@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.lenovo.trackapp">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustResize|stateHidden">
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.CteateMeetingActivity" android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.MyScheduleActivity" />
+        <activity android:name=".activity.SignInActivity$Attandance" />
+        <activity android:name=".activity.AttandanceHisActivity" />
+        <activity android:name=".activity.SignOutActivity" />
+        <activity android:name=".activity.SignInActivity" />
+        <activity android:name=".activity.ExpenseActivity" />
+        <activity android:name=".activity.AddCategoryActivity" />
+        <activity android:name=".activity.AddYourCategoryActivity" />
+        <activity android:name=".activity.FeedbackActivity" />
+        <activity android:name=".activity.AddCustomerActivity" />
+        <activity android:name=".activity.NewExpenseActivity" />
+        <activity android:name=".activity.CurrencyListActivity" />
+        <activity android:name=".activity.NewCustomerActivity" />
+        <activity android:name=".activity.SendMessageActivity"/>
+        <activity android:name=".activity.ReminderActivity"/>
+        <activity android:name=".actv.PreRequestActivity"/>
+        <activity android:name=".activity.SendMessageActivity$Messages"></activity>
+    </application>
+
+</manifest>

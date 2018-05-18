@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Business Tracker</string>
+    <string name="title_activity_navigation">Navigation</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint_name">Customer Name</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_place">Place</string>
+    <string name="hint_city">City</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_comment">Comment/Feedback</string>
+    <string name="err_msg_name">Enter Customer name</string>
+    <string name="err_msg_address">Enter Address</string>
+    <string name="err_msg_place">Enter Place</string>
+    <string name="err_msg_city">Enter City</string>
+    <string name="err_msg_email">Enter Valid Email</string>
+    <string name="err_msg_phone">Enter Valid Phone</string>
+    <string name="err_msg_comment">Please Comment</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+</resources>

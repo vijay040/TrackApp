@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/pending" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:text="Title"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTitle"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:text="Date"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtCustomer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDate"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:text="Customer"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp"
+
+            />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDate"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/txtCustomer"
+            android:text="Address"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp"
+
+            />
+
+        <TextView
+            android:id="@+id/txtAdvance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/txtCustomer"
+            android:gravity="right"
+            android:paddingRight="@dimen/_10sdp"
+            android:text="Advance"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_6sdp"
+
+            />
+
+        <TextView
+            android:id="@+id/txtAdvanceMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtAdvance"
+            android:layout_marginLeft="@dimen/_100sdp"
+            android:layout_toRightOf="@id/img"
+            android:gravity="right"
+            android:paddingRight="@dimen/_10sdp"
+            android:text="IDR2000"
+            android:textColor="@color/text_hint_color"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold"
+
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

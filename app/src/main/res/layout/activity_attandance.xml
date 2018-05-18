@@ -1,0 +1,65 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="30dp"
+        android:textStyle="italic"
+        android:textColor="#800000"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:text="ATTENDANCE"/>
+
+    <Button
+        android:id="@+id/btn_singin"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:background="@drawable/shape"
+        android:text="Sing In"/>
+    <Button
+        android:id="@+id/btn_singout"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape"
+        android:text="Sign Out"/>
+    <Button
+        android:id="@+id/btn_history"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_width="120dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape"
+        android:text="CheckHistory"/>
+
+
+
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

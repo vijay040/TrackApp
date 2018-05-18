@@ -1,0 +1,72 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#E5E4E2"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="ATTENDANCE"
+        android:layout_gravity="center"
+        android:textColor="#26A69A"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/btn_location"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+
+        android:background="@drawable/attndncebckgrnd"
+        android:hint="Location"/>
+    <TextView
+        android:id="@+id/btn_date"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:background="@drawable/attndncebckgrnd"
+        android:hint="Date"/>
+    <TextView
+        android:id="@+id/btn_time"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:background="@drawable/attndncebckgrnd"
+        android:hint="Time"/>
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/btn_submit"
+        android:layout_gravity="center"
+        android:background="@drawable/shape"
+        android:text="Submit"/>
+
+
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/btn_data"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

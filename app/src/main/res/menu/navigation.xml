@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Main menu"
+        android:icon="@drawable/navigation"
+        app:showAsAction="always">
+        <menu>
+    <item
+        android:id="@+id/nav_addmeeting"
+        android:icon="@drawable/createmeet"
+        app:showAsAction="never"
+        android:title="Create Meeting"
+        />
+
+    <item
+        android:id="@+id/nav_mysch"
+        android:icon="@drawable/mysch"
+        app:showAsAction="never"
+        android:title="My Sch"
+        />
+    <item
+        android:id="@+id/nav_feedback"
+        android:icon="@drawable/feedbck"
+        app:showAsAction="never"
+        android:title="Feedback"
+        />
+    <item
+        android:id="@+id/nav_attandance"
+        android:icon="@drawable/attendance"
+        app:showAsAction="never"
+        android:title="Attandance"
+        />
+    <item
+        android:id="@+id/nav_customer"
+        android:icon="@drawable/customer"
+        app:showAsAction="never"
+        android:title="Customer Details"
+        />
+    <item
+        android:id="@+id/nav_expense"
+        android:icon="@drawable/exp"
+        app:showAsAction="never"
+        android:title="Expense"
+        />
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/settings"
+        app:showAsAction="never"
+        android:title="Settings"
+        />
+            <item
+                android:id="@+id/nav_message"
+                android:icon="@drawable/msgs"
+                app:showAsAction="never"
+                android:title="Messages"
+                />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout"
+                app:showAsAction="never"
+                android:title="Log Out"
+                />
+        </menu>
+    </item>
+</menu>

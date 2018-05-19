@@ -1,5 +1,7 @@
 package com.example.lenovo.trackapp.util;
 
+        import com.example.lenovo.trackapp.model.LoginModel;
+        import com.example.lenovo.trackapp.model.LoginResMeta;
         import com.example.lenovo.trackapp.model.MeetingsModel;
         import com.example.lenovo.trackapp.model.PreRequestResMeta;
         import com.example.lenovo.trackapp.model.ResMetaCustomer;
@@ -33,4 +35,10 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("pre_requests.php")
     Call<PreRequestResMeta> getPrerequestMeetingList(@Field("user_id") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("apilogin.php")
+    Call<LoginResMeta> login(@Field("email") String email, @Field("password") String password, @Field("device_token") String device_token, @Field("fcm_token") String fcm_token);
+
 }

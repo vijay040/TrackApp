@@ -144,18 +144,13 @@
                     android:hint="Time"
                     android:paddingLeft="@dimen/_10sdp" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/edt_EndTimer"
-                    android:layout_width="@dimen/_100sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/btn"
-                    android:clickable="false"
-                    android:drawableRight="@drawable/down"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="15 min"
+
                     android:paddingLeft="@dimen/_10sdp" />
 
             </LinearLayout>

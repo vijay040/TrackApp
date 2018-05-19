@@ -35,10 +35,7 @@ public class PreRequestActivity extends AppCompatActivity {
         progress=findViewById(R.id.progress);
         progress.setVisibility(View.VISIBLE);
         getPreRequestList();
-
-
-
-    }
+        }
 
     private void getPreRequestList() {
         Singleton.getInstance().getApi().getPrerequestMeetingList("").enqueue(new Callback<PreRequestResMeta>() {

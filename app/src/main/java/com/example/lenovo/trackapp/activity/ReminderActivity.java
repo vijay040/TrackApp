@@ -7,16 +7,21 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
 
 import java.util.Calendar;
 
-public class ReminderActivity extends AppCompatActivity {
-    EditText edtStartDate,edt_time,edtEndDate,edt_EndTime,edt_EndTimer;
+public class ReminderActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    EditText edtStartDate,edt_time,edtEndDate,edt_EndTime;
+    Spinner edt_EndTimer;
     int H, M;
     Calendar calendar;
     int DD, MM, YY;
@@ -25,6 +30,8 @@ public class ReminderActivity extends AppCompatActivity {
     static final int TIME_DIALOG_ID = 3;
     static final int TIME_DIALOG_ID2 = 4;
     int cur = 0;
+    String remindertime[]={"5 minutes","10 minutes","15 minutes","20 minutes","30 minutes","1 hour","2 hours","3 hours","4 hours","5 hours",
+    "6 hours","7 hours","8 hours"," 9 hours","10 hours","11 hours","18 hours","1 day","2 days","3 days","4 days","1 week","2 weeks"};
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,8 @@ public class ReminderActivity extends AppCompatActivity {
         DD=calendar.get(Calendar.DAY_OF_MONTH);
         MM=calendar.get(Calendar.MONTH);
         YY=calendar.get(Calendar.YEAR);
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,remindertime);
+        edt_EndTimer.setAdapter(adapter);
         edtStartDate.setText(String.valueOf(DD)+"-"+String.valueOf(MM+1)+"-"+String.valueOf(YY));
         edtEndDate.setText(String.valueOf(DD)+"-"+String.valueOf(MM+1)+"-"+String.valueOf(YY));
         H = calendar.get(Calendar.HOUR_OF_DAY);
@@ -149,4 +158,15 @@ else{
             }
             }
     };
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        int s_id=edt_EndTimer.getSelectedItemPosition();
+        Toast.makeText(this, "selected reminder:"+remindertime[s_id], Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

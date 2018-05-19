@@ -127,7 +127,7 @@
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_maxCharacters="20"
                 app:met_primaryColor="@color/text_hint_color" />
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
                 android:id="@+id/edtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

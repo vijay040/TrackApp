@@ -7,14 +7,18 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -27,6 +31,7 @@ import android.widget.Toast;
 import com.example.lenovo.trackapp.adaptor.CustomerPopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.MeetingsPopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.MostRecentlyUsedPopupAdaptor;
+import com.example.lenovo.trackapp.adaptor.PlaceArrayAdapter;
 import com.example.lenovo.trackapp.adaptor.PurposePopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.TransportationPopupAdaptor;
 import com.example.lenovo.trackapp.db.CreateMeetDB;
@@ -38,6 +43,15 @@ import com.example.lenovo.trackapp.model.ResMetaCustomer;
 import com.example.lenovo.trackapp.model.ResponseMeta;
 import com.example.lenovo.trackapp.model.TransportationModel;
 import com.example.lenovo.trackapp.util.Singleton;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import org.w3c.dom.Text;
 
@@ -48,11 +62,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CteateMeetingActivity extends AppCompatActivity {
+public class CteateMeetingActivity extends AppCompatActivity implements
+        GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks {
+    private static final String TAG = "CteateMeetingActivity";
+    private static final int GOOGLE_API_CLIENT_ID = 0;
+    private AutoCompleteTextView edtAddress;
+    private GoogleApiClient mGoogleApiClient;
+    private PlaceArrayAdapter mPlaceArrayAdapter;
+    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
+            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     int H, M;
     Calendar calendar;
     int DD, MM, YY;
-    EditText edtPurpose, edtDescreption, edtCustomer, edtDate, edtTime, edtAgenda, edtContactperson, edtAddress;
+    EditText edtPurpose, edtDescreption, edtCustomer, edtDate, edtTime, edtAgenda, edtContactperson;
     CreateMeetDB database = new CreateMeetDB(this);
     TextView txtReminder;
     Button btnSubmit;
@@ -75,6 +98,16 @@ public class CteateMeetingActivity extends AppCompatActivity {
         txtReminder = findViewById(R.id.txtReminder);
         btnSubmit = findViewById(R.id.btnSubmit);
         progress = findViewById(R.id.progress);
+        mGoogleApiClient = new GoogleApiClient.Builder(CteateMeetingActivity.this)
+                .addApi(Places.GEO_DATA_API)
+                .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
+                .addConnectionCallbacks(this)
+                .build();
+        edtAddress.setOnItemClickListener(mAutocompleteClickListener);
+        mPlaceArrayAdapter = new PlaceArrayAdapter(this, android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
+        edtAddress.setAdapter(mPlaceArrayAdapter);
+        edtAddress.setThreshold(1);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
@@ -365,5 +398,57 @@ public class CteateMeetingActivity extends AppCompatActivity {
                 progress.setVisibility(View.GONE);
             }
         });
+    }
+    private AdapterView.OnItemClickListener mAutocompleteClickListener
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+            Log.i(TAG, "Fetching details for ID: " + item.placeId);
+        }
+    };
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                Log.e(TAG, "Place query did not complete. Error: " +
+                        places.getStatus().toString());
+                return;
+            }
+            // Selecting the first object buffer.
+            final Place place = places.get(0);
+            CharSequence attributions = places.getAttributions();
+            Toast.makeText(CteateMeetingActivity.this,place.getAddress(),Toast.LENGTH_SHORT).show();
+
+        }
+    };
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
+        Log.i(TAG, "Google Places API connected.");
+    }
+    @Override
+    public void onConnectionSuspended(int i) {
+        mPlaceArrayAdapter.setGoogleApiClient(null);
+        Log.e(TAG, "Google Places API connection suspended.");
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+        Log.e(TAG, "Google Places API connection failed with error code: "
+                + connectionResult.getErrorCode());
+
+        Toast.makeText(this,
+                "Google Places API connection failed with error code:" +
+                        connectionResult.getErrorCode(),
+                Toast.LENGTH_LONG).show();
+
     }
 }

@@ -66,6 +66,7 @@
                     android:background="@drawable/btn"
                     android:clickable="false"
                     android:drawableRight="@drawable/calic"
+
                     android:editable="false"
                     android:focusable="false"
                     android:hint=" dd/mm/yy"
@@ -157,7 +158,17 @@
 
 
         </RelativeLayout>
-
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@drawable/btn"
+           android:layout_margin="@dimen/_15sdp"
+            android:layout_gravity="center"
+            android:text="Ok"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white_color" />
 
     </LinearLayout>
 

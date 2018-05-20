@@ -161,12 +161,12 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
-                android:background="@drawable/btn1"
+                android:background="@drawable/btn"
                 android:text="Submit"
                 android:layout_margin="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
-                android:textColor="@color/text_color" />
+                android:textColor="@color/white_color" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(model.getStatus().equalsIgnoreCase("1")) {
                         progress.setVisibility(View.GONE);
                         sh.setLoginModel("LOGIN_MODEL", model);
+                        sh.setBoolean("ISLOGIN",true);
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();
                     }

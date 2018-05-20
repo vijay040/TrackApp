@@ -52,12 +52,9 @@ import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-
 import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -104,7 +101,8 @@ public class CteateMeetingActivity extends AppCompatActivity implements
                 .addConnectionCallbacks(this)
                 .build();
         edtAddress.setOnItemClickListener(mAutocompleteClickListener);
-        mPlaceArrayAdapter = new PlaceArrayAdapter(this, android.R.layout.simple_list_item_1,
+        mPlaceArrayAdapter = new PlaceArrayAdapter(
+                this, android.R.layout.simple_list_item_1,
                 BOUNDS_MOUNTAIN_VIEW, null);
         edtAddress.setAdapter(mPlaceArrayAdapter);
         edtAddress.setThreshold(1);

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,6 +22,7 @@ import java.util.Calendar;
 
 public class ReminderActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     EditText edtStartDate,edt_time,edtEndDate,edt_EndTime;
+    Button btnOk;
     Spinner edt_EndTimer;
     int H, M;
     Calendar calendar;
@@ -41,6 +43,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         edtEndDate=findViewById(R.id.edtEndDate);
         edt_EndTime=findViewById(R.id.edt_EndTime);
         edt_EndTimer=findViewById(R.id.edt_EndTimer);
+        btnOk=findViewById(R.id.btnOk);
         calendar=Calendar.getInstance();
         DD=calendar.get(Calendar.DAY_OF_MONTH);
         MM=calendar.get(Calendar.MONTH);
@@ -90,6 +93,13 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
                 // TODO Auto-generated method stub
                 showDialog(TIME_DIALOG_ID2);
 
+            }
+        });
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
         }

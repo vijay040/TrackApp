@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize|stateHidden">
-        <activity android:name=".actv.LoginActivity">
+        <activity android:name=".actv.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,6 +47,7 @@
         <activity android:name=".activity.SendMessageActivity" />
         <activity android:name=".activity.ReminderActivity" />
         <activity android:name=".actv.PreRequestActivity" />
+        <activity android:name=".actv.LoginActivity" />
         <activity android:name=".activity.SendMessageActivity$Messages" />
 
         <meta-data

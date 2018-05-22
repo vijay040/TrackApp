@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.actv.LoginActivity;
 import com.example.lenovo.trackapp.util.Shprefrences;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "This is Logout Page", Toast.LENGTH_SHORT).show();
+                sh.clearData();
+                Toast.makeText(MainActivity.this, "You have logged out successflly!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
             }
         });
 
@@ -149,7 +153,10 @@ public class MainActivity extends AppCompatActivity {
         } else if (itemid == R.id.nav_message) {
             Toast.makeText(this, "this is your message", Toast.LENGTH_SHORT).show();
         } else if (itemid == R.id.nav_logout) {
-            Toast.makeText(this, "this is Logout", Toast.LENGTH_SHORT).show();
+            sh.clearData();
+            Toast.makeText(this, "You have logged out successflly!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

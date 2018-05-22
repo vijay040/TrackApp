@@ -1,12 +1,15 @@
 package com.example.lenovo.trackapp.actv;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.PreRequestAdaptor;
@@ -26,16 +29,24 @@ public class PreRequestActivity extends AppCompatActivity {
     ListView listView;
 
     ProgressBar progress;
+    RelativeLayout txtAdd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pre_request_activity);
         listView = findViewById(R.id.listView);
-        progress=findViewById(R.id.progress);
+        progress = findViewById(R.id.progress);
+        txtAdd = findViewById(R.id.txtAdd);
         progress.setVisibility(View.VISIBLE);
+        txtAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PreRequestActivity.this, AddPreRequestActivity.class));
+            }
+        });
         getPreRequestList();
-        }
+    }
 
     private void getPreRequestList() {
         Singleton.getInstance().getApi().getPrerequestMeetingList("").enqueue(new Callback<PreRequestResMeta>() {
@@ -45,13 +56,12 @@ public class PreRequestActivity extends AppCompatActivity {
                 PreRequestAdaptor adaptor = new PreRequestAdaptor(PreRequestActivity.this, list);
                 listView.setAdapter(adaptor);
                 progress.setVisibility(View.GONE);
-
             }
 
             @Override
             public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
 
-                Log.e("**Error**",t.getMessage());
+                Log.e("**Error**", t.getMessage());
                 progress.setVisibility(View.GONE);
 
             }

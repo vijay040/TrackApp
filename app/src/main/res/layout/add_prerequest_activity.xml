@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:src="@drawable/ic_request" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtMeetings"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:hint="Select Meetings"
+            android:textCursorDrawable="@drawable/drable_edittext"
+            app:met_baseColor="@color/text_color"
+            app:met_bottomTextSize="@dimen/_1sdp"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelTextSize="@dimen/_10sdp"
+            app:met_maxCharacters="20"
+            app:met_primaryColor="@color/text_hint_color" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtRequestType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:hint="Select Request Type"
+            android:textCursorDrawable="@drawable/drable_edittext"
+            app:met_baseColor="@color/text_color"
+            app:met_bottomTextSize="@dimen/_1sdp"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelTextSize="@dimen/_10sdp"
+            app:met_maxCharacters="20"
+            app:met_primaryColor="@color/text_hint_color" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtAdvance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Advance"
+            android:textCursorDrawable="@drawable/drable_edittext"
+            app:met_baseColor="@color/text_color"
+            app:met_bottomTextSize="@dimen/_1sdp"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelTextSize="@dimen/_10sdp"
+            app:met_maxCharacters="20"
+            app:met_primaryColor="@color/text_hint_color" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtDescreption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:hint="Description"
+            android:textCursorDrawable="@drawable/drable_edittext"
+            app:met_baseColor="@color/text_color"
+            app:met_bottomTextSize="@dimen/_1sdp"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelTextSize="@dimen/_10sdp"
+            app:met_maxCharacters="20"
+            app:met_primaryColor="@color/text_hint_color" />
+
+            <Button
+                android:id="@+id/btAttchment"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="Attachment"
+                android:textAllCaps="false"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold"
+                android:background="@color/them_color"
+                android:drawableLeft="@drawable/ic_attachment"
+                android:drawableTint="@color/white_color"
+                android:layout_gravity="center"
+                />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/btn"
+            android:text="Create"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -31,10 +31,12 @@ import com.example.lenovo.trackapp.adaptor.PlaceArrayAdapter;
 import com.example.lenovo.trackapp.adaptor.PurposePopupAdaptor;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.model.CustomerModel;
+import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.model.MeetingsModel;
 import com.example.lenovo.trackapp.model.PurposeModel;
 import com.example.lenovo.trackapp.model.ResMetaCustomer;
 import com.example.lenovo.trackapp.model.ResponseMeta;
+import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -52,10 +54,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CteateMeetingActivity extends AppCompatActivity implements
+public class CreateMeetingActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
-    private static final String TAG = "CteateMeetingActivity";
+    private static final String TAG = "CreateMeetingActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView edtAddress;
     private GoogleApiClient mGoogleApiClient;
@@ -71,7 +73,7 @@ public class CteateMeetingActivity extends AppCompatActivity implements
     Button btnSubmit;
     ProgressBar progress;
     public static  String SELECTED_PURPOSE;
-
+Shprefrences sh;
     //SweetAlertDialog pDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +90,8 @@ public class CteateMeetingActivity extends AppCompatActivity implements
         txtReminder = findViewById(R.id.txtReminder);
         btnSubmit = findViewById(R.id.btnSubmit);
         progress = findViewById(R.id.progress);
-        mGoogleApiClient = new GoogleApiClient.Builder(CteateMeetingActivity.this)
+        sh=new Shprefrences(this);
+        mGoogleApiClient = new GoogleApiClient.Builder(CreateMeetingActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
                 .addConnectionCallbacks(this)
@@ -103,7 +106,8 @@ public class CteateMeetingActivity extends AppCompatActivity implements
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
-        edtDate.setText(String.valueOf(DD) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(YY));
+
+        edtDate.setText(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         H = calendar.get(Calendar.HOUR_OF_DAY);
         M = calendar.get(Calendar.MINUTE);
         if (H < 12 && H >= 0) {
@@ -154,7 +158,7 @@ public class CteateMeetingActivity extends AppCompatActivity implements
         txtReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CteateMeetingActivity.this, ReminderActivity.class));
+                startActivity(new Intent(CreateMeetingActivity.this, ReminderActivity.class));
             }
         });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -169,27 +173,29 @@ public class CteateMeetingActivity extends AppCompatActivity implements
                 String contactperson = edtContactperson.getText().toString();
                 String address = edtAddress.getText().toString();
                 if (purpose.equals("")) {
-                    Toast.makeText(CteateMeetingActivity.this, "Select Purpose", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, "Select Purpose", Toast.LENGTH_SHORT).show();
                 } else if (descreption.equals("")) {
-                    Toast.makeText(CteateMeetingActivity.this, "Enter Descreption", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, "Enter Descreption", Toast.LENGTH_SHORT).show();
                 } else if (customer.equals("")) {
-                    Toast.makeText(CteateMeetingActivity.this, "Enter Customer Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, "Enter Customer Name", Toast.LENGTH_SHORT).show();
                 } else if (date.equals("")) {
-                    Toast.makeText(CteateMeetingActivity.this, "Enter Date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, "Enter Date", Toast.LENGTH_SHORT).show();
                 } else if (time.equals("")) {
-                    Toast.makeText(CteateMeetingActivity.this, "Enter Time", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, "Enter Time", Toast.LENGTH_SHORT).show();
                 } else if (agenda.equals("")) {
-                    Toast.makeText(CteateMeetingActivity.this, "Enter Agenda", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, "Enter Agenda", Toast.LENGTH_SHORT).show();
                 } else if (contactperson.equals("")) {
-                    Toast.makeText(CteateMeetingActivity.this, "Enter Contact Person", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, "Enter Contact Person", Toast.LENGTH_SHORT).show();
                 } else if (address.equals("")) {
-                    Toast.makeText(CteateMeetingActivity.this, "Enter Address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, "Enter Address", Toast.LENGTH_SHORT).show();
                 } else
 
                 {
                     // pDialog.show();
                     progress.setVisibility(View.VISIBLE);
-                    createMeeting("", purpose, descreption, customer, date, time, agenda, contactperson, address, "", "", "", "", "");
+                 LoginModel model= sh.getLoginModel("LOGIN_MODEL");
+
+                    createMeeting(model.getId(), purpose, descreption, customer, date, time, agenda, contactperson, address, "", "", "", "", "");
                 }
             }
         });
@@ -206,7 +212,7 @@ public class CteateMeetingActivity extends AppCompatActivity implements
         // TODO Auto-generated method stub
         int itemid = item.getItemId();
         if (itemid == R.id.add_customer) {
-            Intent intent = new Intent(CteateMeetingActivity.this, MainActivity.class);
+            Intent intent = new Intent(CreateMeetingActivity.this, LandingActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -225,7 +231,7 @@ public class CteateMeetingActivity extends AppCompatActivity implements
     DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int d, int m, int y) {
-            edtDate.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));
+            edtDate.setText(String.valueOf(y) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(d));
         }
     };
     TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
@@ -287,7 +293,7 @@ public class CteateMeetingActivity extends AppCompatActivity implements
         m.setId("0");
 
         purposeList.add(m);*/
-        adaptor = new PurposePopupAdaptor(CteateMeetingActivity.this, purposeList);
+        adaptor = new PurposePopupAdaptor(CreateMeetingActivity.this, purposeList);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
@@ -319,7 +325,7 @@ public class CteateMeetingActivity extends AppCompatActivity implements
         m.setId("0");
 
         purposeList.add(m);*/
-        CustomerPopupAdaptor adapto = new CustomerPopupAdaptor(CteateMeetingActivity.this, listCustomer);
+        CustomerPopupAdaptor adapto = new CustomerPopupAdaptor(CreateMeetingActivity.this, listCustomer);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
@@ -379,7 +385,7 @@ public class CteateMeetingActivity extends AppCompatActivity implements
             @Override
             public void onResponse(Call<MeetingsModel> call, Response<MeetingsModel> response) {
                 progress.setVisibility(View.GONE);
-                Toast.makeText(CteateMeetingActivity.this, "Data submited successfully!",
+                Toast.makeText(CreateMeetingActivity.this, "Data submited successfully!",
                         Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -415,7 +421,7 @@ public class CteateMeetingActivity extends AppCompatActivity implements
             // Selecting the first object buffer.
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
-            Toast.makeText(CteateMeetingActivity.this,place.getAddress(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateMeetingActivity.this,place.getAddress(),Toast.LENGTH_SHORT).show();
 
         }
     };

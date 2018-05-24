@@ -13,8 +13,11 @@ import android.widget.RelativeLayout;
 
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.PreRequestAdaptor;
+import com.example.lenovo.trackapp.model.LoginModel;
+import com.example.lenovo.trackapp.model.LoginResMeta;
 import com.example.lenovo.trackapp.model.PreRequestModel;
 import com.example.lenovo.trackapp.model.PreRequestResMeta;
+import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
 
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ public class PreRequestActivity extends AppCompatActivity {
 
     ProgressBar progress;
     RelativeLayout txtAdd;
-
+    Shprefrences sh;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,7 @@ public class PreRequestActivity extends AppCompatActivity {
         progress = findViewById(R.id.progress);
         txtAdd = findViewById(R.id.txtAdd);
         progress.setVisibility(View.VISIBLE);
+        sh=new Shprefrences(this);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,6 +50,7 @@ public class PreRequestActivity extends AppCompatActivity {
             }
         });
         getPreRequestList();
+        getMeetingsList();
     }
 
     private void getPreRequestList() {
@@ -63,6 +68,22 @@ public class PreRequestActivity extends AppCompatActivity {
 
                 Log.e("**Error**", t.getMessage());
                 progress.setVisibility(View.GONE);
+
+            }
+        });
+    }
+
+    public void getMeetingsList()
+    {
+        LoginModel model= sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<LoginResMeta>() {
+            @Override
+            public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginResMeta> call, Throwable throwable) {
 
             }
         });

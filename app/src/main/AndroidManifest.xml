@@ -26,9 +26,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.CteateMeetingActivity"
+            android:name=".activity.CreateMeetingActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.LandingActivity" />
         <activity android:name=".activity.MyScheduleActivity" />
         <activity android:name=".activity.SignInActivity$Attandance" />
         <activity android:name=".activity.AttandanceHisActivity" />

@@ -6,12 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
-import com.example.lenovo.trackapp.activity.CteateMeetingActivity;
-import com.example.lenovo.trackapp.model.MeetingsModel;
 import com.example.lenovo.trackapp.model.PurposeModel;
 
 import java.util.ArrayList;

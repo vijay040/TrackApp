@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
-import com.example.lenovo.trackapp.activity.MainActivity;
+import com.example.lenovo.trackapp.activity.LandingActivity;
 import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.model.LoginResMeta;
 import com.example.lenovo.trackapp.util.Shprefrences;
@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                         progress.setVisibility(View.GONE);
                         sh.setLoginModel("LOGIN_MODEL", model);
                         sh.setBoolean("ISLOGIN",true);
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, LandingActivity.class));
                         finish();
                     }
                     else {

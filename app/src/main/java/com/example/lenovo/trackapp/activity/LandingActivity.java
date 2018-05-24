@@ -14,7 +14,7 @@ import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.actv.LoginActivity;
 import com.example.lenovo.trackapp.util.Shprefrences;
 
-public class MainActivity extends AppCompatActivity {
+public class LandingActivity extends AppCompatActivity {
     Button addvisit, expenses, attandance, schedule, addcustomer, feedback, logout, message, setting;
     String name = "";
     Shprefrences sh;
@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "This is setting", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LandingActivity.this, "This is setting", Toast.LENGTH_SHORT).show();
             }
         });
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SendMessageActivity.class);
+                Intent intent = new Intent(LandingActivity.this, SendMessageActivity.class);
                 startActivity(intent);
             }
         });
@@ -56,22 +56,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sh.clearData();
-                Toast.makeText(MainActivity.this, "You have logged out successflly!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                Toast.makeText(LandingActivity.this, "You have logged out successflly!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LandingActivity.this, LoginActivity.class));
                 finish();
             }
         });
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+                Intent intent = new Intent(LandingActivity.this, FeedbackActivity.class);
                 startActivity(intent);
             }
         });
         addcustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddCustomerActivity.class);
+                Intent intent = new Intent(LandingActivity.this, AddCustomerActivity.class);
                 startActivity(intent);
             }
         });
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(MainActivity.this, MyScheduleActivity.class);
+                Intent intent = new Intent(LandingActivity.this, MyScheduleActivity.class);
                 startActivity(intent);
             }
         });
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(MainActivity.this, SignInActivity.Attandance.class);
+                Intent intent = new Intent(LandingActivity.this, SignInActivity.Attandance.class);
                 startActivity(intent);
             }
         });
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(MainActivity.this, CteateMeetingActivity.class);
+                Intent intent = new Intent(LandingActivity.this, CreateMeetingActivity.class);
                 startActivity(intent);
             }
         });
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(MainActivity.this, ExpenseActivity.class);
+                Intent intent = new Intent(LandingActivity.this, ExpenseActivity.class);
                 startActivity(intent);
             }
         });
@@ -124,22 +124,22 @@ public class MainActivity extends AppCompatActivity {
         int itemid = item.getItemId();
         if (itemid == R.id.nav_addmeeting) {
 
-            Intent intent = new Intent(MainActivity.this, CteateMeetingActivity.class);
+            Intent intent = new Intent(LandingActivity.this, CreateMeetingActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_mysch) {
-            Intent intent = new Intent(MainActivity.this, MyScheduleActivity.class);
+            Intent intent = new Intent(LandingActivity.this, MyScheduleActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_feedback) {
-            Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+            Intent intent = new Intent(LandingActivity.this, FeedbackActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_attandance) {
-            Intent intent = new Intent(MainActivity.this, SignInActivity.Attandance.class);
+            Intent intent = new Intent(LandingActivity.this, SignInActivity.Attandance.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_customer) {
-            Intent intent = new Intent(MainActivity.this, AddCustomerActivity.class);
+            Intent intent = new Intent(LandingActivity.this, AddCustomerActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_expense) {
-            Intent intent = new Intent(MainActivity.this, ExpenseActivity.class);
+            Intent intent = new Intent(LandingActivity.this, ExpenseActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_setting) {
             Toast.makeText(this, "setting", Toast.LENGTH_SHORT).show();
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (itemid == R.id.nav_logout) {
             sh.clearData();
             Toast.makeText(this, "You have logged out successflly!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            startActivity(new Intent(LandingActivity.this, LoginActivity.class));
             finish();
         }
         return super.onOptionsItemSelected(item);

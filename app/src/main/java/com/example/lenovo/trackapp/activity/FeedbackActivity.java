@@ -48,7 +48,7 @@ public class FeedbackActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(FeedbackActivity.this,MainActivity.class);
+                Intent intent=new Intent(FeedbackActivity.this,LandingActivity.class);
                 startActivity(intent);
             }
         });

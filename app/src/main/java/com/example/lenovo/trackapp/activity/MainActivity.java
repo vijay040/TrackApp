@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SendMessageActivity.Messages.class);
+                Intent intent = new Intent(MainActivity.this, SendMessageActivity.class);
                 startActivity(intent);
             }
         });
@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,17 +82,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(MainActivity.this, MyScheduleActivity.class);
                 startActivity(intent);
-
             }
         });
         attandance.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(MainActivity.this, SignInActivity.Attandance.class);
                 startActivity(intent);
-
             }
         });
         addvisit.setOnClickListener(new View.OnClickListener() {
@@ -117,11 +112,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.navigation, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -21,7 +21,7 @@ import com.example.lenovo.trackapp.model.CustomerDetails;
 import com.example.lenovo.trackapp.db.HttpCallBack;
 import com.example.lenovo.trackapp.db.HttpGetRequest;
 import com.example.lenovo.trackapp.R;
-import com.example.lenovo.trackapp.adaptor.MessageDetailListAdapter;
+import com.example.lenovo.trackapp.adaptor.CustomerDetailListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +36,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
     TextView selectClientList;
     RelativeLayout progressLayout;
     ProgressDialog progressDialog;
-    MessageDetailListAdapter manageClientsListAdapter;
+    CustomerDetailListAdapter manageClientsListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddCustomerActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
-        manageClientsListAdapter = new MessageDetailListAdapter(AddCustomerActivity.this, clientDetailList);
+        manageClientsListAdapter = new CustomerDetailListAdapter(AddCustomerActivity.this, clientDetailList);
         recyclerView.setAdapter(manageClientsListAdapter);
        // editText.setOnQueryTextListener(this);
         fab.setOnClickListener(new View.OnClickListener(){
@@ -90,7 +90,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                manageClientsListAdapter = new MessageDetailListAdapter(AddCustomerActivity.this, clientDetailList);
+                manageClientsListAdapter = new CustomerDetailListAdapter(AddCustomerActivity.this, clientDetailList);
                 recyclerView.setAdapter(manageClientsListAdapter);
                 //  progressLayout.setVisibility(View.GONE);
                /* try {

@@ -7,10 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -37,8 +35,6 @@
         <activity android:name=".activity.SignOutActivity" />
         <activity android:name=".activity.SignInActivity" />
         <activity android:name=".activity.ExpenseActivity" />
-        <activity android:name=".activity.AddCategoryActivity" />
-        <activity android:name=".activity.AddYourCategoryActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.AddCustomerActivity" />
         <activity android:name=".activity.NewExpenseActivity" />
@@ -49,8 +45,6 @@
         <activity android:name=".actv.PreRequestActivity" />
         <activity android:name=".actv.LoginActivity" />
         <activity android:name=".actv.AddPreRequestActivity" />
-        <activity android:name=".activity.SendMessageActivity$Messages" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDWDqyDgTE5jZNIxw_uRwKtBCY9xQPvGac" />

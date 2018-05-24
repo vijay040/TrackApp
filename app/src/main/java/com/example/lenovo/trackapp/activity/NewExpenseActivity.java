@@ -1,9 +1,9 @@
 package com.example.lenovo.trackapp.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.design.widget.TextInputLayout;
@@ -12,16 +12,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lenovo.trackapp.db.CreateMeetDB;
 import com.example.lenovo.trackapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -30,32 +33,23 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class NewExpenseActivity extends AppCompatActivity {
-
     private static final int SELECT_PHOTO = 200;
-    EditText date, location, vender, expensetype, getDate, amount, comments;
+    EditText meeting,date, location, vender, expensetype, getDate, amount, comments;
     private static final int CAMERA_REQUEST = 1888;
     Bitmap bmp;
     ImageView imageView;
     TextView textView;
-    static String value, cate;
-    // String amnt;
+    static String value;
     public static String imgUrl;
-
-    private TextInputLayout inputLayoutamount, inputLayoutdate, inputLayoutlocation, inputLayoutvender, inputLayoutcomment, inputLayoutexpensetype;
     private static final String IMAGE_DIRECTORY = "/demonuts";
-    CreateMeetDB database = new CreateMeetDB(this);
     private String TAG;
-    public static final String MY_PREFS_NAME = "MyPrefsFile";
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_expense);
         getSupportActionBar().setTitle("ExpenseActivity");
+        meeting=findViewById(R.id.edt_meeting);
         amount = (EditText) findViewById(R.id.edt_amount);
-        //Intent intent1 = getIntent();
-        //  amnt=intent1.getStringExtra("amount");
-        // amount.setText(amnt);
         date = (EditText) findViewById(R.id.edt_date);
         location = (EditText) findViewById(R.id.edt_location);
         imageView = (ImageView) findViewById(R.id.imz_loadreceipt);
@@ -64,30 +58,19 @@ public class NewExpenseActivity extends AppCompatActivity {
         comments = (EditText) findViewById(R.id.edt_comment);
         expensetype = (EditText) findViewById(R.id.edt_Expensetype);
         getDate = (EditText) findViewById(R.id.edt_date1);
-        inputLayoutamount = (TextInputLayout) findViewById(R.id.input_layout_amount);
-        inputLayoutexpensetype = (TextInputLayout) findViewById(R.id.input_layout_expensetype);
-        inputLayoutdate = (TextInputLayout) findViewById(R.id.input_layout_date);
-        inputLayoutlocation = (TextInputLayout) findViewById(R.id.input_layout_location);
-        inputLayoutvender = (TextInputLayout) findViewById(R.id.input_layout_vendor);
-        inputLayoutcomment = (TextInputLayout) findViewById(R.id.input_layout_comment);
-        amount.addTextChangedListener(new MyTextWatcher(amount));
-        date.addTextChangedListener(new MyTextWatcher(date));
-        location.addTextChangedListener(new MyTextWatcher(location));
-        vender.addTextChangedListener(new MyTextWatcher(vender));
-        expensetype.addTextChangedListener(new MyTextWatcher(expensetype));
-        comments.addTextChangedListener(new MyTextWatcher(comments));
-
-        if (imgUrl != null && !imgUrl.equalsIgnoreCase(""))
+        if(imgUrl != null && !imgUrl.equalsIgnoreCase(""))
             Picasso.get().load(imgUrl).into(imageView);
-
-        Bundle extras = getIntent().getExtras();
+            Bundle extras = getIntent().getExtras();
         if (extras != null) {
             value = extras.getString("amount");
         }
         amount.setText(value);
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        cate = prefs.getString("categoryitem", "");//"No name defined" is the default value.
-        expensetype.setText(cate);
+        expensetype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                expensetypePopup();
+            }
+        });
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         String date1 = df.format(Calendar.getInstance().getTime());
         getDate.setText("Created:" + date1);
@@ -98,33 +81,13 @@ public class NewExpenseActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        expensetype.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(NewExpenseActivity.this, AddCategoryActivity.class);
-                startActivity(intent);
-            }
-        });
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectImage();
             }
         });
-        Cursor cursor = database.fetchData();
-        //  getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("536DFE")));
-        if (!(cursor.moveToFirst()) || cursor.getCount() == 0) {
-            Toast.makeText(NewExpenseActivity.this, "there is no schedule to show", Toast.LENGTH_LONG).show();
-        } else {
-            String P = cursor.getString(cursor.getColumnIndex("place"));
-            String Dt = cursor.getString(cursor.getColumnIndex("date"));
-            String CN = cursor.getString(cursor.getColumnIndex("contactperson"));
-            date.setText(Dt);
-            location.setText(P);
-            vender.setText(CN);
-        }
     }
-
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(NewExpenseActivity.this);
@@ -144,25 +107,52 @@ public class NewExpenseActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
     private void openGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.expenseactn, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO Auto-generated method stub
         int itemid = item.getItemId();
         if (itemid == R.id.save) {
-            submitForm();
+            String selectmeeting=meeting.getText().toString();
+            String amnt=amount.getText().toString();
+            String expnsetype=expensetype.getText().toString();
+            String dt=date.getText().toString();
+            String loc=location.getText().toString();
+            String vndr=vender.getText().toString();
+            String cmnt=comments.getText().toString();
+            if(selectmeeting.equals("")){
+                Toast.makeText(NewExpenseActivity.this,"Select Meeting",Toast.LENGTH_SHORT).show();
+            }
+           else if(amnt.equals("")){
+                Toast.makeText(NewExpenseActivity.this,"Enter Amount",Toast.LENGTH_SHORT).show();
+            }
+           else if(expnsetype.equals("")){
+                Toast.makeText(NewExpenseActivity.this,"Enter ExpenseType",Toast.LENGTH_SHORT).show();
+            }
+            else if(dt.equals("")){
+                Toast.makeText(NewExpenseActivity.this,"Enter date",Toast.LENGTH_SHORT).show();
+            }
+            else if(loc.equals("")){
+                Toast.makeText(NewExpenseActivity.this,"Enter location",Toast.LENGTH_SHORT).show();
+            }
+            else if(vndr.equals("")){
+                Toast.makeText(NewExpenseActivity.this,"Enter Vender Name",Toast.LENGTH_SHORT).show();
+            }
+            else if(cmnt.equals("")){
+                Toast.makeText(NewExpenseActivity.this,"Enter Comment",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(NewExpenseActivity.this,"saved",Toast.LENGTH_SHORT).show();
+            }
         } else if (itemid == R.id.cancel) {
             Intent intent = new Intent(NewExpenseActivity.this, ExpenseActivity.class);
             startActivity(intent);
@@ -170,140 +160,6 @@ public class NewExpenseActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private void submitForm() {
-        if (!validateAmount()) {
-            return;
-        }
-        if (!validateDate()) {
-            return;
-        }
-        if (!validateLocation()) {
-            return;
-        }
-        if (!validateVender()) {
-            return;
-        }
-        if (!validateExpenseType()) {
-            return;
-        }
-        if (!validateComment()) {
-            return;
-        }
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
-        finish();
-        startActivity(getIntent());
-    }
-
-    private boolean validateAmount() {
-        if (amount.getText().toString().trim().isEmpty()) {
-            inputLayoutamount.setError("Enter Amount");
-            requestFocus(amount);
-            return false;
-        } else {
-            inputLayoutamount.setErrorEnabled(false);
-        }
-        return true;
-    }
-
-    private boolean validateDate() {
-        if (date.getText().toString().trim().isEmpty()) {
-            inputLayoutdate.setError("Enter Date");
-            requestFocus(date);
-            return false;
-        } else {
-            inputLayoutdate.setErrorEnabled(false);
-        }
-        return true;
-    }
-
-    private boolean validateLocation() {
-        if (location.getText().toString().trim().isEmpty()) {
-            inputLayoutlocation.setError("Enter Location");
-            requestFocus(location);
-            return false;
-        } else {
-            inputLayoutlocation.setErrorEnabled(false);
-        }
-        return true;
-    }
-
-    private boolean validateVender() {
-        if (vender.getText().toString().trim().isEmpty()) {
-            inputLayoutvender.setError("Enter Vender Name");
-            requestFocus(vender);
-            return false;
-        } else {
-            inputLayoutvender.setErrorEnabled(false);
-        }
-        return true;
-    }
-
-    private boolean validateExpenseType() {
-        if (expensetype.getText().toString().trim().isEmpty()) {
-            inputLayoutexpensetype.setError("Choose ExpenseActivity type");
-            requestFocus(vender);
-            return false;
-        } else {
-            inputLayoutvender.setErrorEnabled(false);
-        }
-        return true;
-    }
-
-    private boolean validateComment() {
-        if (comments.getText().toString().trim().isEmpty()) {
-            inputLayoutcomment.setError("Enter Your Comment");
-            requestFocus(comments);
-            return false;
-        } else {
-            inputLayoutcomment.setErrorEnabled(false);
-        }
-        return true;
-    }
-
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
-    }
-
-    public class MyTextWatcher implements TextWatcher {
-        private View view;
-
-        private MyTextWatcher(View view) {
-            this.view = view;
-        }
-
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        public void afterTextChanged(Editable editable) {
-            switch (view.getId()) {
-                case R.id.edt_amount:
-                    validateAmount();
-                    break;
-                case R.id.edt_date:
-                    validateDate();
-                    break;
-                case R.id.edt_location:
-                    validateLocation();
-                    break;
-                case R.id.edt_vendor:
-                    validateVender();
-                    break;
-                case R.id.edt_Expensetype:
-                    validateExpenseType();
-                    break;
-                case R.id.edt_comment:
-                    validateComment();
-                    break;
-            }
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -319,5 +175,27 @@ public class NewExpenseActivity extends AppCompatActivity {
             }
         }
     }
-
+    private void expensetypePopup() {
+        final AlertDialog alertDialog;
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        // ...Irrelevant code for customizing the buttons and title
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.activity_expensetype, null);
+        String type[] = {"Entertainment", "Airfair", "Fuel", "hotel", "car rental", "Visa"};
+        final ListView listexpsetype = dialogView.findViewById(R.id.listexpensetype);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, type);
+        listexpsetype.setAdapter(adapter);
+        dialogBuilder.setView(dialogView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.show();
+        listexpsetype.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                // Display the selected item text on Edittext
+                expensetype.setText(selectedItem);
+                alertDialog.dismiss();
+            }
+        });
+    }
 }

@@ -46,15 +46,10 @@ public class AddPreRequestActivity extends AppCompatActivity {
         edtDescreption = findViewById(R.id.edtDescreption);
         edtRequestType = findViewById(R.id.edtRequestType);
         edtAdvance = findViewById(R.id.edtAdvance);
-
         btnSubmit = findViewById(R.id.btnSubmit);
         progress = findViewById(R.id.progress);
-
-
-
         getPurposeList();
         getCustomerList();
-
         edtMeetings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

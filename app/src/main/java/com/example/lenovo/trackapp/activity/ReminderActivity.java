@@ -95,7 +95,6 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
 
             }
         });
-
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,6 +134,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
                 edtStartDate.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));
             }
 else{
+
                 edtEndDate.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));
             }
             }

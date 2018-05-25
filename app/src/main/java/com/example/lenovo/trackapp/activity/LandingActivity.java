@@ -35,7 +35,7 @@ public class LandingActivity extends AppCompatActivity {
         setting = (Button) findViewById(R.id.btn_setting);
         TextView txtWelcomeText = findViewById(R.id.txtWelcomeText);
         sh = new Shprefrences(this);
-        name = sh.getLoginModel("LOGIN_MODEL").getUser_name();
+        name = sh.getLoginModel("LOGIN_MODEL").getDisplay_name();
         txtWelcomeText.setText("Hi " + name + "! B Tracker Welcomes You.");
        // getSupportActionBar().setTitle("B Tracker");
         setting.setOnClickListener(new View.OnClickListener() {

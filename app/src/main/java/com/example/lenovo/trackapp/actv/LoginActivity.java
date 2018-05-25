@@ -66,8 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                 LoginModel model=response.body().getResponse();
                 if(model!=null)
                 {
-                    if(model.getStatus().equalsIgnoreCase("1")) {
-                        progress.setVisibility(View.GONE);
+                    if(model.getId()!=null)
+                    {
                         sh.setLoginModel("LOGIN_MODEL", model);
                         sh.setBoolean("ISLOGIN",true);
                         startActivity(new Intent(LoginActivity.this, LandingActivity.class));
@@ -75,17 +75,18 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else {
                         if(model!=null)
-                            Toast.makeText(getApplicationContext(), "Invailid email or password!",
+                            Toast.makeText(LoginActivity.this, ""+model.getMsg(),
                                     Toast.LENGTH_SHORT);
 
                     }
                 }
                 else {
-                    if(model!=null)
-                        Toast.makeText(getApplicationContext(), "Invailid email or password!",
+                        Toast.makeText(LoginActivity.this, "Please Try Again!",
                                 Toast.LENGTH_SHORT);
 
                 }
+
+                progress.setVisibility(View.GONE);
 
             }
 

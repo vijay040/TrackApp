@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -34,7 +35,7 @@ import java.util.Calendar;
 
 public class NewExpenseActivity extends AppCompatActivity {
     private static final int SELECT_PHOTO = 200;
-    EditText meeting,date, location, vender, expensetype, getDate, amount, comments;
+    EditText meeting,date, location, vender, expensetype, getDate, amount,comments;
     private static final int CAMERA_REQUEST = 1888;
     Bitmap bmp;
     ImageView imageView;
@@ -43,11 +44,12 @@ public class NewExpenseActivity extends AppCompatActivity {
     public static String imgUrl;
     private static final String IMAGE_DIRECTORY = "/demonuts";
     private String TAG;
+    Button submit;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_expense);
-        getSupportActionBar().setTitle("ExpenseActivity");
+        getSupportActionBar().setTitle("Create Expanse");
         meeting=findViewById(R.id.edt_meeting);
         amount = (EditText) findViewById(R.id.edt_amount);
         date = (EditText) findViewById(R.id.edt_date);
@@ -58,6 +60,7 @@ public class NewExpenseActivity extends AppCompatActivity {
         comments = (EditText) findViewById(R.id.edt_comment);
         expensetype = (EditText) findViewById(R.id.edt_Expensetype);
         getDate = (EditText) findViewById(R.id.edt_date1);
+        submit=findViewById(R.id.btnSubmit);
         if(imgUrl != null && !imgUrl.equalsIgnoreCase(""))
             Picasso.get().load(imgUrl).into(imageView);
             Bundle extras = getIntent().getExtras();
@@ -79,6 +82,44 @@ public class NewExpenseActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(NewExpenseActivity.this, CurrencyListActivity.class);
                 startActivity(intent);
+            }
+        });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String selectmeeting=meeting.getText().toString();
+                String amnt=amount.getText().toString();
+                String expnsetype=expensetype.getText().toString();
+                String dt=date.getText().toString();
+                String loc=location.getText().toString();
+                String vndr=vender.getText().toString();
+                String cmnt=comments.getText().toString();
+                String createddate=getDate.getText().toString();
+                if(selectmeeting.equals("")){
+                    Toast.makeText(NewExpenseActivity.this,"Select Meeting",Toast.LENGTH_SHORT).show();
+                }
+                else if(amnt.equals("")){
+                    Toast.makeText(NewExpenseActivity.this,"Enter Amount",Toast.LENGTH_SHORT).show();
+                }
+                else if(expnsetype.equals("")){
+                    Toast.makeText(NewExpenseActivity.this,"Enter ExpenseType",Toast.LENGTH_SHORT).show();
+                }
+                else if(dt.equals("")){
+                    Toast.makeText(NewExpenseActivity.this,"Enter date",Toast.LENGTH_SHORT).show();
+                }
+                else if(loc.equals("")){
+                    Toast.makeText(NewExpenseActivity.this,"Enter location",Toast.LENGTH_SHORT).show();
+                }
+                else if(vndr.equals("")){
+                    Toast.makeText(NewExpenseActivity.this,"Enter Vender Name",Toast.LENGTH_SHORT).show();
+                }
+                else if(cmnt.equals("")){
+                    Toast.makeText(NewExpenseActivity.this,"Enter Your Comment",Toast.LENGTH_SHORT).show();
+                }
+                else{
+
+                    Toast.makeText(NewExpenseActivity.this,"saved",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         textView.setOnClickListener(new View.OnClickListener() {
@@ -113,54 +154,6 @@ public class NewExpenseActivity extends AppCompatActivity {
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.expenseactn, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
-        int itemid = item.getItemId();
-        if (itemid == R.id.save) {
-            String selectmeeting=meeting.getText().toString();
-            String amnt=amount.getText().toString();
-            String expnsetype=expensetype.getText().toString();
-            String dt=date.getText().toString();
-            String loc=location.getText().toString();
-            String vndr=vender.getText().toString();
-            String cmnt=comments.getText().toString();
-            if(selectmeeting.equals("")){
-                Toast.makeText(NewExpenseActivity.this,"Select Meeting",Toast.LENGTH_SHORT).show();
-            }
-           else if(amnt.equals("")){
-                Toast.makeText(NewExpenseActivity.this,"Enter Amount",Toast.LENGTH_SHORT).show();
-            }
-           else if(expnsetype.equals("")){
-                Toast.makeText(NewExpenseActivity.this,"Enter ExpenseType",Toast.LENGTH_SHORT).show();
-            }
-            else if(dt.equals("")){
-                Toast.makeText(NewExpenseActivity.this,"Enter date",Toast.LENGTH_SHORT).show();
-            }
-            else if(loc.equals("")){
-                Toast.makeText(NewExpenseActivity.this,"Enter location",Toast.LENGTH_SHORT).show();
-            }
-            else if(vndr.equals("")){
-                Toast.makeText(NewExpenseActivity.this,"Enter Vender Name",Toast.LENGTH_SHORT).show();
-            }
-            else if(cmnt.equals("")){
-                Toast.makeText(NewExpenseActivity.this,"Enter Comment",Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Toast.makeText(NewExpenseActivity.this,"saved",Toast.LENGTH_SHORT).show();
-            }
-        } else if (itemid == R.id.cancel) {
-            Intent intent = new Intent(NewExpenseActivity.this, ExpenseActivity.class);
-            startActivity(intent);
-            Toast.makeText(NewExpenseActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
@@ -181,7 +174,7 @@ public class NewExpenseActivity extends AppCompatActivity {
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.activity_expensetype, null);
-        String type[] = {"Entertainment", "Airfair", "Fuel", "hotel", "car rental", "Visa"};
+        String type[] = {"Entertainment", "Airfair", "Fuel", "hotel", "car rental", "Visa","Transport"};
         final ListView listexpsetype = dialogView.findViewById(R.id.listexpensetype);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, type);
         listexpsetype.setAdapter(adapter);

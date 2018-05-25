@@ -23,107 +23,43 @@ public class FeedbackActivity extends AppCompatActivity {
     EditText customername,comment;
     TextView textView;
     ImageView imageView;
-    Button cancel;
-    TextView save;
+    Button submit;
     private static final int SELECT_PHOTO =200 ;
     private static final int CAMERA_REQUEST = 1888;
-    TextInputLayout inputLayoutname,inputLayoutcomment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         customername=(EditText)findViewById(R.id.edt_name);
         comment=(EditText)findViewById(R.id.edt_comment);
-        save=(TextView) findViewById(R.id.btn_save);
+        submit=(Button) findViewById(R.id.btnSubmit);
         textView=(TextView)findViewById(R.id.btn_load);
-        cancel=(Button)findViewById(R.id.btn_cancel);
         imageView=(ImageView)findViewById(R.id.imz_loadreceipt);
-        inputLayoutname = (TextInputLayout) findViewById(R.id.input_layout_name);
-        inputLayoutcomment=(TextInputLayout) findViewById(R.id.input_layout_comment);
-        customername.addTextChangedListener(new MyTextWatcher(customername));
-        comment.addTextChangedListener(new MyTextWatcher(comment));
         getSupportActionBar().setTitle("FeedbackActivity");
        /* customername.setTextColor(Color.parseColor("#2196F3"));
         comment.setTextColor(Color.parseColor("#2196F3"));*/
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(FeedbackActivity.this,LandingActivity.class);
-                startActivity(intent);
-            }
-        });
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectImage();
             }
         });
-        save.setOnClickListener(new View.OnClickListener() {
-
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                submitForm();
+             String customer_name=customername.getText().toString();
+             String comm=comment.getText().toString();
+             if(customer_name.equals("")){
+                 Toast.makeText(FeedbackActivity.this,"Enter Customer Name",Toast.LENGTH_SHORT).show();
+             }
+             else if(comm.equals("")) {
+                 Toast.makeText(FeedbackActivity.this, "Enter Your Comment", Toast.LENGTH_SHORT).show();
+             }
+             else{
+                 Toast.makeText(FeedbackActivity.this,"Saved",Toast.LENGTH_SHORT).show();
+             }
             }
         });
-    }
-    private void submitForm() {
-        if (!validateName()) {
-            return;
-        }
-        if (!validateComment()) {
-            return;
-        }
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
-        finish();
-        startActivity(getIntent());
-    }
-    private boolean validateName() {
-        if (customername.getText().toString().trim().isEmpty()) {
-            inputLayoutname.setError(getString(R.string.err_msg_name));
-            requestFocus(customername);
-            return false;
-        } else {
-            inputLayoutname.setErrorEnabled(false);
-        }
-
-        return true;
-    }
-    private boolean validateComment() {
-        if (comment.getText().toString().trim().isEmpty()) {
-            inputLayoutcomment.setError(getString(R.string.err_msg_comment));
-            requestFocus(comment);
-            return false;
-        } else {
-            inputLayoutcomment.setErrorEnabled(false);
-        }
-
-        return true;
-    }
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
-    }
-    private class MyTextWatcher implements TextWatcher {
-        private View view;
-        private MyTextWatcher(View view) {
-            this.view = view;
-        }
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-        public void afterTextChanged(Editable editable) {
-            switch (view.getId()) {
-                case R.id.edt_name:
-                    validateName();
-                    break;
-                case R.id.edt_comment:
-                    validateComment();
-                    break;
-
-            }
-        }
     }
     private void selectImage() {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
@@ -156,11 +92,11 @@ public class FeedbackActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK){
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(photo);
         }
-        else if (requestCode==SELECT_PHOTO) {
+        else if (requestCode==SELECT_PHOTO){
             if(resultCode == RESULT_OK){
                 Uri selectedImage = data.getData();
                 if(selectedImage !=null){

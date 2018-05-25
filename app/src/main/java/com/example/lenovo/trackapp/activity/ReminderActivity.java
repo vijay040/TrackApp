@@ -172,7 +172,7 @@ else{
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         int s_id=edt_EndTimer.getSelectedItemPosition();
-        Toast.makeText(this, "selected reminder:"+remindertime[s_id], Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected Reminder:"+remindertime[s_id], Toast.LENGTH_SHORT).show();
     }
 
     @Override

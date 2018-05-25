@@ -1,11 +1,8 @@
-<ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -30,62 +27,51 @@
             android:layout_marginBottom="30dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_name"
-        android:layout_width="match_parent"
-android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/edt_name"
-        android:layout_width="match_parent"
-        android:hint="@string/hint_name"
-        android:layout_margin="5dp"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:layout_height="50dp" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_comment"
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/edt_comment"
-        android:layout_width="match_parent"
-        android:hint="@string/hint_comment"
-        android:layout_margin="5dp"
-
-        android:inputType="textMultiLine"
-        android:paddingLeft="10dp"
-        android:layout_height="120dp" /> </android.support.design.widget.TextInputLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:background="#5a9bd5"
-        android:padding="10dp"
-        android:layout_marginTop="120dp"
-        android:weightSum="3">
-        <Button
-
-            android:id="@+id/btn_cancel"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="50dp"
-            android:background="@drawable/arrow" />
-        <TextView
-            android:id="@+id/btn_save"
-            android:layout_width="wrap_content"
-            android:text="Save"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="150dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
+        <ScrollView
+            android:layout_below="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:orientation="vertical">
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Customer Name"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_maxCharacters="20"
+                    android:editable="false"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Feedback/Comment"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_maxCharacters="50"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@drawable/btn"
+                    android:text="Submit"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white_color" />
+            </LinearLayout>
+        </ScrollView>
 </LinearLayout>
-</ScrollView>

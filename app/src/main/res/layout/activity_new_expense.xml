@@ -1,10 +1,8 @@
-  <ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-    <LinearLayout
+<LinearLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,105 +28,127 @@
             android:layout_marginBottom="30dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_meeting"
+        <ScrollView
+            android:layout_below="@+id/img"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
             android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/edt_meeting"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:hint="Select Meeting"
-                android:drawableRight="@drawable/down"
-                android:paddingLeft="10dp"
-                android:clickable="false"
-                android:focusable="false"
-                android:layout_height="50dp" />
-        </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-    android:id="@+id/input_layout_amount"
-    android:layout_width="match_parent"
-    android:layout_marginTop="10dp"
-    android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/edt_amount"
-        android:layout_width="match_parent"
-        android:hint="Amount"
-        android:paddingLeft="10dp"
-        android:layout_height="50dp" />
-</android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_expensetype"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-        android:id="@+id/edt_Expensetype"
-        android:layout_width="match_parent"
-        android:hint="Choose Expensetype"
-            android:drawableRight="@drawable/down"
-            android:clickable="false"
-            android:focusable="false"
-        android:paddingLeft="10dp"
-            android:layout_height="50dp"/>
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/edt_date"
-        android:layout_width="match_parent"
-        android:hint="Date"
-        android:inputType="datetime"
-        android:paddingLeft="10dp"
-        android:layout_height="50dp" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/edt_location"
-        android:layout_width="match_parent"
-        android:hint="location"
-        android:inputType="text"
-        android:paddingLeft="10dp"
-        android:layout_height="50dp" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_vendor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/edt_vendor"
-        android:layout_width="match_parent"
-        android:hint="Vendor Name"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:layout_height="50dp" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_comment"
-        android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-        android:id="@+id/edt_comment"
-                android:hint="Comment"
-                android:inputType="textMultiLine"
-                android:paddingLeft="10dp"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:scrollbars="vertical" />
-        </android.support.design.widget.TextInputLayout>
-        <EditText
-        android:id="@+id/edt_date1"
-        android:layout_width="match_parent"
-        android:hint=""
-        android:inputType="datetime"
-        android:clickable="false"
-        android:focusable="false"
-        android:paddingLeft="10dp"
-        android:layout_height="50dp"/>
-        </LinearLayout>
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:orientation="vertical">
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_meeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Select Meeting"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_maxCharacters="20"
+                    android:editable="false"
+                    android:drawableRight="@drawable/down"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Amount"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_maxCharacters="20"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_Expensetype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Choose ExpenseType"
+                    android:editable="false"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_maxCharacters="20"
+                    android:drawableRight="@drawable/down"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edt_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Date"
+                        android:textCursorDrawable="@drawable/drable_edittext"
+                        app:met_baseColor="@color/text_color"
+                        app:met_bottomTextSize="@dimen/_1sdp"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelTextSize="@dimen/_10sdp"
+                        app:met_maxCharacters="20"
+                        app:met_primaryColor="@color/text_hint_color" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Location"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_maxCharacters="20"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_vendor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Vender Name"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_maxCharacters="20"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Comment"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_maxCharacters="50"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <EditText
+                    android:id="@+id/edt_date1"
+                    android:layout_width="match_parent"
+                    android:hint=""
+                    android:inputType="datetime"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:visibility="gone"
+                    android:paddingLeft="5dp"
+                    android:layout_height="50dp"/>
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@drawable/btn"
+                    android:text="Submit"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white_color" />
+            </LinearLayout>
         </ScrollView>
+</LinearLayout>
+
 

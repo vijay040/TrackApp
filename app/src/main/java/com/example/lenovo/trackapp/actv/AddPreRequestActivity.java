@@ -10,23 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.adaptor.CurrencyAdaptor;
 import com.example.lenovo.trackapp.adaptor.CustomerPopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.DepartmentAdaptor;
 import com.example.lenovo.trackapp.adaptor.MeetingsAdaptor;
 import com.example.lenovo.trackapp.adaptor.PurposePopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.RequestTypesAdaptor;
+import com.example.lenovo.trackapp.model.CurrencyModel;
 import com.example.lenovo.trackapp.model.CustomerModel;
 import com.example.lenovo.trackapp.model.DepartmentModel;
 import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.model.MeetingModel;
 import com.example.lenovo.trackapp.model.PurposeModel;
 import com.example.lenovo.trackapp.model.RequestTypeModel;
+import com.example.lenovo.trackapp.model.ResMetaCurrency;
 import com.example.lenovo.trackapp.model.ResMetaCustomer;
 import com.example.lenovo.trackapp.model.ResMetaDepartment;
 import com.example.lenovo.trackapp.model.ResMetaMeeting;
@@ -47,13 +51,14 @@ import retrofit2.Response;
 
 public class AddPreRequestActivity extends AppCompatActivity {
 
-    EditText edtMeetings, edtDescreption, edtAdvance,edtDepartment;
+    EditText edtMeetings, edtDescreption, edtAdvance,edtDepartment,edtCurrency;
     Button btnSubmit;
     ProgressBar progress;
     Shprefrences sh;
-    ArrayList<MeetingModel> meetingList;
-    ArrayList<RequestTypeModel> requestTyoesList;
-    ArrayList<DepartmentModel> departmentList;
+    ArrayList<MeetingModel> meetingList=new ArrayList<>();
+    ArrayList<RequestTypeModel> requestTyoesList=new ArrayList<>();
+    ArrayList<DepartmentModel> departmentList=new ArrayList<>();
+    ArrayList<CurrencyModel> currencyList=new ArrayList<>();
     ListView listTypes;
 
     //SweetAlertDialog pDialog;
@@ -67,11 +72,14 @@ public class AddPreRequestActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         listTypes = findViewById(R.id.listTypes);
         edtDepartment= findViewById(R.id.edtDepartment);
+        edtCurrency= findViewById(R.id.edtCurrency);
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);
-        getMeetingsList();
+        progress.setVisibility(View.VISIBLE);
         getReqestTypes();
+        getMeetingsList();
         getDepartmentList();
+        getCurrencyList();
         edtMeetings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +91,13 @@ public class AddPreRequestActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showDepartmentList();
+            }
+        });
+
+        edtCurrency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCurrencyList();
             }
         });
 
@@ -104,7 +119,6 @@ public class AddPreRequestActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable throwable) {
-
             }
         });
     }
@@ -126,7 +140,18 @@ public class AddPreRequestActivity extends AppCompatActivity {
 
     private void getCurrencyList()
     {
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
+            @Override
+            public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
+                currencyList=response.body().getResponse();
+            }
 
+            @Override
+            public void onFailure(Call<ResMetaCurrency> call, Throwable t) {
+
+            }
+        });
     }
 
     public void getReqestTypes() {
@@ -137,11 +162,12 @@ public class AddPreRequestActivity extends AppCompatActivity {
                 requestTyoesList = response.body().getResponse();
                 RequestTypesAdaptor adapto = new RequestTypesAdaptor(com.example.lenovo.trackapp.actv.AddPreRequestActivity.this, requestTyoesList);
                 listTypes.setAdapter(adapto);
+                progress.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
-
+                progress.setVisibility(View.GONE);
             }
         });
     }
@@ -199,12 +225,40 @@ public class AddPreRequestActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 DepartmentModel obj = (DepartmentModel) listPurpose.getAdapter().getItem(position);
-                edtDepartment.setText(obj.getDepartment_name());
+                    edtDepartment.setText(obj.getDepartment_name());
                 alertDialog.dismiss();
             }
         });
 
     }
+
+    private void showCurrencyList() {
+        CurrencyAdaptor adapto = new CurrencyAdaptor(AddPreRequestActivity.this, currencyList);
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        // ...Irrelevant code for customizing the buttons and title
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.meeting_popup, null);
+        final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
+        TextView title = dialogView.findViewById(R.id.title);
+        title.setText("Select Currency");
+        //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
+        dialogBuilder.setView(dialogView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.show();
+        listPurpose.setAdapter(adapto);
+
+        listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                CurrencyModel obj = (CurrencyModel) listPurpose.getAdapter().getItem(position);
+                edtCurrency.setText(obj.getCurrency_name());
+                alertDialog.dismiss();
+            }
+        });
+
+    }
+
 
 
 }

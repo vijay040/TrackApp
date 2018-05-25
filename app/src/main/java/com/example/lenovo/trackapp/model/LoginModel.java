@@ -56,8 +56,8 @@ public class LoginModel {
         return Code;
     }
 
-    public void setCode(String code) {
-        Code = code;
+    public void setCode(String Code) {
+        this.Code = Code;
     }
 
     public String getPosition ()

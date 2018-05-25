@@ -7,10 +7,10 @@
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:src="@drawable/ic_request" />
 
     <ProgressBar
@@ -20,16 +20,12 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/img">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
+            android:layout_below="@+id/img"
             android:orientation="vertical">
 
             <LinearLayout
@@ -57,14 +53,16 @@
                     android:id="@+id/edtCurrency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="select currancy"
-                    android:paddingLeft="@dimen/_4sdp"
+                    android:hint="Currency"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:editable="false"
                     android:textCursorDrawable="@drawable/drable_edittext"
                     app:met_baseColor="@color/text_color"
                     app:met_bottomTextSize="@dimen/_1sdp"
                     app:met_floatingLabel="highlight"
                     app:met_floatingLabelTextSize="@dimen/_10sdp"
                     app:met_maxCharacters="20"
+                    android:textColor="@color/them_color"
                     app:met_primaryColor="@color/them_color" />
 
             </LinearLayout>
@@ -75,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Select Department"
+                android:editable="false"
                 android:textCursorDrawable="@drawable/drable_edittext"
                 app:met_baseColor="@color/text_color"
                 app:met_bottomTextSize="@dimen/_1sdp"
@@ -101,7 +100,6 @@
                 android:id="@+id/edtDescreption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:hint="Description"
                 android:textCursorDrawable="@drawable/drable_edittext"
                 app:met_baseColor="@color/text_color"
@@ -156,14 +154,13 @@
             <ListView
                 android:id="@+id/listTypes"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:layout_marginBottom="@dimen/_40sdp"
                 android:layout_marginTop="@dimen/_5sdp">
 
             </ListView>
 
         </LinearLayout>
-    </ScrollView>
 
     <Button
         android:id="@+id/btnSubmit"

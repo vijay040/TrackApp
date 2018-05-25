@@ -3,6 +3,7 @@ package com.example.lenovo.trackapp.actv;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -64,8 +65,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                 LoginModel model=response.body().getResponse();
+                Log.e("","inside**************************************");
                 if(model!=null)
                 {
+                    Log.e("","inside*****************************model!=null********");
                     if(model.getId()!=null)
                     {
                         sh.setLoginModel("LOGIN_MODEL", model);
@@ -73,17 +76,12 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(new Intent(LoginActivity.this, LandingActivity.class));
                         finish();
                     }
-                    else {
-                        if(model!=null)
-                            Toast.makeText(LoginActivity.this, ""+model.getMsg(),
-                                    Toast.LENGTH_SHORT);
-
+                    if(model.getCode()!=null) {
+                        Toast.makeText(LoginActivity.this, ""+ model.getMsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
-                        Toast.makeText(LoginActivity.this, "Please Try Again!",
-                                Toast.LENGTH_SHORT);
-
+                        Toast.makeText(LoginActivity.this, "Please Try Again!", Toast.LENGTH_SHORT).show();
                 }
 
                 progress.setVisibility(View.GONE);
@@ -94,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Please Try Again!",
-                        Toast.LENGTH_SHORT);
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }

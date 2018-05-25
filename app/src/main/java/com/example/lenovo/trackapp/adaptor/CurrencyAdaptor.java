@@ -9,16 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.model.CurrencyModel;
 import com.example.lenovo.trackapp.model.DepartmentModel;
-import com.example.lenovo.trackapp.model.RequestTypeModel;
 
 import java.util.ArrayList;
 
-public class DepartmentAdaptor extends BaseAdapter {
-    public ArrayList<DepartmentModel> list;
+public class CurrencyAdaptor extends BaseAdapter {
+    public ArrayList<CurrencyModel> list;
     public Activity context;
 
-    public DepartmentAdaptor(Activity context, ArrayList<DepartmentModel> list) {
+    public CurrencyAdaptor(Activity context, ArrayList<CurrencyModel> list) {
         this.list = list;
         this.context = context;
     }
@@ -44,11 +44,12 @@ public class DepartmentAdaptor extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.inf_purpose_popup_list, null);
 
+
         }
 
         TextView txtTitle = view.findViewById(R.id.txtTitle);
 
-        txtTitle.setText(list.get(i).getDepartment_name());
+        txtTitle.setText(list.get(i).getCurrency_name());
 
         return view;
     }

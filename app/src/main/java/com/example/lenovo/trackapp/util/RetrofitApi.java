@@ -5,6 +5,8 @@ package com.example.lenovo.trackapp.util;
         import com.example.lenovo.trackapp.model.MeetingsModel;
         import com.example.lenovo.trackapp.model.PreRequestResMeta;
         import com.example.lenovo.trackapp.model.ResMetaCustomer;
+        import com.example.lenovo.trackapp.model.ResMetaMeeting;
+        import com.example.lenovo.trackapp.model.ResMetaReqTypes;
         import com.example.lenovo.trackapp.model.ResponseMeta;
 
         import retrofit2.Call;
@@ -43,20 +45,20 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("fetch_meeting.php")
-    Call<LoginResMeta> getMeetingsList(@Field("user_id") String user_id);
+    Call<ResMetaMeeting> getMeetingsList(@Field("user_id") String user_id);
 
 
     @FormUrlEncoded
     @POST("request_type.php")
-    Call<LoginResMeta> getRequestTypes(@Field("user_id") String user_id);
+    Call<ResMetaReqTypes> getRequestTypes(@Field("user_id") String user_id);
 
 
     @FormUrlEncoded
     @POST("msg.php?request=savemsg_data")
-    Call<MeetingsModel> postPreRequest(@Field("user_id") String user_id, @Field("purpose") String purpose,
-                                    @Field("descreption") String descreption, @Field("customer") String customer, @Field("date") String date,
-                                    @Field("time") String time, @Field("agenda") String agenda, @Field("contact_person") String contact_person,
-                                    @Field("address") String address, @Field("start_date") String start_date, @Field("start_time") String start_time
+    Call<ResMetaMeeting> postPreRequest(@Field("user_id") String user_id, @Field("purpose") String purpose,
+                                        @Field("descreption") String descreption, @Field("customer") String customer, @Field("date") String date,
+                                        @Field("time") String time, @Field("agenda") String agenda, @Field("contact_person") String contact_person,
+                                        @Field("address") String address, @Field("start_date") String start_date, @Field("start_time") String start_time
             , @Field("end_date") String end_date, @Field("end_time") String end_time, @Field("alarm_time") String alarm_time
     );
 

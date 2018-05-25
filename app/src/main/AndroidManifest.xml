@@ -44,7 +44,7 @@
         <activity android:name=".activity.ReminderActivity" />
         <activity android:name=".actv.PreRequestActivity" />
         <activity android:name=".actv.LoginActivity" />
-        <activity android:name=".actv.AddPreRequestActivity" />
+        <activity android:name=".actv.AddPreRequestActivity" android:windowSoftInputMode="stateAlwaysHidden" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDWDqyDgTE5jZNIxw_uRwKtBCY9xQPvGac" />

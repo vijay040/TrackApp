@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+
+        android:id="@+id/lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_10sdp"
+            android:text="Select Purpose"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/search"
+            android:hint="Enter Filter Text"
+            android:paddingLeft="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="gone" />
+
+
+        <ListView
+            android:id="@+id/listPurpose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_50sdp">
+
+
+        </ListView>
+        <Button
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/btn"
+            android:text="Ok"
+            android:textSize="@dimen/_20sdp"
+            android:textColor="@color/white_color"
+            />
+    </LinearLayout>
+
+</LinearLayout>

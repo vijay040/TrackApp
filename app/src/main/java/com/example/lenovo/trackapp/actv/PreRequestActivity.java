@@ -15,8 +15,10 @@ import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.PreRequestAdaptor;
 import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.model.LoginResMeta;
+import com.example.lenovo.trackapp.model.MeetingModel;
 import com.example.lenovo.trackapp.model.PreRequestModel;
 import com.example.lenovo.trackapp.model.PreRequestResMeta;
+import com.example.lenovo.trackapp.model.ResMetaMeeting;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
 
@@ -34,6 +36,7 @@ public class PreRequestActivity extends AppCompatActivity {
     ProgressBar progress;
     RelativeLayout txtAdd;
     Shprefrences sh;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,6 @@ public class PreRequestActivity extends AppCompatActivity {
             }
         });
         getPreRequestList();
-        getMeetingsList();
     }
 
     private void getPreRequestList() {
@@ -73,19 +75,4 @@ public class PreRequestActivity extends AppCompatActivity {
         });
     }
 
-    public void getMeetingsList()
-    {
-        LoginModel model= sh.getLoginModel("LOGIN_MODEL");
-        Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<LoginResMeta>() {
-            @Override
-            public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<LoginResMeta> call, Throwable throwable) {
-
-            }
-        });
-    }
 }

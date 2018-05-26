@@ -19,13 +19,17 @@
         android:layout_height="@dimen/_50sdp"
         android:layout_centerInParent="true"
         android:visibility="gone" />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/img"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:layout_below="@+id/img"
             android:orientation="vertical">
 
             <LinearLayout
@@ -156,23 +160,25 @@
             <ListView
                 android:id="@+id/listTypes"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_90sdp"
+                android:layout_height="@dimen/_88sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp">
 
             </ListView>
-            <Button
-                android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/btn"
-                android:text="Create"
-                android:textColor="@color/white_color"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold" />
+
         </LinearLayout>
-
-
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:background="#FFDA44"
+            android:text="Create"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_15sdp"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    
 </RelativeLayout>

@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
-import com.example.lenovo.trackapp.model.MeetingsModel;
 import com.example.lenovo.trackapp.model.TransportationModel;
 
 import java.util.ArrayList;

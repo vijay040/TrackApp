@@ -33,7 +33,7 @@ import com.example.lenovo.trackapp.adaptor.PurposePopupAdaptor;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.model.CustomerModel;
 import com.example.lenovo.trackapp.model.LoginModel;
-import com.example.lenovo.trackapp.model.MeetingsModel;
+import com.example.lenovo.trackapp.model.MeetingModel;
 import com.example.lenovo.trackapp.model.PurposeModel;
 import com.example.lenovo.trackapp.model.ResMetaCustomer;
 import com.example.lenovo.trackapp.model.ResponseMeta;
@@ -391,9 +391,9 @@ Shprefrences sh;
                 , end_time
                 , alarm_time
 
-        ).enqueue(new Callback<MeetingsModel>() {
+        ).enqueue(new Callback<MeetingModel>() {
             @Override
-            public void onResponse(Call<MeetingsModel> call, Response<MeetingsModel> response) {
+            public void onResponse(Call<MeetingModel> call, Response<MeetingModel> response) {
                 progress.setVisibility(View.GONE);
                 Toast.makeText(CreateMeetingActivity.this, "Data submited successfully!",
                         Toast.LENGTH_LONG).show();
@@ -401,7 +401,7 @@ Shprefrences sh;
             }
 
             @Override
-            public void onFailure(Call<MeetingsModel> call, Throwable t) {
+            public void onFailure(Call<MeetingModel> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
         });

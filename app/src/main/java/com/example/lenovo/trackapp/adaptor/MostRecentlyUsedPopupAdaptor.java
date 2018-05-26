@@ -9,15 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
-import com.example.lenovo.trackapp.model.MeetingsModel;
+import com.example.lenovo.trackapp.model.MeetingModel;
 
 import java.util.ArrayList;
 
 public class MostRecentlyUsedPopupAdaptor extends BaseAdapter {
-    public ArrayList<MeetingsModel> list;
+    public ArrayList<MeetingModel> list;
     public Activity context;
 
-    public MostRecentlyUsedPopupAdaptor(Activity context, ArrayList<MeetingsModel> list) {
+    public MostRecentlyUsedPopupAdaptor(Activity context, ArrayList<MeetingModel> list) {
         this.list = list;
         this.context = context;
     }

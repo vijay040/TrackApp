@@ -1,9 +1,9 @@
 package com.example.lenovo.trackapp.util;
 
-        import com.example.lenovo.trackapp.model.LoginModel;
         import com.example.lenovo.trackapp.model.LoginResMeta;
-        import com.example.lenovo.trackapp.model.MeetingsModel;
+        import com.example.lenovo.trackapp.model.MeetingModel;
         import com.example.lenovo.trackapp.model.PreRequestResMeta;
+        import com.example.lenovo.trackapp.model.RequestTypeModel;
         import com.example.lenovo.trackapp.model.ResMetaCurrency;
         import com.example.lenovo.trackapp.model.ResMetaCustomer;
         import com.example.lenovo.trackapp.model.ResMetaDepartment;
@@ -11,8 +11,11 @@ package com.example.lenovo.trackapp.util;
         import com.example.lenovo.trackapp.model.ResMetaReqTypes;
         import com.example.lenovo.trackapp.model.ResponseMeta;
 
+        import java.util.ArrayList;
+        import java.util.List;
+
         import retrofit2.Call;
-        import retrofit2.Retrofit;
+        import retrofit2.http.Body;
         import retrofit2.http.Field;
         import retrofit2.http.FormUrlEncoded;
         import retrofit2.http.POST;
@@ -21,10 +24,10 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("meeting_rest_api.php?request=savemeeting_data")
-    Call<MeetingsModel> postMeeting(@Field("user_id") String user_id, @Field("purpose") String purpose,
-                                    @Field("descreption") String descreption, @Field("customer") String customer, @Field("date") String date,
-                                    @Field("time") String time, @Field("agenda") String agenda, @Field("contact_person") String contact_person,
-                                    @Field("address") String address, @Field("start_date") String start_date, @Field("start_time") String start_time
+    Call<MeetingModel> postMeeting(@Field("user_id") String user_id, @Field("purpose") String purpose,
+                                   @Field("descreption") String descreption, @Field("customer") String customer, @Field("date") String date,
+                                   @Field("time") String time, @Field("agenda") String agenda, @Field("contact_person") String contact_person,
+                                   @Field("address") String address, @Field("start_date") String start_date, @Field("start_time") String start_time
             , @Field("end_date") String end_date, @Field("end_time") String end_time, @Field("alarm_time") String alarm_time
     );
 
@@ -65,11 +68,10 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("msg.php?request=savemsg_data")
-    Call<ResMetaMeeting> postPreRequest(@Field("user_id") String user_id, @Field("purpose") String purpose,
-                                        @Field("descreption") String descreption, @Field("customer") String customer, @Field("date") String date,
-                                        @Field("time") String time, @Field("agenda") String agenda, @Field("contact_person") String contact_person,
-                                        @Field("address") String address, @Field("start_date") String start_date, @Field("start_time") String start_time
-            , @Field("end_date") String end_date, @Field("end_time") String end_time, @Field("alarm_time") String alarm_time
+    Call<ResMetaMeeting> postPreRequest(@Field("user_id") String user_id,
+                                        @Field("advance") String advance, @Field("currency") String currency, @Field("department") String department, @Field("meeting_id") String meeting_id,
+                                        @Field("description") String description,  @Field("requesttypes") ArrayList<RequestTypeModel> requesttypes
+
     );
 
 

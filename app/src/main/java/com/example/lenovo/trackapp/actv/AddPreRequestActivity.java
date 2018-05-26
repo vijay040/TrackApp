@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.CurrencyAdaptor;
@@ -53,7 +54,7 @@ import retrofit2.Response;
  * Created by Lenovo on 22-05-2018.
  */
 
-public class AddPreRequestActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
+public class AddPreRequestActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     EditText edtMeetings, edtDescreption, edtAdvance, edtDepartment, edtCurrency;
     Button btnSubmit;
@@ -64,6 +65,7 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
     ArrayList<DepartmentModel> departmentList = new ArrayList<>();
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     ListView listTypes;
+
     //SweetAlertDialog pDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);
         progress.setVisibility(View.VISIBLE);
+
         getReqestTypes();
         getMeetingsList();
         getDepartmentList();
@@ -90,6 +93,7 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
                 showMeetings();
             }
         });
+
         edtDepartment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +113,15 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
             public void onClick(View view) {
             }
         });
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitPost();
+            }
+        });
     }
+
+
     public void getMeetingsList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
@@ -164,6 +176,7 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
                 listTypes.setAdapter(adapto);
                 progress.setVisibility(View.GONE);
             }
+
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
                 progress.setVisibility(View.GONE);
@@ -177,6 +190,7 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
     private int popupId = 0;
 
     private void showMeetings() {
+
         adaptor = new MeetingsAdaptor(com.example.lenovo.trackapp.actv.AddPreRequestActivity.this, meetingList);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -201,12 +215,14 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 MeetingModel obj = (MeetingModel) listPurpose.getAdapter().getItem(position);
-                edtMeetings.setText(obj.getPurpose());
+                Log.e("selected**", "" + obj.getDescreption());
+                edtMeetings.setText(obj.getDescreption());
                 alertDialog.dismiss();
             }
         });
 
     }
+
     DepartmentAdaptor departmentAdaptor;
 
     private void showDepartmentList() {
@@ -219,6 +235,7 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
+        editTextName.setIconified(true);
         editTextName.setQueryHint("Search Here");
         editTextName.setOnQueryTextListener(this);
         title.setText("Select Department");
@@ -228,6 +245,7 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
         popupId = 3;
         alertDialog.show();
         listPurpose.setAdapter(departmentAdaptor);
+
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -236,10 +254,14 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
                 alertDialog.dismiss();
             }
         });
+
     }
+
     CurrencyAdaptor currencyAdaptor;
+
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(AddPreRequestActivity.this, currencyList);
+
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -249,6 +271,7 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
         TextView title = dialogView.findViewById(R.id.title);
         editTextName.setQueryHint("Search Here");
         editTextName.setOnQueryTextListener(this);
+
         title.setText("Select Currency");
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
@@ -256,6 +279,7 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
         popupId = 2;
         alertDialog.show();
         listPurpose.setAdapter(currencyAdaptor);
+
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -266,10 +290,13 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
         });
 
     }
+
+
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
+
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
@@ -278,12 +305,14 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
                 ArrayList<MeetingModel> newlist = new ArrayList<>();
                 for (MeetingModel list : meetingList) {
                     String getName = list.getPurpose().toLowerCase();
+
                     if (getName.contains(s)) {
                         newlist.add(list);
                     }
                 }
                 adaptor.filter(newlist);
-            break;
+                break;
+
             case 2:
                 ArrayList<CurrencyModel> newlist1 = new ArrayList<>();
                 for (CurrencyModel list : currencyList) {
@@ -295,10 +324,11 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
                 }
                 currencyAdaptor.filter(newlist1);
                 break;
+
             case 3:
                 ArrayList<DepartmentModel> newlist2 = new ArrayList<>();
                 for (DepartmentModel list : departmentList) {
-                    String getDepartment = list. getDepartment_name().toLowerCase();
+                    String getDepartment = list.getDepartment_name().toLowerCase();
 
                     if (getDepartment.contains(s)) {
                         newlist2.add(list);
@@ -307,8 +337,50 @@ public class AddPreRequestActivity extends AppCompatActivity  implements SearchV
                 departmentAdaptor.filter(newlist2);
                 break;
         }
-        return  true;
+        return true;
     }
+
+
+    private void submitPost() {
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        String userid = model.getUser_id();
+        String adv = edtAdvance.getText().toString();
+        String curr = edtCurrency.getText().toString();
+        String dept = edtDepartment.getText().toString();
+        String meetind_id = edtMeetings.getText().toString();
+        String des = edtDescreption.getText().toString();
+        if (userid.equals("")) {
+            Toast.makeText(AddPreRequestActivity.this, "Your session is time out please login again", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (adv.equals("")) {
+            Toast.makeText(AddPreRequestActivity.this, "Enter Advance Amount", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (curr.equals("")) {
+            Toast.makeText(AddPreRequestActivity.this, "Select Currency", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (dept.equals("")) {
+            Toast.makeText(AddPreRequestActivity.this, "Select Department", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (meetind_id.equals("")) {
+            Toast.makeText(AddPreRequestActivity.this, "Select Meeting", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (des.equals("")) {
+            Toast.makeText(AddPreRequestActivity.this, "Enter Descreption", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        progress.setVisibility(View.VISIBLE);
+        Singleton.getInstance().getApi().postPreRequest(userid, adv, curr, dept, meetind_id, des, requestTyoesList).enqueue(new Callback<ResMetaMeeting>() {
+            @Override
+            public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
+                progress.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
+                progress.setVisibility(View.GONE);
+            }
+        });
+    }
+
 }
-
-

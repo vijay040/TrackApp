@@ -40,6 +40,7 @@
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_maxCharacters="20"
+                android:drawableRight="@drawable/dropdownyello"
                 android:editable="false"
                 app:met_primaryColor="@color/text_hint_color" />
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -66,6 +67,7 @@
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_maxCharacters="20"
+                android:drawableRight="@drawable/dropdownyello"
                 app:met_primaryColor="@color/text_hint_color" />
             <LinearLayout
                 android:layout_width="match_parent"

@@ -39,6 +39,13 @@ public class MeetingsAdaptor extends BaseAdapter {
         return i;
     }
 
+    public void filter(ArrayList<MeetingModel>newList)
+    {
+        list=new ArrayList<>();
+        list.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         if (view == null) {

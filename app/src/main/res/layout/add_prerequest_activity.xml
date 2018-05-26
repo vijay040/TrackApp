@@ -80,7 +80,6 @@
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_maxCharacters="20"
-                android:drawableRight="@drawable/dropdownyello"
                 app:met_primaryColor="@color/text_hint_color" />
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edtDepartment"
@@ -109,6 +108,7 @@
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_maxCharacters="20"
+                android:drawableRight="@drawable/dropdownyello"
                 app:met_primaryColor="@color/text_hint_color" />
 
 

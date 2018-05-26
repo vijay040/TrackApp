@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
@@ -25,6 +26,7 @@ import com.example.lenovo.trackapp.adaptor.MeetingsAdaptor;
 import com.example.lenovo.trackapp.adaptor.PurposePopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.RequestTypesAdaptor;
 import com.example.lenovo.trackapp.model.CurrencyModel;
+import com.example.lenovo.trackapp.model.CustomerDetails;
 import com.example.lenovo.trackapp.model.CustomerModel;
 import com.example.lenovo.trackapp.model.DepartmentModel;
 import com.example.lenovo.trackapp.model.LoginModel;
@@ -51,33 +53,34 @@ import retrofit2.Response;
  * Created by Lenovo on 22-05-2018.
  */
 
-public class AddPreRequestActivity extends AppCompatActivity {
+public class AddPreRequestActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
 
-    EditText edtMeetings, edtDescreption, edtAdvance,edtDepartment,edtCurrency;
+    EditText edtMeetings, edtDescreption, edtAdvance, edtDepartment, edtCurrency;
     Button btnSubmit;
     ProgressBar progress;
     Shprefrences sh;
-    ArrayList<MeetingModel> meetingList=new ArrayList<>();
-    ArrayList<RequestTypeModel> requestTyoesList=new ArrayList<>();
-    ArrayList<DepartmentModel> departmentList=new ArrayList<>();
-    ArrayList<CurrencyModel> currencyList=new ArrayList<>();
+    ArrayList<MeetingModel> meetingList = new ArrayList<>();
+    ArrayList<RequestTypeModel> requestTyoesList = new ArrayList<>();
+    ArrayList<DepartmentModel> departmentList = new ArrayList<>();
+    ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     ListView listTypes;
-
     //SweetAlertDialog pDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_prerequest_activity);
+
         edtMeetings = findViewById(R.id.edtMeetings);
         edtDescreption = findViewById(R.id.edtDescreption);
         edtAdvance = findViewById(R.id.edtAdvance);
         btnSubmit = findViewById(R.id.btnSubmit);
         listTypes = findViewById(R.id.listTypes);
-        edtDepartment= findViewById(R.id.edtDepartment);
-        edtCurrency= findViewById(R.id.edtCurrency);
+        edtDepartment = findViewById(R.id.edtDepartment);
+        edtCurrency = findViewById(R.id.edtCurrency);
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);
         progress.setVisibility(View.VISIBLE);
+
         getReqestTypes();
         getMeetingsList();
         getDepartmentList();
@@ -141,13 +144,12 @@ public class AddPreRequestActivity extends AppCompatActivity {
         });
     }
 
-    private void getCurrencyList()
-    {
+    private void getCurrencyList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
             @Override
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
-                currencyList=response.body().getResponse();
+                currencyList = response.body().getResponse();
             }
 
             @Override
@@ -178,6 +180,7 @@ public class AddPreRequestActivity extends AppCompatActivity {
 
     AlertDialog alertDialog;
     MeetingsAdaptor adaptor;
+    private int popupId = 0;
 
     private void showMeetings() {
 
@@ -188,11 +191,16 @@ public class AddPreRequestActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
+
         TextView title = dialogView.findViewById(R.id.title);
+        final SearchView editTextName = dialogView.findViewById(R.id.edt);
+        editTextName.setQueryHint("Search Here");
+        editTextName.setOnQueryTextListener(this);
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         title.setText("Selected Created Meetings");
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
+        popupId = 1;
         alertDialog.show();
         listPurpose.setAdapter(adaptor);
 
@@ -206,10 +214,10 @@ public class AddPreRequestActivity extends AppCompatActivity {
         });
 
     }
-
+    DepartmentAdaptor departmentAdaptor;
 
     private void showDepartmentList() {
-        DepartmentAdaptor adapto = new DepartmentAdaptor(AddPreRequestActivity.this, departmentList);
+        departmentAdaptor = new DepartmentAdaptor(AddPreRequestActivity.this, departmentList);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
@@ -217,39 +225,48 @@ public class AddPreRequestActivity extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         TextView title = dialogView.findViewById(R.id.title);
+        final SearchView editTextName = dialogView.findViewById(R.id.edt);
+        editTextName.setQueryHint("Search Here");
+        editTextName.setOnQueryTextListener(this);
         title.setText("Select Department");
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
+        popupId = 3;
         alertDialog.show();
-        listPurpose.setAdapter(adapto);
+        listPurpose.setAdapter(departmentAdaptor);
 
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 DepartmentModel obj = (DepartmentModel) listPurpose.getAdapter().getItem(position);
-                    edtDepartment.setText(obj.getDepartment_name());
+                edtDepartment.setText(obj.getDepartment_name());
                 alertDialog.dismiss();
             }
         });
 
     }
-
+    CurrencyAdaptor currencyAdaptor;
     private void showCurrencyList() {
-        CurrencyAdaptor adapto = new CurrencyAdaptor(AddPreRequestActivity.this, currencyList);
+        currencyAdaptor = new CurrencyAdaptor(AddPreRequestActivity.this, currencyList);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
+        final SearchView editTextName = dialogView.findViewById(R.id.edt);
         TextView title = dialogView.findViewById(R.id.title);
+        editTextName.setQueryHint("Search Here");
+        editTextName.setOnQueryTextListener(this);
+
         title.setText("Select Currency");
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
+        popupId = 2;
         alertDialog.show();
-        listPurpose.setAdapter(adapto);
+        listPurpose.setAdapter(currencyAdaptor);
 
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -262,6 +279,54 @@ public class AddPreRequestActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s = s.toLowerCase();
+        switch (popupId) {
+            case 1:
+                ArrayList<MeetingModel> newlist = new ArrayList<>();
+                for (MeetingModel list : meetingList) {
+                    String getName = list.getPurpose().toLowerCase();
+
+                    if (getName.contains(s)) {
+                        newlist.add(list);
+                    }
+                }
+                adaptor.filter(newlist);
+            break;
+
+            case 2:
+                ArrayList<CurrencyModel> newlist1 = new ArrayList<>();
+                for (CurrencyModel list : currencyList) {
+                    String getCurrency = list.getCurrency_name().toLowerCase();
+
+                    if (getCurrency.contains(s)) {
+                        newlist1.add(list);
+                    }
+                }
+                currencyAdaptor.filter(newlist1);
+                break;
+
+            case 3:
+                ArrayList<DepartmentModel> newlist2 = new ArrayList<>();
+                for (DepartmentModel list : departmentList) {
+                    String getDepartment = list. getDepartment_name().toLowerCase();
+
+                    if (getDepartment.contains(s)) {
+                        newlist2.add(list);
+                    }
+                }
+                departmentAdaptor.filter(newlist2);
+                break;
+        }
+        return  true;
+    }
 
 
 }

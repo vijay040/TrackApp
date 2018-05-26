@@ -38,6 +38,12 @@ public class CustomerPopupAdaptor extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
+    public void filter(ArrayList<CustomerModel>newList)
+    {
+        list=new ArrayList<>();
+        list.addAll(newList);
+        notifyDataSetChanged();
+    }
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {

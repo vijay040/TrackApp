@@ -37,6 +37,12 @@ public class DepartmentAdaptor extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
+    public void filter(ArrayList<DepartmentModel>newList)
+    {
+        list=new ArrayList<>();
+        list.addAll(newList);
+        notifyDataSetChanged();
+    }
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {

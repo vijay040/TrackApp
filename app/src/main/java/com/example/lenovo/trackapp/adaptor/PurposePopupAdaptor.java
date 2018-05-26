@@ -36,7 +36,12 @@ public class PurposePopupAdaptor extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
-
+    public void filter(ArrayList<PurposeModel>newList)
+    {
+        list=new ArrayList<>();
+        list.addAll(newList);
+        notifyDataSetChanged();
+    }
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         if (view == null) {

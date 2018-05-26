@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.model.CurrencyModel;
 import com.example.lenovo.trackapp.model.DepartmentModel;
+import com.example.lenovo.trackapp.model.MeetingModel;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,12 @@ public class CurrencyAdaptor extends BaseAdapter {
     @Override
     public long getItemId(int i) {
         return i;
+    }
+    public void filter(ArrayList<CurrencyModel>newList1)
+    {
+        list=new ArrayList<>();
+        list.addAll(newList1);
+        notifyDataSetChanged();
     }
 
     @Override

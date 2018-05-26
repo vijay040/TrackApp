@@ -22,6 +22,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -56,7 +57,7 @@ import retrofit2.Response;
 
 public class CreateMeetingActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks {
+        GoogleApiClient.ConnectionCallbacks,SearchView.OnQueryTextListener {
     private static final String TAG = "CreateMeetingActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView edtAddress;
@@ -285,7 +286,8 @@ Shprefrences sh;
 
     AlertDialog alertDialog;
     ArrayList<PurposeModel> purposeList = new ArrayList<>();
-    PurposePopupAdaptor adaptor;
+    PurposePopupAdaptor purposePopupAdaptor;
+    private int popupId = 0;
 
     private void showPurposePopup() {
        /* PurposeModel m=new PurposeModel();
@@ -293,7 +295,7 @@ Shprefrences sh;
         m.setId("0");
 
         purposeList.add(m);*/
-        adaptor = new PurposePopupAdaptor(CreateMeetingActivity.this, purposeList);
+        purposePopupAdaptor = new PurposePopupAdaptor(CreateMeetingActivity.this, purposeList);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
@@ -301,10 +303,14 @@ Shprefrences sh;
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
+        final SearchView editTextName = dialogView.findViewById(R.id.edt);
+        editTextName.setQueryHint("Search Here");
+        editTextName.setOnQueryTextListener(this);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
         alertDialog.show();
-        listPurpose.setAdapter(adaptor);
+          popupId = 1;
+        listPurpose.setAdapter(purposePopupAdaptor);
 
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -318,14 +324,14 @@ Shprefrences sh;
     }
 
     ArrayList<CustomerModel>listCustomer;
-
+    CustomerPopupAdaptor customerPopupAdaptor;
     private void showCustomerPopup() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
         m.setId("0");
 
         purposeList.add(m);*/
-        CustomerPopupAdaptor adapto = new CustomerPopupAdaptor(CreateMeetingActivity.this, listCustomer);
+        customerPopupAdaptor = new CustomerPopupAdaptor(CreateMeetingActivity.this, listCustomer);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
@@ -333,12 +339,16 @@ Shprefrences sh;
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
        TextView title= dialogView.findViewById(R.id.title);
+        final SearchView editTextName = dialogView.findViewById(R.id.edt);
+        editTextName.setQueryHint("Search Here");
+        editTextName.setOnQueryTextListener(this);
         title.setText("Select Customer");
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
+        popupId = 2;
         alertDialog.show();
-        listPurpose.setAdapter(adapto);
+        listPurpose.setAdapter(customerPopupAdaptor);
 
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -447,5 +457,41 @@ Shprefrences sh;
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s = s.toLowerCase();
+        switch (popupId) {
+            case 1:
+                ArrayList<PurposeModel> newlist = new ArrayList<>();
+                for (PurposeModel list : purposeList) {
+                    String getPurpose = list.getPurpose().toLowerCase();
+
+                    if (getPurpose.contains(s)) {
+                        newlist.add(list);
+                    }
+                }
+                purposePopupAdaptor.filter(newlist);
+                break;
+
+            case 2:
+                ArrayList<CustomerModel> newlist1 = new ArrayList<>();
+                for (CustomerModel list : listCustomer) {
+                    String getCustomer = list.getCustomer_name().toLowerCase();
+
+                    if (getCustomer.contains(s)) {
+                        newlist1.add(list);
+                    }
+                }
+                customerPopupAdaptor.filter(newlist1);
+                break;
+        }
+        return false;
     }
 }

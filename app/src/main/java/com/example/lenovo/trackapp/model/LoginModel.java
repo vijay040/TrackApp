@@ -4,23 +4,23 @@ public class LoginModel {
 
     private String position;
 
-    private String status;
+    private String Code;
 
     private String is_active;
 
     private String country_id;
 
-    private String password;
+    private String date;
 
-    private String department_no;
+    private String password;
 
     private String location_id;
 
     private String id;
 
-    private String user_name;
-
     private String display_name;
+
+    private String time;
 
     private String joining_date;
 
@@ -32,11 +32,33 @@ public class LoginModel {
 
     private String role;
 
+    private String user_id;
+
     private String reporting_person;
+
+    private String department_name;
 
     private String group;
 
     private String mobile;
+
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getCode() {
+        return Code;
+    }
+
+    public void setCode(String Code) {
+        this.Code = Code;
+    }
 
     public String getPosition ()
     {
@@ -46,16 +68,6 @@ public class LoginModel {
     public void setPosition (String position)
     {
         this.position = position;
-    }
-
-    public String getStatus ()
-    {
-        return status;
-    }
-
-    public void setStatus (String status)
-    {
-        this.status = status;
     }
 
     public String getIs_active ()
@@ -78,6 +90,16 @@ public class LoginModel {
         this.country_id = country_id;
     }
 
+    public String getDate ()
+    {
+        return date;
+    }
+
+    public void setDate (String date)
+    {
+        this.date = date;
+    }
+
     public String getPassword ()
     {
         return password;
@@ -86,16 +108,6 @@ public class LoginModel {
     public void setPassword (String password)
     {
         this.password = password;
-    }
-
-    public String getDepartment_no ()
-    {
-        return department_no;
-    }
-
-    public void setDepartment_no (String department_no)
-    {
-        this.department_no = department_no;
     }
 
     public String getLocation_id ()
@@ -118,16 +130,6 @@ public class LoginModel {
         this.id = id;
     }
 
-    public String getUser_name ()
-    {
-        return user_name;
-    }
-
-    public void setUser_name (String user_name)
-    {
-        this.user_name = user_name;
-    }
-
     public String getDisplay_name ()
     {
         return display_name;
@@ -136,6 +138,16 @@ public class LoginModel {
     public void setDisplay_name (String display_name)
     {
         this.display_name = display_name;
+    }
+
+    public String getTime ()
+    {
+        return time;
+    }
+
+    public void setTime (String time)
+    {
+        this.time = time;
     }
 
     public String getJoining_date ()
@@ -188,6 +200,16 @@ public class LoginModel {
         this.role = role;
     }
 
+    public String getUser_id ()
+    {
+        return user_id;
+    }
+
+    public void setUser_id (String user_id)
+    {
+        this.user_id = user_id;
+    }
+
     public String getReporting_person ()
     {
         return reporting_person;
@@ -196,6 +218,16 @@ public class LoginModel {
     public void setReporting_person (String reporting_person)
     {
         this.reporting_person = reporting_person;
+    }
+
+    public String getDepartment_name ()
+    {
+        return department_name;
+    }
+
+    public void setDepartment_name (String department_name)
+    {
+        this.department_name = department_name;
     }
 
     public String getGroup ()
@@ -221,6 +253,7 @@ public class LoginModel {
     @Override
     public String toString()
     {
-        return "ClassPojo [position = "+position+", status = "+status+", is_active = "+is_active+", country_id = "+country_id+", password = "+password+", department_no = "+department_no+", location_id = "+location_id+", id = "+id+", user_name = "+user_name+", display_name = "+display_name+", joining_date = "+joining_date+", mobile_number = "+mobile_number+", email = "+email+", company_name = "+company_name+", role = "+role+", reporting_person = "+reporting_person+", group = "+group+", mobile = "+mobile+"]";
+        return "ClassPojo [position = "+position+", status = "+Code+", is_active = "+is_active+", country_id = "+country_id+", date = "+date+", password = "+password+", location_id = "+location_id+", id = "+id+", display_name = "+display_name+", time = "+time+", joining_date = "+joining_date+", mobile_number = "+mobile_number+", email = "+email+", company_name = "+company_name+", role = "+role+", user_id = "+user_id+", reporting_person = "+reporting_person+", department_name = "+department_name+", group = "+group+", mobile = "+mobile+"]";
     }
 }
+

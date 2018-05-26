@@ -13,10 +13,5 @@ public class LoginResMeta {
         this.response = response;
     }
 
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [response = "+response+"]";
-    }
 }
 

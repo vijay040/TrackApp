@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.actv.LoginActivity;
+import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.util.Shprefrences;
 
 public class LandingActivity extends AppCompatActivity {
@@ -35,7 +36,9 @@ public class LandingActivity extends AppCompatActivity {
         setting = (Button) findViewById(R.id.btn_setting);
         TextView txtWelcomeText = findViewById(R.id.txtWelcomeText);
         sh = new Shprefrences(this);
-        name = sh.getLoginModel("LOGIN_MODEL").getUser_name();
+       LoginModel model= sh.getLoginModel("LOGIN_MODEL");
+       if(model!=null)
+        name = model.getDisplay_name();
         txtWelcomeText.setText("Hi " + name + "! B Tracker Welcomes You.");
        // getSupportActionBar().setTitle("B Tracker");
         setting.setOnClickListener(new View.OnClickListener() {

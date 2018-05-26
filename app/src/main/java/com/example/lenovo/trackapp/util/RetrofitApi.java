@@ -4,7 +4,9 @@ package com.example.lenovo.trackapp.util;
         import com.example.lenovo.trackapp.model.LoginResMeta;
         import com.example.lenovo.trackapp.model.MeetingsModel;
         import com.example.lenovo.trackapp.model.PreRequestResMeta;
+        import com.example.lenovo.trackapp.model.ResMetaCurrency;
         import com.example.lenovo.trackapp.model.ResMetaCustomer;
+        import com.example.lenovo.trackapp.model.ResMetaDepartment;
         import com.example.lenovo.trackapp.model.ResMetaMeeting;
         import com.example.lenovo.trackapp.model.ResMetaReqTypes;
         import com.example.lenovo.trackapp.model.ResponseMeta;
@@ -52,6 +54,14 @@ public interface RetrofitApi {
     @POST("request_type.php")
     Call<ResMetaReqTypes> getRequestTypes(@Field("user_id") String user_id);
 
+
+    @FormUrlEncoded
+    @POST("get_department_api.php")
+    Call<ResMetaDepartment> getDepartmentList(@Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("get_currency_api.php")
+    Call<ResMetaCurrency> getCurrencyList(@Field("user_id") String user_id);
 
     @FormUrlEncoded
     @POST("msg.php?request=savemsg_data")

@@ -29,14 +29,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PreRequestActivity extends AppCompatActivity {
-
     ArrayList<PreRequestModel> list;
     ListView listView;
-
     ProgressBar progress;
     RelativeLayout txtAdd;
     Shprefrences sh;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +51,7 @@ public class PreRequestActivity extends AppCompatActivity {
         });
         getPreRequestList();
     }
-
-    private void getPreRequestList() {
+    private void getPreRequestList(){
         Singleton.getInstance().getApi().getPrerequestMeetingList("").enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
@@ -64,10 +60,8 @@ public class PreRequestActivity extends AppCompatActivity {
                 listView.setAdapter(adaptor);
                 progress.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
-
                 Log.e("**Error**", t.getMessage());
                 progress.setVisibility(View.GONE);
 

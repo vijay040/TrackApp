@@ -38,27 +38,20 @@ public class MeetingsAdaptor extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
-
     public void filter(ArrayList<MeetingModel>newList)
     {
         list=new ArrayList<>();
         list.addAll(newList);
         notifyDataSetChanged();
     }
-
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.inf_purpose_popup_list, null);
-
-
         }
-
         TextView txtTitle = view.findViewById(R.id.txtTitle);
-
         txtTitle.setText(list.get(i).getPurpose());
-
         return view;
     }
 }

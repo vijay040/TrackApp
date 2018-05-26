@@ -24,7 +24,7 @@
             android:layout_height="@dimen/_80sdp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
-            android:src="@drawable/expensemain" />
+            android:src="@drawable/ic_mainexpense" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_50sdp"
-                android:drawableLeft="@drawable/tasks"
+                android:drawableLeft="@drawable/ic_clipboard"
                 android:drawablePadding="@dimen/_20sdp"
                 android:gravity="center"
                 android:hint="Pre Request"
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:drawableLeft="@drawable/money"
+                android:drawableLeft="@drawable/ic_expenses"
                 android:drawablePadding="@dimen/_20sdp"
                 android:gravity="center"
                 android:hint="Expenses"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:drawableLeft="@drawable/analytics"
+                android:drawableLeft="@drawable/ic_report"
                 android:drawablePadding="@dimen/_20sdp"
                 android:gravity="center"
                 android:hint="Expense Report"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:drawableLeft="@drawable/approval"
+                android:drawableLeft="@drawable/ic_checked"
                 android:drawablePadding="@dimen/_20sdp"
                 android:gravity="center"
                 android:hint="Approvals"

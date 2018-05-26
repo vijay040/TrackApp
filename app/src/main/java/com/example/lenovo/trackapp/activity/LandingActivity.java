@@ -16,7 +16,7 @@ import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.util.Shprefrences;
 
 public class LandingActivity extends AppCompatActivity {
-    Button addvisit, expenses, attandance, schedule, addcustomer, feedback, logout, message, setting;
+    Button addvisit, expenses, attandance, schedule, addcustomer, feedback, nofification, message, setting;
     String name = "";
     Shprefrences sh;
 
@@ -31,7 +31,7 @@ public class LandingActivity extends AppCompatActivity {
         message = (Button) findViewById(R.id.btn_message);
         feedback = (Button) findViewById(R.id.btn_feedback);
         addcustomer = (Button) findViewById(R.id.btn_addcustomer);
-        logout = (Button) findViewById(R.id.btn_logout);
+        nofification = (Button) findViewById(R.id.btn_notification);
         message = (Button) findViewById(R.id.btn_message);
         setting = (Button) findViewById(R.id.btn_setting);
         TextView txtWelcomeText = findViewById(R.id.txtWelcomeText);
@@ -55,13 +55,12 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        nofification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sh.clearData();
-                Toast.makeText(LandingActivity.this, "You have logged out successflly!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LandingActivity.this, LoginActivity.class));
-                finish();
+                //sh.clearData();
+                Toast.makeText(LandingActivity.this, "This is pending notification", Toast.LENGTH_SHORT).show();
+
             }
         });
         feedback.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +147,11 @@ public class LandingActivity extends AppCompatActivity {
             Toast.makeText(this, "setting", Toast.LENGTH_SHORT).show();
         } else if (itemid == R.id.nav_message) {
             Toast.makeText(this, "this is your message", Toast.LENGTH_SHORT).show();
-        } else if (itemid == R.id.nav_logout) {
+        }
+        else if (itemid == R.id.nav_notification) {
+            Toast.makeText(this, "this is your pending notification", Toast.LENGTH_SHORT).show();
+        }
+        else if (itemid == R.id.nav_logout) {
             sh.clearData();
             Toast.makeText(this, "You have logged out successflly!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LandingActivity.this, LoginActivity.class));

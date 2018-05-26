@@ -79,7 +79,7 @@ Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cteate_meeting);
+        setContentView(R.layout.activity_create_meeting);
         edtPurpose = findViewById(R.id.edtPurpose);
         edtDescreption = findViewById(R.id.edtDescreption);
         edtCustomer = findViewById(R.id.edtCustomer);
@@ -456,14 +456,11 @@ Shprefrences sh;
                 "Google Places API connection failed with error code:" +
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
-
-    }
-
+        }
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
-
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
@@ -484,7 +481,6 @@ Shprefrences sh;
                 ArrayList<CustomerModel> newlist1 = new ArrayList<>();
                 for (CustomerModel list : listCustomer) {
                     String getCustomer = list.getCustomer_name().toLowerCase();
-
                     if (getCustomer.contains(s)) {
                         newlist1.add(list);
                     }

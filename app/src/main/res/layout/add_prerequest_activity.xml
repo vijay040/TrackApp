@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.6"
                     android:hint="Advance"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textCursorDrawable="@drawable/drable_edittext"
                     app:met_baseColor="@color/text_color"
                     app:met_bottomTextSize="@dimen/_1sdp"
@@ -67,6 +67,18 @@
 
             </LinearLayout>
 
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edtDescreption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:textCursorDrawable="@drawable/drable_edittext"
+                app:met_baseColor="@color/text_color"
+                app:met_bottomTextSize="@dimen/_1sdp"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelTextSize="@dimen/_10sdp"
+                app:met_maxCharacters="20"
+                app:met_primaryColor="@color/text_hint_color" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edtDepartment"
@@ -88,19 +100,6 @@
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:hint="Select Meetings"
-                android:textCursorDrawable="@drawable/drable_edittext"
-                app:met_baseColor="@color/text_color"
-                app:met_bottomTextSize="@dimen/_1sdp"
-                app:met_floatingLabel="highlight"
-                app:met_floatingLabelTextSize="@dimen/_10sdp"
-                app:met_maxCharacters="20"
-                app:met_primaryColor="@color/text_hint_color" />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edtDescreption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Description"
                 android:textCursorDrawable="@drawable/drable_edittext"
                 app:met_baseColor="@color/text_color"
                 app:met_bottomTextSize="@dimen/_1sdp"
@@ -154,23 +153,23 @@
             <ListView
                 android:id="@+id/listTypes"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_marginBottom="@dimen/_40sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp">
 
             </ListView>
-
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/btn"
+                android:text="Create"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/_5sdp"
-        android:background="@drawable/btn"
-        android:text="Create"
-        android:textColor="@color/white_color"
-        android:textSize="@dimen/_15sdp"
-        android:textStyle="bold" />
+
 </RelativeLayout>

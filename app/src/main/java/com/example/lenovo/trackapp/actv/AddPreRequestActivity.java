@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.example.lenovo.trackapp.model.ResMetaDepartment;
 import com.example.lenovo.trackapp.model.ResMetaMeeting;
 import com.example.lenovo.trackapp.model.ResMetaReqTypes;
 import com.example.lenovo.trackapp.model.ResponseMeta;
+import com.example.lenovo.trackapp.util.CurrencyFormatInputFilter;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
 
@@ -80,6 +82,7 @@ public class AddPreRequestActivity extends AppCompatActivity {
         getMeetingsList();
         getDepartmentList();
         getCurrencyList();
+        //edtAdvance.setFilters(new InputFilter[] {new CurrencyFormatInputFilter()});
         edtMeetings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

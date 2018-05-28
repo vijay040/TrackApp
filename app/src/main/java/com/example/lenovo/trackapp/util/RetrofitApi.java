@@ -67,7 +67,7 @@ public interface RetrofitApi {
     Call<ResMetaCurrency> getCurrencyList(@Field("user_id") String user_id);
 
     @FormUrlEncoded
-    @POST("msg.php?request=savemsg_data")
+    @POST("prerequestsapi.php?request=prerequests_data")
     Call<ResMetaMeeting> postPreRequest(@Field("user_id") String user_id,
                                         @Field("advance") String advance, @Field("currency") String currency, @Field("department") String department, @Field("meeting_id") String meeting_id,
                                         @Field("description") String description,  @Field("requesttypes") ArrayList<RequestTypeModel> requesttypes

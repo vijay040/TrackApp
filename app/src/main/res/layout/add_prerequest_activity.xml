@@ -37,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="4">
-
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/edtAdvance"
                     android:layout_width="match_parent"
@@ -72,6 +71,7 @@
                     app:met_primaryColor="@color/them_color" />
 
             </LinearLayout>
+
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edtDescreption"
@@ -147,7 +147,6 @@
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
                 android:visibility="gone" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -156,14 +155,12 @@
                 android:textColor="@color/them_color"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
-
             <ListView
                 android:id="@+id/listTypes"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_88sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp">
-
             </ListView>
 
         </LinearLayout>

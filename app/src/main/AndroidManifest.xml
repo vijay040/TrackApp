@@ -36,7 +36,6 @@
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.AddCustomerActivity" />
         <activity android:name=".activity.NewExpenseActivity" />
-        <activity android:name=".activity.CurrencyListActivity" />
         <activity android:name=".activity.NewCustomerActivity" />
         <activity android:name=".activity.SendMessageActivity" />
         <activity android:name=".activity.ReminderActivity" />

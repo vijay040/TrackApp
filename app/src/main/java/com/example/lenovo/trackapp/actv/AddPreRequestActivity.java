@@ -256,9 +256,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
         });
 
     }
-
     CurrencyAdaptor currencyAdaptor;
-
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(AddPreRequestActivity.this, currencyList);
 
@@ -304,7 +302,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
             case 1:
                 ArrayList<MeetingModel> newlist = new ArrayList<>();
                 for (MeetingModel list : meetingList) {
-                    String getName = list.getPurpose().toLowerCase();
+                    String getName = list.getDescreption().toLowerCase();
 
                     if (getName.contains(s)) {
                         newlist.add(list);
@@ -312,7 +310,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
                 }
                 adaptor.filter(newlist);
                 break;
-
             case 2:
                 ArrayList<CurrencyModel> newlist1 = new ArrayList<>();
                 for (CurrencyModel list : currencyList) {

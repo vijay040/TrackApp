@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/them_color">
-
     <TextView
         android:id="@+id/login_title"
         android:layout_width="fill_parent"
@@ -38,7 +37,7 @@
                     android:id="@+id/edt_usernsme"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/user"
+                    android:drawableLeft="@drawable/ic_user"
                     android:singleLine="true"
                     android:hint="Email"
                     android:textSize="@dimen/_12sdp"
@@ -53,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:singleLine="true"
-                    android:drawableLeft="@drawable/password"
+                    android:drawableLeft="@drawable/ic_password"
                     android:hint="Password"
                     android:textSize="@dimen/_12sdp"
                     android:inputType="textPassword" />

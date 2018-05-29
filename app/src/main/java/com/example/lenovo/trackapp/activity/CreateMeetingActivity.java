@@ -203,23 +203,6 @@ Shprefrences sh;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.addcustomer, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
-        int itemid = item.getItemId();
-        if (itemid == R.id.add_customer) {
-            Intent intent = new Intent(CreateMeetingActivity.this, LandingActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     protected Dialog onCreateDialog(int id) {
         if (id == 111) {
             return new DatePickerDialog(this, onDateSetListener, YY, MM, DD);

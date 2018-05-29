@@ -19,7 +19,6 @@ public class LandingActivity extends AppCompatActivity {
     Button addvisit, expenses, attandance, schedule, addcustomer, feedback, nofification, message, setting;
     String name = "";
     Shprefrences sh;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,7 +145,8 @@ public class LandingActivity extends AppCompatActivity {
         } else if (itemid == R.id.nav_setting) {
             Toast.makeText(this, "setting", Toast.LENGTH_SHORT).show();
         } else if (itemid == R.id.nav_message) {
-            Toast.makeText(this, "this is your message", Toast.LENGTH_SHORT).show();
+           Intent intent=new Intent(LandingActivity.this,SendMessageActivity.class);
+           startActivity(intent);
         }
         else if (itemid == R.id.nav_notification) {
             Toast.makeText(this, "this is your pending notification", Toast.LENGTH_SHORT).show();

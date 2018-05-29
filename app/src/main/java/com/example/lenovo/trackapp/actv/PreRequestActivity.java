@@ -64,9 +64,8 @@ public class PreRequestActivity extends AppCompatActivity {
             public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
                 Log.e("**Error**", t.getMessage());
                 progress.setVisibility(View.GONE);
+                }
+                });
+                }
+                }
 
-            }
-        });
-    }
-
-}

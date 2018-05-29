@@ -29,13 +29,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
                 <Button
                     android:id="@+id/btn_addvisit"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:background="@drawable/ic_meeting" />
-
                 <TextView
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="wrap_content"
@@ -44,10 +42,8 @@
                     android:text="Create Meeting"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-
+                    android:textStyle="bold"/>
+                    </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,7 +82,7 @@
                     android:layout_gravity="right"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="My Sch"
+                    android:text="My Schedule"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
@@ -109,7 +105,8 @@
                     android:id="@+id/btn_feedback"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
-                    android:background="@drawable/ic_feedback" />
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@drawable/ic_feedback"/>
                 <TextView
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="wrap_content"
@@ -118,8 +115,7 @@
                     android:text="Feedback"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -128,7 +124,6 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
                 <Button
                     android:id="@+id/btn_attendance"
                     android:layout_width="@dimen/_50sdp"
@@ -145,25 +140,21 @@
                     android:text="Attendance"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
                 <Button
                     android:id="@+id/btn_addcustomer"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_gravity="right"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_weight="1"
                     android:background="@drawable/ic_customer" />
-
                 <TextView
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="wrap_content"
@@ -173,11 +164,9 @@
                     android:text="Customer Details "
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -185,19 +174,16 @@
             android:orientation="horizontal"
             android:padding="@dimen/_10sdp"
             android:weightSum="3">
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
                 <Button
                     android:id="@+id/btn_setting"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:background="@drawable/ic_settings" />
-
                 <TextView
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="wrap_content"
@@ -206,16 +192,13 @@
                     android:text="Settings"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
                 <Button
                     android:id="@+id/btn_expense"
                     android:layout_width="@dimen/_50sdp"
@@ -223,7 +206,6 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/ic_expense" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -232,36 +214,30 @@
                     android:text="Expenses"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-
+                    android:textStyle="bold" />
+                 </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
                 <Button
                     android:id="@+id/btn_notification"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
-android:layout_gravity="end"
+                    android:layout_gravity="end"
                     android:layout_weight="1"
-                    android:background="@drawable/ic_notification" />
-
+                    android:background="@drawable/ic_notification"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Pending Notification"
+                    android:text="Pending Notifications"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+                    android:textStyle="bold"/>
+                    </LinearLayout>
+                   </LinearLayout>
+                   </LinearLayout>
+                    </ScrollView>

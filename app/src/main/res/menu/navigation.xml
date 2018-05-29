@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:title="Main menu"
-        android:icon="@drawable/navigation"
+        android:icon="@drawable/ic_navigation"
         app:showAsAction="always">
         <menu>
     <item
@@ -17,7 +17,7 @@
         android:id="@+id/nav_mysch"
         android:icon="@drawable/schedule"
         app:showAsAction="never"
-        android:title="My Sch"
+        android:title="My Schedule"
         />
     <item
         android:id="@+id/nav_feedback"

@@ -43,7 +43,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         setContentView(R.layout.activity_add_customer);
         SearchView editText=(SearchView) findViewById(R.id.edt);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.add);
+        fab.setImageResource(R.drawable.ic_plusicon);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         getSupportActionBar().setTitle("Customer Details");
         getMessageData();

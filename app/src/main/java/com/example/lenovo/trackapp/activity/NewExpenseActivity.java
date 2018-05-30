@@ -75,8 +75,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks,SearchView.OnQueryTextListener {
+public class NewExpenseActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
     private static final String TAG = "CreateMeetingActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView edtAddress;
@@ -85,7 +85,7 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     private static final int SELECT_PHOTO = 200;
-    EditText meeting, date, customername, getDate, amount, comments, time,currency;
+    EditText meeting, date, customername, getDate, amount, comments, time, currency;
     private static final int CAMERA_REQUEST = 1888;
     ImageView imageView;
     TextView textView;
@@ -101,6 +101,7 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
     int H, M;
     Calendar calendar;
     int DD, MM, YY;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,12 +118,12 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
         comments = (EditText) findViewById(R.id.edt_comment);
         progress = findViewById(R.id.progress);
         listTypes = findViewById(R.id.listTypes);
-        currency=(EditText)findViewById(R.id.edt_Currency) ;
+        currency = (EditText) findViewById(R.id.edt_Currency);
         getDate = (EditText) findViewById(R.id.edt_date1);
         submit = findViewById(R.id.btnSubmit);
         if (imgUrl != null && !imgUrl.equalsIgnoreCase(""))
             Picasso.get().load(imgUrl).into(imageView);
-        sh=new Shprefrences(this);
+        sh = new Shprefrences(this);
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         String date1 = df.format(Calendar.getInstance().getTime());
         getDate.setText("Created:" + date1);
@@ -178,7 +179,7 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
             public void onClick(View view) {
                 String selectmeeting = meeting.getText().toString();
                 String amnt = amount.getText().toString();
-
+                String currenc = currency.getText() + "";
                 String dt = date.getText().toString();
                 String loc = location.getText().toString();
                 String vndr = customername.getText().toString();
@@ -191,8 +192,8 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
                 } else if (amnt.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
                     return;
-                }  else if (t.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "enter time", Toast.LENGTH_SHORT).show();
+                } else if (t.equals("")) {
+                    Toast.makeText(NewExpenseActivity.this, "Enter time", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (dt.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Enter date", Toast.LENGTH_SHORT).show();
@@ -207,8 +208,8 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
                     Toast.makeText(NewExpenseActivity.this, "Enter Your Comment", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-
-                    Toast.makeText(NewExpenseActivity.this, "saved", Toast.LENGTH_SHORT).show();
+                    progress.setVisibility(View.VISIBLE);
+                    postExpanse(selectmeeting, amnt, currenc, dt, t, loc, vndr, cmnt);
                 }
             }
         });
@@ -237,6 +238,7 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
             }
         });
     }
+
     public void getMeetingsList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
@@ -250,6 +252,7 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
             }
         });
     }
+
     public void getReqestTypes() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getRequestTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
@@ -260,12 +263,14 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
                 listTypes.setAdapter(adapto);
                 progress.setVisibility(View.GONE);
             }
+
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
                 progress.setVisibility(View.GONE);
             }
         });
     }
+
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
@@ -280,7 +285,6 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
             }
         });
     }
-
 
 
     private void selectImage() {
@@ -326,7 +330,6 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
     }
 
 
-
     android.app.AlertDialog alertDialog;
     MeetingsAdaptor adaptor;
     private int popupId = 0;
@@ -364,7 +367,9 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
         });
 
     }
+
     CurrencyAdaptor currencyAdaptor;
+
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(NewExpenseActivity.this, currencyList);
 
@@ -396,13 +401,13 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
         });
 
     }
-    public void getCustomerList()
-    {
+
+    public void getCustomerList() {
         Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
             @Override
             public void onResponse(Call<ResMetaCustomer> call, Response<ResMetaCustomer> response) {
 
-                listCustomer=response.body().getResponse();
+                listCustomer = response.body().getResponse();
             }
 
             @Override
@@ -412,8 +417,9 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
         });
     }
 
-    ArrayList<CustomerModel>listCustomer;
+    ArrayList<CustomerModel> listCustomer;
     CustomerPopupAdaptor customerPopupAdaptor;
+
     private void showCustomerPopup() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
@@ -427,7 +433,7 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
-        TextView title= dialogView.findViewById(R.id.title);
+        TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         editTextName.setQueryHint("Search Here");
         editTextName.setOnQueryTextListener(this);
@@ -449,6 +455,7 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
         });
 
     }
+
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
@@ -474,20 +481,23 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
             // Selecting the first object buffer.
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
-            Toast.makeText(NewExpenseActivity.this,place.getAddress(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewExpenseActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
 
         }
     };
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         Log.i(TAG, "Google Places API connected.");
     }
+
     @Override
     public void onConnectionSuspended(int i) {
         mPlaceArrayAdapter.setGoogleApiClient(null);
         Log.e(TAG, "Google Places API connection suspended.");
     }
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
@@ -499,10 +509,12 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
     }
+
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
+
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
@@ -539,9 +551,10 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
                 }
                 customerPopupAdaptor.filter(newlist2);
                 break;
-              }
+        }
         return true;
     }
+
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id == 111) {
@@ -572,4 +585,25 @@ public class NewExpenseActivity extends AppCompatActivity implements  GoogleApiC
             }
         }
     };
+
+
+    private void postExpanse(String selectmeeting, String amnt, String currenc, String dt, String t, String loc, String vndr, String cmnt) {
+
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        String userid = model.getUser_id();
+        Singleton.getInstance().getApi().postExpanse(userid, selectmeeting, amnt, currenc, requestTyoesList, dt, t, loc, vndr, cmnt).enqueue(new Callback<ResMetaMeeting>() {
+            @Override
+            public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
+                Toast.makeText(NewExpenseActivity.this, "Expanse posted successfully!", Toast.LENGTH_SHORT).show();
+                progress.setVisibility(View.GONE);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
+                progress.setVisibility(View.GONE);
+                Toast.makeText(NewExpenseActivity.this, "Sorry!Try Again!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

@@ -84,8 +84,6 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_gravity="bottom"
             android:background="@color/text_hint_color">
-
-
         </RelativeLayout>-->
     </LinearLayout>
     <LinearLayout
@@ -103,8 +101,8 @@
             android:orientation="vertical">
             <Button
                 android:id="@+id/btn_receipt"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
                 android:background="@drawable/ic_addimage" />
             <TextView
@@ -122,8 +120,8 @@
             android:orientation="vertical">
             <Button
                 android:id="@+id/btn_exp"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
                 android:background="@drawable/ic_plus" />
             <TextView

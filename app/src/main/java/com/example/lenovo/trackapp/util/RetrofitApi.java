@@ -75,4 +75,12 @@ public interface RetrofitApi {
     );
 
 
+    @FormUrlEncoded
+    @POST("post_expense.php?request=saveexpense_data")
+    Call<ResMetaMeeting> postExpanse(@Field("user_id") String user_id, @Field("meeting_id") String meeting_id,
+                                        @Field("amount") String amount, @Field("currency") String currency, @Field("requesttypes") ArrayList<RequestTypeModel> requesttypes,  @Field("date") String date, @Field("time") String time,@Field("location") String location,
+                                        @Field("customer") String customer, @Field("comment") String comment
+
+    );
+
 }

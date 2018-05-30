@@ -79,13 +79,11 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
     private static final String TAG = "CreateMeetingActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
-    private AutoCompleteTextView edtAddress;
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
-    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
-            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     private static final int SELECT_PHOTO = 200;
-    EditText meeting, date, customername, getDate, amount, comments, time, currency;
+    EditText meeting, date, customername, getDate, amount,comments,time,currency;
     private static final int CAMERA_REQUEST = 1888;
     ImageView imageView;
     TextView textView;
@@ -101,7 +99,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
     int H, M;
     Calendar calendar;
     int DD, MM, YY;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,18 +170,18 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 showDialog(111);
             }
         });
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String selectmeeting = meeting.getText().toString();
                 String amnt = amount.getText().toString();
-                String currenc = currency.getText() + "";
+                String currenc = currency.getText().toString();
                 String dt = date.getText().toString();
                 String loc = location.getText().toString();
                 String vndr = customername.getText().toString();
                 String cmnt = comments.getText().toString();
                 String t = time.getText().toString();
+                String totalamount=amnt+currenc;
                 String createddate = getDate.getText().toString();
                 if (selectmeeting.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Select Meeting", Toast.LENGTH_SHORT).show();
@@ -209,7 +206,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postExpanse(selectmeeting, amnt, currenc, dt, t, loc, vndr, cmnt);
+                    postExpanse(selectmeeting, totalamount, currenc, dt, t, loc, vndr, cmnt);
                 }
             }
         });
@@ -238,7 +235,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
     }
-
     public void getMeetingsList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
@@ -252,7 +248,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
     }
-
     public void getReqestTypes() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getRequestTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
@@ -263,14 +258,12 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 listTypes.setAdapter(adapto);
                 progress.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
                 progress.setVisibility(View.GONE);
             }
         });
     }
-
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
@@ -278,15 +271,11 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
                 currencyList = response.body().getResponse();
             }
-
             @Override
             public void onFailure(Call<ResMetaCurrency> call, Throwable t) {
-
             }
         });
     }
-
-
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(NewExpenseActivity.this);
@@ -306,13 +295,11 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         });
         builder.show();
     }
-
     private void openGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -328,22 +315,16 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             }
         }
     }
-
-
     android.app.AlertDialog alertDialog;
     MeetingsAdaptor adaptor;
     private int popupId = 0;
-
     private void showMeetings() {
-
         adaptor = new MeetingsAdaptor(NewExpenseActivity.this, meetingList);
-
         android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
-
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         editTextName.setQueryHint("Search Here");
@@ -355,7 +336,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         popupId = 1;
         alertDialog.show();
         listPurpose.setAdapter(adaptor);
-
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -365,11 +345,8 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 alertDialog.dismiss();
             }
         });
-
     }
-
     CurrencyAdaptor currencyAdaptor;
-
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(NewExpenseActivity.this, currencyList);
 
@@ -382,7 +359,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         TextView title = dialogView.findViewById(R.id.title);
         editTextName.setQueryHint("Search Here");
         editTextName.setOnQueryTextListener(this);
-
         title.setText("Select Currency");
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
@@ -401,7 +377,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         });
 
     }
-
     public void getCustomerList() {
         Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
             @Override
@@ -409,25 +384,21 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
 
                 listCustomer = response.body().getResponse();
             }
-
             @Override
             public void onFailure(Call<ResMetaCustomer> call, Throwable t) {
 
             }
         });
     }
-
     ArrayList<CustomerModel> listCustomer;
     CustomerPopupAdaptor customerPopupAdaptor;
-
     private void showCustomerPopup() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
         m.setId("0");
 
-        purposeList.add(m);*/
+       purposeList.add(m);*/
         customerPopupAdaptor = new CustomerPopupAdaptor(NewExpenseActivity.this, listCustomer);
-
         android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -444,7 +415,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         popupId = 3;
         alertDialog.show();
         listPurpose.setAdapter(customerPopupAdaptor);
-
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -453,9 +423,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 alertDialog.dismiss();
             }
         });
-
     }
-
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
@@ -482,22 +450,18 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
             Toast.makeText(NewExpenseActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
-
         }
     };
-
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         Log.i(TAG, "Google Places API connected.");
     }
-
     @Override
     public void onConnectionSuspended(int i) {
         mPlaceArrayAdapter.setGoogleApiClient(null);
         Log.e(TAG, "Google Places API connection suspended.");
     }
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
@@ -509,12 +473,10 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
     }
-
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
-
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
@@ -564,7 +526,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         }
         return onCreateDialog(id);
     }
-
     DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int d, int m, int y) {
@@ -585,8 +546,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             }
         }
     };
-
-
     private void postExpanse(String selectmeeting, String amnt, String currenc, String dt, String t, String loc, String vndr, String cmnt) {
 
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
@@ -598,7 +557,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 progress.setVisibility(View.GONE);
                 finish();
             }
-
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
                 progress.setVisibility(View.GONE);

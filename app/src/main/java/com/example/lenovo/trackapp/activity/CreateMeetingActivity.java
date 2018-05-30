@@ -31,6 +31,7 @@ import com.example.lenovo.trackapp.adaptor.CustomerPopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.PlaceArrayAdapter;
 import com.example.lenovo.trackapp.adaptor.PurposePopupAdaptor;
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.model.AlarmModel;
 import com.example.lenovo.trackapp.model.CustomerModel;
 import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.model.MeetingModel;
@@ -51,13 +52,14 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CreateMeetingActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks,SearchView.OnQueryTextListener {
+        GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
     private static final String TAG = "CreateMeetingActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView edtAddress;
@@ -73,8 +75,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements
     TextView txtReminder;
     Button btnSubmit;
     ProgressBar progress;
-    public static  String SELECTED_PURPOSE;
-Shprefrences sh;
+    public static String SELECTED_PURPOSE;
+    Shprefrences sh;
+
     //SweetAlertDialog pDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,7 @@ Shprefrences sh;
         txtReminder = findViewById(R.id.txtReminder);
         btnSubmit = findViewById(R.id.btnSubmit);
         progress = findViewById(R.id.progress);
-        sh=new Shprefrences(this);
+        sh = new Shprefrences(this);
         mGoogleApiClient = new GoogleApiClient.Builder(CreateMeetingActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
@@ -159,7 +162,7 @@ Shprefrences sh;
         txtReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CreateMeetingActivity.this, ReminderActivity.class));
+                startActivityForResult(new Intent(CreateMeetingActivity.this, ReminderActivity.class), 10);
             }
         });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -194,12 +197,25 @@ Shprefrences sh;
                 {
                     // pDialog.show();
                     progress.setVisibility(View.VISIBLE);
-                 LoginModel model= sh.getLoginModel("LOGIN_MODEL");
+                    LoginModel model = sh.getLoginModel("LOGIN_MODEL");
 
                     createMeeting(model.getId(), purpose, descreption, customer, date, time, agenda, contactperson, address, "", "", "", "", "");
                 }
             }
         });
+    }
+
+    AlarmModel alarm;
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==10 && resultCode == RESULT_OK) {
+            alarm = (AlarmModel) getIntent().getSerializableExtra("alarm");
+            if(alarm!=null)
+            Log.e("***************", "on ativity**********************" + alarm.getStartTime());
+        }
     }
 
     @Override
@@ -233,13 +249,12 @@ Shprefrences sh;
         }
     };
 
-    public void getPurposeList()
-    {
+    public void getPurposeList() {
         Singleton.getInstance().getApi().getPurposeList("").enqueue(new Callback<ResponseMeta>() {
             @Override
             public void onResponse(Call<ResponseMeta> call, Response<ResponseMeta> response) {
 
-                purposeList=response.body().getResponse();
+                purposeList = response.body().getResponse();
             }
 
             @Override
@@ -250,13 +265,12 @@ Shprefrences sh;
     }
 
 
-    public void getCustomerList()
-    {
+    public void getCustomerList() {
         Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
             @Override
             public void onResponse(Call<ResMetaCustomer> call, Response<ResMetaCustomer> response) {
 
-                listCustomer=response.body().getResponse();
+                listCustomer = response.body().getResponse();
             }
 
             @Override
@@ -292,7 +306,7 @@ Shprefrences sh;
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
         alertDialog.show();
-          popupId = 1;
+        popupId = 1;
         listPurpose.setAdapter(purposePopupAdaptor);
 
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -306,8 +320,9 @@ Shprefrences sh;
 
     }
 
-    ArrayList<CustomerModel>listCustomer;
+    ArrayList<CustomerModel> listCustomer;
     CustomerPopupAdaptor customerPopupAdaptor;
+
     private void showCustomerPopup() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
@@ -321,7 +336,7 @@ Shprefrences sh;
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
-       TextView title= dialogView.findViewById(R.id.title);
+        TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         editTextName.setQueryHint("Search Here");
         editTextName.setOnQueryTextListener(this);
@@ -343,7 +358,6 @@ Shprefrences sh;
         });
 
     }
-
 
 
     private void createMeeting(String user_id, String purpose, String descreption
@@ -389,6 +403,7 @@ Shprefrences sh;
             }
         });
     }
+
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
@@ -414,15 +429,17 @@ Shprefrences sh;
             // Selecting the first object buffer.
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
-            Toast.makeText(CreateMeetingActivity.this,place.getAddress(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateMeetingActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
 
         }
     };
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         Log.i(TAG, "Google Places API connected.");
     }
+
     @Override
     public void onConnectionSuspended(int i) {
         mPlaceArrayAdapter.setGoogleApiClient(null);
@@ -439,11 +456,13 @@ Shprefrences sh;
                 "Google Places API connection failed with error code:" +
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
-        }
+    }
+
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
+
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();

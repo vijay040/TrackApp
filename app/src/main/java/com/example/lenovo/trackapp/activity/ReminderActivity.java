@@ -3,6 +3,7 @@ package com.example.lenovo.trackapp.activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.model.AlarmModel;
 
 import java.util.Calendar;
 
@@ -32,6 +34,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     static final int TIME_DIALOG_ID = 3;
     static final int TIME_DIALOG_ID2 = 4;
     int cur = 0;
+    AlarmModel alarm;
     String remindertime[]={"5 minutes","10 minutes","15 minutes","20 minutes","30 minutes","1 hour","2 hours","3 hours","4 hours","5 hours",
     "6 hours","7 hours","8 hours"," 9 hours","10 hours","11 hours","18 hours","1 day","2 days","3 days","4 days","1 week","2 weeks"};
     @Override
@@ -45,6 +48,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         edt_EndTimer=findViewById(R.id.edt_EndTimer);
         btnOk=findViewById(R.id.btnOk);
         calendar=Calendar.getInstance();
+        alarm=new AlarmModel();
         DD=calendar.get(Calendar.DAY_OF_MONTH);
         MM=calendar.get(Calendar.MONTH);
         YY=calendar.get(Calendar.YEAR);
@@ -98,6 +102,19 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String strtdt=edtStartDate.getText()+"";
+                String strttm=edt_time.getText()+"";
+                String enddt=edtEndDate.getText()+"";
+                String endtm=edt_EndTime.getText()+"";
+                String endtimer=edt_EndTimer.getSelectedItem()+"";
+                alarm.setAlarmTime(endtimer);
+                alarm.setEndDate(enddt);
+                alarm.setEndTime(endtm);
+                alarm.setStartDate(strtdt);
+                alarm.setStartTime(strttm);
+                Intent intent = new Intent();
+                intent.putExtra("alarm", alarm);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });

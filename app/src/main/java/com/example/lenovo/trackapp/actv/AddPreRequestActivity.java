@@ -3,6 +3,8 @@ package com.example.lenovo.trackapp.actv;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.text.InputFilter;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,10 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.activity.NewExpenseActivity;
 import com.example.lenovo.trackapp.adaptor.CurrencyAdaptor;
 import com.example.lenovo.trackapp.adaptor.CustomerPopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.DepartmentAdaptor;
 import com.example.lenovo.trackapp.adaptor.MeetingsAdaptor;
+import com.example.lenovo.trackapp.adaptor.PlaceArrayAdapter;
 import com.example.lenovo.trackapp.adaptor.PurposePopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.RequestTypesAdaptor;
 import com.example.lenovo.trackapp.model.CurrencyModel;
@@ -43,6 +48,15 @@ import com.example.lenovo.trackapp.model.ResponseMeta;
 import com.example.lenovo.trackapp.util.CurrencyFormatInputFilter;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.ArrayList;
 
@@ -54,8 +68,8 @@ import retrofit2.Response;
  * Created by Lenovo on 22-05-2018.
  */
 
-public class AddPreRequestActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
-
+public class AddPreRequestActivity extends AppCompatActivity implements  GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
     EditText edtMeetings, edtDescreption, edtAdvance, edtDepartment, edtCurrency;
     Button btnSubmit;
     ProgressBar progress;
@@ -65,7 +79,14 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
     ArrayList<DepartmentModel> departmentList = new ArrayList<>();
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     ListView listTypes;
+    private AutoCompleteTextView edtAddress;
+    private static final String TAG = "CreateMeetingActivity";
+    private static final int GOOGLE_API_CLIENT_ID = 0;
 
+    private GoogleApiClient mGoogleApiClient;
+    private PlaceArrayAdapter mPlaceArrayAdapter;
+    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
+            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     //SweetAlertDialog pDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +99,25 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
         listTypes = findViewById(R.id.listTypes);
         edtDepartment = findViewById(R.id.edtDepartment);
         edtCurrency = findViewById(R.id.edtCurrency);
+        edtAddress = (AutoCompleteTextView) findViewById(R.id.edt_location);
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);
         progress.setVisibility(View.VISIBLE);
-
         getReqestTypes();
         getMeetingsList();
         getDepartmentList();
         getCurrencyList();
+        mGoogleApiClient = new GoogleApiClient.Builder(AddPreRequestActivity.this)
+                .addApi(Places.GEO_DATA_API)
+                .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
+                .addConnectionCallbacks(this)
+                .build();
+        edtAddress.setOnItemClickListener(mAutocompleteClickListener);
+        mPlaceArrayAdapter = new PlaceArrayAdapter(
+                this, android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
+        edtAddress.setAdapter(mPlaceArrayAdapter);
+        edtAddress.setThreshold(1);
         //edtAdvance.setFilters(new InputFilter[] {new CurrencyFormatInputFilter()});
         edtMeetings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,21 +125,18 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
                 showMeetings();
             }
         });
-
         edtDepartment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDepartmentList();
             }
         });
-
         edtCurrency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showCurrencyList();
             }
         });
-
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,8 +149,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
             }
         });
     }
-
-
     public void getMeetingsList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
@@ -129,13 +156,11 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 meetingList = response.body().getResponse();
             }
-
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable throwable) {
             }
         });
     }
-
     public void getDepartmentList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getDepartmentList(model.getId()).enqueue(new Callback<ResMetaDepartment>() {
@@ -150,7 +175,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
             }
         });
     }
-
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
@@ -158,14 +182,12 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
                 currencyList = response.body().getResponse();
             }
-
             @Override
             public void onFailure(Call<ResMetaCurrency> call, Throwable t) {
 
             }
         });
     }
-
     public void getReqestTypes() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getRequestTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
@@ -176,29 +198,22 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
                 listTypes.setAdapter(adapto);
                 progress.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
                 progress.setVisibility(View.GONE);
             }
         });
     }
-
-
     AlertDialog alertDialog;
     MeetingsAdaptor adaptor;
     private int popupId = 0;
-
     private void showMeetings() {
-
         adaptor = new MeetingsAdaptor(com.example.lenovo.trackapp.actv.AddPreRequestActivity.this, meetingList);
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
-
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         editTextName.setQueryHint("Search Here");
@@ -210,7 +225,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
         popupId = 1;
         alertDialog.show();
         listPurpose.setAdapter(adaptor);
-
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -220,14 +234,10 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
                 alertDialog.dismiss();
             }
         });
-
     }
-
     DepartmentAdaptor departmentAdaptor;
-
     private void showDepartmentList() {
         departmentAdaptor = new DepartmentAdaptor(AddPreRequestActivity.this, departmentList);
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -254,12 +264,10 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
                 alertDialog.dismiss();
             }
         });
-
     }
     CurrencyAdaptor currencyAdaptor;
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(AddPreRequestActivity.this, currencyList);
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -269,7 +277,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
         TextView title = dialogView.findViewById(R.id.title);
         editTextName.setQueryHint("Search Here");
         editTextName.setOnQueryTextListener(this);
-
         title.setText("Select Currency");
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
@@ -277,7 +284,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
         popupId = 2;
         alertDialog.show();
         listPurpose.setAdapter(currencyAdaptor);
-
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -288,13 +294,10 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
         });
 
     }
-
-
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
-
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
@@ -336,8 +339,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
         }
         return true;
     }
-
-
     private void submitPost() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         String userid = model.getUser_id();
@@ -346,6 +347,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
         String dept = edtDepartment.getText().toString();
         String meetind_id = edtMeetings.getText().toString();
         String des = edtDescreption.getText().toString();
+        String totalamount=adv+curr;
         if (userid.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, "Your session is time out please login again", Toast.LENGTH_SHORT).show();
             return;
@@ -365,20 +367,71 @@ public class AddPreRequestActivity extends AppCompatActivity implements SearchVi
             Toast.makeText(AddPreRequestActivity.this, "Enter Descreption", Toast.LENGTH_SHORT).show();
             return;
         }
-
         progress.setVisibility(View.VISIBLE);
-        Singleton.getInstance().getApi().postPreRequest(userid, adv, curr, dept, meetind_id, des, requestTyoesList).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetind_id, des, requestTyoesList).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);
                 Toast.makeText(AddPreRequestActivity.this, "Pre-Request Submited Successfully!", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
         });
+    }
+    private AdapterView.OnItemClickListener mAutocompleteClickListener
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+            Log.i(TAG, "Fetching details for ID: " + item.placeId);
+        }
+    };
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                Log.e(TAG, "Place query did not complete. Error: " +
+                        places.getStatus().toString());
+                return;
+            }
+            // Selecting the first object buffer.
+            final Place place = places.get(0);
+            CharSequence attributions = places.getAttributions();
+            Toast.makeText(AddPreRequestActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
+
+        }
+    };
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
+        Log.i(TAG, "Google Places API connected.");
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mPlaceArrayAdapter.setGoogleApiClient(null);
+        Log.e(TAG, "Google Places API connection suspended.");
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+        Log.e(TAG, "Google Places API connection failed with error code: "
+                + connectionResult.getErrorCode());
+
+        Toast.makeText(this,
+                "Google Places API connection failed with error code:" +
+                        connectionResult.getErrorCode(),
+                Toast.LENGTH_LONG).show();
     }
 
 }

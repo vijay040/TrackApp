@@ -1,199 +1,158 @@
 package com.example.lenovo.trackapp.activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.actv.AddPreRequestActivity;
+import com.example.lenovo.trackapp.adaptor.PlaceArrayAdapter;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
-public class NewCustomerActivity extends AppCompatActivity {
+public class NewCustomerActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks {
 
-    EditText customername,address,place,city,email,phone;
-    Button cancel;
+    EditText customername,email,phone;
+    Button submit;
     TextView save;
-    private TextInputLayout inputLayoutname,inputLayoutaddress,inputLayoutemail,inputLayoutphone,inputLayoutplace,inputLayoutcity;
+private AutoCompleteTextView address;
+    private static final String TAG = "NewCustomerActivity";
+    private static final int GOOGLE_API_CLIENT_ID = 0;
+
+    private GoogleApiClient mGoogleApiClient;
+    private PlaceArrayAdapter mPlaceArrayAdapter;
+    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
+            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_customer);
         customername=(EditText)findViewById(R.id.edt_name);
-        address=(EditText)findViewById(R.id.edt_address);
+        address=(AutoCompleteTextView)findViewById(R.id.edt_address);
         email=(EditText)findViewById(R.id.edt_email);
         phone=(EditText)findViewById(R.id.edt_phone);
-        place=(EditText)findViewById(R.id.edt_place);
-        save=(TextView) findViewById(R.id.btn_save);
-        city=(EditText) findViewById(R.id.edt_city);
-        cancel=(Button)findViewById(R.id.btn_back);
-        inputLayoutname = (TextInputLayout) findViewById(R.id.input_layout_customer);
-        inputLayoutaddress=(TextInputLayout) findViewById(R.id.input_layout_address);
-        inputLayoutemail=(TextInputLayout) findViewById(R.id.input_layout_email);
-        inputLayoutcity=(TextInputLayout) findViewById(R.id.input_layout_city);
-        inputLayoutphone=(TextInputLayout) findViewById(R.id.input_layout_phone);
-        inputLayoutplace=(TextInputLayout) findViewById(R.id.input_layout_place);
-       /* customername.setTextColor(Color.parseColor("#2196F3"));
-        address.setTextColor(Color.parseColor("#2196F3"));
-        email.setTextColor(Color.parseColor("#2196F3"));
-        phone.setTextColor(Color.parseColor("#2196F3"));
-        place.setTextColor(Color.parseColor("#2196F3"));
-        city.setTextColor(Color.parseColor("#2196F3"));*/
-        customername.addTextChangedListener(new MyTextWatcher(customername));
-        address.addTextChangedListener(new MyTextWatcher(address));
-        email.addTextChangedListener(new MyTextWatcher(email));
-        phone.addTextChangedListener(new MyTextWatcher(phone));
-        place.addTextChangedListener(new MyTextWatcher(place));
-        city.addTextChangedListener(new MyTextWatcher(city));
+        submit=findViewById(R.id.btnSubmit);
         getSupportActionBar().setTitle("New Customer");
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(NewCustomerActivity.this,AddCustomerActivity.class);
-                startActivity(intent);
-            }
-        });
-        save.setOnClickListener(new View.OnClickListener()
-        {
-
-
+        mGoogleApiClient = new GoogleApiClient.Builder(NewCustomerActivity.this)
+                .addApi(Places.GEO_DATA_API)
+                .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
+                .addConnectionCallbacks(this)
+                .build();
+        address.setOnItemClickListener(mAutocompleteClickListener);
+        mPlaceArrayAdapter = new PlaceArrayAdapter(
+                this, android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
+        address.setAdapter(mPlaceArrayAdapter);
+        address.setThreshold(1);
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                submitForm();
+                String custmrname=customername.getText().toString();
+                String add=address.getText().toString();
+                String em=email.getText().toString();
+                String phn=phone.getText().toString();
+                if(custmrname.equals("")){
+                    Toast.makeText(NewCustomerActivity.this,"Enter Customer Name",Toast.LENGTH_SHORT).show();
+                }
+                else if(add.equals("")){
+                    Toast.makeText(NewCustomerActivity.this,"Enter Address",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(em.trim().isEmpty()||!em.matches("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                        "\\@" +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                        "(" +
+                        "\\." +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                        ")+")){
+
+                    Toast.makeText(NewCustomerActivity.this,"Enter Valid Email",Toast.LENGTH_SHORT).show();
+return;
+                }
+                else if(phn.trim().isEmpty()||phone.getText().toString().length()<10||phn.length()>12){
+                    Toast.makeText(NewCustomerActivity.this,"Enter Valid Phone No.",Toast.LENGTH_SHORT).show();
+                  return;
+                }
+                Toast.makeText(NewCustomerActivity.this,"Saved",Toast.LENGTH_SHORT).show();
             }
         });
-    } private void submitForm() {
-        if (!validateName()) {
-            return;
-        }
-        if (!validateAddress()) {
-            return;
-        }
-        if (!validateEmail()) {
-            return;
-        }
-        if (!validatePlace()) {
-            return;
-        }
-        if (!validatePhone()) {
-            return;
-        }
-        if (!validateCity()) {
-            return;
-        }
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
-        finish();
-        startActivity(getIntent());
     }
-    private boolean validateName() {
-        if (customername.getText().toString().trim().isEmpty()) {
-            inputLayoutname.setError(getString(R.string.err_msg_name));
-            requestFocus(customername);
-            return false;
-        } else {
-            inputLayoutname.setErrorEnabled(false);
+    private AdapterView.OnItemClickListener mAutocompleteClickListener
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+            Log.i(TAG, "Fetching details for ID: " + item.placeId);
         }
-        return true;
-    }
-    private boolean validateAddress() {
-        if (address.getText().toString().trim().isEmpty()) {
-            inputLayoutaddress.setError(getString(R.string.err_msg_address));
-            requestFocus(address);
-            return false;
-        } else {
-            inputLayoutaddress.setErrorEnabled(false);
+    };
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                Log.e(TAG, "Place query did not complete. Error: " +
+                        places.getStatus().toString());
+                return;
+            }
+            // Selecting the first object buffer.
+            final Place place = places.get(0);
+            CharSequence attributions = places.getAttributions();
+            Toast.makeText(NewCustomerActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
+
         }
-        return true;
-    }
-    private boolean validateEmail() {
-        if (email.getText().toString().trim().isEmpty()||!email.getText().toString().matches("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                "\\@" +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                "(" +
-                "\\." +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                ")+")) {
-            inputLayoutemail.setError(getString(R.string.err_msg_email));
-            requestFocus(email);
-            return false;
-        } else {
-            inputLayoutemail.setErrorEnabled(false);
-        }
-        return true;
-    }
-    private boolean validatePhone() {
-        if (phone.getText().toString().trim().isEmpty()||phone.getText().toString().length()<10||phone.getText().toString().length()>12) {
-            inputLayoutphone.setError(getString(R.string.err_msg_phone));
-            requestFocus(phone);
-            return false;
-        } else {
-            inputLayoutphone.setErrorEnabled(false);
-        }
-        return true;
-    }
-    private boolean validatePlace() {
-        if (place.getText().toString().trim().isEmpty()) {
-            inputLayoutplace.setError(getString(R.string.err_msg_place));
-            requestFocus(place);
-            return false;
-        } else {
-            inputLayoutplace.setErrorEnabled(false);
-        }
-        return true;
-    }
-    private boolean validateCity() {
-        if (city.getText().toString().trim().isEmpty()) {
-            inputLayoutcity.setError(getString(R.string.err_msg_city));
-            requestFocus(city);
-            return false;
-        } else {
-            inputLayoutcity.setErrorEnabled(false);
-        }
-        return true;
+    };
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
+        Log.i(TAG, "Google Places API connected.");
     }
 
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
+    @Override
+    public void onConnectionSuspended(int i) {
+        mPlaceArrayAdapter.setGoogleApiClient(null);
+        Log.e(TAG, "Google Places API connection suspended.");
     }
-    public class MyTextWatcher implements TextWatcher {
-        private View view;
-        private MyTextWatcher(View view) {
-            this.view = view;
-        }
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-        public void afterTextChanged(Editable editable) {
-            switch (view.getId()) {
-                case R.id.edt_name:
-                    validateName();
-                    break;
-                case R.id.edt_address:
-                    validateAddress();
-                    break;
-                case R.id.edt_email:
-                    validateEmail();
-                    break;
-                case R.id.edt_place:
-                    validatePlace();
-                    break;
-                case R.id.edt_phone:
-                    validatePhone();
-                    break;
-                case R.id.edt_city:
-                    validateCity();
-                    break;
-            }
-        }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+        Log.e(TAG, "Google Places API connection failed with error code: "
+                + connectionResult.getErrorCode());
+
+        Toast.makeText(this,
+                "Google Places API connection failed with error code:" +
+                        connectionResult.getErrorCode(),
+                Toast.LENGTH_LONG).show();
     }
+
+
 }

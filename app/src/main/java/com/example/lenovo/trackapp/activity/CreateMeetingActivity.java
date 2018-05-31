@@ -212,7 +212,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==10 && resultCode == RESULT_OK) {
-            alarm = (AlarmModel) getIntent().getSerializableExtra("alarm");
+            alarm = (AlarmModel) data.getSerializableExtra("ALARM");
             if(alarm!=null)
             Log.e("***************", "on ativity**********************" + alarm.getStartTime());
         }

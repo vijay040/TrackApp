@@ -70,7 +70,7 @@ public interface RetrofitApi {
     @POST("prerequestsapi.php?request=prerequests_data")
     Call<ResMetaMeeting> postPreRequest(@Field("user_id") String user_id,
                                         @Field("advance") String advance, @Field("currency") String currency, @Field("department") String department, @Field("meeting_id") String meeting_id,
-                                        @Field("description") String description,  @Field("requesttypes") ArrayList<RequestTypeModel> requesttypes
+                                        @Field("description") String description,  @Field("address") String address,  @Field("date") String date, @Field("requesttypes") ArrayList<RequestTypeModel> requesttypes
 
     );
 

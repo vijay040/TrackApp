@@ -49,8 +49,14 @@ public class PreRequestActivity extends AppCompatActivity {
                 startActivity(new Intent(PreRequestActivity.this, AddPreRequestActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getPreRequestList();
     }
+
     private void getPreRequestList(){
         Singleton.getInstance().getApi().getPrerequestMeetingList("").enqueue(new Callback<PreRequestResMeta>() {
             @Override
@@ -65,7 +71,10 @@ public class PreRequestActivity extends AppCompatActivity {
                 Log.e("**Error**", t.getMessage());
                 progress.setVisibility(View.GONE);
                 }
-                });
-                }
-                }
+
+        });
+
+    }
+
+}
 

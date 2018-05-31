@@ -51,7 +51,7 @@ public class PreRequestAdaptor extends BaseAdapter {
         }
 
         TextView txtTitle = view.findViewById(R.id.txtTitle);
-        txtTitle.setText(list.get(i).getMeeting_id());
+        txtTitle.setText(list.get(i).getDescription());
 
         TextView txtDate = view.findViewById(R.id.txtDate);
         txtDate.setText(list.get(i).getDate());

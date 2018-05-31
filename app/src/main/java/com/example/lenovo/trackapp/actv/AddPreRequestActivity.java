@@ -10,6 +10,7 @@ import android.support.v7.widget.AppCompatCheckBox;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -58,7 +59,10 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,7 +72,7 @@ import retrofit2.Response;
  * Created by Lenovo on 22-05-2018.
  */
 
-public class AddPreRequestActivity extends AppCompatActivity implements  GoogleApiClient.OnConnectionFailedListener,
+public class AddPreRequestActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
     EditText edtMeetings, edtDescreption, edtAdvance, edtDepartment, edtCurrency;
     Button btnSubmit;
@@ -87,6 +91,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+
     //SweetAlertDialog pDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +112,18 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
         getMeetingsList();
         getDepartmentList();
         getCurrencyList();
+
+
+        listTypes.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
         mGoogleApiClient = new GoogleApiClient.Builder(AddPreRequestActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
@@ -137,11 +154,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
                 showCurrencyList();
             }
         });
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,6 +162,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
             }
         });
     }
+
     public void getMeetingsList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
@@ -156,11 +170,13 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 meetingList = response.body().getResponse();
             }
+
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable throwable) {
             }
         });
     }
+
     public void getDepartmentList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getDepartmentList(model.getId()).enqueue(new Callback<ResMetaDepartment>() {
@@ -175,6 +191,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
             }
         });
     }
+
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
@@ -182,12 +199,14 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
                 currencyList = response.body().getResponse();
             }
+
             @Override
             public void onFailure(Call<ResMetaCurrency> call, Throwable t) {
 
             }
         });
     }
+
     public void getReqestTypes() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getRequestTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
@@ -198,15 +217,18 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
                 listTypes.setAdapter(adapto);
                 progress.setVisibility(View.GONE);
             }
+
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
                 progress.setVisibility(View.GONE);
             }
         });
     }
+
     AlertDialog alertDialog;
     MeetingsAdaptor adaptor;
     private int popupId = 0;
+
     private void showMeetings() {
         adaptor = new MeetingsAdaptor(com.example.lenovo.trackapp.actv.AddPreRequestActivity.this, meetingList);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -231,11 +253,15 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
                 MeetingModel obj = (MeetingModel) listPurpose.getAdapter().getItem(position);
                 Log.e("selected**", "" + obj.getDescreption());
                 edtMeetings.setText(obj.getDescreption());
+                meetingId = obj.getId();
                 alertDialog.dismiss();
             }
         });
     }
+
+    String meetingId = "";
     DepartmentAdaptor departmentAdaptor;
+
     private void showDepartmentList() {
         departmentAdaptor = new DepartmentAdaptor(AddPreRequestActivity.this, departmentList);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -265,7 +291,9 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
             }
         });
     }
+
     CurrencyAdaptor currencyAdaptor;
+
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(AddPreRequestActivity.this, currencyList);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -294,10 +322,12 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
         });
 
     }
+
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
+
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
@@ -339,15 +369,15 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
         }
         return true;
     }
+
     private void submitPost() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         String userid = model.getUser_id();
         String adv = edtAdvance.getText().toString();
         String curr = edtCurrency.getText().toString();
         String dept = edtDepartment.getText().toString();
-        String meetind_id = edtMeetings.getText().toString();
         String des = edtDescreption.getText().toString();
-        String totalamount=adv+curr;
+        String totalamount = adv + curr;
         if (userid.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, "Your session is time out please login again", Toast.LENGTH_SHORT).show();
             return;
@@ -360,26 +390,34 @@ public class AddPreRequestActivity extends AppCompatActivity implements  GoogleA
         } else if (dept.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, "Select Department", Toast.LENGTH_SHORT).show();
             return;
-        } else if (meetind_id.equals("")) {
+        } else if (meetingId.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, "Select Meeting", Toast.LENGTH_SHORT).show();
             return;
         } else if (des.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, "Enter Descreption", Toast.LENGTH_SHORT).show();
             return;
         }
+        String addres = edtAddress.getText() + "";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String datetime = dateFormat.format(date);
+        Log.e("datetime", "**********"+datetime);
+        Log.e("addres", "*****************"+addres);
         progress.setVisibility(View.VISIBLE);
-        Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetind_id, des, requestTyoesList).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetingId, des, addres, datetime, requestTyoesList).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);
                 Toast.makeText(AddPreRequestActivity.this, "Pre-Request Submited Successfully!", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
         });
     }
+
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override

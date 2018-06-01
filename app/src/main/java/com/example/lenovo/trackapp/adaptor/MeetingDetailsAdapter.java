@@ -63,13 +63,13 @@ public class MeetingDetailsAdapter extends BaseAdapter {
         TextView txtContactPerson=view.findViewById(R.id.txtcontactperson);
         TextView txtAddress=view.findViewById(R.id.txtaddress);
         txtDescreption.setText(list.get(i).getDescreption());
-        txtPurpose.setText(list.get(i).getPurpose());
-        txtCustomer.setText(list.get(i).getCustomer_name());
-        txtAgenda.setText(list.get(i).getAgenda());
-        txtDate.setText(list.get(i).getDate());
-        txtTime.setText(list.get(i).getTime());
-        txtContactPerson.setText(list.get(i).getContact_person());
-        txtAddress.setText(list.get(i).getAddress());
+        txtPurpose.setText("Purpose:"+list.get(i).getPurpose());
+        txtCustomer.setText("Client:"+list.get(i).getCustomer_name());
+        txtAgenda.setText("Agenda:"+list.get(i).getAgenda());
+        txtDate.setText("Date:"+list.get(i).getDate());
+        txtTime.setText("Time:"+list.get(i).getTime());
+        txtContactPerson.setText("Con. Person:"+list.get(i).getContact_person());
+        txtAddress.setText("Address"+list.get(i).getAddress());
         return view;
     }
 }

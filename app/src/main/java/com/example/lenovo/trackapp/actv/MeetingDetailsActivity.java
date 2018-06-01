@@ -14,7 +14,7 @@ import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.model.MeetingModel;
 
 public class MeetingDetailsActivity extends AppCompatActivity {
-TextView descreption,purpose,customer,agenda,date,time,address;
+TextView descreption,purpose,customer,agenda,date,time,address,contact;
     MeetingModel model;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,13 +28,15 @@ TextView descreption,purpose,customer,agenda,date,time,address;
         date=findViewById(R.id.txtdate);
         time=findViewById(R.id.txttime);
         address=findViewById(R.id.txtaddress);
-        descreption.setText("Description:"+model.getDescreption());
-        purpose.setText("Purpose:"+model.getPurpose());
-        customer.setText("Client:"+model.getCustomer_name());
+        contact=findViewById(R.id.txtcontactperson);
+        descreption.setText("Description: "+model.getDescreption());
+        purpose.setText("Purpose: "+model.getPurpose());
+        customer.setText("Client  :"+model.getCustomer_name());
         agenda.setText("Agenda:"+model.getAgenda());
-        date.setText("Date:"+model.getDate());
-        time.setText("Time:"+model.getTime());
-        address.setText("Address:"+model.getAddress());
+        date.setText("Date: "+model.getDate());
+        time.setText("Time: "+model.getTime());
+        address.setText("Address: "+model.getAddress());
+        contact.setText("Contact Person: "+model.getContact_person());
 
 
          SpannableStringBuilder sb = new SpannableStringBuilder(purpose.getText());
@@ -60,7 +62,7 @@ TextView descreption,purpose,customer,agenda,date,time,address;
 
         sb = new SpannableStringBuilder(customer.getText());
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
-        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         customer.setText(sb);
 
         sb = new SpannableStringBuilder(agenda.getText());
@@ -82,6 +84,12 @@ TextView descreption,purpose,customer,agenda,date,time,address;
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         address.setText(sb);
+
+        sb = new SpannableStringBuilder(contact.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 15, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        contact.setText(sb);
+
 
     }
 }

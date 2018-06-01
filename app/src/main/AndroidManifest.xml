@@ -28,7 +28,6 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.LandingActivity" />
         <activity android:name=".activity.MyScheduleActivity" />
-        <activity android:name=".activity.SignInActivity$Attandance" />
         <activity android:name=".activity.ExpenseActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.AddCustomerActivity" />
@@ -38,6 +37,7 @@
         <activity android:name=".activity.ReminderActivity" />
         <activity android:name=".actv.PreRequestActivity" />
         <activity android:name=".actv.LoginActivity" />
+        <activity android:name=".actv.MeetingDetailsActivity" />
         <activity android:name=".actv.AddPreRequestActivity" android:windowSoftInputMode="stateAlwaysHidden" />
         <receiver android:name=".util.AlarmReciver" android:enabled="true" />
         <meta-data

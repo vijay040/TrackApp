@@ -229,4 +229,9 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    public void setAlarm()
+    {
+
+    }
 }

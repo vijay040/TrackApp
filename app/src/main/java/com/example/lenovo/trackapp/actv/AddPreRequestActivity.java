@@ -396,14 +396,15 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         String datetime = dateFormat.format(date);
-        Log.e("datetime", "**********"+datetime);
-        Log.e("addres", "*****************"+addres);
+        Log.e("datetime", "**********" + datetime);
+        Log.e("addres", "*****************" + addres);
         progress.setVisibility(View.VISIBLE);
         Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetingId, des, addres, datetime, requestTyoesList).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);
                 Toast.makeText(AddPreRequestActivity.this, "Pre-Request Submited Successfully!", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override

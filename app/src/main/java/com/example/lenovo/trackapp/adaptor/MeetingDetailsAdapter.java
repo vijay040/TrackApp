@@ -69,7 +69,7 @@ public class MeetingDetailsAdapter extends BaseAdapter {
         txtDate.setText("Date:"+list.get(i).getDate());
         txtTime.setText("Time:"+list.get(i).getTime());
         txtContactPerson.setText("Con. Person:"+list.get(i).getContact_person());
-        txtAddress.setText("Address"+list.get(i).getAddress());
+        txtAddress.setText("Address: "+list.get(i).getAddress());
         return view;
     }
 }

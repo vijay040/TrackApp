@@ -19,18 +19,19 @@
         android:layout_toRightOf="@id/img"
         android:text="Descreption:"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_18sdp"
+        android:textSize="@dimen/_13sdp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/txtpurpose"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="19dp"
         android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:layout_toRightOf="@id/img"
         android:text="Purpose:"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_13sdp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/_12sdp" />
     <TextView
         android:id="@+id/txtcustomer"
         android:layout_width="wrap_content"
@@ -38,9 +39,10 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_toRightOf="@id/img"
         android:text="Customer:"
+        android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_13sdp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/_12sdp"
+         />
     <TextView
         android:id="@+id/txtagenda"
         android:layout_width="wrap_content"
@@ -48,9 +50,10 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_toRightOf="@id/img"
         android:text="Agenda:"
+        android:layout_marginTop="@dimen/_7sdp"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_13sdp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/_12sdp"
+        />
     <TextView
         android:id="@+id/txtdate"
         android:layout_width="wrap_content"
@@ -59,8 +62,8 @@
         android:layout_toRightOf="@id/img"
         android:text="Date:"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_13sdp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/_12sdp"
+       android:layout_marginTop="@dimen/_7sdp" />
     <TextView
         android:id="@+id/txttime"
         android:layout_width="wrap_content"
@@ -68,9 +71,10 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_toRightOf="@id/img"
         android:text="Time:"
+        android:layout_marginTop="@dimen/_7sdp"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_13sdp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/_12sdp"
+        />
     <TextView
         android:id="@+id/txtaddress"
         android:layout_width="wrap_content"
@@ -79,8 +83,8 @@
         android:layout_toRightOf="@id/img"
         android:text="Address:"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_13sdp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/_12sdp"
+      android:layout_marginTop="@dimen/_7sdp" />
 
 
 

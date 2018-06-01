@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
@@ -31,12 +32,15 @@ import retrofit2.Response;
 public class MyScheduleActivity extends AppCompatActivity {
     ListView listMeetingsView;
     Shprefrences sh;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_schedule);
         listMeetingsView = findViewById(R.id.listMeetingsView);
+        progressBar=findViewById(R.id.progress);
+        progressBar.setVisibility(View.VISIBLE);
         sh = new Shprefrences(this);
         getMeetingList();
         listMeetingsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -59,11 +63,12 @@ public class MyScheduleActivity extends AppCompatActivity {
                 ArrayList<MeetingModel> list = response.body().getResponse();
                 final MeetingDetailsAdapter adapter = new MeetingDetailsAdapter(MyScheduleActivity.this, list);
                 listMeetingsView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable throwable) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

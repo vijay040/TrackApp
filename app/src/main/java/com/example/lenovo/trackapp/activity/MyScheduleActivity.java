@@ -55,7 +55,6 @@ public class MyScheduleActivity extends AppCompatActivity {
                 ArrayList<MeetingModel> list=response.body().getResponse();
              final   MeetingDetailsAdapter adapter=new MeetingDetailsAdapter(MyScheduleActivity.this,list);
                 listMeetingsView.setAdapter(adapter);
-
             }
 
             @Override

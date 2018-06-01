@@ -23,13 +23,13 @@ TextView descreption,purpose,customer,agenda,date,time,address;
         date=findViewById(R.id.txtdate);
         time=findViewById(R.id.txttime);
         address=findViewById(R.id.txtaddress);
-        descreption.setText(model.getDescreption());
-        purpose.setText(model.getPurpose());
-        customer.setText(model.getCustomer());
-        agenda.setText(model.getAgenda());
-        date.setText(model.getDate());
-        time.setText(model.getTime());
-        address.setText(model.getAddress());
+         descreption.setText("Descreption: "+model.getDescreption());
+        purpose.setText("Purpose: "+model.getPurpose());
+        customer.setText("Customer Name: "+model.getCustomer());
+        agenda.setText("Agenda: "+model.getAgenda());
+        date.setText("Date: "+model.getDate());
+        time.setText("Time: "+model.getTime());
+        address.setText("Address: "+model.getAddress());
 
 
     }

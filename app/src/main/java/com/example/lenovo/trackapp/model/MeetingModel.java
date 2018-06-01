@@ -1,6 +1,8 @@
 package com.example.lenovo.trackapp.model;
 
-public class MeetingModel {
+import java.io.Serializable;
+
+public class MeetingModel implements Serializable{
     private String agenda;
 
     private String id;

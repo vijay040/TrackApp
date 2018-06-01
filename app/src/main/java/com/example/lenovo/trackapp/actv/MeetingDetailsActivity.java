@@ -15,6 +15,7 @@ TextView descreption,purpose,customer,agenda,date,time,address;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_meetingdetails);
+        model= (MeetingModel) getIntent().getSerializableExtra("MEETINGMODEL");
         descreption=findViewById(R.id.txtdescreption);
         purpose=findViewById(R.id.txtpurpose);
         customer=findViewById(R.id.txtcustomer);

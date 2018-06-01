@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/txtdescreption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:text="Descreption"
+            android:textColor="@color/them_color"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtpurpose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_below="@+id/txtdescreption"
+            android:text="Purpose"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtcustomer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtdescreption"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/_130sdp"
+            android:text="Customer"
+            android:ems="6"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtcustomer"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:ems="7"
+            android:text="Date:10/11/2018"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txttime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtcustomer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:ems="5"
+            android:text="Time:10:20:30"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtagenda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtdescreption"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:text="Agenda"
+            android:ems="7"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtcontactperson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtpurpose"
+            android:layout_marginLeft="@dimen/_6sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:text="Contact Person"
+            android:ems="7"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtcontactperson"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:text="Address"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+    </RelativeLayout>
+</RelativeLayout>

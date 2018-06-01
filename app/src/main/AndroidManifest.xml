@@ -29,9 +29,6 @@
         <activity android:name=".activity.LandingActivity" />
         <activity android:name=".activity.MyScheduleActivity" />
         <activity android:name=".activity.SignInActivity$Attandance" />
-        <activity android:name=".activity.AttandanceHisActivity" />
-        <activity android:name=".activity.SignOutActivity" />
-        <activity android:name=".activity.SignInActivity" />
         <activity android:name=".activity.ExpenseActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.AddCustomerActivity" />

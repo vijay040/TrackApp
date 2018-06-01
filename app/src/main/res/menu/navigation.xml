@@ -35,7 +35,7 @@
         android:id="@+id/nav_customer"
         android:icon="@drawable/ic_customer"
         app:showAsAction="never"
-        android:title="Customer Details"
+        android:title="Clients"
         />
     <item
         android:id="@+id/nav_expense"
@@ -59,7 +59,7 @@
                 android:id="@+id/nav_notification"
                 android:icon="@drawable/ic_notification"
                 app:showAsAction="never"
-                android:title="Pending notification"
+                android:title="Pendings"
                 />
             <item
                 android:id="@+id/nav_logout"

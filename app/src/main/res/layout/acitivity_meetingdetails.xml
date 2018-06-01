@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:src="@drawable/logo" />
+    <TextView
+        android:id="@+id/txtdescreption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_toRightOf="@id/img"
+        android:text="Descreption:"
+        android:textColor="@color/them_color"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtpurpose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_toRightOf="@id/img"
+        android:text="Purpose:"
+        android:textColor="@color/them_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtcustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_toRightOf="@id/img"
+        android:text="Customer:"
+        android:textColor="@color/them_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtagenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_toRightOf="@id/img"
+        android:text="Agenda:"
+        android:textColor="@color/them_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_toRightOf="@id/img"
+        android:text="Date:"
+        android:textColor="@color/them_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txttime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_toRightOf="@id/img"
+        android:text="Time:"
+        android:textColor="@color/them_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_toRightOf="@id/img"
+        android:text="Address:"
+        android:textColor="@color/them_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+
+
+
+
+</LinearLayout>

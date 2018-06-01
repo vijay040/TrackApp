@@ -86,7 +86,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
     private AutoCompleteTextView edtAddress;
     private static final String TAG = "CreateMeetingActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
-
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
@@ -112,8 +111,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         getMeetingsList();
         getDepartmentList();
         getCurrencyList();
-
-
         listTypes.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
@@ -291,9 +288,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             }
         });
     }
-
     CurrencyAdaptor currencyAdaptor;
-
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(AddPreRequestActivity.this, currencyList);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -417,7 +412,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             }
         });
     }
-
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
@@ -443,10 +437,11 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             // Selecting the first object buffer.
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
-            Toast.makeText(AddPreRequestActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(AddPreRequestActivity.this, place.getAddress(),Toast.LENGTH_SHORT).show();
         }
     };
+
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {

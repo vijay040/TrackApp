@@ -18,6 +18,7 @@ public class MeetingModel {
     private String customer;
 
     private String title;
+    private String address;
 
     public String getTitle() {
         return title;
@@ -25,6 +26,13 @@ public class MeetingModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getAgenda() {
@@ -91,8 +99,5 @@ public class MeetingModel {
         this.customer = customer;
     }
 
-    @Override
-    public String toString() {
-        return "ClassPojo [agenda = " + agenda + ", id = " + id + ", descreption = " + descreption + ", Time = " + Time + ", Date = " + Date + ", contact_person = " + contact_person + ", purpose = " + purpose + ", customer = " + customer + "]";
-    }
+
 }

@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,19 +16,13 @@
             android:textStyle="bold"
             android:background="#F2F2F2"
             android:paddingBottom="@dimen/_5sdp"
-            android:paddingTop="@dimen/_5sdp"
-            />
-
+            android:paddingTop="@dimen/_5sdp"  />
         <CheckBox
             android:id="@+id/chkSelect"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/_15sdp"
-            />
-    </RelativeLayout>
-
-
-
-</LinearLayout>
+            android:layout_marginRight="@dimen/_15sdp"   />
+          </RelativeLayout>
+          </LinearLayout>

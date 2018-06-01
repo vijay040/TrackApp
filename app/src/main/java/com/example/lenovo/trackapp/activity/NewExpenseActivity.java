@@ -189,7 +189,12 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 } else if (amnt.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (t.equals("")) {
+                }
+                else if (currenc.equals("")) {
+                    Toast.makeText(NewExpenseActivity.this, "Select Currency", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(t.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Enter time", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (dt.equals("")) {
@@ -199,7 +204,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                     Toast.makeText(NewExpenseActivity.this, "Enter location", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (vndr.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "Enter Vender Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewExpenseActivity.this, "Select Customer Name", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (cmnt.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Enter Your Comment", Toast.LENGTH_SHORT).show();

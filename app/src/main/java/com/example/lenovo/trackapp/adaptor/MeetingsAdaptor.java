@@ -30,12 +30,10 @@ public class MeetingsAdaptor extends BaseAdapter {
 
         return list.size();
     }
-
     @Override
     public Object getItem(int i) {
         return list.get(i);
     }
-
     @Override
     public long getItemId(int i) {
         return i;
@@ -46,21 +44,15 @@ public class MeetingsAdaptor extends BaseAdapter {
         list.addAll(newList);
         notifyDataSetChanged();
     }
-
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.inf_purpose_popup_list, null);
-
         }
-
         TextView txtTitle = view.findViewById(R.id.txtTitle);
-
         Log.e("Description",""+list.get(i).getDescreption());
-
         txtTitle.setText(list.get(i).getDescreption());
-
         return view;
     }
 }

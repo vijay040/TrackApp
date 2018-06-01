@@ -4,15 +4,12 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <ImageView
                 android:id="@+id/img"
                 android:layout_width="@dimen/_50sdp"
@@ -20,33 +17,28 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:src="@drawable/ic_request" />
-
             <ProgressBar
                 android:id="@+id/progress"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_centerInParent="true"
                 android:visibility="gone" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/img"
                 android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:orientation="vertical">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:weightSum="4">
-
                         <com.rengwuxian.materialedittext.MaterialEditText
                             android:id="@+id/edtAdvance"
                             android:layout_width="match_parent"
@@ -61,7 +53,6 @@
                             app:met_floatingLabelTextSize="@dimen/_10sdp"
                             app:met_maxCharacters="20"
                             app:met_primaryColor="@color/text_hint_color" />
-
                         <com.rengwuxian.materialedittext.MaterialEditText
                             android:id="@+id/edtCurrency"
                             android:layout_width="match_parent"
@@ -79,10 +70,7 @@
                             app:met_floatingLabelTextSize="@dimen/_10sdp"
                             app:met_maxCharacters="20"
                             app:met_primaryColor="@color/them_color" />
-
                     </LinearLayout>
-
-
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/edtDescreption"
                         android:layout_width="match_parent"
@@ -95,7 +83,6 @@
                         app:met_floatingLabelTextSize="@dimen/_10sdp"
                         app:met_maxCharacters="20"
                         app:met_primaryColor="@color/text_hint_color" />
-
                     <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
                         android:id="@+id/edt_location"
                         android:layout_width="match_parent"
@@ -110,7 +97,6 @@
                         app:met_floatingLabelTextSize="@dimen/_10sdp"
                         app:met_maxCharacters="20"
                         app:met_primaryColor="@color/text_hint_color" />
-
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/edtDepartment"
                         android:layout_width="match_parent"
@@ -125,7 +111,6 @@
                         app:met_floatingLabelTextSize="@dimen/_10sdp"
                         app:met_maxCharacters="20"
                         app:met_primaryColor="@color/text_hint_color" />
-
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/edtMeetings"
                         android:layout_width="match_parent"
@@ -140,7 +125,6 @@
                         app:met_floatingLabelTextSize="@dimen/_10sdp"
                         app:met_maxCharacters="20"
                         app:met_primaryColor="@color/text_hint_color" />
-
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/edtRequestType"
                         android:layout_width="match_parent"
@@ -155,7 +139,6 @@
                         app:met_floatingLabelTextSize="@dimen/_10sdp"
                         app:met_maxCharacters="20"
                         app:met_primaryColor="@color/text_hint_color" />
-
                     <Button
                         android:id="@+id/btAttchment"
                         android:layout_width="@dimen/_150sdp"
@@ -172,7 +155,6 @@
                         android:textSize="@dimen/_15sdp"
                         android:textStyle="bold"
                         android:visibility="gone" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -181,14 +163,13 @@
                         android:textColor="@color/them_color"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
-
                     <ListView
                         android:id="@+id/listTypes"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_5sdp"></ListView>
-
+                        android:layout_marginTop="@dimen/_5sdp">
+                    </ListView>
                     <Button
                         android:id="@+id/btnSubmit"
                         android:layout_width="match_parent"

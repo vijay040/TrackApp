@@ -89,8 +89,7 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(LandingActivity.this, SignInActivity.Attandance.class);
-                startActivity(intent);
+               Toast.makeText(LandingActivity.this,"This is Attandance",Toast.LENGTH_SHORT).show();
             }
         });
         addvisit.setOnClickListener(new View.OnClickListener() {
@@ -118,13 +117,11 @@ public class LandingActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.navigation, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO Auto-generated method stub
         int itemid = item.getItemId();
         if (itemid == R.id.nav_addmeeting) {
-
             Intent intent = new Intent(LandingActivity.this, CreateMeetingActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_mysch) {
@@ -134,8 +131,8 @@ public class LandingActivity extends AppCompatActivity {
             Intent intent = new Intent(LandingActivity.this, FeedbackActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_attandance) {
-            Intent intent = new Intent(LandingActivity.this, SignInActivity.Attandance.class);
-            startActivity(intent);
+            Toast.makeText(LandingActivity.this,"This is Attandance",Toast.LENGTH_SHORT).show();
+
         } else if (itemid == R.id.nav_customer) {
             Intent intent = new Intent(LandingActivity.this, AddCustomerActivity.class);
             startActivity(intent);
@@ -149,11 +146,11 @@ public class LandingActivity extends AppCompatActivity {
            startActivity(intent);
         }
         else if (itemid == R.id.nav_notification) {
-            Toast.makeText(this, "this is your pending notification", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "this is your pendings", Toast.LENGTH_SHORT).show();
         }
         else if (itemid == R.id.nav_logout) {
             sh.clearData();
-            Toast.makeText(this, "You have logged out successflly!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You have logged out successfully!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LandingActivity.this, LoginActivity.class));
             finish();
         }

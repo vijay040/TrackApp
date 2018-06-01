@@ -64,7 +64,7 @@ public class MeetingDetailsAdapter extends BaseAdapter {
         TextView txtAddress=view.findViewById(R.id.txtaddress);
         txtDescreption.setText(list.get(i).getDescreption());
         txtPurpose.setText(list.get(i).getPurpose());
-        txtCustomer.setText(list.get(i).getCustomer());
+        txtCustomer.setText(list.get(i).getCustomer_name());
         txtAgenda.setText(list.get(i).getAgenda());
         txtDate.setText(list.get(i).getDate());
         txtTime.setText(list.get(i).getTime());

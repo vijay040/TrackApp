@@ -2,7 +2,7 @@ package com.example.lenovo.trackapp.model;
 
 import java.io.Serializable;
 
-public class MeetingModel implements Serializable{
+public class MeetingModel implements Serializable {
     private String agenda;
 
     private String id;
@@ -18,9 +18,17 @@ public class MeetingModel implements Serializable{
     private String purpose;
 
     private String customer;
-
+    private String customer_name;
     private String title;
     private String address;
+
+    public String getCustomer_name() {
+        return customer_name;
+    }
+
+    public void setCustomer_name(String customer_name) {
+        this.customer_name = customer_name;
+    }
 
     public String getTitle() {
         return title;
@@ -29,6 +37,7 @@ public class MeetingModel implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getAddress() {
         return address;
     }

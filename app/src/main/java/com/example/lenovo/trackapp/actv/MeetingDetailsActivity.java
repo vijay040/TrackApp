@@ -1,8 +1,13 @@
 package com.example.lenovo.trackapp.actv;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
@@ -31,6 +36,52 @@ TextView descreption,purpose,customer,agenda,date,time,address;
         time.setText("Time:"+model.getTime());
         address.setText("Address:"+model.getAddress());
 
+
+         SpannableStringBuilder sb = new SpannableStringBuilder(purpose.getText());
+
+// Span to set text color to some RGB value
+         ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+
+// Span to make text bold
+    //    final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
+
+// Set the text color for first 4 characters
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+// make them also bold
+       // sb.setSpan(bss, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+        purpose.setText(sb);
+
+        sb = new SpannableStringBuilder(descreption.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        descreption.setText(sb);
+
+        sb = new SpannableStringBuilder(customer.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        customer.setText(sb);
+
+        sb = new SpannableStringBuilder(agenda.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        agenda.setText(sb);
+
+        sb = new SpannableStringBuilder(date.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        date.setText(sb);
+
+        sb = new SpannableStringBuilder(time.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        time.setText(sb);
+
+        sb = new SpannableStringBuilder(address.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        address.setText(sb);
 
     }
 }

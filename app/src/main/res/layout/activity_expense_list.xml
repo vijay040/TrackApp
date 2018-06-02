@@ -9,8 +9,17 @@
         android:layout_centerInParent="true"
         android:visibility="gone"/>
     <ListView
-        android:id="@+id/listMeetingsView"
+        android:id="@+id/listExpenseView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
+    <RelativeLayout
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:id="@+id/txtAdd"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_plusicon"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp" />
 </RelativeLayout>

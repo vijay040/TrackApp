@@ -23,15 +23,12 @@ import java.util.ArrayList;
 public class MeetingDetailsAdapter extends BaseAdapter {
     public ArrayList<MeetingModel> list;
     public Activity context;
-
     public MeetingDetailsAdapter(Activity context, ArrayList<MeetingModel> list) {
         this.list = list;
         this.context = context;
     }
-
     @Override
     public int getCount() {
-
         return list.size();
     }
     @Override

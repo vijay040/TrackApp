@@ -37,24 +37,17 @@ TextView descreption,purpose,customer,agenda,date,time,address,contact;
         time.setText("Time: "+model.getTime());
         address.setText("Address: "+model.getAddress());
         contact.setText("Contact Person: "+model.getContact_person());
-
-
-         SpannableStringBuilder sb = new SpannableStringBuilder(purpose.getText());
-
-// Span to set text color to some RGB value
+        SpannableStringBuilder sb = new SpannableStringBuilder(purpose.getText());
+     // Span to set text color to some RGB value
          ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
-
-// Span to make text bold
+        // Span to make text bold
     //    final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
-
-// Set the text color for first 4 characters
+        // Set the text color for first 4 characters
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
 // make them also bold
        // sb.setSpan(bss, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-
         purpose.setText(sb);
-
         sb = new SpannableStringBuilder(descreption.getText());
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
         sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
@@ -89,7 +82,5 @@ TextView descreption,purpose,customer,agenda,date,time,address,contact;
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
         sb.setSpan(fcs, 0, 15, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         contact.setText(sb);
-
-
-    }
+        }
 }

@@ -42,6 +42,7 @@ public class PreRequestActivity extends AppCompatActivity {
         progress = findViewById(R.id.progress);
         txtAdd = findViewById(R.id.txtAdd);
         progress.setVisibility(View.VISIBLE);
+        getSupportActionBar().setTitle("Pre-Requests");
         sh=new Shprefrences(this);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -37,6 +37,7 @@ TextView descreption,purpose,customer,agenda,date,time,address,contact;
         time.setText("Time: "+model.getTime());
         address.setText("Address: "+model.getAddress());
         contact.setText("Contact Person: "+model.getContact_person());
+        getSupportActionBar().setTitle("Meeting Detail");
         SpannableStringBuilder sb = new SpannableStringBuilder(purpose.getText());
      // Span to set text color to some RGB value
          ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));

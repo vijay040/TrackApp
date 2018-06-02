@@ -44,6 +44,7 @@ TextView txtPreRequest,txtExpanse;
         btn_exp = findViewById(R.id.btn_exp);
         txtPreRequest=findViewById(R.id.txtPreRequest);
         txtExpanse=findViewById(R.id.txtExpense);
+        getSupportActionBar().setTitle("Expenses");
         txtExpanse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

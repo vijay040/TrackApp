@@ -31,6 +31,7 @@ public class ExpenseListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expense_list);
         listExpenseView=findViewById(R.id.listExpenseView);
         progressBar=findViewById(R.id.progress);
+        getSupportActionBar().setTitle("Expenses");
         txtAdd=findViewById(R.id.txtAdd);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override

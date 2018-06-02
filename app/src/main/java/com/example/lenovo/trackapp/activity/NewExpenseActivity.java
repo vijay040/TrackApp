@@ -122,6 +122,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         currency = (EditText) findViewById(R.id.edt_Currency);
         getDate = (EditText) findViewById(R.id.edt_date1);
         submit = findViewById(R.id.btnSubmit);
+        getSupportActionBar().setTitle("Create Expense");
         if (imgUrl != null && !imgUrl.equalsIgnoreCase(""))
             Picasso.get().load(imgUrl).into(imageView);
         sh = new Shprefrences(this);

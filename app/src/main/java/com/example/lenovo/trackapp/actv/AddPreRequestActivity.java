@@ -103,6 +103,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         listTypes = findViewById(R.id.listTypes);
         edtDepartment = findViewById(R.id.edtDepartment);
         edtCurrency = findViewById(R.id.edtCurrency);
+        getSupportActionBar().setTitle("Add Pre-Request");
         edtAddress = (AutoCompleteTextView) findViewById(R.id.edt_location);
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);

@@ -29,6 +29,7 @@ public class MyScheduleActivity extends AppCompatActivity {
         listMeetingsView = findViewById(R.id.listMeetingsView);
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
+        getSupportActionBar().setTitle("Scheduled Meetings");
         sh = new Shprefrences(this);
         getMeetingList();
         listMeetingsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

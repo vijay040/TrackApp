@@ -26,6 +26,8 @@ public class CustomerPopupAdaptor extends BaseAdapter {
 
     @Override
     public int getCount() {
+        if (list == null)
+            return 0;
         return list.size();
     }
 
@@ -38,9 +40,9 @@ public class CustomerPopupAdaptor extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
-    public void filter(ArrayList<CustomerModel>newList)
-    {
-        list=new ArrayList<>();
+
+    public void filter(ArrayList<CustomerModel> newList) {
+        list = new ArrayList<>();
         list.addAll(newList);
         notifyDataSetChanged();
     }

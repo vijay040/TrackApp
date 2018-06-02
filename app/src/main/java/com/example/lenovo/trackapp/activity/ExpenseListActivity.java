@@ -13,6 +13,8 @@ import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.ExpenseListAdaptor;
 import com.example.lenovo.trackapp.model.ExpenseModel;
 import com.example.lenovo.trackapp.model.ExpenseResMeta;
+import com.example.lenovo.trackapp.model.LoginModel;
+import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class ExpenseListActivity extends AppCompatActivity {
     ListView listExpenseView;
     ProgressBar progressBar;
     RelativeLayout txtAdd;
+    Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,7 @@ public class ExpenseListActivity extends AppCompatActivity {
         progressBar=findViewById(R.id.progress);
         getSupportActionBar().setTitle("Expenses");
         txtAdd=findViewById(R.id.txtAdd);
+        sh=new Shprefrences(this);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +55,8 @@ public class ExpenseListActivity extends AppCompatActivity {
 
     private void getExpenseList()
     {
-        Singleton.getInstance().getApi().getExpanseList("").enqueue(new Callback<ExpenseResMeta>() {
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().getExpanseList(model.getId()).enqueue(new Callback<ExpenseResMeta>() {
             @Override
             public void onResponse(Call<ExpenseResMeta> call, Response<ExpenseResMeta> response) {
                 ArrayList<ExpenseModel> model=response.body().getResponse();

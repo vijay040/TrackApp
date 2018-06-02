@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -86,9 +87,9 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
     EditText meeting, date, customername, getDate, amount,comments,time,currency;
     private static final int CAMERA_REQUEST = 1888;
     ImageView imageView;
-    TextView textView;
+
     public static String imgUrl;
-    Button submit;
+    Button submit,attachement;
     Shprefrences sh;
     ProgressBar progress;
     private AutoCompleteTextView location;
@@ -109,9 +110,9 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         date = (EditText) findViewById(R.id.edt_date);
         location = (AutoCompleteTextView) findViewById(R.id.edt_location);
         time = (EditText) findViewById(R.id.edt_time);
-        imageView = (ImageView) findViewById(R.id.imz_loadreceipt);
+        imageView = (ImageView) findViewById(R.id.imageView);
         customername = (EditText) findViewById(R.id.edt_vendor);
-        textView = (TextView) findViewById(R.id.btn_load);
+        attachement = (Button) findViewById(R.id.btAttchment);
         comments = (EditText) findViewById(R.id.edt_comment);
         progress = findViewById(R.id.progress);
         listTypes = findViewById(R.id.listTypes);
@@ -123,7 +124,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         sh = new Shprefrences(this);
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         String date1 = df.format(Calendar.getInstance().getTime());
-        getDate.setText("Created:" + date1);
+        getDate.setText("Created On:" + date1);
         mGoogleApiClient = new GoogleApiClient.Builder(NewExpenseActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
@@ -162,6 +163,15 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 showDialog(121);
+            }
+        });
+        listTypes.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
             }
         });
         date.setOnClickListener(new View.OnClickListener() {
@@ -216,7 +226,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 }
             }
         });
-        textView.setOnClickListener(new View.OnClickListener() {
+        attachement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectImage();

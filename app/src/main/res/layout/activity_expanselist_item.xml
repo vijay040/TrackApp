@@ -30,13 +30,13 @@
 
 
         <TextView
-            android:id="@+id/txtDate"
+            android:id="@+id/txtCreatedOn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtDescreption"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/img"
-            android:text="Date"
+            android:text="Created On"
             android:singleLine="true"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_8sdp"
@@ -46,7 +46,7 @@
             android:id="@+id/txtRequestType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtDate"
+            android:layout_below="@+id/txtCreatedOn"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/img"
             android:text="Request Type"

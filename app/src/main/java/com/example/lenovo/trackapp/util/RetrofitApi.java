@@ -1,5 +1,6 @@
 package com.example.lenovo.trackapp.util;
 
+        import com.example.lenovo.trackapp.model.ExpenseResMeta;
         import com.example.lenovo.trackapp.model.LoginResMeta;
         import com.example.lenovo.trackapp.model.MeetingModel;
         import com.example.lenovo.trackapp.model.PreRequestResMeta;
@@ -82,5 +83,11 @@ public interface RetrofitApi {
                                         @Field("customer") String customer, @Field("comment") String comment
 
     );
+
+
+
+    @FormUrlEncoded
+    @POST("fetch_expense.php")
+    Call<ExpenseResMeta> getExpanseList(@Field("user_id") String user_id);
 
 }

@@ -426,7 +426,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                         places.getStatus().toString());
                 return;
             }
-            // Selecting the first object buffer.
+            //Selecting the first object buffer.
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
             Toast.makeText(CreateMeetingActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();

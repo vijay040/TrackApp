@@ -7,7 +7,19 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.adaptor.ExpenseListAdaptor;
+import com.example.lenovo.trackapp.model.ExpenseModel;
+import com.example.lenovo.trackapp.model.ExpenseResMeta;
+import com.example.lenovo.trackapp.util.Singleton;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ExpenseListActivity extends AppCompatActivity {
     ListView listExpenseView;
@@ -19,14 +31,39 @@ public class ExpenseListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expense_list);
         listExpenseView=findViewById(R.id.listExpenseView);
         progressBar=findViewById(R.id.progress);
-        txtAdd = findViewById(R.id.txtAdd);
+        txtAdd=findViewById(R.id.txtAdd);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ExpenseListActivity.this, NewExpenseActivity.class);
-          startActivity(intent);
+                startActivity(new Intent(ExpenseListActivity.this,NewExpenseActivity.class));
             }
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBar.setVisibility(View.VISIBLE);
+        getExpenseList();
+    }
+
+    private void getExpenseList()
+    {
+        Singleton.getInstance().getApi().getExpanseList("").enqueue(new Callback<ExpenseResMeta>() {
+            @Override
+            public void onResponse(Call<ExpenseResMeta> call, Response<ExpenseResMeta> response) {
+                ArrayList<ExpenseModel> model=response.body().getResponse();
+                ExpenseListAdaptor adaptor=new ExpenseListAdaptor(ExpenseListActivity.this,model);
+                listExpenseView.setAdapter(adaptor);
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<ExpenseResMeta> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
 }

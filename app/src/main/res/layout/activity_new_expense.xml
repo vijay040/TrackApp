@@ -271,7 +271,11 @@
                 android:text="Submit"
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/_15sdp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_10sdp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

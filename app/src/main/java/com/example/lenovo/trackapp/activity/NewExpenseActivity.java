@@ -84,12 +84,12 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     private static final int SELECT_PHOTO = 200;
-    EditText meeting, date, customername, getDate, amount,comments,time,currency;
+    EditText meeting, date, customername, getDate, amount, comments, time, currency;
     private static final int CAMERA_REQUEST = 1888;
     ImageView imageView;
 
     public static String imgUrl;
-    Button submit,attachement;
+    Button submit, attachement;
     Shprefrences sh;
     ProgressBar progress;
     private AutoCompleteTextView location;
@@ -97,9 +97,11 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
     ArrayList<MeetingModel> meetingList = new ArrayList<>();
     ArrayList<RequestTypeModel> requestTyoesList = new ArrayList<>();
     ListView listTypes;
+    TextView image_path;
     int H, M;
     Calendar calendar;
     int DD, MM, YY;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +116,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         customername = (EditText) findViewById(R.id.edt_vendor);
         attachement = (Button) findViewById(R.id.btAttchment);
         comments = (EditText) findViewById(R.id.edt_comment);
+        image_path=findViewById(R.id.image_path);
         progress = findViewById(R.id.progress);
         listTypes = findViewById(R.id.listTypes);
         currency = (EditText) findViewById(R.id.edt_Currency);
@@ -149,7 +152,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         H = calendar.get(Calendar.HOUR_OF_DAY);
         M = calendar.get(Calendar.MINUTE);
 
-      if (H < 12 && H >= 0) {
+        if (H < 12 && H >= 0) {
             time.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
         } else {
             H -= 12;
@@ -192,7 +195,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 String vndr = customername.getText().toString();
                 String cmnt = comments.getText().toString();
                 String t = time.getText().toString();
-                String totalamount=amnt+currenc;
+                String totalamount = amnt + currenc;
                 String createddate = getDate.getText().toString();
                 if (selectmeeting.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Select Meeting", Toast.LENGTH_SHORT).show();
@@ -200,12 +203,10 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 } else if (amnt.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (currenc.equals("")) {
+                } else if (currenc.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Select Currency", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(t.equals("")) {
+                } else if (t.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Enter time", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (dt.equals("")) {
@@ -251,6 +252,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
     }
+
     public void getMeetingsList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
@@ -264,6 +266,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
     }
+
     public void getReqestTypes() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getRequestTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
@@ -274,12 +277,14 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 listTypes.setAdapter(adapto);
                 progress.setVisibility(View.GONE);
             }
+
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
                 progress.setVisibility(View.GONE);
             }
         });
     }
+
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
@@ -287,11 +292,13 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
                 currencyList = response.body().getResponse();
             }
+
             @Override
             public void onFailure(Call<ResMetaCurrency> call, Throwable t) {
             }
         });
     }
+
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(NewExpenseActivity.this);
@@ -311,29 +318,39 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         });
         builder.show();
     }
+
     private void openGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
+
+    String imageImagePath = "";
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(photo);
+            imageImagePath = data.getData().getPath();
+            image_path.setText(imageImagePath);
         } else if (requestCode == SELECT_PHOTO) {
             if (resultCode == RESULT_OK) {
                 Uri selectedImage = data.getData();
                 if (selectedImage != null) {
                     imageView.setImageURI(selectedImage);
+                    imageImagePath = selectedImage.getPath();
+                    image_path.setText(imageImagePath);
                 }
             }
         }
     }
+
     android.app.AlertDialog alertDialog;
     MeetingsAdaptor adaptor;
     private int popupId = 0;
+
     private void showMeetings() {
         adaptor = new MeetingsAdaptor(NewExpenseActivity.this, meetingList);
         android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
@@ -362,7 +379,9 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
     }
+
     CurrencyAdaptor currencyAdaptor;
+
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(NewExpenseActivity.this, currencyList);
 
@@ -393,6 +412,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         });
 
     }
+
     public void getCustomerList() {
         Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
             @Override
@@ -400,14 +420,17 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
 
                 listCustomer = response.body().getResponse();
             }
+
             @Override
             public void onFailure(Call<ResMetaCustomer> call, Throwable t) {
 
             }
         });
     }
+
     ArrayList<CustomerModel> listCustomer;
     CustomerPopupAdaptor customerPopupAdaptor;
+
     private void showCustomerPopup() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
@@ -440,6 +463,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
     }
+
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
@@ -468,16 +492,19 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             Toast.makeText(NewExpenseActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
         }
     };
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         Log.i(TAG, "Google Places API connected.");
     }
+
     @Override
     public void onConnectionSuspended(int i) {
         mPlaceArrayAdapter.setGoogleApiClient(null);
         Log.e(TAG, "Google Places API connection suspended.");
     }
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
@@ -489,10 +516,12 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
     }
+
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
+
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
@@ -542,6 +571,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         }
         return onCreateDialog(id);
     }
+
     DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int d, int m, int y) {
@@ -552,7 +582,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         @Override
         public void onTimeSet(TimePicker timePicker, int h, int m) {
 
-           if (h < 12 && h >= 0) {
+            if (h < 12 && h >= 0) {
                 time.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "AM");
             } else {
                 h -= 12;
@@ -563,6 +593,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             }
         }
     };
+
     private void postExpanse(String selectmeeting, String amnt, String currenc, String dt, String t, String loc, String vndr, String cmnt) {
 
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
@@ -574,6 +605,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 progress.setVisibility(View.GONE);
                 finish();
             }
+
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
                 progress.setVisibility(View.GONE);

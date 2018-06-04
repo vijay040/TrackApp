@@ -54,7 +54,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDWDqyDgTE5jZNIxw_uRwKtBCY9xQPvGac" />
 
-        <activity android:name=".activity.ExpenseListActivity"></activity>
+        <activity android:name=".activity.ExpenseListActivity" />
+        <activity android:name=".activity.ExpenseReportActivity"></activity>
     </application>
 
 </manifest>

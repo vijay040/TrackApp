@@ -7,10 +7,12 @@
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_centerInParent="true"
-      />
+        android:visibility="gone"
+        />
     <ListView
-        android:id="@+id/listMeetingsView"
+        android:id="@+id/listExpenseReport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
+
 </RelativeLayout>

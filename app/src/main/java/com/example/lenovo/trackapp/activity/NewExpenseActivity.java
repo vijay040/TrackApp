@@ -6,26 +6,18 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -37,9 +29,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.example.lenovo.trackapp.R;
-import com.example.lenovo.trackapp.actv.AddPreRequestActivity;
 import com.example.lenovo.trackapp.adaptor.CurrencyAdaptor;
 import com.example.lenovo.trackapp.adaptor.CustomerPopupAdaptor;
 import com.example.lenovo.trackapp.adaptor.MeetingsAdaptor;
@@ -66,16 +56,13 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.squareup.picasso.Picasso;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class NewExpenseActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
     private static final String TAG = "CreateMeetingActivity";
@@ -87,7 +74,6 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
     EditText meeting, date, customername, getDate, amount, comments, time, currency;
     private static final int CAMERA_REQUEST = 1888;
     ImageView imageView;
-
     public static String imgUrl;
     Button submit, attachement;
     Shprefrences sh;
@@ -139,7 +125,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 this, android.R.layout.simple_list_item_1,
                 BOUNDS_MOUNTAIN_VIEW, null);
         location.setAdapter(mPlaceArrayAdapter);
-        location.setThreshold(1);
+        location.setThreshold(1); 
         progress.setVisibility(View.VISIBLE);
         getReqestTypes();
         getMeetingsList();

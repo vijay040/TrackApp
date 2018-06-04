@@ -9,40 +9,10 @@
         android:layout_width="@dimen/_70sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_height="@dimen/_70sdp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="#5a9bd5"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:weightSum="1">
-
-        <ImageView
-            android:id="@+id/imz_loadreceipt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_receipt" />
-
-        <TextView
-            android:id="@+id/btn_load"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="1"
-            android:text="Add Receipt"
-            android:textColor="#ffffff" />
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/img">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,18 +20,6 @@
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:orientation="vertical">
-
-            <ProgressBar
-                android:id="@+id/progress"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-
-
-
-
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edt_meeting"
                 android:layout_width="match_parent"
@@ -76,14 +34,11 @@
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_maxCharacters="30"
                 app:met_primaryColor="@color/text_hint_color" />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="4">
-
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/edt_amount"
                     android:layout_width="match_parent"
@@ -117,7 +72,6 @@
                     app:met_maxCharacters="20"
                     app:met_primaryColor="@color/them_color" />
             </LinearLayout>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -127,8 +81,14 @@
                 android:textColor="@color/them_color"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
-
-            <ListView
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                /><ListView
                 android:id="@+id/listTypes"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_88sdp"
@@ -157,7 +117,6 @@
                     app:met_floatingLabelTextSize="@dimen/_10sdp"
                     app:met_maxCharacters="20"
                     app:met_primaryColor="@color/text_hint_color" />
-
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/edt_time"
                     android:layout_width="match_parent"
@@ -174,7 +133,6 @@
                     app:met_maxCharacters="20"
                     app:met_primaryColor="@color/text_hint_color" />
             </LinearLayout>
-
             <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
                 android:id="@+id/edt_location"
                 android:layout_width="match_parent"
@@ -188,8 +146,6 @@
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_maxCharacters="20"
                 app:met_primaryColor="@color/text_hint_color" />
-
-
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edt_vendor"
                 android:layout_width="match_parent"
@@ -204,7 +160,6 @@
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_maxCharacters="20"
                 app:met_primaryColor="@color/text_hint_color" />
-
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edt_comment"
                 android:layout_width="match_parent"
@@ -246,11 +201,8 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:background="@drawable/ic_attachment"
-                    />
-
+                    android:background="@drawable/ic_attachment" />
             </LinearLayout>
-
             <EditText
                 android:id="@+id/edt_date1"
                 android:layout_width="match_parent"
@@ -259,9 +211,7 @@
                 android:focusable="false"
                 android:hint=""
                 android:inputType="datetime"
-                android:paddingLeft="5dp"
-                />
-
+                android:paddingLeft="5dp"  />
             <Button
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
@@ -271,8 +221,7 @@
                 android:text="Submit"
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_10sdp"/>

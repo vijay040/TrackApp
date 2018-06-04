@@ -19,8 +19,8 @@
                 android:src="@drawable/ic_request" />
             <ProgressBar
                 android:id="@+id/progress"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_centerInParent="true"
                 android:visibility="gone" />
             <LinearLayout

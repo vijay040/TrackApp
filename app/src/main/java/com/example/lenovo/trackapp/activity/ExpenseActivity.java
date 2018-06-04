@@ -35,7 +35,7 @@ public class ExpenseActivity extends AppCompatActivity {
     protected static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 0;
 
     Button btn_receipt, btn_exp;
-TextView txtPreRequest,txtExpanse;
+TextView txtPreRequest,txtExpanse,txtExpenseReport;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +44,15 @@ TextView txtPreRequest,txtExpanse;
         btn_exp = findViewById(R.id.btn_exp);
         txtPreRequest=findViewById(R.id.txtPreRequest);
         txtExpanse=findViewById(R.id.txtExpense);
+        txtExpenseReport=findViewById(R.id.txtExpenseReport);
+
         getSupportActionBar().setTitle("Expenses");
+        txtExpenseReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExpenseActivity.this,ExpenseReportActivity.class));
+            }
+        });
         txtExpanse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

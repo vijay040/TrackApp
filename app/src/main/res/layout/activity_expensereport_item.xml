@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp">
+
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:text="Title"
+            android:ems="15"
+            android:textColor="@color/them_color"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTitle"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:text="Date"
+            android:ems="8"
+            android:singleLine="true"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp"
+
+            />
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTitle"
+      android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/txtDate"
+            android:text="Status"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp"
+
+            />
+
+
+        <TextView
+            android:id="@+id/txtAdvance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/txtTitle"
+            android:gravity="right"
+            android:paddingRight="@dimen/_10sdp"
+            android:text=" Total Amount"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_6sdp"
+
+            />
+
+        <TextView
+            android:id="@+id/txtTotalAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtAdvance"
+            android:layout_marginLeft="@dimen/_100sdp"
+            android:layout_toRightOf="@id/img"
+            android:gravity="right"
+            android:paddingRight="@dimen/_10sdp"
+            android:text="IDR2000"
+            android:textColor="@color/text_hint_color"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold"
+
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

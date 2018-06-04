@@ -39,7 +39,7 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("fetch_matchDeatils.php")
-    Call<ResMetaCustomerList> getCustomerList(@Field("user_id") String user_id);
+    Call<ResMetaCustomer> getCustomerList(@Field("user_id") String user_id);
 
     @FormUrlEncoded
     @POST("pre_requests.php")

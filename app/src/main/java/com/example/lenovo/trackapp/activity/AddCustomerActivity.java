@@ -22,6 +22,7 @@ import com.example.lenovo.trackapp.db.HttpCallBack;
 import com.example.lenovo.trackapp.db.HttpGetRequest;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.CustomerDetailListAdapter;
+import com.example.lenovo.trackapp.model.CustomerModel;
 import com.example.lenovo.trackapp.model.ResMetaCurrency;
 import com.example.lenovo.trackapp.model.ResMetaCustomer;
 import com.example.lenovo.trackapp.model.ResMetaCustomerList;
@@ -40,7 +41,7 @@ import retrofit2.Response;
 
 public class AddCustomerActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener{
     RecyclerView recyclerView;
-    List<CustomerDetails> clientDetailList = new ArrayList<>();
+    List<CustomerModel> clientDetailList = new ArrayList<>();
     TextView selectClientList;
     RelativeLayout progressLayout;
     ProgressDialog progressDialog;
@@ -65,25 +66,26 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
                 startActivity(intent);
             }
         });
-        getClientList();
+        getCustomerList();
     }
 
-    private void getClientList()
-    {
-        Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomerList>() {
+    public void getCustomerList() {
+        Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
             @Override
-            public void onResponse(Call<ResMetaCustomerList> call, Response<ResMetaCustomerList> response) {
+            public void onResponse(Call<ResMetaCustomer> call, Response<ResMetaCustomer> response) {
+
                 clientDetailList=response.body().getResponse();
                 manageClientsListAdapter = new CustomerDetailListAdapter(AddCustomerActivity.this, clientDetailList);
                 recyclerView.setAdapter(manageClientsListAdapter);
             }
 
             @Override
-            public void onFailure(Call<ResMetaCustomerList> call, Throwable t) {
+            public void onFailure(Call<ResMetaCustomer> call, Throwable t) {
 
             }
         });
     }
+
 
     @Override
     public boolean onQueryTextSubmit(String s) {
@@ -92,8 +94,8 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
     @Override
     public boolean onQueryTextChange(String s) {
         s=s.toLowerCase();
-        ArrayList<CustomerDetails>newlist=new ArrayList<>();
-        for(CustomerDetails name:clientDetailList)
+        ArrayList<CustomerModel>newlist=new ArrayList<>();
+        for(CustomerModel name:clientDetailList)
         {
             String getName=name.getCustomer_name().toLowerCase();
             if(getName.contains(s)){

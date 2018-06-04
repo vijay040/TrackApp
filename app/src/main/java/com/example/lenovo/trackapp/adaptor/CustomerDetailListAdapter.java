@@ -14,20 +14,21 @@ import android.widget.TextView;
 
 import com.example.lenovo.trackapp.model.CustomerDetails;
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.model.CustomerModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDetailListAdapter.MyViewHolder> {
-    List<CustomerDetails> data = new ArrayList<>();
+    List<CustomerModel> data = new ArrayList<>();
     private LayoutInflater inflater;
     private Activity context;
     private ProgressDialog progressDialog;
 
 
 
-    public CustomerDetailListAdapter(Activity context, List<CustomerDetails> data) {
+    public CustomerDetailListAdapter(Activity context, List<CustomerModel> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         progressDialog = new ProgressDialog(context);
@@ -46,7 +47,7 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
-    public void filter(ArrayList<CustomerDetails>newList)
+    public void filter(ArrayList<CustomerModel>newList)
     {
         data=new ArrayList<>();
         data.addAll(newList);
@@ -55,13 +56,13 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        final CustomerDetails current = data.get(position);
+        final CustomerModel current = data.get(position);
         holder.name.setText("Customer Name: "+current.getCustomer_name());
         holder.address.setText("Address: "+current.getAddress());
         holder.email.setText("Email: "+current.getEmail());
         holder.mobile.setText("Mobile: "+current.getPhone());
         holder.taxDetail.setText("Tax Details: "+current.getTax_details());
-        holder.companyId.setText("Company Id: "+current.getCompany_name());
+        holder.companyId.setText("Company Id: "+current.getCompany_id());
 
                 /*if (isMessage)
                     if(current.getTotal_message()!=null)

@@ -22,35 +22,32 @@ public class ExpenseReportAdapter extends BaseAdapter {
     public ArrayList<ExpenseReportModel> list;
     public Activity context;
 
-    public ExpenseReportAdapter(Activity context, ArrayList<ExpenseReportModel> list) {
+    public ExpenseReportAdapter(Activity context, ArrayList<ExpenseReportModel> list){
         this.list = list;
         this.context = context;
-    }
+     }
     @Override
     public int getCount() {
         return list.size();
     }
-
     @Override
     public Object getItem(int i) {
         return list.get(i);
     }
-
     @Override
     public long getItemId(int i) {
         return i;
     }
-
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        if (view == null) {
+    public View getView(int i, View view, ViewGroup viewGroup){
+        if (view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.activity_expensereport_item, null);
         }
-            TextView txtTitle=view.findViewById(R.id.txtTitle);
+        TextView txtTitle=view.findViewById(R.id.txtTitle);
             TextView txtTotalAmount=view.findViewById(R.id.txtTotalAmount);
             TextView date=view.findViewById(R.id.txtDate);
             TextView status=view.findViewById(R.id.txtStatus);
            return view;
-    }
-}
+        }
+        }

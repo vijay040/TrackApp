@@ -96,7 +96,9 @@ return;
                     Toast.makeText(NewCustomerActivity.this,"Enter Valid Phone No.",Toast.LENGTH_SHORT).show();
                   return;
                 }
-                Toast.makeText(NewCustomerActivity.this,"Saved",Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(NewCustomerActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

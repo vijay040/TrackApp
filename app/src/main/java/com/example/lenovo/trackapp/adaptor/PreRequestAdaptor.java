@@ -47,8 +47,7 @@ public class PreRequestAdaptor extends BaseAdapter {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.inf_prerequest_item, null);
-
-        }
+            }
 
         TextView txtTitle = view.findViewById(R.id.txtTitle);
         txtTitle.setText(list.get(i).getDescription());

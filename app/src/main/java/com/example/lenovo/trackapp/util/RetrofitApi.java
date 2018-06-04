@@ -7,17 +7,14 @@ import com.example.lenovo.trackapp.model.PreRequestResMeta;
 import com.example.lenovo.trackapp.model.RequestTypeModel;
 import com.example.lenovo.trackapp.model.ResMetaCurrency;
 import com.example.lenovo.trackapp.model.ResMetaCustomer;
-import com.example.lenovo.trackapp.model.ResMetaCustomerList;
 import com.example.lenovo.trackapp.model.ResMetaDepartment;
 import com.example.lenovo.trackapp.model.ResMetaMeeting;
 import com.example.lenovo.trackapp.model.ResMetaReqTypes;
 import com.example.lenovo.trackapp.model.ResponseMeta;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;

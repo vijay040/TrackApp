@@ -2,8 +2,6 @@ package com.example.lenovo.trackapp.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,26 +9,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.lenovo.trackapp.db.Cons;
-import com.example.lenovo.trackapp.model.CustomerDetails;
-import com.example.lenovo.trackapp.db.HttpCallBack;
-import com.example.lenovo.trackapp.db.HttpGetRequest;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.CustomerDetailListAdapter;
 import com.example.lenovo.trackapp.model.CustomerModel;
-import com.example.lenovo.trackapp.model.ResMetaCurrency;
 import com.example.lenovo.trackapp.model.ResMetaCustomer;
-import com.example.lenovo.trackapp.model.ResMetaCustomerList;
 import com.example.lenovo.trackapp.util.Singleton;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,21 +33,28 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
     TextView selectClientList;
     RelativeLayout progressLayout;
     ProgressDialog progressDialog;
+    ProgressBar progress;
     CustomerDetailListAdapter manageClientsListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
         SearchView editText=(SearchView) findViewById(R.id.edt);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.ic_plusicon);
+       RelativeLayout addicon=findViewById(R.id.txtAdd);
+        SearchView editTextName=(SearchView) findViewById(R.id.edt);
+        progress = findViewById(R.id.progress);
+
+        progress.setVisibility(View.VISIBLE);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        editTextName.setQueryHint("Search By Customer Name ");
+        editTextName.setOnQueryTextListener(this);
         getSupportActionBar().setTitle("Customer Details");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddCustomerActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
        // editText.setOnQueryTextListener(this);
-        fab.setOnClickListener(new View.OnClickListener(){
+        addicon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                Intent intent=new Intent(AddCustomerActivity.this,NewCustomerActivity.class);
@@ -68,7 +63,6 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         });
         getCustomerList();
     }
-
     public void getCustomerList() {
         Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
             @Override
@@ -77,10 +71,12 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
                 clientDetailList=response.body().getResponse();
                 manageClientsListAdapter = new CustomerDetailListAdapter(AddCustomerActivity.this, clientDetailList);
                 recyclerView.setAdapter(manageClientsListAdapter);
+                progress.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<ResMetaCustomer> call, Throwable t) {
+                Log.e("**Error**", t.getMessage());
+                progress.setVisibility(View.GONE);
 
             }
         });

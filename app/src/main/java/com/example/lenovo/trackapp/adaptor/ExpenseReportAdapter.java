@@ -51,7 +51,6 @@ public class ExpenseReportAdapter extends BaseAdapter {
             TextView txtTotalAmount=view.findViewById(R.id.txtTotalAmount);
             TextView date=view.findViewById(R.id.txtDate);
             TextView status=view.findViewById(R.id.txtStatus);
-
-        return null;
+           return view;
     }
 }

@@ -20,7 +20,7 @@
             android:paddingTop="@dimen/_5sdp"
             />
 
-        <android.support.v7.widget.AppCompatCheckBox
+        <CheckBox
             android:id="@+id/chkSelect"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"

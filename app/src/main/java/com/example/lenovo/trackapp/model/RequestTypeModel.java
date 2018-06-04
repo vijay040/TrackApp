@@ -30,4 +30,9 @@ public class RequestTypeModel {
     public void setRequest_type(String request_type) {
         this.request_type = request_type;
     }
+
+    @Override
+    public String toString() {
+        return request_type;
+    }
 }

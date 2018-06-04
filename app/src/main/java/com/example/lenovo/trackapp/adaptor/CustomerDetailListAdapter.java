@@ -56,14 +56,14 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final CustomerDetails current = data.get(position);
-        holder.name.setText("Customer Name: "+current.getName());
+        holder.name.setText("Customer Name: "+current.getCustomer_name());
         holder.address.setText("Address: "+current.getAddress());
         holder.email.setText("Email: "+current.getEmail());
         holder.mobile.setText("Mobile: "+current.getPhone());
-        holder.taxDetail.setText("Tax Details: "+current.getTaxDetail());
-        holder.companyId.setText("Company Id: "+current.getCustomerId());
+        holder.taxDetail.setText("Tax Details: "+current.getTax_details());
+        holder.companyId.setText("Company Id: "+current.getCompany_name());
 
-               /* if (isMessage)
+                /*if (isMessage)
                     if(current.getTotal_message()!=null)
                     holder.email.setText(current.getTotal_message() + "/2000");
                     else

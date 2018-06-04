@@ -368,7 +368,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
 
     private void submitPost() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        String userid = model.getUser_id();
+        String userid = model.getId();
         String adv = edtAdvance.getText().toString();
         String curr = edtCurrency.getText().toString();
         String dept = edtDepartment.getText().toString();
@@ -442,7 +442,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             Toast.makeText(AddPreRequestActivity.this, place.getAddress(),Toast.LENGTH_SHORT).show();
         }
     };
-
 
 
     @Override

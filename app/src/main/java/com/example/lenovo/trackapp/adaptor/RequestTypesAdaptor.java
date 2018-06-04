@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
@@ -47,9 +49,21 @@ public class RequestTypesAdaptor extends BaseAdapter {
 
         }
 
-        TextView txtTitle = view.findViewById(R.id.txtTitle);
 
+        TextView txtTitle = view.findViewById(R.id.txtTitle);
+        final CheckBox chkSelect = view.findViewById(R.id.chkSelect);
         txtTitle.setText(list.get(i).getRequest_type());
+
+        chkSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b==true) {
+                    list.get(i).setSelected(true);
+                } else {
+                    list.get(i).setSelected(false);
+                }
+            }
+        });
 
         return view;
     }

@@ -1,25 +1,26 @@
 package com.example.lenovo.trackapp.util;
 
-        import com.example.lenovo.trackapp.model.ExpenseResMeta;
-        import com.example.lenovo.trackapp.model.LoginResMeta;
-        import com.example.lenovo.trackapp.model.MeetingModel;
-        import com.example.lenovo.trackapp.model.PreRequestResMeta;
-        import com.example.lenovo.trackapp.model.RequestTypeModel;
-        import com.example.lenovo.trackapp.model.ResMetaCurrency;
-        import com.example.lenovo.trackapp.model.ResMetaCustomer;
-        import com.example.lenovo.trackapp.model.ResMetaDepartment;
-        import com.example.lenovo.trackapp.model.ResMetaMeeting;
-        import com.example.lenovo.trackapp.model.ResMetaReqTypes;
-        import com.example.lenovo.trackapp.model.ResponseMeta;
+import com.example.lenovo.trackapp.model.ExpenseResMeta;
+import com.example.lenovo.trackapp.model.LoginResMeta;
+import com.example.lenovo.trackapp.model.MeetingModel;
+import com.example.lenovo.trackapp.model.PreRequestResMeta;
+import com.example.lenovo.trackapp.model.RequestTypeModel;
+import com.example.lenovo.trackapp.model.ResMetaCurrency;
+import com.example.lenovo.trackapp.model.ResMetaCustomer;
+import com.example.lenovo.trackapp.model.ResMetaCustomerList;
+import com.example.lenovo.trackapp.model.ResMetaDepartment;
+import com.example.lenovo.trackapp.model.ResMetaMeeting;
+import com.example.lenovo.trackapp.model.ResMetaReqTypes;
+import com.example.lenovo.trackapp.model.ResponseMeta;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
-        import retrofit2.Call;
-        import retrofit2.http.Body;
-        import retrofit2.http.Field;
-        import retrofit2.http.FormUrlEncoded;
-        import retrofit2.http.POST;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 public interface RetrofitApi {
 
@@ -38,7 +39,7 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("fetch_matchDeatils.php")
-    Call<ResMetaCustomer> getCustomerList(@Field("user_id") String user_id);
+    Call<ResMetaCustomerList> getCustomerList(@Field("user_id") String user_id);
 
     @FormUrlEncoded
     @POST("pre_requests.php")
@@ -52,7 +53,6 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("fetch_meeting.php")
     Call<ResMetaMeeting> getMeetingsList(@Field("user_id") String user_id);
-
 
     @FormUrlEncoded
     @POST("request_type.php")
@@ -71,7 +71,7 @@ public interface RetrofitApi {
     @POST("prerequestsapi.php?request=prerequests_data")
     Call<ResMetaMeeting> postPreRequest(@Field("user_id") String user_id,
                                         @Field("advance") String advance, @Field("currency") String currency, @Field("department") String department, @Field("meeting_id") String meeting_id,
-                                        @Field("description") String description,  @Field("address") String address,  @Field("date") String date, @Field("requesttypes") ArrayList<RequestTypeModel> requesttypes
+                                        @Field("description") String description, @Field("address") String address, @Field("date") String date, @Field("requesttype[]") ArrayList<RequestTypeModel> requesttypes
 
     );
 
@@ -79,15 +79,15 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("post_expense.php?request=saveexpense_data")
     Call<ResMetaMeeting> postExpanse(@Field("user_id") String user_id, @Field("meeting_id") String meeting_id,
-                                        @Field("amount") String amount, @Field("currency") String currency, @Field("requesttypes") ArrayList<RequestTypeModel> requesttypes,  @Field("date") String date, @Field("time") String time,@Field("location") String location,
-                                        @Field("customer") String customer, @Field("comment") String comment
+                                     @Field("amount") String amount, @Field("currency") String currency, @Field("requesttype[]") ArrayList<RequestTypeModel> requesttypes, @Field("date") String date, @Field("time") String time, @Field("location") String location,
+                                     @Field("customer") String customer, @Field("comment") String comment
 
     );
-
 
 
     @FormUrlEncoded
     @POST("fetch_expense.php")
     Call<ExpenseResMeta> getExpanseList(@Field("user_id") String user_id);
+
 
 }

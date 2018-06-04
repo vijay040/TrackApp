@@ -22,6 +22,10 @@ import com.example.lenovo.trackapp.db.HttpCallBack;
 import com.example.lenovo.trackapp.db.HttpGetRequest;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.CustomerDetailListAdapter;
+import com.example.lenovo.trackapp.model.ResMetaCurrency;
+import com.example.lenovo.trackapp.model.ResMetaCustomer;
+import com.example.lenovo.trackapp.model.ResMetaCustomerList;
+import com.example.lenovo.trackapp.util.Singleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +33,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddCustomerActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener{
     RecyclerView recyclerView;
@@ -46,12 +54,9 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         fab.setImageResource(R.drawable.ic_plusicon);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         getSupportActionBar().setTitle("Customer Details");
-        getMessageData();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddCustomerActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
-        manageClientsListAdapter = new CustomerDetailListAdapter(AddCustomerActivity.this, clientDetailList);
-        recyclerView.setAdapter(manageClientsListAdapter);
        // editText.setOnQueryTextListener(this);
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -60,73 +65,26 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
                 startActivity(intent);
             }
         });
+        getClientList();
     }
-    private void getMessageData() {
-        HttpGetRequest httpGetRequest = new HttpGetRequest(new HttpCallBack() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
+    private void getClientList()
+    {
+        Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomerList>() {
             @Override
-            public void onPostSuccess(String response) {
-                Log.e("Sann","aaa===="+response);
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray contacts = jsonObject.getJSONArray("response");
-                    Log.e("Sann","ayay=="+contacts);
-                    if (response != null) {
-                        for (int i = 0; i < contacts.length(); i++) {
-                            JSONObject c = contacts.getJSONObject(i);
-                            CustomerDetails customerDetails = new CustomerDetails();
-                            customerDetails.setName(c.getString("customer_name"));
-                            customerDetails.setAddress(c.getString("address"));
-                            customerDetails.setEmail(c.getString("email"));
-                            customerDetails.setPhone(c.getString("phone"));
-                            customerDetails.setTaxDetail(c.getString("tax_details"));
-                            customerDetails.setCustomerId(c.getString("company_id"));
-                            Log.e("Sann","ayay=="+c.getString("company_id"));
-                            clientDetailList.add(customerDetails);
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Server Problem Try After Some Time", Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onResponse(Call<ResMetaCustomerList> call, Response<ResMetaCustomerList> response) {
+                clientDetailList=response.body().getResponse();
                 manageClientsListAdapter = new CustomerDetailListAdapter(AddCustomerActivity.this, clientDetailList);
                 recyclerView.setAdapter(manageClientsListAdapter);
-                //  progressLayout.setVisibility(View.GONE);
-               /* try {
-                    if (dataManger != null)
-                        dataManger.getAdminDetailDataManager().deleteAllClients();
-                    if (clientDetailList != null)
-                        clientDetailList.clear();
-
-                    JSONArray jsonArray = new JSONArray(response);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonOjbect = jsonArray.getJSONObject(i);
-                        CustomerDetails adminDetail = new  AdminDetail;
-                        if (clientDetailList != null)
-                            clientDetailList.add(adminDetail);
-                        if (dataManger != null)
-                            dataManger.getAdminDetailDataManager().createOrUpdate(adminDetail);
-                    }
-                    if (clientsListAdapter != null)
-                        clientsListAdapter.notifyDataSetChanged();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (JsonParseException e) {
-                    e.printStackTrace();
-                } catch (JsonMappingException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
             }
+
             @Override
-            public void onPreExecute() {
+            public void onFailure(Call<ResMetaCustomerList> call, Throwable t) {
+
             }
         });
-        httpGetRequest.execute(Cons.GET_TOTAL_MESSAGE_BAL);
     }
+
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
@@ -137,7 +95,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         ArrayList<CustomerDetails>newlist=new ArrayList<>();
         for(CustomerDetails name:clientDetailList)
         {
-            String getName=name.getName().toLowerCase();
+            String getName=name.getCustomer_name().toLowerCase();
             if(getName.contains(s)){
                 newlist.add(name);
             }

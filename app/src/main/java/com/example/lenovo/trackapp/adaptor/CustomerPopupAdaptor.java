@@ -52,8 +52,6 @@ public class CustomerPopupAdaptor extends BaseAdapter {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.inf_purpose_popup_list, null);
-
-
         }
 
         TextView txtTitle = view.findViewById(R.id.txtTitle);

@@ -6,6 +6,7 @@ package com.example.lenovo.trackapp.adaptor;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,6 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
     private ProgressDialog progressDialog;
 
 
-
     public CustomerDetailListAdapter(Activity context, List<CustomerModel> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -48,9 +48,9 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
-    public void filter(ArrayList<CustomerModel>newList)
-    {
-        data=new ArrayList<>();
+
+    public void filter(ArrayList<CustomerModel> newList) {
+        data = new ArrayList<>();
         data.addAll(newList);
         notifyDataSetChanged();
     }
@@ -58,33 +58,33 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final CustomerModel current = data.get(position);
-        holder.name.setText("Customer Name: "+current.getCustomer_name());
-        holder.address.setText("Address: "+current.getAddress());
-        holder.email.setText("Email: "+current.getEmail());
-        holder.mobile.setText("Mobile: "+current.getPhone());
-        holder.taxDetail.setText("Tax Details: "+current.getTax_details());
-        holder.companyId.setText("Company Name: "+current.getCompany_name ());
+        holder.name.setText("Customer Name: " + current.getCustomer_name());
+        holder.address.setText("Address: " + current.getAddress());
+        holder.email.setText("Email: " + current.getEmail());
+        holder.mobile.setText("Mobile: " + current.getPhone());
+        holder.taxDetail.setText("Tax Details: " + current.getTax_details());
+        holder.companyId.setText("Company Name: " + current.getCompany_name());
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                data.get(position).isVisible=! data.get(position).isVisible;
-                if(data.get(position).isVisible) {
+                data.get(position).isVisible = !data.get(position).isVisible;
+                if (data.get(position).isVisible) {
                     holder.mobile.setVisibility(view.VISIBLE);
                     holder.taxDetail.setVisibility(view.VISIBLE);
                     holder.companyId.setVisibility(view.VISIBLE);
-                }
-                else
-                {
+                    holder.down.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_up));
+                   // holder.down.setBackgroundResource(R.drawable.ic_up);
+                } else {
                     holder.mobile.setVisibility(view.GONE);
                     holder.taxDetail.setVisibility(view.GONE);
                     holder.companyId.setVisibility(view.GONE);
+                   holder.down.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_down));
+                   // holder.down.setBackgroundResource(R.drawable.ic_down);
                 }
-
             }
         });
 
-
-                /*if (isMessage)
+        /*if (isMessage)
                     if(current.getTotal_message()!=null)
                     holder.email.setText(current.getTotal_message() + "/2000");
                     else
@@ -104,11 +104,11 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
         return data.size();
     }
 
-
-
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name,address,email,mobile,taxDetail,companyId;
+        TextView name, address, email, mobile, taxDetail, companyId;
         RelativeLayout relativeLayout;
+        ImageView down;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
@@ -117,10 +117,8 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
             mobile = (TextView) itemView.findViewById(R.id.mobile);
             taxDetail = (TextView) itemView.findViewById(R.id.tax_detail);
             companyId = (TextView) itemView.findViewById(R.id.company_id);
-            relativeLayout=(RelativeLayout)itemView.findViewById(R.id.relative_layout_customer);
-
-
-
+            down = itemView.findViewById(R.id.imz_down);
+            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout_customer);
         }
     }
 }

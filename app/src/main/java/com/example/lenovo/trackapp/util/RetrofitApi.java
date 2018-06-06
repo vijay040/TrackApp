@@ -24,7 +24,7 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("meeting_rest_api.php?request=savemeeting_data")
     Call<MeetingModel> postMeeting(@Field("user_id") String user_id, @Field("purpose") String purpose,
-                                   @Field("descreption") String descreption, @Field("customer") String customer, @Field("date") String date,
+                                   @Field("descreption") String descreption, @Field("customer_id") String customer, @Field("date") String date,
                                    @Field("time") String time, @Field("agenda") String agenda, @Field("contact_person") String contact_person,
                                    @Field("address") String address, @Field("start_date") String start_date, @Field("start_time") String start_time
             , @Field("end_date") String end_date, @Field("end_time") String end_time, @Field("alarm_time") String alarm_time

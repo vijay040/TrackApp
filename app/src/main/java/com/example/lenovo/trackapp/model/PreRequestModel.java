@@ -1,6 +1,8 @@
 package com.example.lenovo.trackapp.model;
 
-public class PreRequestModel {
+import java.io.Serializable;
+
+public class PreRequestModel implements Serializable {
     private String id;
 
     private String status;

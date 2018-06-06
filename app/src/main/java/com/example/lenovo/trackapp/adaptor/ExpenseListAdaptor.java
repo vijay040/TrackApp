@@ -47,30 +47,32 @@ public class ExpenseListAdaptor extends BaseAdapter {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.activity_expanselist_item, null);
-
         }
-
-
-        TextView txtTitle = view.findViewById(R.id.txtTitle);
-       // txtTitle.setText(list.get(i).getDescription());
+        TextView txtDescreption = view.findViewById(R.id.txtDescreption);
+        txtDescreption.setText(list.get(i).getDescreption ());
 
         TextView txtCreatedOn = view.findViewById(R.id.txtCreatedOn);
-        txtCreatedOn.setText(list.get(i).getDate());
+        txtCreatedOn.setText("Expense Created On:"+list.get(i).getCreated_on ());
 
-        //TextView txtCustomer = view.findViewById(R.id.txtCustomer);
-       // txtCustomer.setText(list.get(i).getCustomer_name());
+        TextView txtCustomer = view.findViewById(R.id.txtCustomerName);
+        txtCustomer.setText(list.get(i).getCustomer_name());
 
         TextView txtAddress = view.findViewById(R.id.txtAddress);
-       // txtAddress.setText(list.get(i).getAddress());
-
+       txtAddress.setText(list.get(i).getAddress ());
 
         TextView txtAdvanceMoney = view.findViewById(R.id.txtAdvanceMoney);
         txtAdvanceMoney.setText(list.get(i).getAmount());
 
+        TextView txtRequestType = view.findViewById(R.id.txtRequestType);
+        txtRequestType.setText(list.get(i).getExpense_type ());
+
+        TextView txtDate = view.findViewById(R.id.txtDate);
+        txtDate.setText("Meeting Date:"+list.get(i).getDate ()+", "+list.get(i).getTime ());
+/*
+        TextView txtTime = view.findViewById(R.id.txtTime);
+        txtTime.setText(list.get(i).getTime ());*/
+
         ImageView img = view.findViewById(R.id.img);
-
-
-
         return view;
     }
 }

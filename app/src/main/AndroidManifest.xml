@@ -55,7 +55,8 @@
             android:value="AIzaSyDWDqyDgTE5jZNIxw_uRwKtBCY9xQPvGac" />
 
         <activity android:name=".activity.ExpenseListActivity" />
-        <activity android:name=".activity.ExpenseReportActivity"></activity>
+        <activity android:name=".activity.ExpenseReportActivity" />
+        <activity android:name=".activity.PreRequestDetailActivity"></activity>
     </application>
 
 </manifest>

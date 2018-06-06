@@ -71,6 +71,46 @@
             />
 
         <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCustomerName"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:text="Date"
+            android:singleLine="true"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp"
+
+            />
+        <TextView
+            android:id="@+id/txtCustomerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtAddress"
+            android:layout_toRightOf="@id/img"
+            android:text="Customer Name"
+         android:layout_marginLeft="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp"
+
+            />
+      <!--  <TextView
+            android:id="@+id/txtTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCustomerName"
+            android:layout_marginLeft="@dimen/_70sdp"
+            android:layout_toRightOf="@id/txtDate"
+            android:text="Time"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp"
+
+            />-->
+
+
+        <TextView
             android:id="@+id/txtAdvance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

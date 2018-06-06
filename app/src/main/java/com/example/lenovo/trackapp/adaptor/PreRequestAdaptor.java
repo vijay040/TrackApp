@@ -50,7 +50,7 @@ public class PreRequestAdaptor extends BaseAdapter {
             }
 
         TextView txtTitle = view.findViewById(R.id.txtTitle);
-        txtTitle.setText(list.get(i).getDescription());
+        txtTitle.setText(list.get(i).getComment());
 
         TextView txtDate = view.findViewById(R.id.txtDate);
         txtDate.setText(list.get(i).getDate());
@@ -60,7 +60,6 @@ public class PreRequestAdaptor extends BaseAdapter {
 
         TextView txtAddress = view.findViewById(R.id.txtAddress);
         txtAddress.setText(list.get(i).getAddress());
-
 
         TextView txtAdvanceMoney = view.findViewById(R.id.txtAdvanceMoney);
         txtAdvanceMoney.setText(list.get(i).getAdvance());

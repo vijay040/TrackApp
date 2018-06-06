@@ -6,6 +6,7 @@ package com.example.lenovo.trackapp.adaptor;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.model.CustomerModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,18 +60,20 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
         holder.companyname.setText("Company Name: "+current.getCompany_name ());
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
                 data.get(position).isVisible=! data.get(position).isVisible;
                 if(data.get(position).isVisible) {
                     holder.mobile.setVisibility(view.VISIBLE);
                     holder.taxDetail.setVisibility(view.VISIBLE);
                     holder.companyname.setVisibility(view.VISIBLE);
+                    holder.hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_up));
                 }
                 else
                 {
                     holder.mobile.setVisibility(view.GONE);
                     holder.taxDetail.setVisibility(view.GONE);
                     holder.companyname.setVisibility(view.GONE);
+                    holder.hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_down));
                 }
             }
         });
@@ -98,6 +99,7 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name,address,email,mobile,taxDetail,companyname;
         RelativeLayout relativeLayout;
+        ImageView hide;
         public MyViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
@@ -106,6 +108,7 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
             mobile = (TextView) itemView.findViewById(R.id.mobile);
             taxDetail = (TextView) itemView.findViewById(R.id.tax_detail);
             companyname = (TextView) itemView.findViewById(R.id.company_name);
+            hide=itemView.findViewById(R.id.imz_down);
             relativeLayout=(RelativeLayout)itemView.findViewById(R.id.relative_layout_customer);
         }
     }

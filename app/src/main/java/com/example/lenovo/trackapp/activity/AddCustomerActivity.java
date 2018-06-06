@@ -1,5 +1,4 @@
 package com.example.lenovo.trackapp.activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
-import android.widget.TextView;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.CustomerDetailListAdapter;
 import com.example.lenovo.trackapp.model.CustomerModel;
@@ -24,9 +22,6 @@ import retrofit2.Response;
 public class AddCustomerActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener{
     RecyclerView recyclerView;
     List<CustomerModel> clientDetailList = new ArrayList<>();
-    TextView selectClientList;
-    RelativeLayout progressLayout;
-    ProgressDialog progressDialog;
     ProgressBar progress;
     CustomerDetailListAdapter manageClientsListAdapter;
     @Override
@@ -45,7 +40,6 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddCustomerActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
-       // editText.setOnQueryTextListener(this);
         addicon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

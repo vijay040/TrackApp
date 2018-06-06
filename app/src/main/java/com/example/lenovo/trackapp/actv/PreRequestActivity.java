@@ -7,11 +7,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.activity.MyScheduleActivity;
+import com.example.lenovo.trackapp.activity.PreRequestDetailActivity;
+import com.example.lenovo.trackapp.adaptor.MeetingDetailsAdapter;
 import com.example.lenovo.trackapp.adaptor.PreRequestAdaptor;
 import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.model.LoginResMeta;
@@ -50,6 +54,16 @@ public class PreRequestActivity extends AppCompatActivity {
                 startActivity(new Intent(PreRequestActivity.this, AddPreRequestActivity.class));
             }
             });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PreRequestAdaptor adapter = (PreRequestAdaptor) adapterView.getAdapter();
+                PreRequestModel preRequestModel = adapter.list.get(i);
+                Intent intent = new Intent(PreRequestActivity.this, PreRequestDetailActivity.class);
+                intent.putExtra("PREREQUESTMODEL", preRequestModel);
+                startActivity(intent);
+            }
+        });
             }
 
     @Override

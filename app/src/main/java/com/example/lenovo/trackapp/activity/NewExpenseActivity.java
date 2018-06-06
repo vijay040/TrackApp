@@ -63,31 +63,25 @@ import java.util.Calendar;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-public class NewExpenseActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
+import retrofit2.http.Field;
+
+public class NewExpenseActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private static final String TAG = "CreateMeetingActivity";
-    private static final int GOOGLE_API_CLIENT_ID = 0;
-    private GoogleApiClient mGoogleApiClient;
-    private PlaceArrayAdapter mPlaceArrayAdapter;
-    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+
     private static final int SELECT_PHOTO = 200;
-    EditText meeting, date, customername, getDate, amount, comments, time, currency;
+    EditText meeting, getDate, amount, comments, currency;
     private static final int CAMERA_REQUEST = 1888;
     ImageView imageView;
     public static String imgUrl;
     Button submit, attachement;
     Shprefrences sh;
     ProgressBar progress;
-    private AutoCompleteTextView location;
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     ArrayList<MeetingModel> meetingList = new ArrayList<>();
     ArrayList<RequestTypeModel> requestTyoesList = new ArrayList<>();
     ListView listTypes;
     TextView image_path;
-    int H, M;
-    Calendar calendar;
-    int DD, MM, YY;
-
+    String createddate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,14 +89,10 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
         getSupportActionBar().setTitle("Create Expanse");
         meeting = findViewById(R.id.edt_meeting);
         amount = (EditText) findViewById(R.id.edt_amount);
-        date = (EditText) findViewById(R.id.edt_date);
-        location = (AutoCompleteTextView) findViewById(R.id.edt_location);
-        time = (EditText) findViewById(R.id.edt_time);
         imageView = (ImageView) findViewById(R.id.imageView);
-        customername = (EditText) findViewById(R.id.edt_vendor);
         attachement = (Button) findViewById(R.id.btAttchment);
         comments = (EditText) findViewById(R.id.edt_comment);
-        image_path=findViewById(R.id.image_path);
+        image_path = findViewById(R.id.image_path);
         progress = findViewById(R.id.progress);
         listTypes = findViewById(R.id.listTypes);
         currency = (EditText) findViewById(R.id.edt_Currency);
@@ -113,48 +103,13 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
             Picasso.get().load(imgUrl).into(imageView);
         sh = new Shprefrences(this);
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
-        String date1 = df.format(Calendar.getInstance().getTime());
-        getDate.setText("Created On:" + date1);
-        mGoogleApiClient = new GoogleApiClient.Builder(NewExpenseActivity.this)
-                .addApi(Places.GEO_DATA_API)
-                .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
-                .addConnectionCallbacks(this)
-                .build();
-        location.setOnItemClickListener(mAutocompleteClickListener);
-        mPlaceArrayAdapter = new PlaceArrayAdapter(
-                this, android.R.layout.simple_list_item_1,
-                BOUNDS_MOUNTAIN_VIEW, null);
-        location.setAdapter(mPlaceArrayAdapter);
-        location.setThreshold(1); 
+        final String createddate = df.format(Calendar.getInstance().getTime());
+        getDate.setText("Created On:" + createddate);
         progress.setVisibility(View.VISIBLE);
         getReqestTypes();
         getMeetingsList();
         getCurrencyList();
-        getCustomerList();
-        calendar = Calendar.getInstance();
-        DD = calendar.get(Calendar.DAY_OF_MONTH);
-        MM = calendar.get(Calendar.MONTH);
-        YY = calendar.get(Calendar.YEAR);
-        date.setText(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
-        H = calendar.get(Calendar.HOUR_OF_DAY);
-        M = calendar.get(Calendar.MINUTE);
 
-        if (H < 12 && H >= 0) {
-            time.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
-        } else {
-            H -= 12;
-            if (H == 0) {
-                H = 12;
-            }
-            time.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
-        }
-        time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                showDialog(121);
-            }
-        });
         listTypes.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
@@ -164,26 +119,15 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 return false;
             }
         });
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                showDialog(111);
-            }
-        });
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String selectmeeting = meeting.getText().toString();
                 String amnt = amount.getText().toString();
                 String currenc = currency.getText().toString();
-                String dt = date.getText().toString();
-                String loc = location.getText().toString();
-                String vndr = customername.getText().toString();
                 String cmnt = comments.getText().toString();
-                String t = time.getText().toString();
                 String totalamount = amnt + currenc;
-                String createddate = getDate.getText().toString();
                 if (selectmeeting.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Select Meeting", Toast.LENGTH_SHORT).show();
                     return;
@@ -193,24 +137,12 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 } else if (currenc.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Select Currency", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (t.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "Enter time", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (dt.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "Enter date", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (loc.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "Enter location", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (vndr.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "Select Customer Name", Toast.LENGTH_SHORT).show();
-                    return;
                 } else if (cmnt.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, "Enter Your Comment", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postExpanse(selectmeeting, totalamount, currenc, dt, t, loc, vndr, cmnt);
+                    postExpanse(totalamount, createddate, cmnt);
                 }
             }
         });
@@ -232,12 +164,7 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 showCurrencyList();
             }
         });
-        customername.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showCustomerPopup();
-            }
-        });
+
     }
 
     public void getMeetingsList() {
@@ -362,12 +289,14 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 MeetingModel obj = (MeetingModel) listPurpose.getAdapter().getItem(position);
                 Log.e("selected**", "" + obj.getDescreption());
                 meeting.setText(obj.getDescreption());
+                meetingId = obj.getId();
                 alertDialog.dismiss();
             }
         });
     }
 
     CurrencyAdaptor currencyAdaptor;
+    String meetingId;
 
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(NewExpenseActivity.this, currencyList);
@@ -400,109 +329,11 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
 
     }
 
-    public void getCustomerList() {
-        Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
-            @Override
-            public void onResponse(Call<ResMetaCustomer> call, Response<ResMetaCustomer> response) {
 
-                listCustomer = response.body().getResponse();
-            }
 
-            @Override
-            public void onFailure(Call<ResMetaCustomer> call, Throwable t) {
 
-            }
-        });
-    }
 
-    ArrayList<CustomerModel> listCustomer;
-    CustomerPopupAdaptor customerPopupAdaptor;
 
-    private void showCustomerPopup() {
-       /* PurposeModel m=new PurposeModel();
-        m.setPurpose("Business Meeting in Noida");
-        m.setId("0");
-
-       purposeList.add(m);*/
-        customerPopupAdaptor = new CustomerPopupAdaptor(NewExpenseActivity.this, listCustomer);
-        android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
-        // ...Irrelevant code for customizing the buttons and title
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View dialogView = inflater.inflate(R.layout.meeting_popup, null);
-        final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
-        TextView title = dialogView.findViewById(R.id.title);
-        final SearchView editTextName = dialogView.findViewById(R.id.edt);
-        editTextName.setQueryHint("Search Here");
-        editTextName.setOnQueryTextListener(this);
-        title.setText("Select Customer");
-        //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
-        dialogBuilder.setView(dialogView);
-        alertDialog = dialogBuilder.create();
-        popupId = 3;
-        alertDialog.show();
-        listPurpose.setAdapter(customerPopupAdaptor);
-        listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                CustomerModel obj = (CustomerModel) listPurpose.getAdapter().getItem(position);
-                customername.setText(obj.getCustomer_name());
-                alertDialog.dismiss();
-            }
-        });
-    }
-
-    private AdapterView.OnItemClickListener mAutocompleteClickListener
-            = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
-            final String placeId = String.valueOf(item.placeId);
-            Log.i(TAG, "Selected: " + item.description);
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeId);
-            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
-            Log.i(TAG, "Fetching details for ID: " + item.placeId);
-        }
-    };
-    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
-            = new ResultCallback<PlaceBuffer>() {
-        @Override
-        public void onResult(PlaceBuffer places) {
-            if (!places.getStatus().isSuccess()) {
-                Log.e(TAG, "Place query did not complete. Error: " +
-                        places.getStatus().toString());
-                return;
-            }
-            // Selecting the first object buffer.
-            final Place place = places.get(0);
-            CharSequence attributions = places.getAttributions();
-            Toast.makeText(NewExpenseActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
-        }
-    };
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
-        Log.i(TAG, "Google Places API connected.");
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        mPlaceArrayAdapter.setGoogleApiClient(null);
-        Log.e(TAG, "Google Places API connection suspended.");
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-        Log.e(TAG, "Google Places API connection failed with error code: "
-                + connectionResult.getErrorCode());
-
-        Toast.makeText(this,
-                "Google Places API connection failed with error code:" +
-                        connectionResult.getErrorCode(),
-                Toast.LENGTH_LONG).show();
-    }
 
     @Override
     public boolean onQueryTextSubmit(String s) {
@@ -535,57 +366,18 @@ public class NewExpenseActivity extends AppCompatActivity implements GoogleApiCl
                 }
                 currencyAdaptor.filter(newlist1);
                 break;
-            case 3:
-                ArrayList<CustomerModel> newlist2 = new ArrayList<>();
-                for (CustomerModel list : listCustomer) {
-                    String getCustomer = list.getCustomer_name().toLowerCase();
-                    if (getCustomer.contains(s)) {
-                        newlist2.add(list);
-                    }
-                }
-                customerPopupAdaptor.filter(newlist2);
-                break;
+
         }
         return true;
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        if (id == 111) {
-            return new DatePickerDialog(this, onDateSetListener, YY, MM, DD);
-        } else if (id == 121) {
-            return new TimePickerDialog(this, onTimeSetListener, H, M, false);
-        }
-        return onCreateDialog(id);
-    }
 
-    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker datePicker, int d, int m, int y) {
-            date.setText(String.valueOf(y) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(d));
-        }
-    };
-    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker timePicker, int h, int m) {
 
-            if (h < 12 && h >= 0) {
-                time.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "AM");
-            } else {
-                h -= 12;
-                if (h == 0) {
-                    h = 12;
-                }
-                time.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "PM");
-            }
-        }
-    };
-
-    private void postExpanse(String selectmeeting, String amnt, String currenc, String dt, String t, String loc, String vndr, String cmnt) {
+    private void postExpanse(String amnt, String createddate,  String cmnt) {
 
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        String userid = model.getUser_id();
-        Singleton.getInstance().getApi().postExpanse(userid, selectmeeting, amnt, currenc, requestTyoesList, dt, t, loc, vndr, cmnt).enqueue(new Callback<ResMetaMeeting>() {
+        String userid = model.getId();
+        Singleton.getInstance().getApi().postExpanse(userid, meetingId, amnt,  requestTyoesList, createddate, cmnt).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 Toast.makeText(NewExpenseActivity.this, "Expanse posted successfully!", Toast.LENGTH_SHORT).show();

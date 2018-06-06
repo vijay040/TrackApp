@@ -58,7 +58,8 @@ public class PreRequestActivity extends AppCompatActivity {
         getPreRequestList();
     }
     private void getPreRequestList(){
-        Singleton.getInstance().getApi().getPrerequestMeetingList("").enqueue(new Callback<PreRequestResMeta>() {
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().getPrerequestMeetingList(model.getId()).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
                 list = response.body().getResponse();

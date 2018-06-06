@@ -354,13 +354,14 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                                     int position, long id) {
                 CustomerModel obj = (CustomerModel) listPurpose.getAdapter().getItem(position);
                 edtCustomer.setText(obj.getCustomer_name());
+                customerid=obj.getId();
                 alertDialog.dismiss();
             }
         });
 
     }
 
-
+String customerid;
     private void createMeeting(String user_id, String purpose, String descreption
             , String customer
             , String date
@@ -377,7 +378,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
     ) {
         Singleton.getInstance().getApi().postMeeting(user_id, purpose
                 , descreption
-                , customer
+                , customerid
                 , date
                 , time
                 , agenda

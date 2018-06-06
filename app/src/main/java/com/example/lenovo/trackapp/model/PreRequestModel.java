@@ -17,6 +17,16 @@ public class PreRequestModel {
 
     private String description;
 
+    private String comment;
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public String getDescription() {
         return description;
     }

@@ -95,71 +95,10 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"></ListView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:weightSum="2">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:hint="Date"
-                    android:textCursorDrawable="@drawable/drable_edittext"
-                    app:met_baseColor="@color/text_color"
-                    app:met_bottomTextSize="@dimen/_1sdp"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelTextSize="@dimen/_10sdp"
-                    app:met_maxCharacters="20"
-                    app:met_primaryColor="@color/text_hint_color" />
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:hint="Time"
-                    android:textCursorDrawable="@drawable/drable_edittext"
-                    app:met_baseColor="@color/text_color"
-                    app:met_bottomTextSize="@dimen/_1sdp"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelTextSize="@dimen/_10sdp"
-                    app:met_maxCharacters="20"
-                    app:met_primaryColor="@color/text_hint_color" />
-            </LinearLayout>
-            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
-                android:id="@+id/edt_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Location"
-                android:textCursorDrawable="@drawable/drable_edittext"
-                app:met_baseColor="@color/text_color"
-                app:met_bottomTextSize="@dimen/_1sdp"
-                app:met_errorColor="@color/text_hint_color"
-                app:met_floatingLabel="highlight"
-                app:met_floatingLabelTextSize="@dimen/_10sdp"
-                app:met_maxCharacters="20"
-                app:met_primaryColor="@color/text_hint_color" />
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edt_vendor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/dropdownyello"
-                android:editable="false"
-                android:hint="Select Customer Name"
-                android:textCursorDrawable="@drawable/drable_edittext"
-                app:met_baseColor="@color/text_color"
-                app:met_bottomTextSize="@dimen/_1sdp"
-                app:met_floatingLabel="highlight"
-                app:met_floatingLabelTextSize="@dimen/_10sdp"
-                app:met_maxCharacters="20"
-                app:met_primaryColor="@color/text_hint_color" />
+
+
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edt_comment"
                 android:layout_width="match_parent"

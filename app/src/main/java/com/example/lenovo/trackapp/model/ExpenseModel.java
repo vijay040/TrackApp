@@ -3,17 +3,21 @@ package com.example.lenovo.trackapp.model;
 public class ExpenseModel {
     private String amount;
 
-    private String id;
+    private String descreption;
+
+    private String Time;
 
     private String expense_type;
 
-    private String location;
+    private String Date;
+
+    private String address;
+
+    private String created_on;
 
     private String customer_name;
 
     private String image;
-
-    private String date;
 
     public String getAmount ()
     {
@@ -25,14 +29,24 @@ public class ExpenseModel {
         this.amount = amount;
     }
 
-    public String getId ()
+    public String getDescreption ()
     {
-        return id;
+        return descreption;
     }
 
-    public void setId (String id)
+    public void setDescreption (String descreption)
     {
-        this.id = id;
+        this.descreption = descreption;
+    }
+
+    public String getTime ()
+    {
+        return Time;
+    }
+
+    public void setTime (String Time)
+    {
+        this.Time = Time;
     }
 
     public String getExpense_type ()
@@ -45,14 +59,34 @@ public class ExpenseModel {
         this.expense_type = expense_type;
     }
 
-    public String getLocation ()
+    public String getDate ()
     {
-        return location;
+        return Date;
     }
 
-    public void setLocation (String location)
+    public void setDate (String Date)
     {
-        this.location = location;
+        this.Date = Date;
+    }
+
+    public String getAddress ()
+    {
+        return address;
+    }
+
+    public void setAddress (String address)
+    {
+        this.address = address;
+    }
+
+    public String getCreated_on ()
+    {
+        return created_on;
+    }
+
+    public void setCreated_on (String created_on)
+    {
+        this.created_on = created_on;
     }
 
     public String getCustomer_name ()
@@ -75,16 +109,10 @@ public class ExpenseModel {
         this.image = image;
     }
 
-    public String getDate ()
+    @Override
+    public String toString()
     {
-        return date;
+        return "ClassPojo [amount = "+amount+", descreption = "+descreption+", Time = "+Time+", expense_type = "+expense_type+", Date = "+Date+", address = "+address+", created_on = "+created_on+", customer_name = "+customer_name+", image = "+image+"]";
     }
-
-    public void setDate (String date)
-    {
-        this.date = date;
-    }
-
 }
-
 

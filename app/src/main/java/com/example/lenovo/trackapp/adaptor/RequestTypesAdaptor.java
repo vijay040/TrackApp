@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
@@ -45,26 +47,30 @@ public class RequestTypesAdaptor extends BaseAdapter {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.inf_request_types_list, null);
-
-
         }
 
 
         TextView txtTitle = view.findViewById(R.id.txtTitle);
-        final CheckBox chkSelect = view.findViewById(R.id.chkSelect);
+        final ImageView chkSelect = view.findViewById(R.id.imgSelect);
+        RelativeLayout lay=view.findViewById(R.id.lay);
         txtTitle.setText(list.get(i).getRequest_type());
 
-        chkSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        lay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b==true) {
-                    list.get(i).setSelected(true);
-                } else {
+            public void onClick(View view) {
+
+                if(list.get(i).isSelected())
+                {
                     list.get(i).setSelected(false);
+                    chkSelect.setVisibility(View.GONE);
+                }
+                else
+                {
+                    list.get(i).setSelected(true);
+                    chkSelect.setVisibility(View.VISIBLE);
                 }
             }
         });
-
         return view;
     }
 }

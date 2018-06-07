@@ -41,6 +41,7 @@
         <activity android:name=".activity.ReminderActivity" />
         <activity android:name=".actv.PreRequestActivity" />
         <activity android:name=".actv.LoginActivity" />
+        <activity android:name=".actv.ApprovalActivity" />
         <activity android:name=".actv.MeetingDetailsActivity" />
         <activity
             android:name=".actv.AddPreRequestActivity"

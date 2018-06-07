@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -37,6 +38,7 @@ import com.example.lenovo.trackapp.model.ResMetaMeeting;
 import com.example.lenovo.trackapp.model.ResMetaReqTypes;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
+import com.example.lenovo.trackapp.util.Util;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -100,7 +102,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         getMeetingsList();
         getDepartmentList();
         getCurrencyList();
-        listTypes.setOnTouchListener(new View.OnTouchListener() {
+       /* listTypes.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -109,7 +111,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                 return false;
             }
         });
-
+*/
         mGoogleApiClient = new GoogleApiClient.Builder(AddPreRequestActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
@@ -147,6 +149,24 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                 submitPost();
             }
         });
+
+      /*  listTypes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                RequestTypeModel obj = (RequestTypeModel) listTypes.getAdapter().getItem(position);
+                ImageView chkSelect=view.findViewById(R.id.imgSelect);
+                if(obj.isSelected())
+                {
+                    obj.setSelected(false);
+                    chkSelect.setVisibility(View.GONE);
+                }
+                else
+                {
+                    obj.setSelected(true);
+                    chkSelect.setVisibility(View.VISIBLE);
+                }
+            }
+        });*/
     }
 
     public void getMeetingsList() {
@@ -201,6 +221,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                 requestTyoesList = response.body().getResponse();
                 RequestTypesAdaptor adapto = new RequestTypesAdaptor(com.example.lenovo.trackapp.actv.AddPreRequestActivity.this, requestTyoesList);
                 listTypes.setAdapter(adapto);
+                Util.setListViewHeightBasedOnItems(listTypes);
                 progress.setVisibility(View.GONE);
             }
 
@@ -354,6 +375,8 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         return true;
     }
 
+
+
     private void submitPost() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         String userid = model.getId();
@@ -387,8 +410,16 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         String datetime = dateFormat.format(date);
         Log.e("datetime", "**********" + datetime);
         Log.e("addres", "*****************" + addres);
+        ArrayList<RequestTypeModel>listtype=new ArrayList<>();
+        for(RequestTypeModel list :requestTyoesList)
+        {
+            if(list.isSelected())
+                listtype.add(list);
+        }
+
+
         progress.setVisibility(View.VISIBLE);
-        Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetingId, des, addres, datetime, requestTyoesList).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetingId, des, addres, datetime, listtype).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);

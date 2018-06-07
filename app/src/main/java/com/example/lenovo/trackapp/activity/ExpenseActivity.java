@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.actv.ApprovalActivity;
 import com.example.lenovo.trackapp.actv.PreRequestActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -30,12 +31,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ExpenseActivity extends AppCompatActivity {
-    ImageView preexpense, expense, expensereport, approval;
+
     Button receipt, expenses;
     protected static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 0;
 
     Button btn_receipt, btn_exp;
-TextView txtPreRequest,txtExpanse,txtExpenseReport;
+TextView txtPreRequest,txtExpanse,txtExpenseReport,txtApprovals;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +46,16 @@ TextView txtPreRequest,txtExpanse,txtExpenseReport;
         txtPreRequest=findViewById(R.id.txtPreRequest);
         txtExpanse=findViewById(R.id.txtExpense);
         txtExpenseReport=findViewById(R.id.txtExpenseReport);
-
+        txtApprovals=findViewById(R.id.txtApprovals);
         getSupportActionBar().setTitle("Expenses");
+        txtApprovals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ExpenseActivity.this,ApprovalActivity.class);
+                startActivity(intent);
+            }
+        });
+
         txtExpenseReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

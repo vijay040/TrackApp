@@ -36,8 +36,6 @@ public class FeedbackActivity extends AppCompatActivity {
         textView=(TextView)findViewById(R.id.btn_load);
         imageView=(ImageView)findViewById(R.id.imz_loadreceipt);
         getSupportActionBar().setTitle("FeedbackActivity");
-       /* customername.setTextColor(Color.parseColor("#2196F3"));
-        comment.setTextColor(Color.parseColor("#2196F3"));*/
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

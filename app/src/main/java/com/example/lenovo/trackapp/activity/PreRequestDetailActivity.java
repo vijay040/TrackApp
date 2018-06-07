@@ -1,14 +1,14 @@
 package com.example.lenovo.trackapp.activity;
 
-import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+;
 
 import com.example.lenovo.trackapp.R;
-import com.example.lenovo.trackapp.model.MeetingModel;
+
 import com.example.lenovo.trackapp.model.PreRequestModel;
 
 public class PreRequestDetailActivity extends AppCompatActivity {

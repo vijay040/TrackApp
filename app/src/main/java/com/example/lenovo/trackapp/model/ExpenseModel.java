@@ -19,6 +19,16 @@ public class ExpenseModel {
 
     private String image;
 
+    public boolean isVisible=false;
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
+
     public String getAmount ()
     {
         return amount;

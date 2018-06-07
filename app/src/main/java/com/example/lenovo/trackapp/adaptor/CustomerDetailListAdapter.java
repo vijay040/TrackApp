@@ -18,14 +18,11 @@ import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.model.CustomerModel;
 import java.util.ArrayList;
 import java.util.List;
-
-
 public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDetailListAdapter.MyViewHolder> {
     List<CustomerModel> data = new ArrayList<>();
     private LayoutInflater inflater;
     private Activity context;
     private ProgressDialog progressDialog;
-
     public CustomerDetailListAdapter(Activity context, List<CustomerModel> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -77,20 +74,6 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
                 }
             }
         });
-
-
-               /*  if (isMessage)
-                    if(current.getTotal_message()!=null)
-                    holder.email.setText(current.getTotal_message() + "/2000");
-                    else
-                        holder.email.setText( "0/2000");
-                else {
-                        if(current.getAccount_bal()!=null)
-                    holder.email.setText(current.getAccount_bal());
-                    else
-                            holder.email.setText("0");
-                }
-                holder.title.setText(current.getCreated_at() + " to " + current.getExpire_at());*/
     }
     @Override
     public int getItemCount() {

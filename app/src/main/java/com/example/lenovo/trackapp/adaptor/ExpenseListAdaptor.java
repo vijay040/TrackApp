@@ -8,12 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.model.ExpenseModel;
-import com.example.lenovo.trackapp.model.PreRequestModel;
-
 import java.util.ArrayList;
 
 public class ExpenseListAdaptor extends BaseAdapter {
@@ -63,14 +61,39 @@ public class ExpenseListAdaptor extends BaseAdapter {
         TextView txtAdvanceMoney = view.findViewById(R.id.txtAdvanceMoney);
         txtAdvanceMoney.setText(list.get(i).getAmount());
 
-        TextView txtRequestType = view.findViewById(R.id.txtRequestType);
+        final TextView txtRequestType = view.findViewById(R.id.txtRequestType);
         txtRequestType.setText(""+list.get(i).getExpense_type ());
 
-        TextView txtDate = view.findViewById(R.id.txtDate);
+        final TextView txtDate = view.findViewById(R.id.txtDate);
         txtDate.setText("Meeting Date:"+list.get(i).getDate ()+", "+list.get(i).getTime ());
-/*
-        TextView txtTime = view.findViewById(R.id.txtTime);
-        txtTime.setText(list.get(i).getTime ());*/
+
+        final ImageView   hide=view.findViewById(R.id.imz_down);
+        RelativeLayout    relativeLayout=view.findViewById(R.id.relativelayout);
+        final RelativeLayout  lay=view.findViewById(R.id.lay);
+
+        if(list.get(i).isVisible()) {
+            lay.setVisibility(View.VISIBLE);
+            hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_up));
+        }
+        else {
+            lay.setVisibility(View.GONE);
+            hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_down));
+        }
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                list.get(i).isVisible= !list.get(i).isVisible;
+                if(list.get(i).isVisible()) {
+                    lay.setVisibility(View.VISIBLE);
+                    hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_up));
+                }
+                else {
+                    lay.setVisibility(View.GONE);
+                    hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_down));
+                }
+            }
+        });
+
 
         ImageView img = view.findViewById(R.id.img);
         return view;

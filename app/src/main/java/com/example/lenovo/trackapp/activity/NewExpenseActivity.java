@@ -293,7 +293,6 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
 
     CurrencyAdaptor currencyAdaptor;
     String meetingId;
-
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(NewExpenseActivity.this, currencyList);
 
@@ -324,18 +323,10 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         });
 
     }
-
-
-
-
-
-
-
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
-
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
@@ -366,11 +357,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         }
         return true;
     }
-
-
-
     private void postExpanse(String amnt, String createddate,  String cmnt) {
-
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         String userid = model.getId();
         Singleton.getInstance().getApi().postExpanse(userid, meetingId, amnt,  requestTyoesList, createddate, cmnt).enqueue(new Callback<ResMetaMeeting>() {
@@ -380,7 +367,6 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 progress.setVisibility(View.GONE);
                 finish();
             }
-
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
                 progress.setVisibility(View.GONE);

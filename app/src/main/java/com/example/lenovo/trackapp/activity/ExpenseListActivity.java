@@ -45,14 +45,12 @@ public class ExpenseListActivity extends AppCompatActivity {
         });
 
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.VISIBLE);
         getExpenseList();
     }
-
     private void getExpenseList()
     {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
@@ -64,7 +62,6 @@ public class ExpenseListActivity extends AppCompatActivity {
                 listExpenseView.setAdapter(adaptor);
                 progressBar.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<ExpenseResMeta> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);

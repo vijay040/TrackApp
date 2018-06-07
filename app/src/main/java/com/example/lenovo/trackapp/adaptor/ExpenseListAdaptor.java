@@ -55,16 +55,16 @@ public class ExpenseListAdaptor extends BaseAdapter {
         txtCreatedOn.setText("Expense Created On:"+list.get(i).getCreated_on ());
 
         TextView txtCustomer = view.findViewById(R.id.txtCustomerName);
-        txtCustomer.setText(list.get(i).getCustomer_name());
+        txtCustomer.setText("Customer Name:"+list.get(i).getCustomer_name());
 
         TextView txtAddress = view.findViewById(R.id.txtAddress);
-       txtAddress.setText(list.get(i).getAddress ());
+       txtAddress.setText("Address:"+list.get(i).getAddress ());
 
         TextView txtAdvanceMoney = view.findViewById(R.id.txtAdvanceMoney);
         txtAdvanceMoney.setText(list.get(i).getAmount());
 
         TextView txtRequestType = view.findViewById(R.id.txtRequestType);
-        txtRequestType.setText(list.get(i).getExpense_type ());
+        txtRequestType.setText(""+list.get(i).getExpense_type ());
 
         TextView txtDate = view.findViewById(R.id.txtDate);
         txtDate.setText("Meeting Date:"+list.get(i).getDate ()+", "+list.get(i).getTime ());

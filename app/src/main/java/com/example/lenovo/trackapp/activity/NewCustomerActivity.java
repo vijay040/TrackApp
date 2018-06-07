@@ -33,19 +33,16 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 public class NewCustomerActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
-
-    EditText customername,email,phone;
+    EditText customername,email,phone,pin,companyname,country,taxdetails;
     Button submit;
     TextView save;
-private AutoCompleteTextView address;
+    private AutoCompleteTextView address;
     private static final String TAG = "NewCustomerActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
-
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +51,10 @@ private AutoCompleteTextView address;
         address=(AutoCompleteTextView)findViewById(R.id.edt_address);
         email=(EditText)findViewById(R.id.edt_email);
         phone=(EditText)findViewById(R.id.edt_phone);
+        pin=findViewById(R.id.edt_pin);
+        companyname=findViewById(R.id.edt_company);
+        country=findViewById(R.id.edt_country);
+        taxdetails=findViewById(R.id.edt_taxdetails);
         submit=findViewById(R.id.btnSubmit);
         getSupportActionBar().setTitle("New Customer");
         mGoogleApiClient = new GoogleApiClient.Builder(NewCustomerActivity.this)
@@ -74,6 +75,10 @@ private AutoCompleteTextView address;
                 String add=address.getText().toString();
                 String em=email.getText().toString();
                 String phn=phone.getText().toString();
+                String Pin=pin.getText().toString();
+                String Company=companyname.getText().toString();
+                String Country=country.getText().toString();
+                String Tax=taxdetails.getText().toString();
                 if(custmrname.equals("")){
                     Toast.makeText(NewCustomerActivity.this,"Enter Customer Name",Toast.LENGTH_SHORT).show();
                 }
@@ -87,14 +92,30 @@ private AutoCompleteTextView address;
                         "(" +
                         "\\." +
                         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                        ")+")){
+                        ")+")) {
 
                     Toast.makeText(NewCustomerActivity.this,"Enter Valid Email",Toast.LENGTH_SHORT).show();
-return;
+                 return;
                 }
                 else if(phn.trim().isEmpty()||phone.getText().toString().length()<10||phn.length()>12){
                     Toast.makeText(NewCustomerActivity.this,"Enter Valid Phone No.",Toast.LENGTH_SHORT).show();
                   return;
+                }
+                else if(Pin.equals("")){
+                    Toast.makeText(NewCustomerActivity.this,"Enter Pin",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(Company.equals("")){
+                    Toast.makeText(NewCustomerActivity.this,"Enter Company",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(Country.equals("")){
+                    Toast.makeText(NewCustomerActivity.this,"Enter Country",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(Tax.equals("")){
+                    Toast.makeText(NewCustomerActivity.this,"Enter Tax Details",Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 else {
                     Toast.makeText(NewCustomerActivity.this, "Saved", Toast.LENGTH_SHORT).show();
@@ -128,7 +149,6 @@ return;
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
             Toast.makeText(NewCustomerActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
-
         }
     };
 
@@ -155,6 +175,4 @@ return;
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
     }
-
-
 }

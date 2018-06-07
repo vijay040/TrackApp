@@ -6,11 +6,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.example.lenovo.trackapp.R;
-
 public class ExpenseReportActivity extends AppCompatActivity {
     ListView listExpenseReport;
     ProgressBar progressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

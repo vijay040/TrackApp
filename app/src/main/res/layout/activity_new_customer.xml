@@ -1,17 +1,22 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:orientation="vertical" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:orientation="vertical">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/logo"
-                android:layout_height="70dp" />
+                android:layout_height="70dp"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical">
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edt_name"
                 android:layout_width="match_parent"
@@ -82,8 +87,73 @@
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_primaryColor="@color/text_hint_color" />
-
-            <Button
+                app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pin"
+                    android:maxLength="6"
+                    android:inputType="number"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textColor="@color/text_color"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Company Name"
+                    android:inputType="text"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textColor="@color/text_color"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Country"
+                    android:inputType="text"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textColor="@color/text_color"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_primaryColor="@color/text_hint_color" />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_taxdetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Tax Details"
+                    android:inputType="text"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textColor="@color/text_color"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:textCursorDrawable="@drawable/drable_edittext"
+                    app:met_baseColor="@color/text_color"
+                    app:met_bottomTextSize="@dimen/_1sdp"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextSize="@dimen/_10sdp"
+                    app:met_primaryColor="@color/text_hint_color" />
+                    <Button
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
@@ -93,5 +163,12 @@
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_10sdp"/>
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
-    </android.support.design.widget.CoordinatorLayout>
+
+
+

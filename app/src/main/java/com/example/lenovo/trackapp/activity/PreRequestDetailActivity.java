@@ -1,9 +1,11 @@
 package com.example.lenovo.trackapp.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.model.MeetingModel;
@@ -26,6 +28,5 @@ ListView list_requesttype;
         txtdescreption.setText("Descreption:"+prerequestmodel.getComment());
         txtdate.setText("Date:"+prerequestmodel.getDate());
         txtadvance.setText("Advance:"+prerequestmodel.getAdvance());
-
     }
 }

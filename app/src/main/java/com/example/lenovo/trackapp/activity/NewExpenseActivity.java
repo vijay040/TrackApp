@@ -46,7 +46,6 @@ import com.example.lenovo.trackapp.model.ResMetaMeeting;
 import com.example.lenovo.trackapp.model.ResMetaReqTypes;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
-import com.example.lenovo.trackapp.util.Util;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -110,8 +109,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         getReqestTypes();
         getMeetingsList();
         getCurrencyList();
-
-      /*  listTypes.setOnTouchListener(new View.OnTouchListener() {
+        listTypes.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -120,7 +118,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 return false;
             }
         });
-*/
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,7 +179,6 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             }
         });
     }
-
     public void getReqestTypes() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getRequestTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
@@ -190,17 +187,14 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 requestTyoesList = response.body().getResponse();
                 RequestTypesAdaptor adapto = new RequestTypesAdaptor(NewExpenseActivity.this, requestTyoesList);
                 listTypes.setAdapter(adapto);
-                Util.setListViewHeightBasedOnItems(listTypes);
                 progress.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
                 progress.setVisibility(View.GONE);
             }
         });
     }
-
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
@@ -379,14 +373,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
 
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         String userid = model.getId();
-        ArrayList<RequestTypeModel>listtype=new ArrayList<>();
-        for(RequestTypeModel list :requestTyoesList)
-        {
-            if(list.isSelected())
-                listtype.add(list);
-        }
-
-        Singleton.getInstance().getApi().postExpanse(userid, meetingId, amnt,  listtype, createddate, cmnt).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postExpanse(userid, meetingId, amnt,  requestTyoesList, createddate, cmnt).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 Toast.makeText(NewExpenseActivity.this, "Expanse posted successfully!", Toast.LENGTH_SHORT).show();

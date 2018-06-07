@@ -32,7 +32,7 @@ public class MyScheduleActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Scheduled Meetings");
         sh = new Shprefrences(this);
         getMeetingList();
-        listMeetingsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listMeetingsView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MeetingDetailsAdapter adapter = (MeetingDetailsAdapter) adapterView.getAdapter();

@@ -16,7 +16,7 @@ import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.util.Shprefrences;
 
 public class LandingActivity extends AppCompatActivity {
-    Button addvisit, expenses, attandance, schedule, addcustomer, feedback, nofification, message, setting;
+    Button addvisit, expenses, attandance, schedule, addcustomer, feedback, pending, message, setting;
     String name = "";
     Shprefrences sh;
     @Override
@@ -30,7 +30,7 @@ public class LandingActivity extends AppCompatActivity {
         message = (Button) findViewById(R.id.btn_message);
         feedback = (Button) findViewById(R.id.btn_feedback);
         addcustomer = (Button) findViewById(R.id.btn_addcustomer);
-        nofification = (Button) findViewById(R.id.btn_notification);
+        pending = (Button) findViewById(R.id.btn_notification);
         message = (Button) findViewById(R.id.btn_message);
         setting = (Button) findViewById(R.id.btn_setting);
         TextView txtWelcomeText = findViewById(R.id.txtWelcomeText);
@@ -54,11 +54,12 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
-        nofification.setOnClickListener(new View.OnClickListener() {
+        pending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //sh.clearData();
-                Toast.makeText(LandingActivity.this, "This is pending notification", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LandingActivity.this, PendingActivity.class);
+                startActivity(intent);
 
             }
         });

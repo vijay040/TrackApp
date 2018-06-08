@@ -123,15 +123,15 @@
                     android:layout_weight="2"
                     android:src="@drawable/ic_receipt"
                     android:layout_height="@dimen/_40sdp" />
+
                 <TextView
                     android:id="@+id/image_path"
                     android:layout_width="wrap_content"
-                    android:layout_weight="7"
-                    android:text="image Path"
-                    android:ems="6"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    />
+                    android:layout_weight="7"
+                    android:ems="6"
+                    android:text="image Path" />
                 <Button
                     android:id="@+id/btAttchment"
                     android:layout_width="@dimen/_30sdp"

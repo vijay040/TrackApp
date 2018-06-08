@@ -146,9 +146,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                 showCustomerPopup();
             }
         });
-
-        getPurposeList();
         getCustomerList();
+        getPurposeList();
+
 
       /*  pDialog= new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));

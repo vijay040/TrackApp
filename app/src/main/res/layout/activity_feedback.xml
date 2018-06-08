@@ -3,65 +3,47 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <LinearLayout
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:src="@drawable/logo" />
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edtCustomer"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:weightSum="1"
-        android:background="#5a9bd5"
-        android:layout_height="180dp">
-        <ImageView
-            android:id="@+id/imz_loadreceipt"
-            android:layout_width="match_parent"
-            android:src="@drawable/ic_addimage"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/btn_load"
-            android:layout_width="wrap_content"
-            android:text="Add Image"
-            android:layout_weight="1"
-            android:textColor="#ffffff"
-            android:layout_gravity="center"
-            android:layout_marginBottom="30dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-        <ScrollView
-            android:layout_below="@+id/img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:orientation="vertical">
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Customer Name"
-                    android:textCursorDrawable="@drawable/drable_edittext"
-                    app:met_baseColor="@color/text_color"
-                    app:met_bottomTextSize="@dimen/_1sdp"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelTextSize="@dimen/_10sdp"
-                    app:met_maxCharacters="20"
-                    app:met_primaryColor="@color/text_hint_color" />
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_comment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Feedback/Comment"
-                    android:textCursorDrawable="@drawable/drable_edittext"
-                    app:met_baseColor="@color/text_color"
-                    app:met_bottomTextSize="@dimen/_1sdp"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelTextSize="@dimen/_10sdp"
-                    app:met_maxCharacters="50"
-                    app:met_primaryColor="@color/text_hint_color" />
-                <Button
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/_30sdp"
+        android:drawableRight="@drawable/dropdownyello"
+        android:editable="false"
+        android:hint="Select Customer"
+        android:paddingLeft="@dimen/_10sdp"
+        android:textCursorDrawable="@drawable/drable_edittext"
+        app:met_baseColor="@color/text_color"
+        app:met_bottomTextSize="@dimen/_1sdp"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelTextSize="@dimen/_10sdp"
+        app:met_maxCharacters="20"
+        app:met_primaryColor="@color/text_hint_color" />
+
+    <EditText
+        android:id="@+id/edt_comment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:background="@drawable/commentbck"
+        android:gravity="top"
+        android:textColorHint="@color/white_color"
+        android:textColor="@color/white_color"
+        android:layout_margin="@dimen/_5sdp"
+        android:hint="Feedback/Comment"
+        android:paddingLeft="@dimen/_10sdp"
+       />
+    <Button
                     android:id="@+id/btnSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
@@ -69,8 +51,9 @@
                     android:text="Submit"
                     android:layout_margin="@dimen/_10sdp"
                     android:textSize="@dimen/_15sdp"
+
                     android:textStyle="bold"
                     android:textColor="@color/white_color" />
-            </LinearLayout>
-        </ScrollView>
+
+
 </LinearLayout>

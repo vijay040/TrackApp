@@ -46,6 +46,7 @@ import com.example.lenovo.trackapp.model.ResMetaMeeting;
 import com.example.lenovo.trackapp.model.ResMetaReqTypes;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
+import com.example.lenovo.trackapp.util.Util;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -109,7 +110,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         getReqestTypes();
         getMeetingsList();
         getCurrencyList();
-        listTypes.setOnTouchListener(new View.OnTouchListener() {
+       /* listTypes.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -117,7 +118,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 v.getParent().requestDisallowInterceptTouchEvent(true);
                 return false;
             }
-        });
+        });*/
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,6 +188,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 requestTyoesList = response.body().getResponse();
                 RequestTypesAdaptor adapto = new RequestTypesAdaptor(NewExpenseActivity.this, requestTyoesList);
                 listTypes.setAdapter(adapto);
+                Util.setListViewHeightBasedOnItems(listTypes);
                 progress.setVisibility(View.GONE);
             }
             @Override

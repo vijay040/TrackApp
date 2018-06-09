@@ -90,7 +90,8 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-               Toast.makeText(LandingActivity.this,"This is Attandance",Toast.LENGTH_SHORT).show();
+              Intent intent=new Intent(LandingActivity.this,AttandanceActivity.class);
+              startActivity(intent);
             }
         });
         addvisit.setOnClickListener(new View.OnClickListener() {

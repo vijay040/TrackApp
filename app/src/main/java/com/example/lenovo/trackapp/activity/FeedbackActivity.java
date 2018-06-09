@@ -74,14 +74,8 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
     android.app.AlertDialog alertDialog;
     String customerid;
     private void showCustomerPopup() {
-       /* PurposeModel m=new PurposeModel();
-        m.setPurpose("Business Meeting in Noida");
-        m.setId("0");
-
-        purposeList.add(m);*/
         customerPopupAdaptor = new CustomerPopupAdaptor(FeedbackActivity.this, listCustomer);
-
-        android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
+         android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
@@ -107,7 +101,6 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         });
 
     }
-
     public void getCustomerList() {
         Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
             @Override
@@ -115,16 +108,11 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
 
                 listCustomer = response.body().getResponse();
             }
-
             @Override
             public void onFailure(Call<ResMetaCustomer> call, Throwable t) {
-
-            }
+              }
         });
     }
-
-
-
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;

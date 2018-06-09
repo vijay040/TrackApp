@@ -60,6 +60,7 @@
         <activity android:name=".activity.PreRequestDetailActivity" />
         <activity android:name=".activity.PendingActivity" />
         <activity android:name=".activity.PendingDetailActivity" />
+        <activity android:name=".activity.AttandanceActivity"></activity>
     </application>
 
 </manifest>

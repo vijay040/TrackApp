@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
     Shprefrences sh;
+    ProgressBar progress;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     @Override
@@ -63,6 +65,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
         phone=(EditText)findViewById(R.id.edt_phone);
         pin=findViewById(R.id.edt_pin);
         companyname=findViewById(R.id.edt_company);
+        progress = findViewById(R.id.progress);
         country=findViewById(R.id.edt_country);
         taxdetails=findViewById(R.id.edt_taxdetails);
         submit=findViewById(R.id.btnSubmit);
@@ -128,8 +131,10 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                     return;
                 }
                 else {
+                    progress.setVisibility(View.VISIBLE);
+                    //LoginModel model = sh.getLoginModel("LOGIN_MODEL");
 
-                    postNewCustomer()
+                    postNewCustomer(custmrname,add,em,phn,Pin,Company,Tax);
                 }
             }
         });
@@ -193,12 +198,16 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
         Singleton.getInstance().getApi().addNewCustomer(model.getId(),"","","","","","","","").enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
+                progress.setVisibility(View.GONE);
+                Toast.makeText(NewCustomerActivity.this, "Data submited successfully!",
+                        Toast.LENGTH_LONG).show();
+                finish();
 
             }
 
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
-
+                progress.setVisibility(View.GONE);
             }
         });
     }

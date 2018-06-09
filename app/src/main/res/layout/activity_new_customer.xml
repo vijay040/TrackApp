@@ -9,6 +9,7 @@
                 android:layout_marginTop="20dp"
                 android:src="@drawable/logo"
                 android:layout_height="70dp"/>
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -70,6 +71,13 @@
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_primaryColor="@color/text_hint_color" />
+                    <ProgressBar
+                        android:id="@+id/progress"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                    android:layout_gravity="center"
+android:visibility="gone"
+                        />
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edt_phone"
                 android:layout_width="match_parent"

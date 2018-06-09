@@ -21,6 +21,10 @@ import android.widget.Toast;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.actv.AddPreRequestActivity;
 import com.example.lenovo.trackapp.adaptor.PlaceArrayAdapter;
+import com.example.lenovo.trackapp.model.LoginModel;
+import com.example.lenovo.trackapp.model.ResMetaMeeting;
+import com.example.lenovo.trackapp.util.Shprefrences;
+import com.example.lenovo.trackapp.util.Singleton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -30,6 +34,10 @@ import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewCustomerActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
@@ -41,11 +49,13 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
+    Shprefrences sh;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sh=new Shprefrences(this);
         setContentView(R.layout.activity_new_customer);
         customername=(EditText)findViewById(R.id.edt_name);
         address=(AutoCompleteTextView)findViewById(R.id.edt_address);
@@ -118,7 +128,8 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                     return;
                 }
                 else {
-                    Toast.makeText(NewCustomerActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+
+                    postNewCustomer()
                 }
             }
         });
@@ -174,5 +185,21 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                 "Google Places API connection failed with error code:" +
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
+    }
+
+    public void postNewCustomer(String customerName,String address,String email,String phhone,String pin,String company,String taxdetails )
+    {
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().addNewCustomer(model.getId(),"","","","","","","","").enqueue(new Callback<ResMetaMeeting>() {
+            @Override
+            public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
+
+            }
+        });
     }
 }

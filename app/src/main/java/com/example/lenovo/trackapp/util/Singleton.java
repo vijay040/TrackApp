@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Singleton {
 
 private static String baseUrL="";
-private static String devURL="http://intellisysglobal.com/";//fetch_post_expense.php
+private static String devURL="http://intellisysglobal.com/web/";//fetch_post_expense.php
 
 
     private RetrofitApi api;

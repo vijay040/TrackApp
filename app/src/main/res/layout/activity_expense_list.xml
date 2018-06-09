@@ -12,6 +12,8 @@
     <ListView
         android:id="@+id/listExpenseView"
         android:layout_width="match_parent"
+
+android:layout_marginBottom="@dimen/_20sdp"
         android:layout_height="wrap_content">
     </ListView>
     <RelativeLayout

@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.util.AppLocationService;
+import com.example.lenovo.trackapp.util.MyLocation;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,11 +28,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class AttandanceActivity extends AppCompatActivity implements LocationListener {
+public class AttandanceActivity extends AppCompatActivity {
     ImageView signin;
     TextView textViewsignin;
     LocationManager locationManager;
-
+    public static String currentLocation;
 
 
     @Override
@@ -41,28 +43,60 @@ public class AttandanceActivity extends AppCompatActivity implements LocationLis
         textViewsignin = findViewById(R.id.textview_signin);
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         final String createddate = df.format(Calendar.getInstance().getTime());
-
+        getLocation();
     }
 
+    AppLocationService appLocationService;
+    Location nwLocation;
 
-    @Override
-    public void onLocationChanged(Location location) {
+    public void getLocation() {
+        appLocationService = new AppLocationService(AttandanceActivity.this);
+        nwLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
 
-        Log.e("location","location************"+location);
+        if (nwLocation != null) {
+            MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
+                @Override
+                public void gotLocation(Location location) {
+                    //Got the location!
+                    try {
+                        if (location != null) {
+                            double latitude = location.getLatitude();
+                            double longitude = location.getLongitude();
+                            currentLocation = GetAddress(latitude, longitude);
+                            // text_location.setText(location);
+                            Log.e("Loaction********", currentLocation);
+                        }
+                    } catch (Exception e) {
+                        e.getMessage();
+                    }
+                }
+            };
+
+            MyLocation myLocation = new MyLocation();
+            myLocation.getLocation(this, locationResult);
+        } else {
+            // showSettingsAlert("NETWORK");
+        }
     }
 
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
+    public String GetAddress(double latitude, double longitude) {
 
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        String city = "", state = "", address = "";
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            Log.d("Addrss", addresses + "");
+            // latlong = new LatLng(latitude, longitude);
+           // address = addresses.get(0).getAddressLine(0) + " " + addresses.get(0).getAddressLine(1) + " " + addresses.get(0).getAddressLine(2);
+            address = addresses.get(0).getAddressLine(0);
+            city = addresses.get(0).getAddressLine(1);
+            state = addresses.get(0).getAdminArea();
+            String zip = addresses.get(0).getPostalCode();
+            String country = addresses.get(0).getCountryName();
+        } catch (Exception e) {
+
+        }
+        return address;
     }
 
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
 }

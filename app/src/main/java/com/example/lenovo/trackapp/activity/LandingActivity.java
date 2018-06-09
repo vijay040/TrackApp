@@ -1,6 +1,13 @@
 package com.example.lenovo.trackapp.activity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +26,7 @@ public class LandingActivity extends AppCompatActivity {
     Button addvisit, expenses, attandance, schedule, addcustomer, feedback, pending, message, setting;
     String name = "";
     Shprefrences sh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +43,11 @@ public class LandingActivity extends AppCompatActivity {
         setting = (Button) findViewById(R.id.btn_setting);
         TextView txtWelcomeText = findViewById(R.id.txtWelcomeText);
         sh = new Shprefrences(this);
-       LoginModel model= sh.getLoginModel("LOGIN_MODEL");
-       if(model!=null)
-        name = model.getDisplay_name();
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        if (model != null)
+            name = model.getDisplay_name();
         txtWelcomeText.setText("Hi " + name + "! B Tracker Welcomes You.");
-       // getSupportActionBar().setTitle("B Tracker");
+        // getSupportActionBar().setTitle("B Tracker");
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,8 +98,8 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-              Intent intent=new Intent(LandingActivity.this,AttandanceActivity.class);
-              startActivity(intent);
+                Intent intent = new Intent(LandingActivity.this, AttandanceActivity.class);
+                startActivity(intent);
             }
         });
         addvisit.setOnClickListener(new View.OnClickListener() {
@@ -113,12 +121,20 @@ public class LandingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+        }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.navigation, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO Auto-generated method stub
@@ -133,7 +149,7 @@ public class LandingActivity extends AppCompatActivity {
             Intent intent = new Intent(LandingActivity.this, FeedbackActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_attandance) {
-            Toast.makeText(LandingActivity.this,"This is Attandance",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LandingActivity.this, "This is Attandance", Toast.LENGTH_SHORT).show();
 
         } else if (itemid == R.id.nav_customer) {
             Intent intent = new Intent(LandingActivity.this, AddCustomerActivity.class);
@@ -144,13 +160,11 @@ public class LandingActivity extends AppCompatActivity {
         } else if (itemid == R.id.nav_setting) {
             Toast.makeText(this, "setting", Toast.LENGTH_SHORT).show();
         } else if (itemid == R.id.nav_message) {
-           Intent intent=new Intent(LandingActivity.this,SendMessageActivity.class);
-           startActivity(intent);
-        }
-        else if (itemid == R.id.nav_notification) {
+            Intent intent = new Intent(LandingActivity.this, SendMessageActivity.class);
+            startActivity(intent);
+        } else if (itemid == R.id.nav_notification) {
             Toast.makeText(this, "this is your pendings", Toast.LENGTH_SHORT).show();
-        }
-        else if (itemid == R.id.nav_logout) {
+        } else if (itemid == R.id.nav_logout) {
             sh.clearData();
             Toast.makeText(this, "You have logged out successfully!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LandingActivity.this, LoginActivity.class));
@@ -158,4 +172,34 @@ public class LandingActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+
+    }
+
 }

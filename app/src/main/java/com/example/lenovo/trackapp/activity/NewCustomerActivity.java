@@ -132,9 +132,9 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                 }
                 else {
                     progress.setVisibility(View.VISIBLE);
-                    //LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+                    LoginModel model = sh.getLoginModel("LOGIN_MODEL");
 
-                    postNewCustomer(custmrname,add,em,phn,Pin,Company,Tax);
+                    postNewCustomer(custmrname,add,em,phn,Pin,Company,Country,Tax);
                 }
             }
         });
@@ -192,10 +192,10 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                 Toast.LENGTH_LONG).show();
     }
 
-    public void postNewCustomer(String customerName,String address,String email,String phhone,String pin,String company,String taxdetails )
+    public void postNewCustomer(String customerName,String address,String email,String phhone,String pin,String company,String country,String taxdetails )
     {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        Singleton.getInstance().getApi().addNewCustomer(model.getId(),"","","","","","","","").enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().addNewCustomer(model.getId(),customerName,address,email,phhone,pin,company,country,taxdetails).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);

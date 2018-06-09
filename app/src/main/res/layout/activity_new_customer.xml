@@ -18,7 +18,7 @@
          android:visibility="gone"
         />
 
-                <ScrollView
+            <ScrollView
                     android:layout_below="@+id/img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

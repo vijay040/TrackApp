@@ -33,7 +33,8 @@ public class AttandanceActivity extends AppCompatActivity {
     TextView textViewsignin;
     LocationManager locationManager;
     public static String currentLocation;
-
+    private String status = "signin";
+    boolean isLogin=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,17 @@ public class AttandanceActivity extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         final String createddate = df.format(Calendar.getInstance().getTime());
         getLocation();
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(AttandanceActivity.this, createddate + currentLocation, Toast.LENGTH_SHORT).show();
+                signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
+                textViewsignin.setText("SIGN OUT");
+
+
+            }
+        });
     }
 
     AppLocationService appLocationService;
@@ -87,7 +99,7 @@ public class AttandanceActivity extends AppCompatActivity {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             Log.d("Addrss", addresses + "");
             // latlong = new LatLng(latitude, longitude);
-           // address = addresses.get(0).getAddressLine(0) + " " + addresses.get(0).getAddressLine(1) + " " + addresses.get(0).getAddressLine(2);
+            // address = addresses.get(0).getAddressLine(0) + " " + addresses.get(0).getAddressLine(1) + " " + addresses.get(0).getAddressLine(2);
             address = addresses.get(0).getAddressLine(0);
             city = addresses.get(0).getAddressLine(1);
             state = addresses.get(0).getAdminArea();

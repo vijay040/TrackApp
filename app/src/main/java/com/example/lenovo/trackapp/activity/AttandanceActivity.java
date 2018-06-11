@@ -15,30 +15,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
-import com.example.lenovo.trackapp.model.AttandenceModel;
-import com.example.lenovo.trackapp.model.LoginModel;
-import com.example.lenovo.trackapp.model.ResAttandance;
-import com.example.lenovo.trackapp.model.ResMetaMeeting;
 import com.example.lenovo.trackapp.util.AppLocationService;
 import com.example.lenovo.trackapp.util.MyLocation;
-import com.example.lenovo.trackapp.util.Shprefrences;
-import com.example.lenovo.trackapp.util.Singleton;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AttandanceActivity extends AppCompatActivity {
     ImageView signin;
@@ -46,25 +34,26 @@ public class AttandanceActivity extends AppCompatActivity {
     LocationManager locationManager;
     public static String currentLocation;
     private String status = "signin";
-    boolean isLogin = false;
-    Shprefrences sh;
-    ProgressBar progress;
+    boolean isLogin=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sh = new Shprefrences(this);
         setContentView(R.layout.activity_attandance);
-        progress = findViewById(R.id.progress);
         signin = findViewById(R.id.imageView);
         textViewsignin = findViewById(R.id.textview_signin);
-        progress.setVisibility(View.VISIBLE);
-        getAttandanceStatus();
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        final String createddate = df.format(Calendar.getInstance().getTime());
         getLocation();
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postAttandance();
+
+                Toast.makeText(AttandanceActivity.this, createddate + currentLocation, Toast.LENGTH_SHORT).show();
+                signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
+                textViewsignin.setText("SIGN OUT");
+
+
             }
         });
     }
@@ -120,65 +109,6 @@ public class AttandanceActivity extends AppCompatActivity {
 
         }
         return address;
-    }
-
-    private void postAttandance() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
-        final String createddate = df.format(Calendar.getInstance().getTime());
-
-        if (status.equalsIgnoreCase("signin")) {
-            status = "signout";
-            signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
-            textViewsignin.setText("SIGN IN");
-        } else {
-            status = "signin";
-            signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
-            textViewsignin.setText("SIGN OUT");
-        }
-
-        Singleton.getInstance().getApi().postAttendance(model.getId(), currentLocation, createddate, status).enqueue(new Callback<ResMetaMeeting>() {
-            @Override
-            public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
-
-            }
-        });
-
-    }
-
-    private void getAttandanceStatus() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-
-        Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>() {
-            @Override
-            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
-
-                ArrayList<AttandenceModel> model = response.body().getResponse();
-                if (model.size() > 0)
-                    status = model.get(0).getStatus();
-
-                if (status.equalsIgnoreCase("signin")) {
-                    signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
-                    textViewsignin.setText("SIGN OUT");
-                } else {
-                    signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
-                    textViewsignin.setText("SIGN IN");
-                }
-                progress.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onFailure(Call<ResAttandance> call, Throwable t) {
-                progress.setVisibility(View.GONE);
-            }
-        });
-
     }
 
 }

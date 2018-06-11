@@ -8,7 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.activity.LandingActivity;
+import com.example.lenovo.trackapp.model.ResAttandance;
 import com.example.lenovo.trackapp.util.Shprefrences;
+import com.example.lenovo.trackapp.util.Singleton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -21,6 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         sh = new Shprefrences(SplashActivity.this);
+
         Handler h = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {
@@ -43,5 +50,6 @@ public class SplashActivity extends AppCompatActivity {
         }, 3000);
 
     }
+
 
 }

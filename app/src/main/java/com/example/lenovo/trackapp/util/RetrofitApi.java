@@ -5,6 +5,7 @@ import com.example.lenovo.trackapp.model.LoginResMeta;
 import com.example.lenovo.trackapp.model.MeetingModel;
 import com.example.lenovo.trackapp.model.PreRequestResMeta;
 import com.example.lenovo.trackapp.model.RequestTypeModel;
+import com.example.lenovo.trackapp.model.ResAttandance;
 import com.example.lenovo.trackapp.model.ResMetaCurrency;
 import com.example.lenovo.trackapp.model.ResMetaCustomer;
 import com.example.lenovo.trackapp.model.ResMetaDepartment;
@@ -91,6 +92,24 @@ public interface RetrofitApi {
     Call<ResMetaMeeting> addNewCustomer(@Field("user_id") String user_id, @Field("customer_name") String customer_name,
                                         @Field("address") String address, @Field("email") String email, @Field("phone") String phone, @Field("pin'") String pin,
                                         @Field("customer_company") String customer_company, @Field("country") String country, @Field("tax_details") String details
+
+    );
+
+    @FormUrlEncoded
+    @POST("attendance_post_api.php?request=saveattendance_data")
+    Call<ResMetaMeeting> postAttendance(@Field("user_id") String user_id, @Field("location") String location,@Field("date_time") String datetime,@Field("status") String status
+
+    );
+
+    @FormUrlEncoded
+    @POST("attendance_get_api.php")
+    Call<ResAttandance> getAttandanceStatus(@Field("user_id") String user_id
+
+    );
+
+    @FormUrlEncoded
+    @POST("user_master.php")
+    Call<ResAttandance> test(@Field("user_id") String user_id
 
     );
 }

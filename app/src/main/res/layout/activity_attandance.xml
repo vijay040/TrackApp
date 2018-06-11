@@ -3,6 +3,7 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="@dimen/_80sdp"
@@ -19,4 +20,12 @@
        android:layout_marginTop="@dimen/_20sdp"
        android:textSize="@dimen/_20sdp"
        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        />
 </LinearLayout>

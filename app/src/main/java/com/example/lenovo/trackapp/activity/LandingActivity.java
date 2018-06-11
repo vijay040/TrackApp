@@ -20,7 +20,13 @@ import android.widget.Toast;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.actv.LoginActivity;
 import com.example.lenovo.trackapp.model.LoginModel;
+import com.example.lenovo.trackapp.model.ResAttandance;
 import com.example.lenovo.trackapp.util.Shprefrences;
+import com.example.lenovo.trackapp.util.Singleton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LandingActivity extends AppCompatActivity {
     Button addvisit, expenses, attandance, schedule, addcustomer, feedback, pending, message, setting;
@@ -127,6 +133,23 @@ public class LandingActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
         }
+       // test();
+    }
+
+
+    public void test()
+    {
+        Singleton.getInstance().getApi().test("16").enqueue(new Callback<ResAttandance>() {
+            @Override
+            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResAttandance> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

@@ -7,23 +7,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.lenovo.trackapp.R;
+import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.model.PreRequestModel;
+import com.example.lenovo.trackapp.model.PreRequestResMeta;
+import com.example.lenovo.trackapp.util.Shprefrences;
+import com.example.lenovo.trackapp.util.Singleton;
 
-;
+;import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PendingDetailActivity extends AppCompatActivity {
 PreRequestModel prerequestmodel;
 TextView txtdescreption,txtdate,txtadvance,txtstatus;
 ListView list_requesttype;
 Button reject,approve;
+Shprefrences sh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sh=new Shprefrences(this);
         setContentView(R.layout.activity_pendingdetail);
         prerequestmodel= (PreRequestModel) getIntent().getSerializableExtra("PREREQUESTMODEL");
         txtdescreption=findViewById(R.id.txtdescreption);
@@ -57,6 +67,38 @@ Button reject,approve;
         sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtdate.setText(sb);
 
+        approve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postStatus("ACCEPT");
+                finish();
+            }
+        });
 
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postStatus("REJECT");
+                finish();
+            }
+        });
+
+
+    }
+
+    private void postStatus(String status)
+    {
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().postAcceptRejectPendings(model.getId(),prerequestmodel.getId(),status).enqueue(new Callback<PreRequestResMeta>() {
+            @Override
+            public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
+
+            }
+        });
     }
 }

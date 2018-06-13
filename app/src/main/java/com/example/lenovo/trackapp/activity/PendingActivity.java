@@ -59,11 +59,11 @@ public class PendingActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        getPreRequestList();
+        getPendingsList();
     }
-    private void getPreRequestList(){
+    private void getPendingsList(){
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        Singleton.getInstance().getApi().getPrerequestMeetingList(model.getId()).enqueue(new Callback<PreRequestResMeta>() {
+        Singleton.getInstance().getApi().getPendingsList(model.getId()).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
                 list = response.body().getResponse();

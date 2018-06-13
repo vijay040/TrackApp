@@ -108,8 +108,27 @@ public interface RetrofitApi {
     );
 
     @FormUrlEncoded
-    @POST("user_master.php")
+    @POST("location_map.php")
     Call<ResAttandance> test(@Field("user_id") String user_id
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("pending_get_api.php")
+    Call<PreRequestResMeta> getPendingsList(@Field("user_id") String user_id
+
+    );
+
+    @FormUrlEncoded
+    @POST("pending_post_api.php?request=setPendingStatus")
+    Call<PreRequestResMeta> postAcceptRejectPendings(@Field("user_id") String user_id,@Field("id") String id,@Field("manager_status") String manager_status
+
+    );
+
+    @FormUrlEncoded
+    @POST("location_post_api.php?request=saveLocation")
+    Call<PreRequestResMeta> postDeviceLocation(@Field("user_id") String user_id,@Field("latitude") String latitude,@Field("longitude") String longitude
 
     );
 }

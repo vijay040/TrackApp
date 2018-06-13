@@ -5,11 +5,14 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +23,10 @@ import android.widget.Toast;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.actv.LoginActivity;
 import com.example.lenovo.trackapp.model.LoginModel;
+import com.example.lenovo.trackapp.model.PreRequestResMeta;
 import com.example.lenovo.trackapp.model.ResAttandance;
+import com.example.lenovo.trackapp.util.AppLocationService;
+import com.example.lenovo.trackapp.util.MyLocation;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
 
@@ -49,6 +55,11 @@ public class LandingActivity extends AppCompatActivity {
         setting = (Button) findViewById(R.id.btn_setting);
         TextView txtWelcomeText = findViewById(R.id.txtWelcomeText);
         sh = new Shprefrences(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+        }
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         if (model != null)
             name = model.getDisplay_name();
@@ -128,14 +139,9 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-        }
-       // test();
-    }
 
+        test();
+    }
 
     public void test()
     {
@@ -151,6 +157,60 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getLocation();
+    }
+
+    AppLocationService appLocationService;
+    Location nwLocation;
+    public void getLocation() {
+        appLocationService = new AppLocationService(LandingActivity.this);
+        nwLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
+
+        if (nwLocation != null) {
+            MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
+                @Override
+                public void gotLocation(Location location) {
+                    //Got the location!
+                    try {
+                        if (location != null) {
+                            double latitude = location.getLatitude();
+                            double longitude = location.getLongitude();
+                            postDeviceLocation(latitude+"",""+longitude);
+                        }
+                    } catch (Exception e) {
+                        e.getMessage();
+
+                    }
+                }
+            };
+
+            MyLocation myLocation = new MyLocation();
+            myLocation.getLocation(this, locationResult);
+        } else {
+            // showSettingsAlert("NETWORK");
+        }
+    }
+
+    public void  postDeviceLocation(String latitude,String longitude)
+    {
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().postDeviceLocation(model.getId(),latitude,longitude).enqueue(new Callback<PreRequestResMeta>() {
+            @Override
+            public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

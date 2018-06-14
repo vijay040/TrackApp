@@ -31,7 +31,6 @@ public class PendingActivity extends AppCompatActivity {
     ArrayList<PreRequestModel> list;
     ListView listView;
     ProgressBar progress;
-
     Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +38,9 @@ public class PendingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pending);
         listView = findViewById(R.id.listView);
         progress = findViewById(R.id.progress);
-
         progress.setVisibility(View.VISIBLE);
         getSupportActionBar().setTitle("Request List");
         sh=new Shprefrences(this);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -55,7 +52,6 @@ public class PendingActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     protected void onResume(){
         super.onResume();

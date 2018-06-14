@@ -203,14 +203,11 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
                 currencyList = response.body().getResponse();
             }
-
             @Override
             public void onFailure(Call<ResMetaCurrency> call, Throwable t) {
-
             }
         });
     }
-
     public void getReqestTypes() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getRequestTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
@@ -222,18 +219,15 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                 Util.setListViewHeightBasedOnItems(listTypes);
                 progress.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
                 progress.setVisibility(View.GONE);
             }
         });
     }
-
     AlertDialog alertDialog;
     MeetingsAdaptor adaptor;
     private int popupId = 0;
-
     private void showMeetings() {
         adaptor = new MeetingsAdaptor(com.example.lenovo.trackapp.actv.AddPreRequestActivity.this, meetingList);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -263,10 +257,8 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             }
         });
     }
-
     String meetingId = "";
     DepartmentAdaptor departmentAdaptor;
-
     private void showDepartmentList() {
         departmentAdaptor = new DepartmentAdaptor(AddPreRequestActivity.this, departmentList);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -323,9 +315,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                 alertDialog.dismiss();
             }
         });
-
     }
-
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
@@ -357,7 +347,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                 }
                 currencyAdaptor.filter(newlist1);
                 break;
-
             case 3:
                 ArrayList<DepartmentModel> newlist2 = new ArrayList<>();
                 for (DepartmentModel list : departmentList) {
@@ -372,9 +361,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         }
         return true;
     }
-
-
-
     private void submitPost() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         String userid = model.getId();
@@ -414,8 +400,6 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             if(list.isSelected())
                 listtype.add(list);
         }
-
-
         progress.setVisibility(View.VISIBLE);
         Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetingId, des, addres, datetime, listtype).enqueue(new Callback<ResMetaMeeting>() {
             @Override

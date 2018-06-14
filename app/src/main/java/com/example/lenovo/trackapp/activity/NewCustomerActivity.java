@@ -167,13 +167,11 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
             Toast.makeText(NewCustomerActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
         }
     };
-
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         Log.i(TAG, "Google Places API connected.");
     }
-
     @Override
     public void onConnectionSuspended(int i) {
         mPlaceArrayAdapter.setGoogleApiClient(null);
@@ -202,9 +200,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                 Toast.makeText(NewCustomerActivity.this, "Data submited successfully!",
                         Toast.LENGTH_LONG).show();
                 finish();
-
             }
-
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
                 progress.setVisibility(View.GONE);

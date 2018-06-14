@@ -6,22 +6,15 @@ public class MeetingModel implements Serializable {
     private String agenda;
 
     private String id;
-
     private String descreption;
-
     private String Time;
-
     private String Date;
-
     private String contact_person;
-
     private String purpose;
-
     private String customer;
     private String customer_name;
     private String title;
     private String address;
-
     public String getCustomer_name() {
         return customer_name;
     }

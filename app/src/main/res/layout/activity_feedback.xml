@@ -1,10 +1,10 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:orientation="vertical">
 
-    <ImageView
+        <ImageView
         android:id="@+id/img"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp"
@@ -12,12 +12,10 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:src="@drawable/logo" />
 
-
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/edtCustomer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="@dimen/_30sdp"
         android:drawableRight="@drawable/dropdownyello"
         android:editable="false"
@@ -30,20 +28,18 @@
         app:met_floatingLabelTextSize="@dimen/_10sdp"
         app:met_maxCharacters="20"
         app:met_primaryColor="@color/text_hint_color" />
-
-    <EditText
-        android:id="@+id/edt_comment"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:background="@drawable/commentbck"
-        android:gravity="top"
-        android:textColorHint="@color/white_color"
-        android:textColor="@color/white_color"
-        android:layout_margin="@dimen/_5sdp"
-        android:hint="Feedback/Comment"
-        android:paddingLeft="@dimen/_10sdp"
-       />
-    <Button
+        <EditText
+            android:id="@+id/edt_comment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:background="@drawable/commentbck"
+            android:gravity="top"
+            android:textColorHint="@color/white_color"
+            android:textColor="@color/white_color"
+            android:layout_margin="@dimen/_5sdp"
+            android:hint="Feedback/Comment"
+            android:paddingLeft="@dimen/_10sdp" />
+                 <Button
                     android:id="@+id/btnSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
@@ -51,9 +47,6 @@
                     android:text="Submit"
                     android:layout_margin="@dimen/_10sdp"
                     android:textSize="@dimen/_15sdp"
-
                     android:textStyle="bold"
                     android:textColor="@color/white_color" />
-
-
-</LinearLayout>
+                    </LinearLayout>

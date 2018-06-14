@@ -232,8 +232,7 @@ public class LandingActivity extends AppCompatActivity {
             Intent intent = new Intent(LandingActivity.this, FeedbackActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_attandance) {
-            Toast.makeText(LandingActivity.this, "This is Attandance", Toast.LENGTH_SHORT).show();
-
+            startActivity(new Intent(LandingActivity.this,AttandanceActivity.class));
         } else if (itemid == R.id.nav_customer) {
             Intent intent = new Intent(LandingActivity.this, AddCustomerActivity.class);
             startActivity(intent);
@@ -246,7 +245,7 @@ public class LandingActivity extends AppCompatActivity {
             Intent intent = new Intent(LandingActivity.this, SendMessageActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_notification) {
-            Toast.makeText(this, "this is your pendings", Toast.LENGTH_SHORT).show();
+         startActivity(new Intent(LandingActivity.this,PendingActivity.class));
         } else if (itemid == R.id.nav_logout) {
             sh.clearData();
             Toast.makeText(this, "You have logged out successfully!", Toast.LENGTH_SHORT).show();

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/them_color">
     <TextView
         android:id="@+id/login_title"
@@ -44,18 +45,18 @@
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/etPasswordLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
+
                 <EditText
                     android:id="@+id/edt_password"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:singleLine="true"
+                    android:hint="password"
                     android:drawableLeft="@drawable/ic_password"
-                    android:hint="Password"
-                    android:textSize="@dimen/_12sdp"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"/>
             </android.support.design.widget.TextInputLayout>
             <Button
                 android:id="@+id/btn_signin"

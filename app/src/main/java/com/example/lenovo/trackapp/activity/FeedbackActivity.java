@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.CustomerPopupAdaptor;
@@ -44,21 +45,21 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         edtCustomer = findViewById(R.id.edtCustomer);
         comment=(EditText)findViewById(R.id.edt_comment);
         submit=(Button) findViewById(R.id.btnSubmit);
-        getSupportActionBar().setTitle("FeedbackActivity");
-        edtCustomer.setOnClickListener(new View.OnClickListener() {
+        getSupportActionBar().setTitle("Feedback");
+        edtCustomer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 showCustomerPopup();
             }
         });
         getCustomerList();
-        submit.setOnClickListener(new View.OnClickListener() {
+        submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
              String customer_name=edtCustomer.getText().toString();
              String comm=comment.getText().toString();
              if(customer_name.equals("")){
-                 Toast.makeText(FeedbackActivity.this,"Enter Select Customer Name",Toast.LENGTH_SHORT).show();
+                 Toast.makeText(FeedbackActivity.this,"Select Customer Name",Toast.LENGTH_SHORT).show();
              }
              else if(comm.equals("")) {
                  Toast.makeText(FeedbackActivity.this, "Enter Your Comment", Toast.LENGTH_SHORT).show();
@@ -76,7 +77,6 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
     private void showCustomerPopup() {
         customerPopupAdaptor = new CustomerPopupAdaptor(FeedbackActivity.this, listCustomer);
          android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
-        // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.meeting_popup, null);
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
@@ -99,13 +99,11 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
                 alertDialog.dismiss();
             }
         });
-
     }
     public void getCustomerList() {
         Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
             @Override
             public void onResponse(Call<ResMetaCustomer> call, Response<ResMetaCustomer> response) {
-
                 listCustomer = response.body().getResponse();
             }
             @Override
@@ -117,7 +115,6 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
-
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();

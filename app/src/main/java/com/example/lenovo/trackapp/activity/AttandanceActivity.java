@@ -1,17 +1,18 @@
 package com.example.lenovo.trackapp.activity;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
+
+
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
+
 import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
+
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,7 +29,6 @@ import com.example.lenovo.trackapp.util.AppLocationService;
 import com.example.lenovo.trackapp.util.MyLocation;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,7 +50,6 @@ public class AttandanceActivity extends AppCompatActivity {
     Shprefrences sh;
     ProgressBar progress;
     TextView txtLocation,texDate;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,23 +67,20 @@ public class AttandanceActivity extends AppCompatActivity {
         final String createddate = df.format(Calendar.getInstance().getTime());
         texDate.setText(createddate);
         getAttandanceStatus();
-
+        getSupportActionBar().setTitle("Attendance");
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
                 postAttandance();
             }
         });
-    }
-
-    AppLocationService appLocationService;
-    Location nwLocation;
-
-    public void getLocation() {
+        }
+       AppLocationService appLocationService;
+        Location nwLocation;
+        public void getLocation() {
         appLocationService = new AppLocationService(AttandanceActivity.this);
         nwLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
-
-        if (nwLocation != null) {
+            if(nwLocation != null) {
             MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
                 @Override
                 public void gotLocation(Location location) {
@@ -94,7 +90,6 @@ public class AttandanceActivity extends AppCompatActivity {
                         if (location != null) {
                             double latitude = location.getLatitude();
                             double longitude = location.getLongitude();
-
                             currentLocation = GetAddress(latitude, longitude);
                             txtLocation.setText(currentLocation);
                             // text_location.setText(location);
@@ -107,16 +102,13 @@ public class AttandanceActivity extends AppCompatActivity {
                     }
                 }
             };
-
             MyLocation myLocation = new MyLocation();
             myLocation.getLocation(this, locationResult);
         } else {
             // showSettingsAlert("NETWORK");
         }
     }
-
     public String GetAddress(double latitude, double longitude) {
-
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         String city = "", state = "", address = "";
         try {
@@ -134,12 +126,10 @@ public class AttandanceActivity extends AppCompatActivity {
         }
         return address;
     }
-
     private void postAttandance() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         final String createddate = df.format(Calendar.getInstance().getTime());
-
         if (status.equalsIgnoreCase("signin")) {
             status = "signout";
             signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
@@ -149,34 +139,26 @@ public class AttandanceActivity extends AppCompatActivity {
             signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
             textViewsignin.setText("SIGN OUT");
         }
-
         Singleton.getInstance().getApi().postAttendance(model.getId(), currentLocation, createddate, status).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
-
-
             }
-
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
-
             }
         });
 
     }
-
     private void getAttandanceStatus() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-
-        Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>() {
+        Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>(){
             @Override
-            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
+            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response){
 
                 ArrayList<AttandenceModel> model = response.body().getResponse();
                 if (model.size() > 0)
                     status = model.get(0).getStatus();
-
-                if (status.equalsIgnoreCase("signin")) {
+                if (status.equalsIgnoreCase("signin")){
                     signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
                     textViewsignin.setText("SIGN OUT");
                 } else {
@@ -185,13 +167,11 @@ public class AttandanceActivity extends AppCompatActivity {
                 }
                 progress.setVisibility(View.GONE);
             }
-
             @Override
             public void onFailure(Call<ResAttandance> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-            }
+             }
         });
 
     }
-
 }

@@ -2,7 +2,6 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android" >
-
     <ImageView
         android:id="@+id/image"
         android:layout_width="@dimen/_60sdp"
@@ -10,11 +9,10 @@
         android:layout_alignStart="@+id/imageView"
         android:layout_below="@+id/current_location"
         android:layout_marginTop="@dimen/_40sdp"
-        android:background="@drawable/ic_attandance" />
-
-    <TextView
+        android:background="@drawable/ic_attandance"/>
+        <TextView
         android:id="@+id/current_location"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textview_signin"
@@ -23,9 +21,7 @@
         android:text="Location"
         android:textColor="#5fb0c9"
         android:textSize="@dimen/_10sdp" />
-
-
-    <TextView
+     <TextView
         android:id="@+id/texDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +31,6 @@
         android:singleLine="true"
         android:textColor="#5fb0c9"
         android:textSize="@dimen/_10sdp" />
-
     <ImageView
         android:id="@+id/location"
         android:layout_width="@dimen/_40sdp"
@@ -43,8 +38,7 @@
         android:layout_above="@+id/imageView"
         android:layout_alignStart="@+id/image"
         android:layout_marginStart="55dp"
-        android:background="@drawable/ic_location" />
-
+        android:background="@drawable/ic_location"/>
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="@dimen/_80sdp"
@@ -52,7 +46,7 @@
         android:layout_below="@+id/image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="46dp"
-        android:background="@drawable/ic_signin" />
+        android:background="@drawable/ic_signin"/>
    <TextView
        android:id="@+id/textview_signin"
        android:layout_width="wrap_content"
@@ -63,7 +57,6 @@
     android:layout_below="@+id/imageView"
        android:textSize="@dimen/_20sdp"
        android:layout_height="wrap_content" />
-
     <ProgressBar
         android:id="@+id/progressbar"
         style="?android:attr/progressBarStyle"

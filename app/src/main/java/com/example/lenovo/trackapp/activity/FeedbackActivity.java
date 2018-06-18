@@ -75,7 +75,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
              else{
                  DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
                  final String createddate = df.format(Calendar.getInstance().getTime());
-                 postFeedback(customer_name,comm,createddate);
+                 postFeedback(customerid,comm,createddate);
 
              }
             }

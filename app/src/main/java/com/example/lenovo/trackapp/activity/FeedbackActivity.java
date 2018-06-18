@@ -26,7 +26,10 @@ import android.widget.Toolbar;
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.CustomerPopupAdaptor;
 import com.example.lenovo.trackapp.model.CustomerModel;
+import com.example.lenovo.trackapp.model.LoginModel;
+import com.example.lenovo.trackapp.model.PreRequestResMeta;
 import com.example.lenovo.trackapp.model.ResMetaCustomer;
+import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
 
 import java.util.ArrayList;
@@ -38,9 +41,11 @@ import retrofit2.Response;
 public class FeedbackActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     EditText edtCustomer,comment;
     Button submit;
+    Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sh=new Shprefrences(this);
         setContentView(R.layout.activity_feedback);
         edtCustomer = findViewById(R.id.edtCustomer);
         comment=(EditText)findViewById(R.id.edt_comment);
@@ -65,7 +70,9 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
                  Toast.makeText(FeedbackActivity.this, "Enter Your Comment", Toast.LENGTH_SHORT).show();
              }
              else{
-                 Toast.makeText(FeedbackActivity.this,"Saved",Toast.LENGTH_SHORT).show();
+
+                 postFeedback(customer_name,comm);
+
              }
             }
         });
@@ -127,6 +134,22 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
                 }
                 customerPopupAdaptor.filter(newlist1);
         return false;
+    }
+
+    public void postFeedback(String customerId,String feedback)
+    {
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().postFeedback(model.getId(),customerId,feedback).enqueue(new Callback<PreRequestResMeta>() {
+            @Override
+            public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
+
+            }
+        });
     }
 }
 

@@ -131,4 +131,11 @@ public interface RetrofitApi {
     Call<PreRequestResMeta> postDeviceLocation(@Field("user_id") String user_id,@Field("latitude") String latitude,@Field("longitude") String longitude
 
     );
+
+
+    @FormUrlEncoded
+    @POST("feedback_post_api.php?request=savefeedback_data")
+    Call<PreRequestResMeta> postFeedback(@Field("user_id") String user_id,@Field("customer_id") String customer_id,@Field("feedback") String feedback
+
+    );
 }

@@ -33,6 +33,6 @@ public class RequestTypeModel {
 
     @Override
     public String toString() {
-        return request_type;
+        return id;
     }
 }

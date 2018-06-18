@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
     EditText edtCustomer,comment;
     Button submit;
     Shprefrences sh;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +55,9 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         edtCustomer = findViewById(R.id.edtCustomer);
         comment=(EditText)findViewById(R.id.edt_comment);
         submit=(Button) findViewById(R.id.btnSubmit);
+        progressBar=findViewById(R.id.progressbar);
         getSupportActionBar().setTitle("Feedback");
+        progressBar.setVisibility(View.VISIBLE);
         edtCustomer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -75,6 +79,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
              else{
                  DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
                  final String createddate = df.format(Calendar.getInstance().getTime());
+
                  postFeedback(customerid,comm,createddate);
 
              }
@@ -116,9 +121,11 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
             @Override
             public void onResponse(Call<ResMetaCustomer> call, Response<ResMetaCustomer> response) {
                 listCustomer = response.body().getResponse();
+                progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<ResMetaCustomer> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
               }
         });
     }
@@ -143,15 +150,19 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
     public void postFeedback(String customerId,String feedback, String posted_on)
     {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        progressBar.setVisibility(View.VISIBLE);
         Singleton.getInstance().getApi().postFeedback(model.getId(),customerId,feedback,posted_on).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
+                Toast.makeText(FeedbackActivity.this,"Successfully posted",Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                finish();
 
             }
 
             @Override
             public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

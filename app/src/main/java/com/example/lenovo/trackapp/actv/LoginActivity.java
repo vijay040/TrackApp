@@ -1,6 +1,7 @@
 package com.example.lenovo.trackapp.actv;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.activity.LandingActivity;
+import com.example.lenovo.trackapp.activity.NewCustomerActivity;
 import com.example.lenovo.trackapp.model.LoginModel;
 import com.example.lenovo.trackapp.model.LoginResMeta;
 import com.example.lenovo.trackapp.util.Shprefrences;
@@ -33,11 +35,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); getSupportActionBar().hide();
+        setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
         username = findViewById(R.id.edt_usernsme);
         password = findViewById(R.id.edt_password);
-        forgotpassword = findViewById(R.id.txt_forgot);
-        remember = findViewById(R.id.checkBox1);
+       /* forgotpassword = findViewById(R.id.txt_forgot);
+        remember = findViewById(R.id.checkBox1);*/
         btn_signin=findViewById(R.id.btn_signin);
         progress=findViewById(R.id.progress);
         sh=new Shprefrences(this);
@@ -57,8 +60,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
     private void login(String email,String pass)
     {
         Singleton.getInstance().getApi().login(email,pass,"","").enqueue(new Callback<LoginResMeta>() {
@@ -96,4 +97,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 }

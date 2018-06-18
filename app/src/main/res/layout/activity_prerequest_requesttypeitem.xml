@@ -27,6 +27,5 @@
             android:background="@drawable/ic_logout"
             android:layout_alignParentRight="true" />
 
-
     </RelativeLayout>
 </LinearLayout>

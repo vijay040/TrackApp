@@ -8,7 +8,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Singleton {
-
 private static String baseUrL="";
 private static String devURL="http://intellisysglobal.com/web/";//fetch_post_expense.php
 
@@ -22,7 +21,6 @@ private static String devURL="http://intellisysglobal.com/web/";//fetch_post_exp
     }
 
     public RetrofitApi getApi() {
-
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -34,8 +32,7 @@ private static String devURL="http://intellisysglobal.com/web/";//fetch_post_exp
                 .addConverterFactory(GsonConverterFactory.create())
                 /* .addConverterFactory(GsonConverterFactory.create(gson))*/
                 .build();
-
-        return retrofit.create(RetrofitApi.class);
+               return retrofit.create(RetrofitApi.class);
     }
 
 

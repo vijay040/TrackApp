@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -49,7 +50,6 @@
         <receiver
             android:name=".util.AlarmReciver"
             android:enabled="true" />
-
         <receiver android:name=".util.LocationChangeReceiver">
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
@@ -59,11 +59,14 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDWDqyDgTE5jZNIxw_uRwKtBCY9xQPvGac" />
+
         <activity android:name=".activity.ExpenseListActivity" />
         <activity android:name=".activity.ExpenseReportActivity" />
         <activity android:name=".activity.PreRequestDetailActivity" />
         <activity android:name=".activity.PendingActivity" />
         <activity android:name=".activity.PendingDetailActivity" />
-        <activity android:name=".activity.AttandanceActivity"></activity>
+        <activity android:name=".activity.AttandanceActivity" />
+        <activity android:name=".activity.SettingActivity"></activity>
     </application>
-     </manifest>
+
+</manifest>

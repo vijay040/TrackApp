@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
+
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.activity.PreRequestDetailActivity;
 import com.example.lenovo.trackapp.adaptor.PreRequestAdaptor;
@@ -25,24 +25,17 @@ public class ApprovalActivity extends AppCompatActivity {
     ArrayList<PreRequestModel> list;
     ListView listView;
     ProgressBar progress;
-    RelativeLayout txtAdd;
     Shprefrences sh;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pre_request_activity);
+        setContentView(R.layout.activity_approval);
         listView = findViewById(R.id.listView);
         progress = findViewById(R.id.progress);
-        txtAdd = findViewById(R.id.txtAdd);
         progress.setVisibility(View.VISIBLE);
-        getSupportActionBar().setTitle("Pre-Requests");
+        getSupportActionBar().setTitle("Approvals");
         sh=new Shprefrences(this);
-        txtAdd.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ApprovalActivity.this,AddPreRequestActivity.class));
-            }
-            });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
@@ -51,8 +44,8 @@ public class ApprovalActivity extends AppCompatActivity {
                 Intent intent = new Intent(ApprovalActivity.this, PreRequestDetailActivity.class);
                 intent.putExtra("PREREQUESTMODEL", preRequestModel);
                 startActivity(intent);
-            }
-        });
+                }
+               });
     }
     @Override
     protected void onResume(){

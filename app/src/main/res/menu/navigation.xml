@@ -10,10 +10,9 @@
         android:id="@+id/nav_addmeeting"
         android:icon="@drawable/ic_meeting"
         app:showAsAction="never"
-        android:title="Create Meeting"
-        />
+        android:title="Create Meeting" />
 
-    <item
+            <item
         android:id="@+id/nav_mysch"
         android:icon="@drawable/schedule"
         app:showAsAction="never"
@@ -23,14 +22,14 @@
         android:id="@+id/nav_feedback"
         android:icon="@drawable/ic_feedback"
         app:showAsAction="never"
-        android:title="Feedback"
-        />
+        android:title="Feedback" />
+
     <item
         android:id="@+id/nav_attandance"
         android:icon="@drawable/attaindance"
         app:showAsAction="never"
-        android:title="Attandance"
-        />
+        android:title="Attandance" />
+
     <item
         android:id="@+id/nav_customer"
         android:icon="@drawable/ic_customer"
@@ -47,26 +46,26 @@
         android:id="@+id/nav_setting"
         android:icon="@drawable/ic_settings"
         app:showAsAction="never"
-        android:title="Settings"
-        />
+        android:title="Settings" />
+
             <item
                 android:id="@+id/nav_message"
                 android:icon="@drawable/msgicon"
                 app:showAsAction="never"
-                android:title="Messages"
-                />
+                android:title="Messages" />
+
             <item
                 android:id="@+id/nav_notification"
                 android:icon="@drawable/ic_notification"
                 app:showAsAction="never"
-                android:title="Pendings"
-                />
+                android:title="Pendings" />
+
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_logout"
                 app:showAsAction="never"
-                android:title="Log Out"
-                />
+                android:title="Log Out" />
+
         </menu>
     </item>
 </menu>

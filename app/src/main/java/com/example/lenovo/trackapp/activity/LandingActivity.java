@@ -68,7 +68,7 @@ public class LandingActivity extends AppCompatActivity {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LandingActivity.this, "This is setting", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LandingActivity.this,SettingActivity.class));
             }
         });
         message.setOnClickListener(new View.OnClickListener() {
@@ -240,7 +240,7 @@ public class LandingActivity extends AppCompatActivity {
             Intent intent = new Intent(LandingActivity.this, ExpenseActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_setting) {
-            Toast.makeText(this, "setting", Toast.LENGTH_SHORT).show();
+         startActivity(new Intent(LandingActivity.this,SettingActivity.class));
         } else if (itemid == R.id.nav_message) {
             Intent intent = new Intent(LandingActivity.this, SendMessageActivity.class);
             startActivity(intent);
@@ -254,10 +254,7 @@ public class LandingActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -277,11 +274,8 @@ public class LandingActivity extends AppCompatActivity {
             return true;
         }
     }
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
 
     }
-
 }

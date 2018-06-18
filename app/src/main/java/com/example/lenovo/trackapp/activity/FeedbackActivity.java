@@ -32,7 +32,10 @@ import com.example.lenovo.trackapp.model.ResMetaCustomer;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,8 +73,9 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
                  Toast.makeText(FeedbackActivity.this, "Enter Your Comment", Toast.LENGTH_SHORT).show();
              }
              else{
-
-                 postFeedback(customer_name,comm);
+                 DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+                 final String createddate = df.format(Calendar.getInstance().getTime());
+                 postFeedback(customer_name,comm,createddate);
 
              }
             }
@@ -136,10 +140,10 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         return false;
     }
 
-    public void postFeedback(String customerId,String feedback)
+    public void postFeedback(String customerId,String feedback, String posted_on)
     {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        Singleton.getInstance().getApi().postFeedback(model.getId(),customerId,feedback).enqueue(new Callback<PreRequestResMeta>() {
+        Singleton.getInstance().getApi().postFeedback(model.getId(),customerId,feedback,posted_on).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
 

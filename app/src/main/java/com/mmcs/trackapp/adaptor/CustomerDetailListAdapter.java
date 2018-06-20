@@ -54,7 +54,7 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
         holder.email.setText("Email: "+current.getEmail());
         holder.mobile.setText("Mobile: "+current.getPhone());
         holder.taxDetail.setText("Tax Details: "+current.getTax_details());
-        holder.companyname.setText("Company Name: "+current.getCompany_name ());
+        holder.companyname.setText("Company Name: "+current.getCustomer_company ());
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){

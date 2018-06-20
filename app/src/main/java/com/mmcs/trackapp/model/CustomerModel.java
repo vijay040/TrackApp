@@ -26,16 +26,16 @@ public class CustomerModel {
 
     private String city;
 
-    private String company_name;
+    private String customer_company;
 
     public boolean isVisible=false;
 
-    public String getCompany_name() {
-        return company_name;
+    public String getCustomer_company() {
+        return customer_company;
     }
 
-    public void setCompany_name(String company_name) {
-        this.company_name = company_name;
+    public void setCustomer_company(String customer_company) {
+        this.customer_company = customer_company;
     }
 
     public String getId() {

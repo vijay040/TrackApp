@@ -7,4 +7,6 @@
     <color name="text_hint_color">#5DD7FC</color>
     <color name="them_color">#5fb0c9</color>
     <color name="white_color">#ffffff</color>
+    <color name="view_devider">#bcbec0</color>
+
 </resources>

@@ -132,11 +132,11 @@ public class AttandanceActivity extends AppCompatActivity {
         final String createddate = df.format(Calendar.getInstance().getTime());
         if (status.equalsIgnoreCase("signin")) {
             status = "signout";
-            signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
+            signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
             textViewsignin.setText("SIGN IN");
         } else {
             status = "signin";
-            signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
+            signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
             textViewsignin.setText("SIGN OUT");
         }
         Singleton.getInstance().getApi().postAttendance(model.getId(), currentLocation, createddate, status).enqueue(new Callback<ResMetaMeeting>() {

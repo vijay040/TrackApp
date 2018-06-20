@@ -48,9 +48,12 @@ public class MyScheduleActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().getMeetingsList("" + model.getId()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
-                ArrayList<MeetingModel> list = response.body().getResponse();
-                final MeetingDetailsAdapter adapter = new MeetingDetailsAdapter(MyScheduleActivity.this, list);
-                listMeetingsView.setAdapter(adapter);
+                if(response.body()!=null) {
+                    ArrayList<MeetingModel> list = response.body().getResponse();
+                    final MeetingDetailsAdapter adapter = new MeetingDetailsAdapter(MyScheduleActivity.this, list);
+                    listMeetingsView.setAdapter(adapter);
+                    progressBar.setVisibility(View.GONE);
+                }
                 progressBar.setVisibility(View.GONE);
             }
             @Override

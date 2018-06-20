@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:text="List Value"
+            android:text="@string/ListValue"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"

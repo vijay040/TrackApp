@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Receipt"
+                android:text="@string/Receipt"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/_12sdp" />
         </LinearLayout>
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:text="Expense"
+                android:text="@string/Expense"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/_12sdp" />
         </LinearLayout>

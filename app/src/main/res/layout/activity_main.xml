@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="Welcome To:Business Tracker"
+            android:text="@string/welcome"
             android:textColor="#00008B"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"/>
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="Create Meeting"
+                    android:text="@string/CreateMeeting"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold"/>
@@ -59,7 +59,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Messages"
+                    android:text="@string/Messages"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold"/>
@@ -82,7 +82,7 @@
                     android:layout_gravity="right"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="My Schedule"
+                    android:text="@string/MySchedule"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="Feedback"
+                    android:text="@string/Feedback"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
@@ -137,7 +137,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Attendance"
+                    android:text="@string/Attendance"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
@@ -162,7 +162,7 @@
                     android:layout_gravity="right"
                     android:gravity="right"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:text="Clients"
+                    android:text="@string/Clients"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold"/>
@@ -194,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="Settings"
+                    android:text="@string/Settings"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Expenses"
+                    android:text="@string/Expenses"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
@@ -244,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Pendings"
+                    android:text="@string/Pendings"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:textColor="#03A9F4"
                     android:textSize="@dimen/_10sdp"

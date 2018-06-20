@@ -1,29 +1,18 @@
 package com.example.lenovo.trackapp.activity;
+
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
 import com.example.lenovo.trackapp.R;
 import com.example.lenovo.trackapp.adaptor.CustomerPopupAdaptor;
 import com.example.lenovo.trackapp.model.CustomerModel;
@@ -32,12 +21,10 @@ import com.example.lenovo.trackapp.model.PreRequestResMeta;
 import com.example.lenovo.trackapp.model.ResMetaCustomer;
 import com.example.lenovo.trackapp.util.Shprefrences;
 import com.example.lenovo.trackapp.util.Singleton;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,13 +45,13 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         progressBar=findViewById(R.id.progressbar);
         getSupportActionBar().setTitle("Feedback");
         progressBar.setVisibility(View.VISIBLE);
+        getCustomerList();
         edtCustomer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 showCustomerPopup();
             }
         });
-        getCustomerList();
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
@@ -79,9 +66,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
              else{
                  DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
                  final String createddate = df.format(Calendar.getInstance().getTime());
-
                  postFeedback(customerid,comm,createddate);
-
              }
             }
         });
@@ -107,8 +92,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         alertDialog.show();
         listPurpose.setAdapter(customerPopupAdaptor);
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 CustomerModel obj = (CustomerModel) listPurpose.getAdapter().getItem(position);
                 edtCustomer.setText(obj.getCustomer_name());
                 customerid=obj.getId();
@@ -157,11 +141,9 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
                 Toast.makeText(FeedbackActivity.this,"Successfully posted",Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 finish();
-
-            }
-
+                 }
             @Override
-            public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
+            public void onFailure(Call<PreRequestResMeta> call, Throwable t){
                 progressBar.setVisibility(View.GONE);
             }
         });

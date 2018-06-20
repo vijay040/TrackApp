@@ -146,7 +146,7 @@
                 android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Need Reminder"
+                android:text="@string/NeedReminder"
                 android:textColor="@color/text_hint_color"
                 android:textSize="@dimen/_12sdp" />
             <TextView
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:text="Reminder Settings"
+                android:text="@string/ReminderSettings"
                 android:textColor="@color/text_hint_color"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="italic" />
@@ -164,7 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/btn"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:layout_margin="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"

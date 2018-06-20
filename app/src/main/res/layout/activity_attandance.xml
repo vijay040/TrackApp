@@ -18,7 +18,7 @@
         android:layout_alignStart="@+id/textview_signin"
         android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/ic_loc"
-        android:text="Location"
+        android:text="@string/Location"
         android:textColor="#5fb0c9"
         android:textSize="@dimen/_10sdp" />
      <TextView
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/current_location"
         android:layout_toEndOf="@+id/image"
-        android:text="Current Date"
+        android:text="@string/CurrentDate"
         android:singleLine="true"
         android:textColor="#5fb0c9"
         android:textSize="@dimen/_10sdp" />
@@ -50,7 +50,7 @@
    <TextView
        android:id="@+id/textview_signin"
        android:layout_width="wrap_content"
-       android:text="SIGN IN"
+       android:text="@string/SIGNIN"
        android:layout_centerHorizontal="true"
        android:textStyle="bold"
       android:layout_marginTop="@dimen/_20sdp"

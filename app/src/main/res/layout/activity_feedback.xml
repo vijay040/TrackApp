@@ -64,11 +64,12 @@
             android:layout_below="@+id/edt_comment"
             android:layout_marginTop="23dp"
             android:background="@drawable/btn"
-            android:text="Submit"
+            android:text="@string/Submit"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:textColor="@color/white_color"
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold" />
+
 
                     </RelativeLayout>

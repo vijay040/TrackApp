@@ -171,7 +171,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/btn"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />

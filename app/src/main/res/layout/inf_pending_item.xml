@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/img"
-            android:text="Title"
+            android:text="@string/Title"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
@@ -27,7 +27,7 @@
             android:layout_below="@+id/txtTitle"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/img"
-            android:text="Date"
+            android:text="@string/Date"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_9sdp" />
 
@@ -38,7 +38,7 @@
             android:layout_below="@+id/txtDate"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/img"
-            android:text="Customer"
+            android:text="@string/Customer"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_9sdp"
 
@@ -51,7 +51,7 @@
             android:layout_below="@+id/txtDate"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/txtCustomer"
-            android:text="Address"
+            android:text="@string/Address"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_9sdp"
 
@@ -66,7 +66,7 @@
             android:layout_toRightOf="@id/txtCustomer"
             android:gravity="right"
             android:paddingRight="@dimen/_10sdp"
-            android:text="Advance"
+            android:text="@string/Advance"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_6sdp"
 
@@ -82,7 +82,7 @@
             android:layout_toRightOf="@id/img"
             android:gravity="right"
             android:paddingRight="@dimen/_10sdp"
-            android:text="IDR2000"
+            android:text="@string/IDR2000"
             android:textColor="@color/text_hint_color"
             android:textSize="@dimen/_10sdp"
             android:textStyle="bold"

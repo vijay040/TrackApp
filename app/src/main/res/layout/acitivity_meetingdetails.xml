@@ -11,7 +11,7 @@
         android:src="@drawable/logo" />
     <TextView
         android:layout_width="wrap_content"
-        android:text="Meeting details"
+        android:text="@string/Meetingdetails"
         android:layout_gravity="center"
         android:textSize="@dimen/_15sdp"
         android:textColor="@color/text_hint_color"
@@ -25,7 +25,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_toRightOf="@id/img"
-        android:text="Descreption:"
+        android:text="@string/Descreption"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_13sdp"
         android:textStyle="bold" />
@@ -37,7 +37,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_toRightOf="@id/img"
-        android:text="Purpose:"
+        android:text="@string/Purpose"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_12sdp" />
 
@@ -48,7 +48,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_toRightOf="@id/img"
-        android:text="Client:"
+        android:text="@string/Client"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_12sdp" />
 
@@ -59,7 +59,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_toRightOf="@id/img"
-        android:text="Contact Person:"
+        android:text="@string/ContactPerson"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_12sdp" />
 
@@ -70,7 +70,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_7sdp"
         android:layout_toRightOf="@id/img"
-        android:text="Agenda:"
+        android:text="@string/Agenda"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_12sdp" />
 
@@ -81,7 +81,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_7sdp"
         android:layout_toRightOf="@id/img"
-        android:text="Date:"
+        android:text="@string/Date"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_12sdp" />
 
@@ -92,7 +92,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_7sdp"
         android:layout_toRightOf="@id/img"
-        android:text="Time:"
+        android:text="@string/Time"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_12sdp" />
 
@@ -103,7 +103,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_7sdp"
         android:layout_toRightOf="@id/img"
-        android:text="Address:"
+        android:text="@string/Address"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_12sdp" />
 
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imgMap"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="Location"
+                android:text="@string/Location"
                 android:paddingLeft="@dimen/_18sdp"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_10sdp" />
@@ -160,7 +160,7 @@
                 android:layout_below="@+id/start"
                 android:gravity="center"
                 android:textColor="@color/text_color"
-                android:text="Start Meeting"
+                android:text="@string/StartMeeting"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_10sdp" />
 
@@ -189,7 +189,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_10sdp"
-                android:text="End Meeting"
+                android:text="@string/EndMeeting"
                 android:paddingLeft="@dimen/_5sdp"
                 />
 

@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="Request detail"
+                android:text="@string/Requestdetail"
                 android:textColor="@color/text_hint_color"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
@@ -43,7 +43,7 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_weight="1"
-                    android:text="Descreption:"
+                    android:text="@string/Descreption"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
@@ -55,7 +55,7 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_weight="1"
-                    android:text="Date"
+                    android:text="@string/Date"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
@@ -68,7 +68,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
 
-                android:text="Advance:"
+                android:text="@string/Advance"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_12sdp" />
 
@@ -92,7 +92,7 @@
                     android:layout_margin="@dimen/_15sdp"
                     android:layout_weight="1"
                     android:background="@drawable/btnreject"
-                    android:text="REJECT"
+                    android:text="@string/REJECT"
                     android:textColor="#ffffff"
                     android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
                     android:layout_margin="@dimen/_15sdp"
                     android:layout_weight="1"
                     android:background="@drawable/btnaccept"
-                    android:text="APPROVE"
+                    android:text="@string/APPROVE"
                     android:textColor="#ffffff"
                     android:textStyle="bold" />
 

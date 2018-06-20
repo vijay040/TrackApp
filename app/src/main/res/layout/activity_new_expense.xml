@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_9sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="Select Request Types"
+                android:text="@string/SelectRequestTypes"
                 android:textColor="@color/them_color"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
@@ -131,7 +131,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="7"
                     android:ems="6"
-                    android:text="image Path" />
+                    android:text="@string/imagePath" />
                 <Button
                     android:id="@+id/btAttchment"
                     android:layout_width="@dimen/_30sdp"
@@ -157,7 +157,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/btn"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:textColor="@color/white_color"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />

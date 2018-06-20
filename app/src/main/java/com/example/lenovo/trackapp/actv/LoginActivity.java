@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         username = findViewById(R.id.edt_usernsme);
         password = findViewById(R.id.edt_password);
-       /* forgotpassword = findViewById(R.id.txt_forgot);
+      /*  forgotpassword = findViewById(R.id.txt_forgot);
         remember = findViewById(R.id.checkBox1);*/
         btn_signin=findViewById(R.id.btn_signin);
         progress=findViewById(R.id.progress);

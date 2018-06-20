@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:gravity="center_horizontal"
             android:layout_below="@+id/user_profile_photo"
-            android:text="Account Login"
+            android:text="@string/AccountLogin"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold" />
@@ -73,7 +73,7 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_25sdp"
                 android:background="@drawable/btn"
-                android:text="SIGN IN"
+                android:text="@string/SIGNIN"
                 android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#5DD7FC"
                 android:layout_margin="@dimen/_10sdp"
-                android:text="Remember Me"
+                android:text="@string/RememberMe"
                 android:visibility="gone"/>
             <TextView
                 android:id="@+id/txt_forgot"
@@ -94,7 +94,7 @@
                 android:layout_gravity="right"
                 android:paddingTop="@dimen/_5sdp"
                 android:textColor="#5DD7FC"
-                android:text="Forgot Password?"
+                android:text="@string/ForgotPassword"
                 android:visibility="gone"/>
               </LinearLayout>
             </RelativeLayout>

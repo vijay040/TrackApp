@@ -82,6 +82,15 @@
     <string name="EndDate">End Date</string>
     <string name="Ok">Ok</string>
     <string name="logout">Logout</string>
+    <string name="edt_txt__name">User Name</string>
+    <string name="edt_txt_last_name">Display Name</string>
+    <string name="EmailAddress">Email Address</string>
+    <string name="password">Password</string>
+    <string name="posotion">Position</string>
+    <string name="department">Department</string>
+    <string name="manager">Reporting Manager</string>
+    <string name="joiningdate">Joining Date</string>
+    <string name="role">Role</string>
 
 
 

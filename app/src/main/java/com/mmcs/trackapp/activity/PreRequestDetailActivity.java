@@ -17,7 +17,7 @@ import com.mmcs.trackapp.model.PreRequestModel;
 
 public class PreRequestDetailActivity extends AppCompatActivity {
 PreRequestModel prerequestmodel;
-TextView txtdescreption,txtdate,txtadvance,txtstatus;
+    TextView txtdescreption,txtdate,txtadvance,txtstatus,txtaddress,txtcustomer;
 ListView list_requesttype;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,14 @@ ListView list_requesttype;
         txtdate=findViewById(R.id.txtdate);
         txtadvance=findViewById(R.id.txtadvance);
         txtstatus=findViewById(R.id.txtstatus);
+        txtaddress=findViewById(R.id.txtaddress);
+        txtcustomer=findViewById(R.id.txtcustomer);
         list_requesttype=findViewById(R.id.list_requesttype);
         txtdescreption.setText("Descreption:"+prerequestmodel.getComment());
         txtdate.setText("Date:"+prerequestmodel.getDate());
         txtadvance.setText("Advance:"+prerequestmodel.getAdvance());
+        txtaddress.setText("Address:"+prerequestmodel.getAddress());
+        txtcustomer.setText("Customer Name:"+prerequestmodel.getCustomer_name());
         txtstatus.setText("Status:"+"No Updates");
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         // Span to set text color to some RGB value
@@ -56,5 +60,15 @@ ListView list_requesttype;
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
         sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtstatus.setText(sb);
+
+        sb = new SpannableStringBuilder(txtaddress.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtaddress.setText(sb);
+
+        sb = new SpannableStringBuilder(txtcustomer.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtcustomer.setText(sb);
     }
 }

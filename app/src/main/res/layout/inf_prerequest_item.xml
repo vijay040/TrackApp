@@ -2,19 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp">
-
         <ImageView
             android:id="@+id/img"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
-            android:background="@drawable/pending" />
-
+            android:background="@drawable/star" />
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
@@ -25,7 +21,6 @@
             android:textColor="@color/text_color"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
-
         <TextView
             android:id="@+id/txtDate"
             android:layout_width="wrap_content"
@@ -46,10 +41,7 @@
             android:layout_toRightOf="@id/img"
             android:text="@string/Customer"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/_9sdp"
-
-            />
-
+            android:textSize="@dimen/_9sdp" />
         <TextView
             android:id="@+id/txtAddress"
             android:layout_width="wrap_content"
@@ -59,9 +51,9 @@
             android:layout_toRightOf="@id/txtCustomer"
             android:text="@string/Address"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/_9sdp" />
 
-            />
+
 
         <TextView
             android:id="@+id/txtAdvance"

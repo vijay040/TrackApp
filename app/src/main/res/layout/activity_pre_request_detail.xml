@@ -58,6 +58,26 @@
         android:textColor="@color/text_color"
         android:textSize="@dimen/_12sdp" />
     <TextView
+        android:id="@+id/txtaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+
+        android:text="@string/Address"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp" />
+    <TextView
+        android:id="@+id/txtcustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+
+        android:text="@string/Customer"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp" />
+    <TextView
         android:id="@+id/txtstatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

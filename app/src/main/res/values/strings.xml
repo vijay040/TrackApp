@@ -64,7 +64,7 @@
     <string name="SelectRequestTypes">Select Request Types</string>
     <string name="imagePath">image Path</string>
     <string name="Requestdetail">Request detail</string>
-    <string name="Advance">Advance:</string>
+    <string name="Advance">Advance</string>
     <string name="REJECT">REJECT</string>
     <string name="APPROVE">APPROVE</string>
     <string name="PreRequestdetail">Pre-Request detail</string>

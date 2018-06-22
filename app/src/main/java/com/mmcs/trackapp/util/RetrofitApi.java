@@ -138,4 +138,15 @@ public interface RetrofitApi {
     Call<PreRequestResMeta> postFeedback(@Field("user_id") String user_id,@Field("customer_id") String customer_id,@Field("feedback") String feedback,@Field("posted_on") String posted_on
 
     );
+
+    @FormUrlEncoded
+    @POST("start_meeting_post.php?request=startMeeting")
+    Call<PreRequestResMeta> updateMeedingStatus(@Field("user_id") String user_id,@Field("start_date_time") String start_date_time,@Field("end_date_time") String end_date_time,@Field("status") String status,@Field("meeting_id") String meeting_id
+            ,@Field("start_address") String start_address ,@Field("end_address") String end_address
+    );
+
+    @FormUrlEncoded
+    @POST("start_meeting_get.php")
+    Call<ResMetaMeeting> getMeetingStatus(@Field("user_id") String user_id,@Field("meeting_id") String meeting_id
+    );
 }

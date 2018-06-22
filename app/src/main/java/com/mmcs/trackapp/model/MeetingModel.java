@@ -15,6 +15,26 @@ public class MeetingModel implements Serializable {
     private String customer_name;
     private String title;
     private String address;
+
+    private String start_address;
+
+    private String alarm_time;
+
+    private String end_address;
+
+    private String status;
+
+    private String start_date_time;
+
+    private String end_date_time;
+
+
+    private String m_address;
+
+    private String user_id;
+
+    private String customer_id;
+
     public String getCustomer_name() {
         return customer_name;
     }
@@ -97,6 +117,78 @@ public class MeetingModel implements Serializable {
 
     public String getCustomer() {
         return customer;
+    }
+
+    public String getStart_address() {
+        return start_address;
+    }
+
+    public void setStart_address(String start_address) {
+        this.start_address = start_address;
+    }
+
+    public String getAlarm_time() {
+        return alarm_time;
+    }
+
+    public void setAlarm_time(String alarm_time) {
+        this.alarm_time = alarm_time;
+    }
+
+    public String getEnd_address() {
+        return end_address;
+    }
+
+    public void setEnd_address(String end_address) {
+        this.end_address = end_address;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStart_date_time() {
+        return start_date_time;
+    }
+
+    public void setStart_date_time(String start_date_time) {
+        this.start_date_time = start_date_time;
+    }
+
+    public String getEnd_date_time() {
+        return end_date_time;
+    }
+
+    public void setEnd_date_time(String end_date_time) {
+        this.end_date_time = end_date_time;
+    }
+
+    public String getM_address() {
+        return m_address;
+    }
+
+    public void setM_address(String m_address) {
+        this.m_address = m_address;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(String customer_id) {
+        this.customer_id = customer_id;
     }
 
     public void setCustomer(String customer) {

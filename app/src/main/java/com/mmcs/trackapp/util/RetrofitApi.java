@@ -108,8 +108,8 @@ public interface RetrofitApi {
     );
 
     @FormUrlEncoded
-    @POST("location_map.php")
-    Call<ResAttandance> test(@Field("user_id") String user_id
+    @POST("login.php")
+    Call<ResAttandance> test(@Field("email") String email,@Field("password") String password
 
     );
 

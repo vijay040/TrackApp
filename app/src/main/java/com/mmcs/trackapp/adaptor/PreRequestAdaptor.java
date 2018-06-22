@@ -68,7 +68,7 @@ public class PreRequestAdaptor extends BaseAdapter {
 
         int status = 0;
 
-        if (list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
+       /* if (list.get(i).getSt() != null && !list.get(i).getStatus().equals("")) {
             status = (Integer.parseInt(list.get(i).getStatus()));
 
             switch (status) {
@@ -87,7 +87,7 @@ public class PreRequestAdaptor extends BaseAdapter {
                     img.setBackground(ContextCompat.getDrawable(context, R.drawable.rejected));
                     break;
             }
-        }
+        }*/
 
 
         return view;

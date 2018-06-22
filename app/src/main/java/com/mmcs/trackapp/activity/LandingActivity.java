@@ -134,24 +134,8 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
-
-        test();
     }
 
-    public void test()
-    {
-        Singleton.getInstance().getApi().test("16").enqueue(new Callback<ResAttandance>() {
-            @Override
-            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<ResAttandance> call, Throwable t) {
-
-            }
-        });
-    }
 
     @Override
     protected void onResume() {

@@ -7,7 +7,13 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.model.ResAttandance;
 import com.mmcs.trackapp.util.Shprefrences;
+import com.mmcs.trackapp.util.Singleton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -20,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         sh = new Shprefrences(SplashActivity.this);
-
+        test();
         Handler h = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {
@@ -44,5 +50,20 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+
+    public void test()
+    {
+        Singleton.getInstance().getApi().test("samir@gmail.com","samir@123").enqueue(new Callback<ResAttandance>() {
+            @Override
+            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResAttandance> call, Throwable t) {
+
+            }
+        });
+    }
 
 }

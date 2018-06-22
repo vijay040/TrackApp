@@ -61,14 +61,14 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDWDqyDgTE5jZNIxw_uRwKtBCY9xQPvGac" />
-
         <activity android:name=".activity.ExpenseListActivity" />
         <activity android:name=".activity.ExpenseReportActivity" />
         <activity android:name=".activity.PreRequestDetailActivity" />
         <activity android:name=".activity.PendingActivity" />
         <activity android:name=".activity.PendingDetailActivity" />
         <activity android:name=".activity.AttandanceActivity" />
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.SettingActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

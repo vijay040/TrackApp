@@ -367,7 +367,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         String dept = edtDepartment.getText().toString();
         String des = edtDescreption.getText().toString();
         String totalamount = adv + curr;
-        if (userid.equals("")) {
+      /*  if (userid.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, "Your session is time out please login again", Toast.LENGTH_SHORT).show();
             return;
         } else if (adv.equals("")) {
@@ -385,7 +385,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         } else if (des.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, "Enter Descreption", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
         String addres = edtAddress.getText() + "";
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();

@@ -60,7 +60,7 @@
                     android:drawableRight="@drawable/ic_calendar"
                     android:editable="false"
                     android:focusable="false"
-                    android:hint=" dd/mm/yy"
+                    android:hint="@string/dateformate"
                     android:paddingLeft="10dp" />
                 <EditText
                     android:id="@+id/edt_time"
@@ -74,7 +74,7 @@
                     android:editable="false"
                     android:focusable="false"
                     android:paddingLeft="@dimen/_10sdp"
-                    android:hint="Time" />
+                    android:hint="@string/Time" />
             </LinearLayout>
         </RelativeLayout>
         <RelativeLayout
@@ -113,7 +113,7 @@
                     android:drawableRight="@drawable/ic_calendar"
                     android:editable="false"
                     android:focusable="false"
-                    android:hint=" dd/mm/yy"
+                    android:hint="@string/dateformate"
                     android:paddingLeft="10dp" />
                 <EditText
                     android:id="@+id/edt_EndTime"
@@ -126,7 +126,7 @@
                     android:editable="false"
                     android:focusable="false"
                     android:drawableRight="@drawable/ic_down"
-                    android:hint="Time"
+                    android:hint="@string/Time"
                     android:paddingLeft="@dimen/_10sdp" />
                 <Spinner
                     android:id="@+id/edt_EndTimer"

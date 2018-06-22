@@ -9,7 +9,7 @@
         <SearchView
             android:id="@+id/edt"
             android:layout_width="match_parent"
-            android:hint="Search"
+            android:hint="@string/Search"
             android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView

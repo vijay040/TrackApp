@@ -42,7 +42,7 @@
                 android:drawableLeft="@drawable/ic_clipboard"
                 android:drawablePadding="@dimen/_20sdp"
                 android:gravity="center"
-                android:hint="Pre Request"
+                android:hint="@string/PreRequest"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_18sdp" />
 
@@ -55,7 +55,7 @@
                 android:drawableLeft="@drawable/ic_expenses"
                 android:drawablePadding="@dimen/_20sdp"
                 android:gravity="center"
-                android:hint="Expenses"
+                android:hint="@string/Expenses"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_18sdp" />
 
@@ -68,7 +68,7 @@
                 android:drawableLeft="@drawable/ic_report"
                 android:drawablePadding="@dimen/_20sdp"
                 android:gravity="center"
-                android:hint="Expense Report"
+                android:hint="@string/ExpenseReport"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_18sdp" />
 
@@ -81,7 +81,7 @@
                 android:drawableLeft="@drawable/ic_checked"
                 android:drawablePadding="@dimen/_20sdp"
                 android:gravity="center"
-                android:hint="Approvals"
+                android:hint="@string/Approvals"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_18sdp" />
         </LinearLayout>

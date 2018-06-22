@@ -31,14 +31,14 @@
     <string name="Expenses">Expenses</string>
     <string name="Pendings">Pendings</string>
     <string name="Meetingdetails">Meeting details</string>
-    <string name="Descreption">Descreption:</string>
-    <string name="Purpose">Purpose:</string>
-    <string name="Client">Client:</string>
-    <string name="ContactPerson">Contact Person:</string>
-    <string name="Agenda">Agenda:</string>
-    <string name="Date">Date:</string>
-    <string name="Time">Time:</string>
-    <string name="Address">Address:</string>
+    <string name="Descreption">Descreption</string>
+    <string name="Purpose">Purpose</string>
+    <string name="Client">Client</string>
+    <string name="ContactPerson">Contact Person</string>
+    <string name="Agenda">Agenda</string>
+    <string name="Date">Date</string>
+    <string name="Time">Time</string>
+    <string name="Address">Address</string>
     <string name="Location">Location</string>
     <string name="StartMeeting">Start Meeting</string>
     <string name="EndMeeting">End Meeting</string>
@@ -64,7 +64,7 @@
     <string name="SelectRequestTypes">Select Request Types</string>
     <string name="imagePath">image Path</string>
     <string name="Requestdetail">Request detail</string>
-   <string name="Advance">Advance:</string>
+    <string name="Advance">Advance:</string>
     <string name="REJECT">REJECT</string>
     <string name="APPROVE">APPROVE</string>
     <string name="PreRequestdetail">Pre-Request detail</string>
@@ -91,8 +91,23 @@
     <string name="manager">Reporting Manager</string>
     <string name="joiningdate">Joining Date</string>
     <string name="role">Role</string>
+    <string name="Search">Search</string>
+    <string name="PreRequest">Pre Request</string>
+    <string name="ExpenseReport">Expense Report</string>
+    <string name="Approvals">Approvals</string>
+    <string name="SelectCustomer">Select Customer</string>
+    <string name="FeedbackComment">Feedback/Comment</string>
+    <string name="Pin">Pin</string>
+    <string name="Country">Country</string>
+    <string name="SelectMeeting">Select Meeting</string>
+    <string name="Currency">Currency</string>
+    <string name="Comment">Comment</string>
+    <string name="SelectDepartment">Select Department</string>
+    <string name="dateformate">dd/mm/yy</string>
+    <string name="DefaultCurrency">Default Currency</string>
+    <string name="DateFormate">Date Formate</string>
+    <string name="NumberFormate">Number Formate</string>
+    <string name="Language">Language</string>
+    </resources>
 
 
-
-
-</resources>

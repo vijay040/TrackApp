@@ -9,7 +9,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_15sdp"
         android:src="@drawable/logo" />
-
     <TextView
         android:layout_width="wrap_content"
         android:text="@string/PreRequestdetail"
@@ -91,11 +90,7 @@
         android:id="@+id/list_requesttype"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
-
-
-
-
-
-
+        android:layout_height="wrap_content">
+    </ListView>
 </LinearLayout>
+

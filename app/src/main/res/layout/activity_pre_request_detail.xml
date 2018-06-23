@@ -56,7 +56,7 @@
 
         android:text="@string/Advance"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_12sdp" />
+        android:textSize="@dimen/_10sdp" />
     <TextView
         android:id="@+id/txtaddress"
         android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
 
         android:text="@string/Address"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_12sdp" />
+        android:textSize="@dimen/_10sdp" />
     <TextView
         android:id="@+id/txtcustomer"
         android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
 
         android:text="@string/Customer"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_12sdp" />
+        android:textSize="@dimen/_10sdp" />
     <TextView
         android:id="@+id/txtstatus"
         android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
 
         android:text="@string/Status"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_12sdp" />
+        android:textSize="@dimen/_10sdp" />
     <ListView
         android:id="@+id/list_requesttype"
         android:layout_marginTop="@dimen/_10sdp"

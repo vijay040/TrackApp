@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.PreRequestModel;
-import com.mmcs.trackapp.model.PurposeModel;
 
 import java.util.ArrayList;
 
@@ -66,28 +65,30 @@ public class PreRequestAdaptor extends BaseAdapter {
 
         ImageView img = view.findViewById(R.id.img);
 
-        int status = 0;
+        if (list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
 
-       /* if (list.get(i).getSt() != null && !list.get(i).getStatus().equals("")) {
-            status = (Integer.parseInt(list.get(i).getStatus()));
-
-            switch (status) {
-                case 1:
-//Pending
+            switch (list.get(i).getStatus()) {
+                case "PENDING":
+//Pendin
                     img.setBackground(ContextCompat.getDrawable(context, R.drawable.pending));
                     break;
 
-                case 2:
+                case "APPROVED":
 //Approved
-                    img.setBackground(ContextCompat.getDrawable(context, R.drawable.accept));
+                    img.setBackground(ContextCompat.getDrawable(context, R.drawable.approved));
                     break;
 
-                case 3:
+                case "REJECTED":
 //Rejected
-                    img.setBackground(ContextCompat.getDrawable(context, R.drawable.rejected));
+                    img.setBackground(ContextCompat.getDrawable(context, R.drawable.reject));
+                    break;
+
+                case "PROCESSED":
+//Rejected
+                    img.setBackground(ContextCompat.getDrawable(context, R.drawable.star));
                     break;
             }
-        }*/
+        }
 
 
         return view;

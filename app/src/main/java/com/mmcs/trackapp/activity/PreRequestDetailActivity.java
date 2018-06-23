@@ -36,7 +36,7 @@ ListView list_requesttype;
         txtadvance.setText("Advance:"+prerequestmodel.getAdvance());
         txtaddress.setText("Address:"+prerequestmodel.getAddress());
         txtcustomer.setText("Customer Name:"+prerequestmodel.getCustomer_name());
-        txtstatus.setText("Status:"+"No Updates");
+        txtstatus.setText("Status:"+prerequestmodel.getStatus());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));

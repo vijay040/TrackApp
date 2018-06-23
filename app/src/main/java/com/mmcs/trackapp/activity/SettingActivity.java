@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -21,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 public class SettingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
-EditText edt_txt_currency;
+EditText edt_txt_currency,edt_txt_dateformate,edt_txt_language;
     Shprefrences sh;
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     @Override
@@ -31,14 +32,28 @@ EditText edt_txt_currency;
         getSupportActionBar().setTitle("Settings");
         sh = new Shprefrences(this);
         edt_txt_currency=findViewById(R.id.edt_txt_currency);
+        edt_txt_dateformate=findViewById(R.id.edt_txt_dateformate);
+        edt_txt_language=findViewById(R.id.edt_txt_language);
         getCurrencyList();
+        edt_txt_dateformate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                showDateFormate();
+                }
+                });
+        edt_txt_language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLanguage();
+                }
+                });
         edt_txt_currency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showCurrencyList();
-            }
-        });
-    }
+               }
+               });
+               }
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
@@ -49,10 +64,10 @@ EditText edt_txt_currency;
             @Override
             public void onFailure(Call<ResMetaCurrency> call, Throwable t) {
             }
-        });
-    }
-    CurrencyAdaptor currencyAdaptor;
+            });
+            }
     android.app.AlertDialog alertDialog;
+    CurrencyAdaptor currencyAdaptor;
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(SettingActivity.this, currencyList);
         android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
@@ -71,30 +86,69 @@ EditText edt_txt_currency;
         alertDialog.show();
         listPurpose.setAdapter(currencyAdaptor);
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CurrencyModel obj = (CurrencyModel) listPurpose.getAdapter().getItem(position);
                 edt_txt_currency.setText(obj.getCurrency_name());
                 alertDialog.dismiss();
-            }
-        });
-    }
+                }
+                });
+                }
+    private void showLanguage(){
+        android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.activity_language, null);
+        final ListView listlanguage = dialogView.findViewById(R.id.listview);
+        String[] Language = new String[] { "Indonesian","English","Thai","Vietenam"};
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Language);
+        dialogBuilder.setView(dialogView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.show();
+        listlanguage.setAdapter(adapter);
+        listlanguage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String  itemValue= (String) listlanguage.getItemAtPosition(position);
+                edt_txt_language.setText(itemValue);
+                alertDialog.dismiss();
+                }
+                });
+                }
+    private void showDateFormate(){
+        android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.activity_language, null);
+        final ListView listDate = dialogView.findViewById(R.id.listview);
+        String[] Date = new String[] { "DD/MM/YY","MM/DD/YY","YY/MM/DD"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Date);
+        dialogBuilder.setView(dialogView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.show();
+        listDate.setAdapter(adapter);
+        listDate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                String  itemValue    = (String) listDate.getItemAtPosition(position);
+                edt_txt_dateformate.setText(itemValue);
+                alertDialog.dismiss();
+                }
+                });
+                }
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
-    }
+                }
     @Override
     public boolean onQueryTextChange(String s) {
         s=s.toLowerCase();
         ArrayList<CurrencyModel> newlist=new ArrayList<>();
         for(CurrencyModel list:currencyList)
-        {
+               {
             String getCurrency = list.getCurrency_name().toLowerCase();
             if(getCurrency.contains(s)){
                 newlist.add(list);
-            }
-            }
+               }
+               }
         currencyAdaptor.filter(newlist);
         return true;
-    }
-}
+               }
+               }

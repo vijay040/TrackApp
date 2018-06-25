@@ -33,6 +33,7 @@
             android:name=".activity.CreateMeetingActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.LandingActivity" />
+        <activity android:name=".activity.DrawerActivity" />
         <activity android:name=".activity.MyScheduleActivity" />
         <activity android:name=".activity.ExpenseActivity" />
         <activity android:name=".activity.FeedbackActivity" />

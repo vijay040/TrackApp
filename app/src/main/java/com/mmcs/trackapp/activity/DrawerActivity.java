@@ -1,8 +1,11 @@
 package com.mmcs.trackapp.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,6 +23,8 @@ import android.widget.Toast;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.fragment.FragmentHome;
 import com.mmcs.trackapp.util.Shprefrences;
+
+import static com.mmcs.trackapp.activity.LandingActivity.MY_PERMISSIONS_REQUEST_LOCATION;
 
 /**
  * Created by aphroecs on 10/10/2016.
@@ -34,6 +40,8 @@ public class DrawerActivity extends AppCompatActivity {
     Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT > 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -51,6 +59,12 @@ public class DrawerActivity extends AppCompatActivity {
         txt_pending = (TextView) findViewById(R.id.txt_pending);
         txt_message = (TextView) findViewById(R.id.txt_message);
         txt_logout = (TextView) findViewById(R.id.txt_logout);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+        }
 
         sh = new Shprefrences(this);
         fragmentManager = getSupportFragmentManager();

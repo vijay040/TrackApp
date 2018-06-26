@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -33,13 +35,15 @@ public class PreRequestActivity extends AppCompatActivity {
     Shprefrences sh;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pre_request_activity);
         listView = findViewById(R.id.listView);
         progress = findViewById(R.id.progress);
         txtAdd = findViewById(R.id.txtAdd);
         progress.setVisibility(View.VISIBLE);
-        getSupportActionBar().setTitle("Pre-Requests");
+        //getSupportActionBar().setTitle("Pre-Requests");
         sh=new Shprefrences(this);
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override

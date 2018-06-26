@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -47,6 +49,8 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         sh=new Shprefrences(this);
         setContentView(R.layout.activity_new_customer);
@@ -60,7 +64,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
         country=findViewById(R.id.edt_country);
         taxdetails=findViewById(R.id.edt_taxdetails);
         submit=findViewById(R.id.btnSubmit);
-        getSupportActionBar().setTitle("New Customer");
+        //getSupportActionBar().setTitle("New Customer");
         mGoogleApiClient = new GoogleApiClient.Builder(NewCustomerActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)

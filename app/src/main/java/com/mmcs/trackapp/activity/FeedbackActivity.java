@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +38,8 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
     ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         sh=new Shprefrences(this);
         setContentView(R.layout.activity_feedback);
@@ -43,7 +47,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         comment=(EditText)findViewById(R.id.edt_comment);
         submit=(Button) findViewById(R.id.btnSubmit);
         progressBar=findViewById(R.id.progressbar);
-        getSupportActionBar().setTitle("Feedback");
+        //getSupportActionBar().setTitle("Feedback");
         progressBar.setVisibility(View.VISIBLE);
         getCustomerList();
         edtCustomer.setOnClickListener(new View.OnClickListener(){

@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -30,12 +32,14 @@ public class PendingActivity extends AppCompatActivity {
     Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending);
         listView = findViewById(R.id.listView);
         progress = findViewById(R.id.progress);
         progress.setVisibility(View.VISIBLE);
-        getSupportActionBar().setTitle("Request List");
+       // getSupportActionBar().setTitle("Request List");
         sh=new Shprefrences(this);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

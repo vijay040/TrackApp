@@ -6,52 +6,8 @@
     android:layout_width="match_parent"
     android:background="@color/white_color"
     android:layout_height="match_parent">
+    <include layout="@layout/toolbar"/>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:background="@color/white_color"
-        android:visibility="gone"
-        android:contentInsetStart="0dp"
-        android:contentInsetLeft="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        android:layout_height="wrap_content">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:padding="@dimen/_5sdp"
-                android:onClick="backImage"
-                android:id="@+id/back_image">
-
-                <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/logo" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:id="@+id/fix_it_image"
-                    android:src="@drawable/logo" />
-            </RelativeLayout>
-
-        </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
 
     <View
         android:id="@+id/divider10"

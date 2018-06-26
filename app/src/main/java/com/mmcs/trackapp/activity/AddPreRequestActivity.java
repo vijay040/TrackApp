@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -80,6 +82,8 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_prerequest_activity);
         edtMeetings = findViewById(R.id.edtMeetings);
@@ -89,7 +93,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         listTypes = findViewById(R.id.listTypes);
         edtDepartment = findViewById(R.id.edtDepartment);
         edtCurrency = findViewById(R.id.edtCurrency);
-        getSupportActionBar().setTitle("Add Pre-Request");
+       // getSupportActionBar().setTitle("Add Pre-Request");
         edtAddress = (AutoCompleteTextView) findViewById(R.id.edt_location);
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);

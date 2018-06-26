@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -81,7 +83,10 @@ public class CreateMeetingActivity extends AppCompatActivity implements
     //SweetAlertDialog pDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_create_meeting);
         edtPurpose = findViewById(R.id.edtPurpose);
         edtDescreption = findViewById(R.id.edtDescreption);
@@ -95,7 +100,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         btnSubmit = findViewById(R.id.btnSubmit);
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);
-        getSupportActionBar().setTitle("Create Meeting");
+       //getSupportActionBar().setTitle("Create Meeting");
         mGoogleApiClient = new GoogleApiClient.Builder(CreateMeetingActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)

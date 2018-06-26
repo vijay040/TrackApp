@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -85,6 +87,8 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     String createddate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_expense);
         getSupportActionBar().setTitle("Create Expanse");
@@ -99,7 +103,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         currency = (EditText) findViewById(R.id.edt_Currency);
         getDate = (EditText) findViewById(R.id.edt_date1);
         submit = findViewById(R.id.btnSubmit);
-        getSupportActionBar().setTitle("Create Expense");
+        //getSupportActionBar().setTitle("Create Expense");
         if (imgUrl != null && !imgUrl.equalsIgnoreCase(""))
             Picasso.get().load(imgUrl).into(imageView);
         sh = new Shprefrences(this);

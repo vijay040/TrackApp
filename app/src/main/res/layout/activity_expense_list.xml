@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="@dimen/_30sdp"
@@ -10,6 +11,7 @@
         android:visibility="gone"
         />
     <ListView
+        android:layout_marginTop="@dimen/_60sdp"
         android:id="@+id/listExpenseView"
         android:layout_width="match_parent"
 

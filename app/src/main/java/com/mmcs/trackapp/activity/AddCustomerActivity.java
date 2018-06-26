@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -28,6 +30,8 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
     CustomerDetailListAdapter manageClientsListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
         SearchView editText=(SearchView) findViewById(R.id.edt);
@@ -38,7 +42,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         editTextName.setQueryHint("Search By Customer Name ");
         editTextName.setOnQueryTextListener(this);
-        getSupportActionBar().setTitle("Customer Details");
+       // getSupportActionBar().setTitle("Customer Details");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddCustomerActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);

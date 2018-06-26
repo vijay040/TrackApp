@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         sh = new Shprefrences(SplashActivity.this);
-        test();
+       // test();
         Handler h = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {
@@ -40,7 +40,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 boolean isLogin = sh.getBoolean("ISLOGIN", false);
                 if (isLogin)
-                    startActivity(new Intent(SplashActivity.this, LandingActivity.class));
+                    startActivity(new Intent(SplashActivity.this, DrawerActivity.class));
                 else
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 finish();

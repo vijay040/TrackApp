@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -27,9 +29,11 @@ EditText edt_txt_currency,edt_txt_dateformate,edt_txt_language;
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        getSupportActionBar().setTitle("Settings");
+        //getSupportActionBar().setTitle("Settings");
         sh = new Shprefrences(this);
         edt_txt_currency=findViewById(R.id.edt_txt_currency);
         edt_txt_dateformate=findViewById(R.id.edt_txt_dateformate);

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -31,11 +33,13 @@ public class ExpenseListActivity extends AppCompatActivity {
     Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_list);
         listExpenseView=findViewById(R.id.listExpenseView);
         progressBar=findViewById(R.id.progress);
-        getSupportActionBar().setTitle("Expenses");
+        //getSupportActionBar().setTitle("Expenses");
         txtAdd=findViewById(R.id.txtAdd);
         sh=new Shprefrences(this);
         txtAdd.setOnClickListener(new View.OnClickListener() {

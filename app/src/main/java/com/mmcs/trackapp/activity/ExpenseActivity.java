@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,8 @@ public class ExpenseActivity extends AppCompatActivity {
 TextView txtPreRequest,txtExpanse,txtExpenseReport,txtApprovals;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense);
         btn_receipt = findViewById(R.id.btn_receipt);
@@ -44,7 +48,7 @@ TextView txtPreRequest,txtExpanse,txtExpenseReport,txtApprovals;
         txtExpanse=findViewById(R.id.txtExpense);
         txtExpenseReport=findViewById(R.id.txtExpenseReport);
         txtApprovals=findViewById(R.id.txtApprovals);
-        getSupportActionBar().setTitle("Expenses");
+        //getSupportActionBar().setTitle("Expenses");
         txtApprovals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

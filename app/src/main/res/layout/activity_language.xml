@@ -2,12 +2,13 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android" >
+    <include layout="@layout/toolbar"/>
     <TextView
         android:layout_width="wrap_content"
         android:text="Select:"
         android:textSize="@dimen/_15sdp"
         android:layout_marginLeft="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_height="wrap_content" />
     <ListView
         android:id="@+id/listview"

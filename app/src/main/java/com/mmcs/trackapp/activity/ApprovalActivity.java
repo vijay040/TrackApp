@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -27,12 +29,14 @@ public class ApprovalActivity extends AppCompatActivity {
     Shprefrences sh;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approval);
         listView = findViewById(R.id.listView);
         progress = findViewById(R.id.progress);
         progress.setVisibility(View.VISIBLE);
-        getSupportActionBar().setTitle("Approvals");
+        //getSupportActionBar().setTitle("Approvals");
         sh=new Shprefrences(this);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -15,6 +15,8 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,6 +52,8 @@ public class MeetingDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         sh = new Shprefrences(this);
         setContentView(R.layout.acitivity_meetingdetails);
@@ -74,7 +78,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         time.setText("Time: " + model.getTime());
         address.setText("Address: " + model.getAddress());
         contact.setText("Contact Person: " + model.getContact_person());
-        getSupportActionBar().setTitle("Meeting Detail");
+        //getSupportActionBar().setTitle("Meeting Detail");
         SpannableStringBuilder sb = new SpannableStringBuilder(purpose.getText());
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));

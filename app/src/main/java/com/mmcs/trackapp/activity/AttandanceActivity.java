@@ -1,7 +1,6 @@
 package com.mmcs.trackapp.activity;
 
 
-
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -19,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +31,7 @@ import com.mmcs.trackapp.util.AppLocationService;
 import com.mmcs.trackapp.util.MyLocation;
 import com.mmcs.trackapp.util.Shprefrences;
 import com.mmcs.trackapp.util.Singleton;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,7 +52,8 @@ public class AttandanceActivity extends AppCompatActivity {
     boolean isLogin = false;
     Shprefrences sh;
     ProgressBar progress;
-    TextView txtLocation,texDate;
+    TextView txtLocation, texDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -62,29 +64,32 @@ public class AttandanceActivity extends AppCompatActivity {
         progress = findViewById(R.id.progressbar);
         progress.setVisibility(View.VISIBLE);
         signin = findViewById(R.id.imageView);
-        texDate= findViewById(R.id.texDate);
+        texDate = findViewById(R.id.texDate);
         textViewsignin = findViewById(R.id.textview_signin);
-        txtLocation=findViewById(R.id.current_location);
+        txtLocation = findViewById(R.id.current_location);
         txtLocation.setText(currentLocation);
         getLocation();
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         final String createddate = df.format(Calendar.getInstance().getTime());
         texDate.setText(createddate);
         getAttandanceStatus();
-       // getSupportActionBar().setTitle("Attendance");
+        // getSupportActionBar().setTitle("Attendance");
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 postAttandance();
             }
         });
-        }
-       AppLocationService appLocationService;
-        Location nwLocation;
-        public void getLocation() {
+        back();
+    }
+
+    AppLocationService appLocationService;
+    Location nwLocation;
+
+    public void getLocation() {
         appLocationService = new AppLocationService(AttandanceActivity.this);
         nwLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
-            if(nwLocation != null) {
+        if (nwLocation != null) {
             MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
                 @Override
                 public void gotLocation(Location location) {
@@ -112,6 +117,7 @@ public class AttandanceActivity extends AppCompatActivity {
             // showSettingsAlert("NETWORK");
         }
     }
+
     public String GetAddress(double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         String city = "", state = "", address = "";
@@ -130,6 +136,17 @@ public class AttandanceActivity extends AppCompatActivity {
         }
         return address;
     }
+
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
     private void postAttandance() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
@@ -147,22 +164,24 @@ public class AttandanceActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
             }
+
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
             }
         });
 
     }
+
     private void getAttandanceStatus() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>(){
+        Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>() {
             @Override
-            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response){
+            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
 
                 ArrayList<AttandenceModel> model = response.body().getResponse();
                 if (model.size() > 0)
                     status = model.get(0).getStatus();
-                if (status.equalsIgnoreCase("signin")){
+                if (status.equalsIgnoreCase("signin")) {
                     signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
                     textViewsignin.setText("SIGN OUT");
                 } else {
@@ -171,10 +190,11 @@ public class AttandanceActivity extends AppCompatActivity {
                 }
                 progress.setVisibility(View.GONE);
             }
+
             @Override
             public void onFailure(Call<ResAttandance> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-             }
+            }
         });
 
     }

@@ -2,6 +2,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <SearchView
+        android:id="@+id/edt"
+        android:layout_width="match_parent"
+        android:hint="@string/Search"
+        android:layout_height="wrap_content" />
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="@dimen/_30sdp"
@@ -11,6 +17,7 @@
     <ListView
         android:id="@+id/listMeetingsView"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_40sdp"
         android:layout_height="wrap_content">
     </ListView>
 </RelativeLayout>

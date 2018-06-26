@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.Toast;
+
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.MeetingDetailsAdapter;
 import com.mmcs.trackapp.model.LoginModel;
@@ -14,23 +17,30 @@ import com.mmcs.trackapp.model.ResMetaMeeting;
 import com.mmcs.trackapp.util.Shprefrences;
 import com.mmcs.trackapp.util.Singleton;
 import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-public class MyScheduleActivity extends AppCompatActivity {
+public class MyScheduleActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
     ListView listMeetingsView;
     Shprefrences sh;
     ProgressBar progressBar;
+    ArrayList<MeetingModel>  meetinglist = new ArrayList<>();
+    MeetingDetailsAdapter meetingadapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_schedule);
+        sh = new Shprefrences(this);
+        SearchView editTextName=(SearchView) findViewById(R.id.edt);
         listMeetingsView = findViewById(R.id.listMeetingsView);
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
+        editTextName.setQueryHint("Search By Purpose/Customer Name ");
+        editTextName.setOnQueryTextListener(this);
         getSupportActionBar().setTitle("Scheduled Meetings");
-        sh = new Shprefrences(this);
-        getMeetingList();
+        // getMeetingList();
         listMeetingsView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -42,15 +52,15 @@ public class MyScheduleActivity extends AppCompatActivity {
             }
         });
     }
-    private void getMeetingList() {
+    public void getMeetingList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getMeetingsList("" + model.getId()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 if(response.body()!=null) {
-                    ArrayList<MeetingModel> list = response.body().getResponse();
-                    final MeetingDetailsAdapter adapter = new MeetingDetailsAdapter(MyScheduleActivity.this, list);
-                    listMeetingsView.setAdapter(adapter);
+                    meetinglist = response.body().getResponse();
+                    meetingadapter = new MeetingDetailsAdapter(MyScheduleActivity.this, meetinglist);
+                    listMeetingsView.setAdapter(meetingadapter);
                     progressBar.setVisibility(View.GONE);
                 }
                 progressBar.setVisibility(View.GONE);
@@ -60,6 +70,34 @@ public class MyScheduleActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getMeetingList();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s=s.toLowerCase();
+        ArrayList<MeetingModel> newlist=new ArrayList<>();
+        for(MeetingModel filterlist:meetinglist)
+        {
+            String purpose=filterlist.getPurpose().toLowerCase();
+            String address =filterlist.getCustomer_name().toLowerCase();
+            if(purpose.contains(s)||address.contains(s)) {
+                newlist.add(filterlist);
+            }
+            else{
+                Toast.makeText(MyScheduleActivity.this,"No Record Found",Toast.LENGTH_SHORT).show();
+            }
+        }
+        meetingadapter.filter(newlist);
+        return true;
     }
 }
 

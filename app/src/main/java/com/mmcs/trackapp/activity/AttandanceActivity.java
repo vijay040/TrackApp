@@ -49,7 +49,7 @@ public class AttandanceActivity extends AppCompatActivity {
     boolean isLogin = false;
     Shprefrences sh;
     ProgressBar progress;
-    TextView txtLocation,texDate;
+    TextView txtLocation,texDate,txt_status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +61,7 @@ public class AttandanceActivity extends AppCompatActivity {
         texDate= findViewById(R.id.texDate);
         textViewsignin = findViewById(R.id.textview_signin);
         txtLocation=findViewById(R.id.current_location);
+        txt_status=findViewById(R.id.txt_status);
         txtLocation.setText(currentLocation);
         getLocation();
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
@@ -68,6 +69,7 @@ public class AttandanceActivity extends AppCompatActivity {
         texDate.setText(createddate);
         getAttandanceStatus();
         getSupportActionBar().setTitle("Attendance");
+
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -159,9 +161,11 @@ public class AttandanceActivity extends AppCompatActivity {
                 if (model.size() > 0)
                     status = model.get(0).getStatus();
                 if (status.equalsIgnoreCase("signin")){
+                    txt_status.setText("Status:SIGN IN");
                     signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
                     textViewsignin.setText("SIGN OUT");
                 } else {
+                    txt_status.setText("Status:SIGN OUT");
                     signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
                     textViewsignin.setText("SIGN IN");
                 }

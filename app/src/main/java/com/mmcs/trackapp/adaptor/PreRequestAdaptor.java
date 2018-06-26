@@ -64,12 +64,11 @@ public class PreRequestAdaptor extends BaseAdapter {
         txtAdvanceMoney.setText(list.get(i).getAdvance());
 
         ImageView img = view.findViewById(R.id.img);
-
-        if (list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
+        if(list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
 
             switch (list.get(i).getStatus()) {
                 case "PENDING":
-//Pendin
+//Pending
                     img.setBackground(ContextCompat.getDrawable(context, R.drawable.pending));
                     break;
 
@@ -84,7 +83,7 @@ public class PreRequestAdaptor extends BaseAdapter {
                     break;
 
                 case "PROCESSED":
-//Rejected
+//Processed
                     img.setBackground(ContextCompat.getDrawable(context, R.drawable.star));
                     break;
             }

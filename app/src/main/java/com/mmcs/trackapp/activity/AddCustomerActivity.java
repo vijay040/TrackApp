@@ -46,6 +46,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddCustomerActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
+
         addicon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

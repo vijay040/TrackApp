@@ -15,6 +15,7 @@ import com.mmcs.trackapp.model.MeetingModel;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Lenovo on 01-06-2018.
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class MeetingDetailsAdapter extends BaseAdapter {
     public ArrayList<MeetingModel> list;
     public Activity context;
-    public MeetingDetailsAdapter(Activity context, ArrayList<MeetingModel> list) {
+    public MeetingDetailsAdapter(Activity context,ArrayList<MeetingModel> list) {
         this.list = list;
         this.context = context;
     }
@@ -45,6 +46,7 @@ public class MeetingDetailsAdapter extends BaseAdapter {
         list.addAll(newList);
         notifyDataSetChanged();
     }
+
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         if (view == null) {

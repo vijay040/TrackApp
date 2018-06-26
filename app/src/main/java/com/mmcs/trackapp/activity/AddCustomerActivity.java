@@ -49,7 +49,6 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
                 startActivity(intent);
             }
         });
-
     }
     public void getCustomerList() {
         Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {

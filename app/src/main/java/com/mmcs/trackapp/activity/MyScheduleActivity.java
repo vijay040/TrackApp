@@ -3,6 +3,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -30,6 +32,8 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
     MeetingDetailsAdapter meetingadapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_schedule);
         sh = new Shprefrences(this);
@@ -39,7 +43,7 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
         progressBar.setVisibility(View.VISIBLE);
         editTextName.setQueryHint("Search By Purpose/Customer Name ");
         editTextName.setOnQueryTextListener(this);
-        getSupportActionBar().setTitle("Scheduled Meetings");
+       // getSupportActionBar().setTitle("Scheduled Meetings");
         // getMeetingList();
         listMeetingsView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override

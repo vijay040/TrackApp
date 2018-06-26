@@ -2,8 +2,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <include layout="@layout/toolbar"/>
     <SearchView
+        android:layout_marginTop="@dimen/_60sdp"
         android:id="@+id/edt"
         android:layout_width="match_parent"
         android:hint="@string/Search"
@@ -15,9 +16,9 @@
         android:layout_centerInParent="true"
       />
     <ListView
+        android:layout_below="@+id/edt"
         android:id="@+id/listMeetingsView"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_40sdp"
         android:layout_height="wrap_content">
     </ListView>
 </RelativeLayout>

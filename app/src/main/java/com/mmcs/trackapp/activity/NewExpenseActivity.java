@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -114,6 +115,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         getReqestTypes();
         getMeetingsList();
         getCurrencyList();
+        back();
        /* listTypes.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
@@ -328,6 +330,15 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             }
         });
 
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     @Override
     public boolean onQueryTextSubmit(String s) {

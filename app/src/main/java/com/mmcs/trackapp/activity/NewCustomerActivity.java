@@ -13,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.mmcs.trackapp.R;
@@ -64,6 +65,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
         country=findViewById(R.id.edt_country);
         taxdetails=findViewById(R.id.edt_taxdetails);
         submit=findViewById(R.id.btnSubmit);
+        back();
         //getSupportActionBar().setTitle("New Customer");
         mGoogleApiClient = new GoogleApiClient.Builder(NewCustomerActivity.this)
                 .addApi(Places.GEO_DATA_API)
@@ -166,6 +168,15 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
     public void onConnected(@Nullable Bundle bundle) {
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         Log.i(TAG, "Google Places API connected.");
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     @Override
     public void onConnectionSuspended(int i) {

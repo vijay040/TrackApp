@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ TextView txtPreRequest,txtExpanse,txtExpenseReport,txtApprovals;
         txtExpanse=findViewById(R.id.txtExpense);
         txtExpenseReport=findViewById(R.id.txtExpenseReport);
         txtApprovals=findViewById(R.id.txtApprovals);
+        back();
         //getSupportActionBar().setTitle("Expenses");
         txtApprovals.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -334,6 +336,15 @@ preexpense.setOnClickListener(new View.OnClickListener() {
 
             //imgView.setImageBitmap(bitmap);
         }
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

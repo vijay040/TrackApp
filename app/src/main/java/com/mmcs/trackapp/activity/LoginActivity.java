@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin=findViewById(R.id.btn_signin);
         progress=findViewById(R.id.progress);
         sh=new Shprefrences(this);
+
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     private void login(String email,String pass)
     {
         Singleton.getInstance().getApi().login(email,pass,"","").enqueue(new Callback<LoginResMeta>() {

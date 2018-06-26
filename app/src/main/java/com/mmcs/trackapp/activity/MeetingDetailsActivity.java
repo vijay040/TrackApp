@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
@@ -70,6 +71,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         time = findViewById(R.id.txttime);
         address = findViewById(R.id.txtaddress);
         contact = findViewById(R.id.txtcontactperson);
+        back();
         descreption.setText("Description: " + model.getDescreption());
         purpose.setText("Purpose: " + model.getPurpose());
         customer.setText("Client  :" + model.getCustomer_name());
@@ -149,6 +151,15 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         });
         getLocation();
 
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

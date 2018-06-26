@@ -24,6 +24,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -100,6 +101,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         btnSubmit = findViewById(R.id.btnSubmit);
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);
+        back();
        //getSupportActionBar().setTitle("Create Meeting");
         mGoogleApiClient = new GoogleApiClient.Builder(CreateMeetingActivity.this)
                 .addApi(Places.GEO_DATA_API)
@@ -254,6 +256,15 @@ public class CreateMeetingActivity extends AppCompatActivity implements
 
         }
     };
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
     public void getPurposeList() {
         Singleton.getInstance().getApi().getPurposeList("").enqueue(new Callback<ResponseMeta>() {

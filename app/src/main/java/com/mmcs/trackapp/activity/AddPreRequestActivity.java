@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,6 +94,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         listTypes = findViewById(R.id.listTypes);
         edtDepartment = findViewById(R.id.edtDepartment);
         edtCurrency = findViewById(R.id.edtCurrency);
+
        // getSupportActionBar().setTitle("Add Pre-Request");
         edtAddress = (AutoCompleteTextView) findViewById(R.id.edt_location);
         progress = findViewById(R.id.progress);
@@ -102,6 +104,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         getMeetingsList();
         getDepartmentList();
         getCurrencyList();
+        back();
        /* listTypes.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
@@ -194,6 +197,15 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             @Override
             public void onFailure(Call<ResMetaDepartment> call, Throwable t) {
 
+            }
+        });
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

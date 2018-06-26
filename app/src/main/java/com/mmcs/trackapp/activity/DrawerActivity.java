@@ -32,7 +32,6 @@ import static com.mmcs.trackapp.activity.LandingActivity.MY_PERMISSIONS_REQUEST_
  * Created by aphroecs on 10/10/2016.
  */
 public class DrawerActivity extends AppCompatActivity {
-
     DrawerLayout drawerLayout;
     RelativeLayout drawerIcon;
     public static boolean isHome = true;
@@ -87,7 +86,6 @@ public class DrawerActivity extends AppCompatActivity {
                     drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
-
 
         txt_meeting.setOnClickListener(new View.OnClickListener() {
             @Override

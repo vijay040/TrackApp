@@ -45,6 +45,7 @@ public class PreRequestActivity extends AppCompatActivity {
         progress.setVisibility(View.VISIBLE);
         //getSupportActionBar().setTitle("Pre-Requests");
         sh=new Shprefrences(this);
+        back();
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +63,15 @@ public class PreRequestActivity extends AppCompatActivity {
             }
         });
             }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
     @Override
     protected void onResume(){

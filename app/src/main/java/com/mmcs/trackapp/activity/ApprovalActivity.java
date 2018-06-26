@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.PreRequestAdaptor;
@@ -36,8 +37,10 @@ public class ApprovalActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         progress = findViewById(R.id.progress);
         progress.setVisibility(View.VISIBLE);
+
         //getSupportActionBar().setTitle("Approvals");
         sh=new Shprefrences(this);
+        back();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -49,6 +52,15 @@ public class ApprovalActivity extends AppCompatActivity {
                 startActivity(intent);
                 }
                });
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     @Override
     protected void onResume(){

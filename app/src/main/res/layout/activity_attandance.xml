@@ -76,6 +76,4 @@
         android:visibility="gone"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp" />
-
-
-</RelativeLayout>
+      </RelativeLayout>

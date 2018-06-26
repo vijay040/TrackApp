@@ -41,7 +41,9 @@ public class ExpenseListActivity extends AppCompatActivity {
         progressBar=findViewById(R.id.progress);
         //getSupportActionBar().setTitle("Expenses");
         txtAdd=findViewById(R.id.txtAdd);
+
         sh=new Shprefrences(this);
+        back();
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,6 +51,15 @@ public class ExpenseListActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     @Override
     protected void onResume() {

@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
@@ -46,6 +47,7 @@ Shprefrences sh;
 
         reject=findViewById(R.id.reject);
         approve=findViewById(R.id.approve);
+
         //getSupportActionBar().setTitle("Request");
         list_requesttype=findViewById(R.id.list_requesttype);
         txtdescreption.setText("Descreption:"+prerequestmodel.getComment());
@@ -105,4 +107,5 @@ Shprefrences sh;
             }
         });
     }
+
 }

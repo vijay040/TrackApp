@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
         editTextName.setOnQueryTextListener(this);
        // getSupportActionBar().setTitle("Scheduled Meetings");
         // getMeetingList();
+        back();
         listMeetingsView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -53,6 +55,15 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
                 Intent intent = new Intent(MyScheduleActivity.this, MeetingDetailsActivity.class);
                 intent.putExtra("MEETINGMODEL", model);
                 startActivity(intent);
+            }
+        });
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

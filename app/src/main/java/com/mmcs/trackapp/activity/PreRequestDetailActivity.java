@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 ;
 
@@ -35,6 +37,7 @@ ListView list_requesttype;
         txtaddress=findViewById(R.id.txtaddress);
         txtcustomer=findViewById(R.id.txtcustomer);
         list_requesttype=findViewById(R.id.list_requesttype);
+
         txtdescreption.setText("Descreption:"+prerequestmodel.getComment());
         txtdate.setText("Date:"+prerequestmodel.getDate());
         txtadvance.setText("Advance:"+prerequestmodel.getAdvance());

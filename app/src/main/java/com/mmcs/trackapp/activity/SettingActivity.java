@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import com.mmcs.trackapp.R;
@@ -39,6 +40,7 @@ EditText edt_txt_currency,edt_txt_dateformate,edt_txt_language;
         edt_txt_dateformate=findViewById(R.id.edt_txt_dateformate);
         edt_txt_language=findViewById(R.id.edt_txt_language);
         getCurrencyList();
+        back();
         edt_txt_dateformate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -141,6 +143,15 @@ EditText edt_txt_currency,edt_txt_dateformate,edt_txt_language;
     public boolean onQueryTextSubmit(String s) {
         return false;
                 }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
     @Override
     public boolean onQueryTextChange(String s) {
         s=s.toLowerCase();

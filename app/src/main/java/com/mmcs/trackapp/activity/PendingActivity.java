@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.PendingAdaptor;
@@ -41,6 +42,7 @@ public class PendingActivity extends AppCompatActivity {
         progress.setVisibility(View.VISIBLE);
        // getSupportActionBar().setTitle("Request List");
         sh=new Shprefrences(this);
+        back();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -49,6 +51,15 @@ public class PendingActivity extends AppCompatActivity {
                 Intent intent = new Intent(PendingActivity.this, PendingDetailActivity.class);
                 intent.putExtra("PREREQUESTMODEL", preRequestModel);
                 startActivity(intent);
+            }
+        });
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

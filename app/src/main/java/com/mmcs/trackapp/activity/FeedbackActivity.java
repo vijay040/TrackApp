@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         //getSupportActionBar().setTitle("Feedback");
         progressBar.setVisibility(View.VISIBLE);
         getCustomerList();
+        back();
         edtCustomer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -87,6 +89,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
+
         editTextName.setQueryHint("Search Here");
         editTextName.setOnQueryTextListener(this);
         title.setText("Select Customer");
@@ -95,6 +98,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         alertDialog = dialogBuilder.create();
         alertDialog.show();
         listPurpose.setAdapter(customerPopupAdaptor);
+
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 CustomerModel obj = (CustomerModel) listPurpose.getAdapter().getItem(position);
@@ -115,6 +119,15 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
             public void onFailure(Call<ResMetaCustomer> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
               }
+        });
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
     }
     @Override

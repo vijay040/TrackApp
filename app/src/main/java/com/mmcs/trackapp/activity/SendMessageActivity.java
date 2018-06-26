@@ -34,6 +34,7 @@ public class SendMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_message2);
         //getSupportActionBar().setTitle("Messages");
         initControls();
+        back();
     }
     private void initControls() {
         messagesContainer = (ListView) findViewById(R.id.messagesContainer);
@@ -90,5 +91,14 @@ public class SendMessageActivity extends AppCompatActivity {
             ChatMessageModel message = chatHistory.get(i);
             displayMessage(message);
         }
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

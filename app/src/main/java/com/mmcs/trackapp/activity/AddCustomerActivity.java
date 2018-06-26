@@ -42,6 +42,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         editTextName.setQueryHint("Search By Customer Name ");
         editTextName.setOnQueryTextListener(this);
+        back();
        // getSupportActionBar().setTitle("Customer Details");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddCustomerActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -52,6 +53,15 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
             public void onClick(View view) {
                Intent intent=new Intent(AddCustomerActivity.this,NewCustomerActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

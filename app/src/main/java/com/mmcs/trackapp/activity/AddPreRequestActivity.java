@@ -100,11 +100,12 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);
         progress.setVisibility(View.VISIBLE);
+        back();
         getReqestTypes();
         getMeetingsList();
         getDepartmentList();
         getCurrencyList();
-        back();
+
        /* listTypes.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
@@ -170,6 +171,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                 }
             }
         });*/
+
     }
 
     public void getMeetingsList() {
@@ -201,7 +203,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         });
     }
     private void back() {
-        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        RelativeLayout drawerIcon =  findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

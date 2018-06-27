@@ -91,9 +91,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_expense);
-        getSupportActionBar().setTitle("Create Expanse");
-        meeting = findViewById(R.id.edt_meeting);
+        setContentView(R.layout.activity_new_expense);meeting = findViewById(R.id.edt_meeting);
         amount = (EditText) findViewById(R.id.edt_amount);
         imageView = (ImageView) findViewById(R.id.imageView);
         attachement = (Button) findViewById(R.id.btAttchment);
@@ -115,7 +113,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         getReqestTypes();
         getMeetingsList();
         getCurrencyList();
-        back();
+    back();
        /* listTypes.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override

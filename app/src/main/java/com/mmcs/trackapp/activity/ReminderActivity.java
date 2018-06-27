@@ -64,7 +64,6 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
-        back();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, remindertime);
         edt_EndTimer.setAdapter(adapter);
         edtStartDate.setText(String.valueOf(DD) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(YY));
@@ -151,16 +150,6 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
             }
         });
     }
-    private void back() {
-        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
-        drawerIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {

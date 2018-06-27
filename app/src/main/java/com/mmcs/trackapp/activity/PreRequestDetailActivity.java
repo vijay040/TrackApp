@@ -38,6 +38,7 @@ ListView list_requesttype;
         txtcustomer=findViewById(R.id.txtcustomer);
         list_requesttype=findViewById(R.id.list_requesttype);
 
+
         txtdescreption.setText("Descreption:"+prerequestmodel.getComment());
         txtdate.setText("Date:"+prerequestmodel.getDate());
         txtadvance.setText("Advance:"+prerequestmodel.getAdvance());
@@ -77,5 +78,16 @@ ListView list_requesttype;
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtcustomer.setText(sb);
+        back();
     }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
 }

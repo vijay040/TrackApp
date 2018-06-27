@@ -15,8 +15,8 @@
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:src="@drawable/logo" />
+        android:layout_marginTop="@dimen/_65sdp"
+        android:src="@drawable/ic_meetingdetail" />
     <TextView
         android:layout_width="wrap_content"
         android:text="@string/Meetingdetails"

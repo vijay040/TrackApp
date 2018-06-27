@@ -3,13 +3,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/toolbar"/>
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:src="@drawable/logo" />
     <TextView
         android:layout_width="wrap_content"
         android:text="@string/PreRequestdetail"
@@ -17,7 +10,7 @@
         android:textSize="@dimen/_15sdp"
         android:textColor="@color/text_hint_color"
         android:textStyle="bold"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_height="wrap_content" />
     <LinearLayout
         android:layout_width="match_parent"

@@ -107,9 +107,6 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
             if(purpose.contains(s)||address.contains(s)) {
                 newlist.add(filterlist);
             }
-            else{
-                Toast.makeText(MyScheduleActivity.this,"No Record Found",Toast.LENGTH_SHORT).show();
-            }
         }
         meetingadapter.filter(newlist);
         return true;

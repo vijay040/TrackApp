@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mmcs.trackapp">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -19,8 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        tools:replace="android:icon"
-        android:windowSoftInputMode="adjustResize|stateHidden">
+        android:windowSoftInputMode="adjustResize|stateHidden"
+        tools:replace="android:icon">
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,16 +58,26 @@
             </intent-filter>
         </receiver>
 
+      <!--  <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDWDqyDgTE5jZNIxw_uRwKtBCY9xQPvGac" />-->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDWDqyDgTE5jZNIxw_uRwKtBCY9xQPvGac" />
+            android:value="AIzaSyBW6-HaJCq41Ej9_G0-jq1iN2U_xmtop-M" />
+    <!--    <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBW6-HaJCq41Ej9_G0-jq1iN2U_xmtop-M" />-->
+
         <activity android:name=".activity.ExpenseListActivity" />
         <activity android:name=".activity.ExpenseReportActivity" />
         <activity android:name=".activity.PreRequestDetailActivity" />
         <activity android:name=".activity.PendingActivity" />
         <activity android:name=".activity.PendingDetailActivity" />
         <activity android:name=".activity.AttandanceActivity" />
-        <activity android:name=".activity.SettingActivity"
+        <activity android:name=".activity.LocationActivity" />
+        <activity
+            android:name=".activity.SettingActivity"
             android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 

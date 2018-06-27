@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/them_color">
+    <include layout="@layout/toolbar" android:id="@+id/toolbar" android:visibility="gone"/>
+
     <RelativeLayout
         android:id="@+id/lay"
         android:layout_width="wrap_content"

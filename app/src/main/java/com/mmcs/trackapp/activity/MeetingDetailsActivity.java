@@ -1,5 +1,6 @@
 package com.mmcs.trackapp.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -46,7 +47,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     TextView descreption, purpose, customer, agenda, date, time, address, contact;
     MeetingModel model;
     Shprefrences sh;
-    ImageView start;
+    ImageView start,imgMap;
     public static String currentLocation;
     public String status = "";
     ProgressBar progressbar;
@@ -63,6 +64,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         progressbar.setVisibility(View.VISIBLE);
         getMeetingStatus();
         start = findViewById(R.id.start);
+        imgMap= findViewById(R.id.imgMap);
         descreption = findViewById(R.id.txtdescreption);
         purpose = findViewById(R.id.txtpurpose);
         customer = findViewById(R.id.txtcustomer);
@@ -147,6 +149,14 @@ public class MeetingDetailsActivity extends AppCompatActivity {
                 }
 
                 updateMeetingStatus(startTime, endTime, currentStatus, startAddress, endAddress);
+            }
+        });
+        imgMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new  Intent(MeetingDetailsActivity.this,LocationActivity.class);
+                intent.putExtra("MEETINGMODEL", model);
+                startActivity(intent);
             }
         });
         getLocation();

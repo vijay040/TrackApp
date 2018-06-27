@@ -32,12 +32,15 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgotpassword;
     Shprefrences sh;
     ProgressBar progress;
+    RelativeLayout lay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        lay=findViewById(R.id.lay);
+        lay.setVisibility(View.GONE);
       //  getSupportActionBar().hide();
         username = findViewById(R.id.edt_usernsme);
         password = findViewById(R.id.edt_password);

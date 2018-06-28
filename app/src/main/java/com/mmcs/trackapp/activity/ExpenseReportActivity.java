@@ -10,22 +10,57 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.adaptor.ReportAdapter;
+import com.mmcs.trackapp.model.LoginModel;
+import com.mmcs.trackapp.model.ReportModel;
+import com.mmcs.trackapp.model.ReportResMeta;
+import com.mmcs.trackapp.model.ResMetaReqTypes;
+import com.mmcs.trackapp.util.Shprefrences;
+import com.mmcs.trackapp.util.Singleton;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ExpenseReportActivity extends AppCompatActivity {
     ListView listExpenseReport;
     ProgressBar progressBar;
+Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+        sh=new Shprefrences(this);
         setContentView(R.layout.activity_expense_report);
-
-        //getSupportActionBar().setTitle("Expense Reports");
-        listExpenseReport=findViewById(R.id.listExpenseReport);
+        listExpenseReport = findViewById(R.id.listExpenseReport);
         back();
-        progressBar=findViewById(R.id.progress);
+        progressBar = findViewById(R.id.progress);
+        getReportList();
+    }
 
-        }
+    public void getReportList()
+    {
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().getReportList(model.getId()).enqueue(new Callback<ReportResMeta>() {
+            @Override
+            public void onResponse(Call<ReportResMeta> call, Response<ReportResMeta> response) {
+
+                ArrayList<ReportModel> model=response.body().getResponse();
+                ReportAdapter adap=new ReportAdapter(ExpenseReportActivity.this,model);
+                listExpenseReport.setAdapter(adap);
+
+            }
+
+            @Override
+            public void onFailure(Call<ReportResMeta> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -36,4 +71,4 @@ public class ExpenseReportActivity extends AppCompatActivity {
         });
     }
 
-        }
+}

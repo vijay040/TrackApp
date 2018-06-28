@@ -4,6 +4,7 @@ import com.mmcs.trackapp.model.ExpenseResMeta;
 import com.mmcs.trackapp.model.LoginResMeta;
 import com.mmcs.trackapp.model.MeetingModel;
 import com.mmcs.trackapp.model.PreRequestResMeta;
+import com.mmcs.trackapp.model.ReportResMeta;
 import com.mmcs.trackapp.model.RequestTypeModel;
 import com.mmcs.trackapp.model.ResAttandance;
 import com.mmcs.trackapp.model.ResMetaCurrency;
@@ -153,4 +154,10 @@ public interface RetrofitApi {
     @POST("start_meeting_get.php")
     Call<ResMetaMeeting> getMeetingStatus(@Field("user_id") String user_id, @Field("meeting_id") String meeting_id
     );
+
+    @FormUrlEncoded
+    @POST("report_get.php")
+    Call<ReportResMeta> getReportList(@Field("user_id") String user_id);
+
+
 }

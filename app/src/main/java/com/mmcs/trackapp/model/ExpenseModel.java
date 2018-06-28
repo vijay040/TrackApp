@@ -1,5 +1,7 @@
 package com.mmcs.trackapp.model;
 
+import java.util.ArrayList;
+
 public class ExpenseModel {
     private String amount;
 
@@ -7,7 +9,7 @@ public class ExpenseModel {
 
     private String Time;
 
-    private String expense_type;
+    private ArrayList<String> expense_type;
 
     private String Date;
 
@@ -20,6 +22,14 @@ public class ExpenseModel {
     private String image;
 
     public boolean isVisible=false;
+
+    public ArrayList<String> getExpense_type() {
+        return expense_type;
+    }
+
+    public void setExpense_type(ArrayList<String> expense_type) {
+        this.expense_type = expense_type;
+    }
 
     public boolean isVisible() {
         return isVisible;
@@ -57,16 +67,6 @@ public class ExpenseModel {
     public void setTime (String Time)
     {
         this.Time = Time;
-    }
-
-    public String getExpense_type ()
-    {
-        return expense_type;
-    }
-
-    public void setExpense_type (String expense_type)
-    {
-        this.expense_type = expense_type;
     }
 
     public String getDate ()

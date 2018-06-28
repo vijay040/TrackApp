@@ -100,6 +100,7 @@
     <string name="Pin">Pin</string>
     <string name="Country">Country</string>
     <string name="SelectMeeting">Select Meeting</string>
+    <string name="SelectExpenseType">Select Expense Types </string>
     <string name="Currency">Currency</string>
     <string name="Comment">Comment</string>
     <string name="SelectDepartment">Select Department</string>

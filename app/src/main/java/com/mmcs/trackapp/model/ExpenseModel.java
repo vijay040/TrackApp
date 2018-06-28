@@ -9,7 +9,7 @@ public class ExpenseModel {
 
     private String Time;
 
-    private ArrayList<String> expense_type;
+    private String expense_type;
 
     private String Date;
 
@@ -23,11 +23,11 @@ public class ExpenseModel {
 
     public boolean isVisible=false;
 
-    public ArrayList<String> getExpense_type() {
+    public String getExpense_type() {
         return expense_type;
     }
 
-    public void setExpense_type(ArrayList<String> expense_type) {
+    public void setExpense_type(String expense_type) {
         this.expense_type = expense_type;
     }
 

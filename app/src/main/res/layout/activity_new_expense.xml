@@ -73,15 +73,21 @@
                     app:met_maxCharacters="20"
                     app:met_primaryColor="@color/them_color" />
             </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edRequestTypes"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_9sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/SelectRequestTypes"
-                android:textColor="@color/them_color"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
+                android:drawableRight="@drawable/dropdownyello"
+                android:editable="false"
+                android:hint="@string/SelectExpenseType"
+                android:textCursorDrawable="@drawable/drable_edittext"
+                app:met_baseColor="@color/text_color"
+                app:met_bottomTextSize="@dimen/_1sdp"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelTextSize="@dimen/_10sdp"
+                app:met_maxCharacters="30"
+                app:met_primaryColor="@color/text_hint_color" />
             <ProgressBar
                 android:id="@+id/progress"
                 android:layout_width="@dimen/_30sdp"
@@ -89,16 +95,7 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:visibility="gone"
-                /><ListView
-                android:id="@+id/listTypes"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_88sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"></ListView>
-
-
-
-
+                />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edt_comment"

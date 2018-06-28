@@ -56,6 +56,10 @@ public interface RetrofitApi {
     @POST("request_type.php")
     Call<ResMetaReqTypes> getRequestTypes(@Field("user_id") String user_id);
 
+    @FormUrlEncoded
+    @POST("expense_type_get.php")
+    Call<ResMetaReqTypes> getExpenseTypes(@Field("user_id") String user_id);
+
 
     @FormUrlEncoded
     @POST("get_department_api.php")
@@ -77,7 +81,7 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("post_expense.php?request=saveexpense_data")
     Call<ResMetaMeeting> postExpanse(@Field("user_id") String user_id, @Field("meeting_id") String meeting_id,
-                                     @Field("amount") String amount, @Field("expense_type[]") ArrayList<RequestTypeModel> requesttypes, @Field("created_on") String createddate,
+                                     @Field("amount") String amount, @Field("expense_type") String requesttypes, @Field("created_on") String createddate,
                                      @Field("comment") String comment
 
     );

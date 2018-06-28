@@ -32,9 +32,11 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.CurrencyAdaptor;
 import com.mmcs.trackapp.adaptor.CustomerPopupAdaptor;
+import com.mmcs.trackapp.adaptor.ExpenseTypesAdaptor;
 import com.mmcs.trackapp.adaptor.MeetingsAdaptor;
 import com.mmcs.trackapp.adaptor.PlaceArrayAdapter;
 import com.mmcs.trackapp.adaptor.RequestTypesAdaptor;
@@ -60,10 +62,12 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.squareup.picasso.Picasso;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -83,22 +87,23 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     ArrayList<MeetingModel> meetingList = new ArrayList<>();
     ArrayList<RequestTypeModel> requestTyoesList = new ArrayList<>();
-    ListView listTypes;
-    TextView image_path;
+    TextView image_path,edRequestTypes;
     String createddate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_expense);meeting = findViewById(R.id.edt_meeting);
+        setContentView(R.layout.activity_new_expense);
+        meeting = findViewById(R.id.edt_meeting);
         amount = (EditText) findViewById(R.id.edt_amount);
         imageView = (ImageView) findViewById(R.id.imageView);
         attachement = (Button) findViewById(R.id.btAttchment);
         comments = (EditText) findViewById(R.id.edt_comment);
         image_path = findViewById(R.id.image_path);
         progress = findViewById(R.id.progress);
-        listTypes = findViewById(R.id.listTypes);
+        edRequestTypes=findViewById(R.id.edRequestTypes);
         currency = (EditText) findViewById(R.id.edt_Currency);
         getDate = (EditText) findViewById(R.id.edt_date1);
         submit = findViewById(R.id.btnSubmit);
@@ -113,16 +118,13 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         getReqestTypes();
         getMeetingsList();
         getCurrencyList();
-    back();
-       /* listTypes.setOnTouchListener(new View.OnTouchListener() {
-            // Setting on Touch Listener for handling the touch inside ScrollView
+        edRequestTypes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Disallow the touch request for parent scroll on touch of child view
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
+            public void onClick(View view) {
+                showRequests();
             }
-        });*/
+        });
+        back();
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,23 +186,25 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             }
         });
     }
+
     public void getReqestTypes() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        Singleton.getInstance().getApi().getRequestTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
+        Singleton.getInstance().getApi().getExpenseTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
             @Override
             public void onResponse(Call<ResMetaReqTypes> call, Response<ResMetaReqTypes> response) {
                 requestTyoesList = response.body().getResponse();
-                RequestTypesAdaptor adapto = new RequestTypesAdaptor(NewExpenseActivity.this, requestTyoesList);
-                listTypes.setAdapter(adapto);
-                Util.setListViewHeightBasedOnItems(listTypes);
+
+
                 progress.setVisibility(View.GONE);
             }
+
             @Override
             public void onFailure(Call<ResMetaReqTypes> call, Throwable throwable) {
                 progress.setVisibility(View.GONE);
             }
         });
     }
+
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
@@ -297,8 +301,42 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         });
     }
 
+
+String requestTypeId;
+    private void showRequests() {
+        ExpenseTypesAdaptor adapto = new ExpenseTypesAdaptor(NewExpenseActivity.this, requestTyoesList);
+        android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
+        // ...Irrelevant code for customizing the buttons and title
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.meeting_popup, null);
+        final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
+        TextView title = dialogView.findViewById(R.id.title);
+        final SearchView editTextName = dialogView.findViewById(R.id.edt);
+        editTextName.setQueryHint("Search Here");
+        editTextName.setOnQueryTextListener(this);
+        //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
+        title.setText("Selected Expense Types");
+        dialogBuilder.setView(dialogView);
+        alertDialog = dialogBuilder.create();
+        popupId = 1;
+        alertDialog.show();
+        listPurpose.setAdapter(adapto);
+        listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                RequestTypeModel obj = (RequestTypeModel) listPurpose.getAdapter().getItem(position);
+                Log.e("selected**", "" + obj.getRequest_type());
+                edRequestTypes.setText(obj.getRequest_type());
+                requestTypeId = obj.getId();
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+
     CurrencyAdaptor currencyAdaptor;
     String meetingId;
+
     private void showCurrencyList() {
         currencyAdaptor = new CurrencyAdaptor(NewExpenseActivity.this, currencyList);
 
@@ -329,6 +367,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         });
 
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -338,10 +377,12 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             }
         });
     }
+
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
+
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
@@ -372,16 +413,18 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         }
         return true;
     }
-    private void postExpanse(String amnt, String createddate,  String cmnt) {
+
+    private void postExpanse(String amnt, String createddate, String cmnt) {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         String userid = model.getId();
-        Singleton.getInstance().getApi().postExpanse(userid, meetingId, amnt,  requestTyoesList, createddate, cmnt).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postExpanse(userid, meetingId, amnt, requestTypeId, createddate, cmnt).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 Toast.makeText(NewExpenseActivity.this, "Expanse posted successfully!", Toast.LENGTH_SHORT).show();
                 progress.setVisibility(View.GONE);
                 finish();
             }
+
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
                 progress.setVisibility(View.GONE);

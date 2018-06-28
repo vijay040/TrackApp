@@ -7,6 +7,7 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:id="@+id/relativelayout"
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/img"

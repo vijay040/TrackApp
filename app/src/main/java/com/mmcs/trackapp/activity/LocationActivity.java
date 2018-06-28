@@ -7,11 +7,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -54,7 +57,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        back();
     }
 
     @Override
@@ -83,6 +86,16 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     public boolean onMarkerClick(final Marker marker) {
 
         return false;
+    }
+
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

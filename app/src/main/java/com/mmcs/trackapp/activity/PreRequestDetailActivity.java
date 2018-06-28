@@ -10,6 +10,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class PreRequestDetailActivity extends AppCompatActivity {
 PreRequestModel prerequestmodel;
     TextView txtdescreption,txtdate,txtadvance,txtstatus,txtaddress,txtcustomer;
 ListView listTypes;
+Button ok;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -38,7 +40,13 @@ ListView listTypes;
         txtaddress=findViewById(R.id.txtaddress);
         txtcustomer=findViewById(R.id.txtcustomer);
         listTypes=findViewById(R.id.listTypes);
-
+        ok=findViewById(R.id.btn_ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         RequestTypesStrAdaptor adaptor =new RequestTypesStrAdaptor(PreRequestDetailActivity.this,prerequestmodel.getRequest_type());
         listTypes.setAdapter(adaptor);
 

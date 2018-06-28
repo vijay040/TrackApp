@@ -108,6 +108,7 @@
     <string name="DateFormate">Date Formate</string>
     <string name="NumberFormate">Number Formate</string>
     <string name="Language">Language</string>
+    <string name="selected_request">Selected Request Types</string>
     </resources>
 
 

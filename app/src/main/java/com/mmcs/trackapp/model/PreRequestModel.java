@@ -1,6 +1,7 @@
 package com.mmcs.trackapp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class PreRequestModel implements Serializable {
     private String id;
@@ -9,7 +10,7 @@ public class PreRequestModel implements Serializable {
 
     private String reject;
 
-    private String request_type;
+    private ArrayList<String> request_type;
 
     private String address;
 
@@ -59,11 +60,11 @@ public class PreRequestModel implements Serializable {
         this.reject = reject;
     }
 
-    public String getRequest_type() {
+    public ArrayList<String> getRequest_type() {
         return request_type;
     }
 
-    public void setRequest_type(String request_type) {
+    public void setRequest_type(ArrayList<String> request_type) {
         this.request_type = request_type;
     }
 

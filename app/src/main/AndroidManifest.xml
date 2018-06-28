@@ -58,16 +58,9 @@
             </intent-filter>
         </receiver>
 
-      <!--  <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDWDqyDgTE5jZNIxw_uRwKtBCY9xQPvGac" />-->
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD-Ty0w3efIQagx5I21iJdQkRgHml6z0dU" />
-    <!--    <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBW6-HaJCq41Ej9_G0-jq1iN2U_xmtop-M" />-->
 
         <activity android:name=".activity.ExpenseListActivity" />
         <activity android:name=".activity.ExpenseReportActivity" />

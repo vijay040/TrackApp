@@ -17,12 +17,13 @@ import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
 
+import com.mmcs.trackapp.adaptor.RequestTypesStrAdaptor;
 import com.mmcs.trackapp.model.PreRequestModel;
 
 public class PreRequestDetailActivity extends AppCompatActivity {
 PreRequestModel prerequestmodel;
     TextView txtdescreption,txtdate,txtadvance,txtstatus,txtaddress,txtcustomer;
-ListView list_requesttype;
+ListView listTypes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -36,7 +37,10 @@ ListView list_requesttype;
         txtstatus=findViewById(R.id.txtstatus);
         txtaddress=findViewById(R.id.txtaddress);
         txtcustomer=findViewById(R.id.txtcustomer);
-        list_requesttype=findViewById(R.id.list_requesttype);
+        listTypes=findViewById(R.id.listTypes);
+
+        RequestTypesStrAdaptor adaptor =new RequestTypesStrAdaptor(PreRequestDetailActivity.this,prerequestmodel.getRequest_type());
+        listTypes.setAdapter(adaptor);
 
 
         txtdescreption.setText("Descreption:"+prerequestmodel.getComment());

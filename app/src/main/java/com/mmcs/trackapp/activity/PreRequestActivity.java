@@ -83,10 +83,12 @@ public class PreRequestActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().getPrerequestMeetingList(model.getId()).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
-                list = response.body().getResponse();
-                PreRequestAdaptor adaptor = new PreRequestAdaptor(PreRequestActivity.this, list);
-                listView.setAdapter(adaptor);
-                progress.setVisibility(View.GONE);
+                if(response.body()!=null) {
+                    list = response.body().getResponse();
+                    PreRequestAdaptor adaptor = new PreRequestAdaptor(PreRequestActivity.this, list);
+                    listView.setAdapter(adaptor);
+                }
+                    progress.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<PreRequestResMeta> call, Throwable t) {

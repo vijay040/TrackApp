@@ -80,11 +80,23 @@
         android:text="@string/Status"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_10sdp" />
-    <ListView
-        android:id="@+id/list_requesttype"
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/selected_request"
+        android:textColor="@color/them_color"
+        android:textStyle="bold"
+        android:textSize="@dimen/_13sdp" />
+    <ListView
+        android:id="@+id/listTypes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp">
     </ListView>
+
 </LinearLayout>
 

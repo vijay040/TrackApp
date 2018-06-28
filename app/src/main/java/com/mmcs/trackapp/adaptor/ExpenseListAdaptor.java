@@ -62,7 +62,7 @@ public class ExpenseListAdaptor extends BaseAdapter {
         txtAdvanceMoney.setText(list.get(i).getAmount());
 
         final TextView txtRequestType = view.findViewById(R.id.txtRequestType);
-        txtRequestType.setText("RequestTypes:"+list.get(i).getExpense_type ());
+        txtRequestType.setText("ExpenseType:"+list.get(i).getExpense_type ());
 
         final TextView txtDate = view.findViewById(R.id.txtDate);
         txtDate.setText("Meeting Date:"+list.get(i).getDate ()+", "+list.get(i).getTime ());

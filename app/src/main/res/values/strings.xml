@@ -110,6 +110,9 @@
     <string name="NumberFormate">Number Formate</string>
     <string name="Language">Language</string>
     <string name="selected_request">Selected Request Types</string>
-    </resources>
+    <string name="reportdetails">Report Details</string>
+    <string name="balancetorct">Balance To Rct</string>
+    <string name="close">close</string>
+</resources>
 
 

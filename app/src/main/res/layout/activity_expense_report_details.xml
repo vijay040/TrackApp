@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="@string/reportdetails"
+        android:layout_gravity="center"
+        android:textSize="@dimen/_15sdp"
+        android:textColor="@color/text_hint_color"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/txtdescreption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:text="@string/Descreption"
+            android:layout_weight="1"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:text="@string/Date"
+            android:layout_weight="1"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txtTotalAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/TotalAmount"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+    <TextView
+        android:id="@+id/txtAdvance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/Advance"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/Expense"
+        android:textColor="@color/them_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+    <ListView
+        android:id="@+id/listExpense"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp">
+    </ListView>
+    <TextView
+        android:id="@+id/txt_Toatal_Amount"
+        android:layout_width="wrap_content"
+        android:textColor="@color/text_color"
+        android:text="@string/TotalAmount"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txt_balance"
+        android:layout_width="wrap_content"
+        android:textColor="@color/text_color"
+        android:text="@string/balancetorct"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_40sdp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/_200sdp"
+        android:text="@string/close"
+        android:layout_gravity="center"
+        android:background="@drawable/btn"
+        android:textColor="@color/white_color"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
+

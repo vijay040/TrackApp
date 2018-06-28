@@ -53,7 +53,6 @@
 
             />
 
-
         <TextView
             android:id="@+id/txtAdvance"
             android:layout_width="wrap_content"

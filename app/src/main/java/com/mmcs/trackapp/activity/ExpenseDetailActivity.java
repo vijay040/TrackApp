@@ -1,6 +1,11 @@
 package com.mmcs.trackapp.activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -19,8 +24,10 @@ import com.mmcs.trackapp.model.ExpenseModel;
 
 public class ExpenseDetailActivity extends AppCompatActivity {
     ExpenseModel  expensemodel;
+    private static final int SELECT_PHOTO = 200;
+    private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
-    TextView txtdescreption,txtCreatedOn,txtAddress,txtCustomerName,txtMeetingDate,txtExpenseType,txtAdvance;
+    TextView txtdescreption,txtCreatedOn,txtAddress,txtCustomerName,txtMeetingDate,txtExpenseType,txtAdvance,txtEdit;
     ImageView image_uploaded;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,14 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtExpenseType=findViewById(R.id.txtExpenseType);
         txtAdvance=findViewById(R.id.txtAdvance);
         image_uploaded=findViewById(R.id.image_uploaded);
+        txtEdit=findViewById(R.id.txtEdit);
         btn_close=findViewById(R.id.btn_close);
+        txtEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,5 +121,52 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void selectImage() {
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(ExpenseDetailActivity.this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Take Photo")) {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                } else if (options[item].equals("Choose from Gallery")) {
+                    openGallery();
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void openGallery() {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+    }
+
+   // String imageImagePath = "";
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            image_uploaded.setImageBitmap(photo);
+           // imageImagePath = data.getData().getPath();
+           // image_path.setText(imageImagePath);
+        } else if (requestCode == SELECT_PHOTO) {
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                if (selectedImage != null) {
+                    image_uploaded.setImageURI(selectedImage);
+                   // imageImagePath = selectedImage.getPath();
+                   // image_path.setText(imageImagePath);
+                }
+            }
+        }
     }
 }

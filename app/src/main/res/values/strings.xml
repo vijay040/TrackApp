@@ -117,6 +117,9 @@
     <string name="meetingdate">Meeting Date</string>
     <string name="expensetype">ExpenseType</string>
     <string name="edit">Edit</string>
+    <string name="to">To:</string>
+    <string name="type_yourmessage_Here">Type Your Message Here</string>
+    <string name="send">Send</string>
 </resources>
 
 

@@ -11,10 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.mmcs.trackapp.R;
-import com.mmcs.trackapp.adaptor.ExpenseListAdaptor;
 import com.mmcs.trackapp.adaptor.MessageAdapter;
-import com.mmcs.trackapp.model.ExpenseModel;
-import com.mmcs.trackapp.model.ExpenseResMeta;
 import com.mmcs.trackapp.model.LoginModel;
 import com.mmcs.trackapp.model.MessageModel;
 import com.mmcs.trackapp.model.MessageResMeta;
@@ -37,7 +34,7 @@ public class MessageActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_message2);
+        setContentView(R.layout.activity_message);
         //getSupportActionBar().setTitle("Messages");
         listMessageView=findViewById(R.id.listMessageView);
         progressBar=findViewById(R.id.progress);

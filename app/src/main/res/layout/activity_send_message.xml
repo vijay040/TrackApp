@@ -1,9 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.mmcs.trackapp.activity.SendMessageActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/toolbar" />
+    <TextView
+        android:id="@+id/txt_to"
+        android:layout_width="wrap_content"
+        android:text="@string/to"
+        android:textSize="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:textColor="@color/text_hint_color"
+        android:layout_height="wrap_content" />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edtUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/CustomerName"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textCursorDrawable="@drawable/drable_edittext"
+        app:met_baseColor="@color/text_color"
+        app:met_bottomTextSize="@dimen/_1sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelTextSize="@dimen/_10sdp"
+        app:met_maxCharacters="20"
+        android:drawableRight="@drawable/dropdownyello"
+        android:editable="false"
+        app:met_primaryColor="@color/text_hint_color" />
+    <EditText
+        android:id="@+id/edt_comment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_below="@+id/edtCustomer"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/commentbck"
+        android:gravity="top"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:hint="@string/type_yourmessage_Here"
+        android:paddingLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="#000"
+        android:textColorHint="#000" />
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+        android:layout_below="@+id/edt_comment"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/btn"
+        android:text="@string/send"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:textColor="@color/white_color"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold" />
+
+
+
+</LinearLayout>

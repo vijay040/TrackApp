@@ -10,11 +10,25 @@ public class ReportModel {
 
     private String balance_rct;
 
+    private String created_on;
+
+    private String status;
+
     private ArrayList<Expense> expense;
 
     private String meeting_id;
 
     private String advance;
+
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getTotal_amount() {
         return total_amount;
@@ -62,5 +76,22 @@ public class ReportModel {
 
     public void setAdvance(String advance) {
         this.advance = advance;
+    }
+
+
+    public String getCreated_on() {
+        return created_on;
+    }
+
+    public void setCreated_on(String created_on) {
+        this.created_on = created_on;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

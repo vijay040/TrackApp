@@ -48,24 +48,18 @@ public class ReportAdapter extends BaseAdapter {
     public View getView(final int i, View view, ViewGroup viewGroup) {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.activity_meetingdetails_item, null);
+            view = inflater.inflate(R.layout.activity_expensereport_item, null);
         }
-        TextView txtDescreption=view.findViewById(R.id.txtdescreption);
-        TextView txtPurpose=view.findViewById(R.id.txtpurpose);
-        TextView txtCustomer=view.findViewById(R.id.txtcustomer);
-        TextView txtAgenda=view.findViewById(R.id.txtagenda);
-        TextView txtDate=view.findViewById(R.id.txtdate);
-        TextView txtTime=view.findViewById(R.id.txttime);
-        TextView txtContactPerson=view.findViewById(R.id.txtcontactperson);
-        TextView txtAddress=view.findViewById(R.id.txtaddress);
-        txtDescreption.setText(list.get(i).getAdvance());
-        txtPurpose.setText("Purpose:"+list.get(i).getBalance_rct());
-        txtCustomer.setText("Client:"+list.get(i).getTotal_amount());
-        txtAgenda.setText("Agenda:"+list.get(i).getMeeting_id());
-       /* txtDate.setText("Date:"+list.get(i).getDate());
-        txtTime.setText("Time:"+list.get(i).getTime());
-        txtContactPerson.setText("Con. Person:"+list.get(i).getContact_person());
-        txtAddress.setText("Address: "+list.get(i).getAddress());*/
+        TextView txtDescreption=view.findViewById(R.id.txtTitle);
+        TextView txtTotalAmount=view.findViewById(R.id.txtTotalAmount);
+        TextView txtDate=view.findViewById(R.id.txtDate);
+        TextView txtStatus=view.findViewById(R.id.txtStatus);
+
+        txtDescreption.setText(list.get(i).getDescription());
+        txtTotalAmount.setText(list.get(i).getTotal_amount());
+        txtDate.setText("Date:"+list.get(i).getCreated_on());
+        txtStatus.setText("Agenda:"+list.get(i).getStatus());
+
         return view;
     }
 }

@@ -72,18 +72,15 @@
             android:id="@+id/txtTotalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_below="@+id/txtAdvance"
-            android:layout_marginLeft="@dimen/_100sdp"
-            android:layout_toRightOf="@id/img"
             android:gravity="right"
             android:paddingRight="@dimen/_10sdp"
             android:text="@string/IDR2000"
             android:textColor="@color/text_hint_color"
-            android:textSize="@dimen/_10sdp"
-            android:textStyle="bold"
 
-            />
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

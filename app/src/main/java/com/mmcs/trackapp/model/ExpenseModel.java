@@ -22,6 +22,16 @@ public class ExpenseModel implements Serializable{
 
     private String image;
 
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public boolean isVisible=false;
 
     public String getExpense_type() {

@@ -58,7 +58,7 @@ public class ReportAdapter extends BaseAdapter {
         txtDescreption.setText(list.get(i).getDescription());
         txtTotalAmount.setText(list.get(i).getTotal_amount());
         txtDate.setText("Date:"+list.get(i).getCreated_on());
-        txtStatus.setText("Agenda:"+list.get(i).getStatus());
+        txtStatus.setText("Status:"+list.get(i).getStatus());
 
         return view;
     }

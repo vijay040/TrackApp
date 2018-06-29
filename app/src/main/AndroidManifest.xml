@@ -40,7 +40,7 @@
         <activity android:name=".activity.AddCustomerActivity" />
         <activity android:name=".activity.NewExpenseActivity" />
         <activity android:name=".activity.NewCustomerActivity" />
-        <activity android:name=".activity.SendMessageActivity" />
+        <activity android:name=".activity.MessageActivity" />
         <activity android:name=".activity.ReminderActivity" />
         <activity android:name=".activity.PreRequestActivity" />
         <activity android:name=".activity.LoginActivity" />
@@ -74,7 +74,8 @@
             android:name=".activity.SettingActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".activity.ExpenseReportDetailsActivity" />
-        <activity android:name=".activity.ExpenseDetailActivity"></activity>
+        <activity android:name=".activity.ExpenseDetailActivity" />
+        <activity android:name=".activity.SendMessageActivity"></activity>
     </application>
 
 </manifest>

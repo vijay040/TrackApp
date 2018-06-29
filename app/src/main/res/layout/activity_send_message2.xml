@@ -1,86 +1,30 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/toolbar"/>
-    <RelativeLayout
-        android:id="@+id/container"
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+    <ListView
+        android:layout_marginTop="@dimen/_60sdp"
+        android:id="@+id/listMessageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
-        <EditText
-            android:id="@+id/messageEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/chatSendButton"
-            android:autoText="true"
-            android:hint="type message" />
-        <Button
-            android:id="@+id/chatSendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:layout_alignParentBottom="true"
-
-            android:layout_alignParentRight="true"
-
-            android:background="@drawable/btn"
-            android:textStyle="bold"
-            android:text="Send"
-
-            android:textColor="#000000"/>
-
-        <ListView
-
-            android:id="@+id/messagesContainer"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="match_parent"
-
-            android:layout_alignParentLeft="false"
-
-            android:layout_alignParentTop="false"
-
-            android:layout_marginBottom="@dimen/_10sdp"
-
-            android:layout_above="@+id/messageEdit"
-
-            android:layout_below="@+id/meLbl"
-
-            android:layout_marginTop="@dimen/_10sdp"
-
-            android:listSelector="@android:color/transparent"
-
-            android:transcriptMode="alwaysScroll"
-
-            android:divider="@null" />
-
-        <TextView
-
-            android:id="@+id/meLbl"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_gravity="left|center_vertical"
-
-            android:text="Anuradha Singh"
-
-            android:singleLine="false"
-
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/friendLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="Monika"
-            android:textSize="20dp" />
-
-    </RelativeLayout>
-</LinearLayout>
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_height="wrap_content">
+    </ListView>
+    <RelativeLayout
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:id="@+id/txtAdd"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_plusicon"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp" />
+</RelativeLayout>

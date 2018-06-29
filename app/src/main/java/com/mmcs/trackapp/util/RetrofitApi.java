@@ -3,6 +3,7 @@ package com.mmcs.trackapp.util;
 import com.mmcs.trackapp.model.ExpenseResMeta;
 import com.mmcs.trackapp.model.LoginResMeta;
 import com.mmcs.trackapp.model.MeetingModel;
+import com.mmcs.trackapp.model.MessageResMeta;
 import com.mmcs.trackapp.model.PreRequestResMeta;
 import com.mmcs.trackapp.model.ReportResMeta;
 import com.mmcs.trackapp.model.RequestTypeModel;
@@ -158,6 +159,10 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("report_get.php")
     Call<ReportResMeta> getReportList(@Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("get_messeage.php")
+    Call<MessageResMeta> getMessages(@Field("user_id") String user_id);
 
 
 }

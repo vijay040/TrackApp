@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -155,7 +154,7 @@ public class DrawerActivity extends AppCompatActivity {
         txt_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, SendMessageActivity.class);
+                Intent intent = new Intent(DrawerActivity.this, MessageActivity.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(Gravity.LEFT);
             }

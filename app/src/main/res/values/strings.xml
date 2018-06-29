@@ -116,6 +116,7 @@
     <string name="expensedetails">Expense Details</string>
     <string name="meetingdate">Meeting Date</string>
     <string name="expensetype">ExpenseType</string>
+    <string name="edit">Edit</string>
 </resources>
 
 

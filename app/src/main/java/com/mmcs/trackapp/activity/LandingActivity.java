@@ -15,14 +15,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.LoginModel;
 import com.mmcs.trackapp.model.PreRequestResMeta;
-import com.mmcs.trackapp.model.ResAttandance;
 import com.mmcs.trackapp.util.AppLocationService;
 import com.mmcs.trackapp.util.MyLocation;
 import com.mmcs.trackapp.util.Shprefrences;
@@ -75,7 +73,7 @@ public class LandingActivity extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LandingActivity.this, SendMessageActivity.class);
+                Intent intent = new Intent(LandingActivity.this, MessageActivity.class);
                 startActivity(intent);
             }
         });
@@ -227,7 +225,7 @@ public class LandingActivity extends AppCompatActivity {
         } else if (itemid == R.id.nav_setting) {
          startActivity(new Intent(LandingActivity.this,SettingActivity.class));
         } else if (itemid == R.id.nav_message) {
-            Intent intent = new Intent(LandingActivity.this, SendMessageActivity.class);
+            Intent intent = new Intent(LandingActivity.this, MessageActivity.class);
             startActivity(intent);
         } else if (itemid == R.id.nav_notification) {
          startActivity(new Intent(LandingActivity.this,PendingActivity.class));

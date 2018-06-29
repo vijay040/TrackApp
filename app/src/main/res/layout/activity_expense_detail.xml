@@ -30,9 +30,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/_8sdp"
-        android:text="Edit"
+        android:text="@string/edit"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="center"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableLeft="@drawable/ic_edit"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_13sdp"
+        android:textSize="@dimen/_11sdp"
         android:textStyle="italic" />
 
 

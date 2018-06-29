@@ -165,4 +165,8 @@ public interface RetrofitApi {
     Call<MessageResMeta> getMessages(@Field("user_id") String user_id);
 
 
+    @FormUrlEncoded
+    @POST("get_user_master.php")
+    Call<LoginResMeta> getUsers(@Field("user_id") String user_id);
+
 }

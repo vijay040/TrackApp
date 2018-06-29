@@ -1,6 +1,8 @@
 package com.mmcs.trackapp.model;
 
-public class Expense {
+import java.io.Serializable;
+
+public class Expense  implements Serializable {
     private String status;
 
     private String created_on;

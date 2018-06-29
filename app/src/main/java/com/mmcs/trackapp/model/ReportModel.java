@@ -1,8 +1,10 @@
 package com.mmcs.trackapp.model;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ReportModel {
+public class ReportModel  implements Serializable {
 
     private String total_amount;
 

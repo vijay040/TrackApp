@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -48,6 +49,16 @@ public class ExpenseListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ExpenseListActivity.this,NewExpenseActivity.class));
+            }
+        });
+        listExpenseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ExpenseListAdaptor adaptor = (ExpenseListAdaptor) adapterView.getAdapter();
+                ExpenseModel model = adaptor.list.get(i);
+                Intent intent = new Intent(ExpenseListActivity.this, ExpenseDetailActivity.class);
+                intent.putExtra("EXPENSEMODEL", model);
+                startActivity(intent);
             }
         });
 

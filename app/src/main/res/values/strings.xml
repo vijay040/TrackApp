@@ -113,6 +113,9 @@
     <string name="reportdetails">Report Details</string>
     <string name="balancetorct">Balance To Rct</string>
     <string name="close">close</string>
+    <string name="expensedetails">Expense Details</string>
+    <string name="meetingdate">Meeting Date</string>
+    <string name="expensetype">ExpenseType</string>
 </resources>
 
 

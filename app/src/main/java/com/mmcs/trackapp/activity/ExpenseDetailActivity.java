@@ -10,34 +10,33 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
-import com.mmcs.trackapp.adaptor.ReportAdapter;
-import com.mmcs.trackapp.model.PreRequestModel;
-import com.mmcs.trackapp.model.ReportModel;
+import com.mmcs.trackapp.model.ExpenseModel;
 
-public class ExpenseReportDetailsActivity extends AppCompatActivity {
-    ReportModel reportmodel;
-    TextView txtdescreption,txtdate,txtTotalAmount,txtAdvance,txt_Toatal_Amount,txt_balance;
-    ListView listExpense;
+public class ExpenseDetailActivity extends AppCompatActivity {
+    ExpenseModel  expensemodel;
     Button btn_close;
+    TextView txtdescreption,txtCreatedOn,txtAddress,txtCustomerName,txtMeetingDate,txtExpenseType,txtAdvance;
+    ImageView image_uploaded;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expense_report_details);
-        reportmodel= (ReportModel) getIntent().getSerializableExtra("REPORTMODEL");
+        setContentView(R.layout.activity_expense_detail);
+        expensemodel= (ExpenseModel) getIntent().getSerializableExtra("EXPENSEMODEL");
         txtdescreption=findViewById(R.id.txtdescreption);
-        txtdate=findViewById(R.id.txtdate);
-        txtTotalAmount=findViewById(R.id.txtTotalAmount);
+        txtCreatedOn=findViewById(R.id.txtCreatedOn);
+        txtAddress=findViewById(R.id.txtAddress);
+        txtCustomerName=findViewById(R.id.txtCustomerName);
+        txtMeetingDate=findViewById(R.id.txtMeetingDate);
+        txtExpenseType=findViewById(R.id.txtExpenseType);
         txtAdvance=findViewById(R.id.txtAdvance);
-        txt_Toatal_Amount=findViewById(R.id.txt_Toatal_Amount);
-        txt_balance=findViewById(R.id.txt_balance);
-        listExpense=findViewById(R.id.listExpense);
+        image_uploaded=findViewById(R.id.image_uploaded);
         btn_close=findViewById(R.id.btn_close);
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +44,13 @@ public class ExpenseReportDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        txtdescreption.setText("Descreption:"+reportmodel.getDescription());
-        txtdate.setText("Date:"+reportmodel.getCreated_on());
-        txtTotalAmount.setText("Total:"+reportmodel.getTotal_amount());
-        txtAdvance.setText("Advance:"+reportmodel.getAdvance());
-        txt_balance.setText("Balance To Rct:"+reportmodel.getBalance_rct());
-        txt_Toatal_Amount.setText("Total Amount:"+reportmodel.getTotal_amount());
+        txtdescreption.setText("Descreption:"+expensemodel.getDescreption ());
+        txtCreatedOn.setText("Expense Created On:"+expensemodel.getCreated_on ());
+        txtCustomerName.setText("Customer Name:"+expensemodel.getCustomer_name());
+        txtAddress.setText("Address:"+expensemodel.getAddress ());
+        txtAdvance.setText("Advance:"+expensemodel.getAmount());
+        txtExpenseType.setText("ExpenseType:"+expensemodel.getExpense_type ());
+        txtMeetingDate.setText("Meeting Date:"+expensemodel.getDate ()+", "+expensemodel.getTime ());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
@@ -60,31 +60,44 @@ public class ExpenseReportDetailsActivity extends AppCompatActivity {
         sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtdescreption.setText(sb);
 
-        sb = new SpannableStringBuilder(txtdate.getText());
+        sb = new SpannableStringBuilder(txtCreatedOn.getText());
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
-        sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        txtdate.setText(sb);
+        sb.setSpan(fcs, 0, 19, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtCreatedOn.setText(sb);
 
-        sb = new SpannableStringBuilder(txtTotalAmount.getText());
+        sb = new SpannableStringBuilder(txtCustomerName.getText());
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
-        sb.setSpan(fcs, 0, 6, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        txtTotalAmount.setText(sb);
+        sb.setSpan(fcs, 0, 14, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtCustomerName.setText(sb);
+
+        sb = new SpannableStringBuilder(txtAddress.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtAddress.setText(sb);
 
         sb = new SpannableStringBuilder(txtAdvance.getText());
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtAdvance.setText(sb);
 
-        sb = new SpannableStringBuilder(txt_balance.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
-        sb.setSpan(fcs, 0, 15, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        txt_balance.setText(sb);
 
-        sb = new SpannableStringBuilder(txt_Toatal_Amount.getText());
+        sb = new SpannableStringBuilder(txtExpenseType.getText());
+        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtExpenseType.setText(sb);
+
+        sb = new SpannableStringBuilder(txtMeetingDate.getText());
         fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        txt_Toatal_Amount.setText(sb);
-        back();
+        txtMeetingDate.setText(sb);
+
+     back();
+
+
+
+
+
+
     }
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);

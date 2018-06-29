@@ -47,6 +47,7 @@ public class ExpenseListAdaptor extends BaseAdapter {
             view = inflater.inflate(R.layout.activity_expanselist_item, null);
         }
         TextView txtDescreption = view.findViewById(R.id.txtDescreption);
+        ImageView imz_down=view.findViewById(R.id.imz_down);
         txtDescreption.setText(list.get(i).getDescreption ());
 
         TextView txtCreatedOn = view.findViewById(R.id.txtCreatedOn);
@@ -73,26 +74,34 @@ public class ExpenseListAdaptor extends BaseAdapter {
 
         if(list.get(i).isVisible()) {
             lay.setVisibility(View.VISIBLE);
-            hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_up));
+            hide.setImageResource( R.drawable.ic_up);
         }
         else {
             lay.setVisibility(View.GONE);
-            hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_down));
+            hide.setImageResource( R.drawable.ic_down);
         }
-        relativeLayout.setOnClickListener(new View.OnClickListener() {
+
+        imz_down.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 list.get(i).isVisible= !list.get(i).isVisible;
                 if(list.get(i).isVisible()) {
                     lay.setVisibility(View.VISIBLE);
-                    hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_up));
+                    hide.setImageResource(R.drawable.ic_up);
                 }
                 else {
                     lay.setVisibility(View.GONE);
-                    hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_down));
+                    hide.setImageResource( R.drawable.ic_down);
                 }
             }
         });
+
+       /* relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+
+            }
+        });*/
 
 
         ImageView img = view.findViewById(R.id.img);

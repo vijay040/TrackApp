@@ -1,8 +1,9 @@
 package com.mmcs.trackapp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ExpenseModel {
+public class ExpenseModel implements Serializable{
     private String amount;
 
     private String descreption;

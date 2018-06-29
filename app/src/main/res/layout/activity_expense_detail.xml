@@ -2,28 +2,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/toolbar"/>
+
+    <include layout="@layout/toolbar" />
+
     <TextView
         android:layout_width="wrap_content"
-        android:text="@string/expensedetails"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="@dimen/_15sdp"
-        android:textColor="@color/text_hint_color"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/_20sdp"
-        android:layout_height="wrap_content" />
+        android:text="@string/expensedetails"
+        android:textColor="@color/text_hint_color"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txtdescreption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/Descreption"
+    <ImageView
+        android:id="@+id/image_uploaded"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/ic_receipt" />
 
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/_13sdp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:text="Edit"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="italic" />
+
+
+    <TextView
+        android:id="@+id/txtdescreption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/Descreption"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/txtAdvance"
         android:layout_width="wrap_content"
@@ -32,19 +55,17 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/Advance"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/_10sdp"
-        />
+        android:textSize="@dimen/_10sdp" />
 
     <TextView
-            android:id="@+id/txtCreatedOn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/CreatedOn"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/_10sdp"
-           />
+        android:id="@+id/txtCreatedOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/CreatedOn"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
 
     <TextView
         android:id="@+id/txtAddress"
@@ -55,6 +76,7 @@
         android:text="@string/Address"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_10sdp" />
+
     <TextView
         android:id="@+id/txtCustomerName"
         android:layout_width="wrap_content"
@@ -74,6 +96,7 @@
         android:text="@string/meetingdate"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_10sdp" />
+
     <TextView
         android:id="@+id/txtExpenseType"
         android:layout_width="wrap_content"
@@ -84,27 +107,17 @@
         android:textColor="@color/text_color"
         android:textSize="@dimen/_10sdp" />
 
-    <ImageView
-        android:id="@+id/image_uploaded"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginLeft="@dimen/_8sdp"
-        android:background="@drawable/ic_receipt" />
-
-
 
     <Button
         android:id="@+id/btn_close"
         android:layout_width="@dimen/_200sdp"
-        android:text="@string/close"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/btn"
-        android:textColor="@color/white_color"
-        android:textSize="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:layout_height="wrap_content" />
-
+        android:background="@drawable/btn"
+        android:text="@string/close"
+        android:textColor="@color/white_color"
+        android:textSize="@dimen/_15sdp" />
 
 
 </LinearLayout>

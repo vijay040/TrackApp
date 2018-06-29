@@ -96,12 +96,6 @@ public class ExpenseListAdaptor extends BaseAdapter {
             }
         });
 
-       /* relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-
-            }
-        });*/
 
 
         ImageView img = view.findViewById(R.id.img);

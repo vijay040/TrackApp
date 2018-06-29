@@ -13,6 +13,7 @@ import com.mmcs.trackapp.model.ResMetaCustomer;
 import com.mmcs.trackapp.model.ResMetaDepartment;
 import com.mmcs.trackapp.model.ResMetaMeeting;
 import com.mmcs.trackapp.model.ResMetaReqTypes;
+import com.mmcs.trackapp.model.ResMetaUsers;
 import com.mmcs.trackapp.model.ResponseMeta;
 
 import java.util.ArrayList;
@@ -167,6 +168,12 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("get_user_master.php")
-    Call<LoginResMeta> getUsers(@Field("user_id") String user_id);
+    Call<ResMetaUsers> getUsers(@Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("post_message.php?request=saveMsg_data")
+    Call<ResMetaMeeting> postMessage(@Field("from_user_id") String from_user_id,@Field("to_user_id") String to_user_id, @Field("text_msg") String text_msg
+            , @Field("created_on") String created_on
+    );
 
 }

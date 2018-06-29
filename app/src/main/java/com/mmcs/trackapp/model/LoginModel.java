@@ -44,6 +44,16 @@ public class LoginModel {
 
     private String msg;
 
+    private String user_name;
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
     public String getMsg() {
         return msg;
     }
@@ -253,7 +263,7 @@ public class LoginModel {
     @Override
     public String toString()
     {
-        return "ClassPojo [position = "+position+", status = "+Code+", is_active = "+is_active+", country_id = "+country_id+", date = "+date+", password = "+password+", location_id = "+location_id+", id = "+id+", display_name = "+display_name+", time = "+time+", joining_date = "+joining_date+", mobile_number = "+mobile_number+", email = "+email+", company_name = "+company_name+", role = "+role+", user_id = "+user_id+", reporting_person = "+reporting_person+", department_name = "+department_name+", group = "+group+", mobile = "+mobile+"]";
+        return ""+user_name;
     }
 }
 

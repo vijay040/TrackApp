@@ -44,6 +44,7 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
     EditText edtUserName, edt_comment;
     Shprefrences sh;
     ProgressBar progress;
+    String user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +137,8 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
     }
 
     public void getUserList() {
-        Singleton.getInstance().getApi().getUsers("").enqueue(new Callback<ResMetaUsers>() {
+      LoginModel  model = sh.getLoginModel("LOGIN_MODEL");
+        Singleton.getInstance().getApi().getUsers(model.getId()).enqueue(new Callback<ResMetaUsers>() {
             @Override
             public void onResponse(Call<ResMetaUsers> call, Response<ResMetaUsers> response) {
 
@@ -163,7 +165,8 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
 
     public void sendMessage(String msg, String createdOn) {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        Singleton.getInstance().getApi().postMessage(model.getId(), userId, msg, createdOn).enqueue(new Callback<ResMetaMeeting>() {
+        user_name=edtUserName.getText()+"";
+        Singleton.getInstance().getApi().postMessage(model.getId(), userId, msg, createdOn,user_name).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 Toast.makeText(SendMessageActivity.this, " Message sent successfully!", Toast.LENGTH_SHORT).show();

@@ -1,10 +1,12 @@
 package com.mmcs.trackapp.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Lenovo on 29-06-2018.
  */
 
-public class MessageModel {
+public class MessageModel implements Serializable {
     private String to_user_id;
 
     private String id;

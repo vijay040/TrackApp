@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -46,6 +47,16 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MessageActivity.this,SendMessageActivity.class));
+            }
+        });
+        listMessageView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MessageAdapter adaptor = (MessageAdapter) adapterView.getAdapter();
+                MessageModel model = adaptor.list.get(i);
+                Intent intent = new Intent(MessageActivity.this, MessageDetailsActivity.class);
+                intent.putExtra("MESSAGEMODEL", model);
+                startActivity(intent);
             }
         });
 

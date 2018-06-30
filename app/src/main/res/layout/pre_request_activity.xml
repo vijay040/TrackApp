@@ -22,7 +22,7 @@
        android:id="@+id/txtAdd"
        android:layout_alignParentBottom="true"
        android:layout_alignParentRight="true"
-       android:background="@drawable/ic_plusicon"
+       android:background="@drawable/ic_addicon"
        android:layout_marginBottom="@dimen/_20sdp"
        android:layout_marginRight="@dimen/_20sdp" />
      </RelativeLayout>

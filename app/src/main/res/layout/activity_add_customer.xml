@@ -38,5 +38,5 @@
         android:layout_alignParentRight="true"
 
         android:layout_margin="@dimen/_10sdp"
-        android:background="@drawable/ic_plusicon" />
+        android:background="@drawable/ic_addicon" />
 </RelativeLayout>

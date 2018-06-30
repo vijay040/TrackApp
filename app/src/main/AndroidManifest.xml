@@ -75,7 +75,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".activity.ExpenseReportDetailsActivity" />
         <activity android:name=".activity.ExpenseDetailActivity" />
-        <activity android:name=".activity.SendMessageActivity"></activity>
+        <activity android:name=".activity.SendMessageActivity" />
+        <activity android:name=".activity.MessageDetailsActivity"></activity>
     </application>
 
 </manifest>

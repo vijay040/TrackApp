@@ -21,10 +21,10 @@
             android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="@dimen/_80sdp"
+        android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_15sdp"
             android:text="@string/Date"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_8sdp"
             android:textColor="@color/text_color"
             />
         <TextView
@@ -35,8 +35,9 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:textSize="@dimen/_10sdp"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:ems="20"
-            android:layout_height="wrap_content" />
+            />
 
 
 

@@ -1,0 +1,63 @@
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <include layout="@layout/toolbar"/>
+    <TextView
+       android:text="Message Details"
+        android:layout_width="wrap_content"
+      android:layout_marginTop="@dimen/_30sdp"
+        android:layout_gravity="center"
+        android:textSize="@dimen/_15sdp"
+        android:textColor="@color/text_hint_color"
+        android:textStyle="bold"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="wrap_content"
+        android:text="Name"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txt_Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:text="Date"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_8sdp"/>
+    <TextView
+        android:id="@+id/txt_message"
+      android:hint="@string/Messages"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:background="@drawable/commentbck"
+        android:gravity="top"
+        android:paddingLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textColor="@color/text_color"/>
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="@dimen/_200sdp"
+        android:text="@string/Ok"
+        android:layout_gravity="center"
+        android:background="@drawable/btn"
+        android:textColor="@color/white_color"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+</LinearLayout>

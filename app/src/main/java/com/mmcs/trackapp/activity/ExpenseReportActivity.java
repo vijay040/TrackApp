@@ -40,6 +40,7 @@ Shprefrences sh;
         listExpenseReport = findViewById(R.id.listExpenseReport);
         back();
         progressBar = findViewById(R.id.progress);
+        progressBar.setVisibility(View.VISIBLE);
         getReportList();
         listExpenseReport.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -63,11 +64,15 @@ Shprefrences sh;
                 ArrayList<ReportModel> model=response.body().getResponse();
                 ReportAdapter adap=new ReportAdapter(ExpenseReportActivity.this,model);
                 listExpenseReport.setAdapter(adap);
+                listExpenseReport.setEmptyView(findViewById(R.id.txt_nodata));
+                progressBar.setVisibility(View.GONE);
 
             }
 
+
             @Override
             public void onFailure(Call<ReportResMeta> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
 
             }
         });

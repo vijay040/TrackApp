@@ -96,7 +96,7 @@
     <Button
         android:id="@+id/btn_close"
         android:layout_width="@dimen/_200sdp"
-        android:text="@string/close"
+        android:text="@string/Ok"
         android:layout_gravity="center"
         android:background="@drawable/btn"
         android:textColor="@color/white_color"

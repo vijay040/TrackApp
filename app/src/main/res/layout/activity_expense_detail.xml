@@ -119,7 +119,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/btn"
-        android:text="@string/close"
+        android:text="@string/Ok"
         android:textColor="@color/white_color"
         android:textSize="@dimen/_15sdp" />
 

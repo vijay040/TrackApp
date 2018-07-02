@@ -87,6 +87,7 @@ public class ExpenseListActivity extends AppCompatActivity {
                 ArrayList<ExpenseModel> model=response.body().getResponse();
                 ExpenseListAdaptor adaptor=new ExpenseListAdaptor(ExpenseListActivity.this,model);
                 listExpenseView.setAdapter(adaptor);
+                listExpenseView.setEmptyView(findViewById(R.id.txt_nodata));
                 progressBar.setVisibility(View.GONE);
             }
             @Override

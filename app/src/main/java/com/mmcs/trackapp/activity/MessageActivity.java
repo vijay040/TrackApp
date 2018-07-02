@@ -70,6 +70,7 @@ public class MessageActivity extends AppCompatActivity {
                 ArrayList<MessageModel> model=response.body().getResponse();
                 MessageAdapter adaptor=new MessageAdapter(MessageActivity.this,model);
                 listMessageView.setAdapter(adaptor);
+                listMessageView.setEmptyView(findViewById(R.id.txt_nodata));
                 progressBar.setVisibility(View.GONE);
             }
             @Override

@@ -76,6 +76,7 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
                     meetinglist = response.body().getResponse();
                     meetingadapter = new MeetingDetailsAdapter(MyScheduleActivity.this, meetinglist);
                     listMeetingsView.setAdapter(meetingadapter);
+                    listMeetingsView.setEmptyView(findViewById(R.id.txt_nodata));
                     progressBar.setVisibility(View.GONE);
                 }
                 progressBar.setVisibility(View.GONE);

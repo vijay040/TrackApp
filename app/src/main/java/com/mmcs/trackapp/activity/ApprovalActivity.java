@@ -75,6 +75,7 @@ public class ApprovalActivity extends AppCompatActivity {
                 list = response.body().getResponse();
                 PreRequestAdaptor adaptor = new PreRequestAdaptor(ApprovalActivity.this, list);
                 listView.setAdapter(adaptor);
+                listView.setEmptyView(findViewById(R.id.txt_nodata));
                 progress.setVisibility(View.GONE);
             }
             @Override

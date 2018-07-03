@@ -33,12 +33,13 @@ import retrofit2.Response;
 public class SettingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_txt_manager,edt_txt_numberformate,edt_txt_position,edt_txt_joiningdate ,edt_txt_department,edt_txt_home_address,edt_txt_conf_personal_number,edt_txt_currency,edt_txt_dateformate,edt_txt_language;
     Shprefrences sh;
-    TextView edt_txt_password_professional;
+    TextView edt_txt_password_professional,text_edit;
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     LoginModel model;
     ImageView imgProfile;
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -63,7 +64,8 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
         edt_txt_dateformate=findViewById(R.id.edt_txt_dateformate);
         edt_txt_language=findViewById(R.id.edt_txt_language);
         imgProfile=findViewById(R.id.imgProfile);
-        imgProfile.setOnClickListener(new View.OnClickListener() {
+        text_edit=findViewById(R.id.text_edit);
+        text_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectImage();

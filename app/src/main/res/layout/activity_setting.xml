@@ -36,16 +36,17 @@
         android:background="@drawable/btn">
 
         <TextView
-            android:id="@+id/text_save"
+            android:id="@+id/text_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:gravity="center"
+          android:drawablePadding="@dimen/_5sdp"
+            android:drawableLeft="@drawable/ic_edit"
             android:src="@drawable/logo"
-            android:text="@string/logout"
+            android:text="@string/edit"
             android:textColor="@color/white_color"
             android:textSize="@dimen/_12sdp"
-            android:textStyle="bold" />
+            android:textStyle="bold|italic" />
     </RelativeLayout>
 
 

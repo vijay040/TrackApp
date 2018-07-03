@@ -20,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -60,6 +61,8 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         edt_EndTimer = findViewById(R.id.edt_EndTimer);
         btnOk = findViewById(R.id.btnOk);
         calendar = Calendar.getInstance();
+        setTitle();
+        back();
         alarm = new AlarmModel();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
@@ -238,4 +241,19 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     {
 
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Reminder Settings");
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
 }

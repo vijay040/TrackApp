@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.CustomerModel;
 import java.util.ArrayList;
@@ -77,7 +79,12 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
     }
     @Override
     public int getItemCount() {
+        if (data.size() == 0) {
+            Toast.makeText(context,"No Record Found",Toast.LENGTH_SHORT).show();
+        }
+
         return data.size();
+       // return data.size();
     }
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name,address,email,mobile,taxDetail,companyname;

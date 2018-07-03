@@ -25,8 +25,6 @@ import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.fragment.FragmentHome;
 import com.mmcs.trackapp.util.Shprefrences;
 
-import static com.mmcs.trackapp.activity.LandingActivity.MY_PERMISSIONS_REQUEST_LOCATION;
-
 /**
  * Created by aphroecs on 10/10/2016.
  */
@@ -36,7 +34,7 @@ public class DrawerActivity extends AppCompatActivity {
     public static boolean isHome = true;
     public static FragmentManager fragmentManager;
     TextView txt_meeting, txt_myschedule, txt_feedback, txt_client, txt_attendance, txt_expense, txt_setting, txt_pending, txt_message, txt_logout;
-    public static LandingActivity activity;
+   final int MY_PERMISSIONS_REQUEST_LOCATION=102;
     Shprefrences sh;
 
     @Override
@@ -60,7 +58,7 @@ public class DrawerActivity extends AppCompatActivity {
         txt_pending = (TextView) findViewById(R.id.txt_pending);
         txt_message = (TextView) findViewById(R.id.txt_message);
         txt_logout = (TextView) findViewById(R.id.txt_logout);
-
+        setTitle();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -194,6 +192,12 @@ public class DrawerActivity extends AppCompatActivity {
         } else {
             Log.e("MainActivity", "Error in creating fragment");
         }
+    }
+
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("BTrack");
     }
 
 

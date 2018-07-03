@@ -11,12 +11,14 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.activity.DrawerActivity;
 
 import java.util.Map;
 
-public class AlpineLteMessagingService extends FirebaseMessagingService {
+public class BtrackMessagingService extends FirebaseMessagingService {
 
-    private static final String TAG = "MyFirebaseMsgService";
+    private static final String TAG = "BTRack";
     private static Intent intent;
 
     /**
@@ -59,7 +61,7 @@ public class AlpineLteMessagingService extends FirebaseMessagingService {
 
         //  String tickerText = params.get("tickerText").toString();
 
-        intent = new Intent(this, SplashActivity.class);
+        intent = new Intent(this, DrawerActivity.class);
         intent.putExtra("NOTIFICATION_VALUE", "enquiry");
 
         sendNotification(subtitle, title);

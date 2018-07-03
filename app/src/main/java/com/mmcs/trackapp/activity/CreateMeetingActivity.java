@@ -157,12 +157,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         getCustomerList();
         getPurposeList();
 
-
-      /*  pDialog= new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading");
-        pDialog.setCancelable(false);
-*/
         edtPurpose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

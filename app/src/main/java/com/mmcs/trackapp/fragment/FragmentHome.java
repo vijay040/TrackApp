@@ -48,7 +48,7 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         TextView txtWelcomeText = view.findViewById(R.id.txtWelcomeText);
         addvisit =  view.findViewById(R.id.btn_addvisit);
@@ -61,6 +61,7 @@ public class FragmentHome extends Fragment {
         pending =  view.findViewById(R.id.btn_notification);
         message =  view.findViewById(R.id.btn_message);
         setting =  view.findViewById(R.id.btn_setting);
+        txtWelcomeText = view.findViewById(R.id.txtWelcomeText);
         sh = new Shprefrences(getActivity());
 
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");

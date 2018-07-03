@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         sh.setLoginModel("LOGIN_MODEL", model);
                         sh.setBoolean("ISLOGIN",true);
-                        startActivity(new Intent(LoginActivity.this, LandingActivity.class));
+                        startActivity(new Intent(LoginActivity.this, DrawerActivity.class));
                         finish();
                     }
                     if(model.getCode()!=null) {

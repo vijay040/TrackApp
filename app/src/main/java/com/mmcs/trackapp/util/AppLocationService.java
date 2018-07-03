@@ -13,8 +13,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 
-import static com.mmcs.trackapp.activity.LandingActivity.MY_PERMISSIONS_REQUEST_LOCATION;
-
 public class AppLocationService extends Service implements LocationListener {
 
     protected LocationManager locationManager;
@@ -22,6 +20,7 @@ public class AppLocationService extends Service implements LocationListener {
 
     private static final long MIN_DISTANCE_FOR_UPDATE = 10;
     private static final long MIN_TIME_FOR_UPDATE = 100; //1000 * 60 * 2;
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 102; //1000 * 60 * 2;
     Context context;
 
     public AppLocationService(Context context) {

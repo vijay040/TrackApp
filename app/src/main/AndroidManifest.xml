@@ -32,7 +32,6 @@
         <activity
             android:name=".activity.CreateMeetingActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.LandingActivity" />
         <activity android:name=".activity.DrawerActivity" />
         <activity android:name=".activity.MyScheduleActivity" />
         <activity android:name=".activity.ExpenseActivity" />
@@ -80,13 +79,13 @@
 
 
         <service
-            android:name=".notification.AlpineLteIstanceIDService"
+            android:name=".fcm.BtrackIstanceIDService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".notification.AlpineLteMessagingService">
+        <service android:name=".fcm.BtrackMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

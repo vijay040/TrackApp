@@ -5,9 +5,9 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-public class AlpineLteIstanceIDService extends FirebaseInstanceIdService {
+public class BtrackIstanceIDService extends FirebaseInstanceIdService {
 
-    private static final String TAG = "Alpineid********";
+    private static final String TAG = "id********";
 
     /**
      * Called if InstanceID token is updated. This may occur if the security of

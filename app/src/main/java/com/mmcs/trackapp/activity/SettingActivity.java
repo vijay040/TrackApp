@@ -1,5 +1,10 @@
 package com.mmcs.trackapp.activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -30,6 +36,9 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
     TextView edt_txt_password_professional;
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     LoginModel model;
+    ImageView imgProfile;
+    private static final int SELECT_PHOTO = 200;
+    private static final int CAMERA_REQUEST = 1888;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -53,6 +62,13 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
         edt_txt_currency=findViewById(R.id.edt_txt_currency);
         edt_txt_dateformate=findViewById(R.id.edt_txt_dateformate);
         edt_txt_language=findViewById(R.id.edt_txt_language);
+        imgProfile=findViewById(R.id.imgProfile);
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
 
          model = sh.getLoginModel("LOGIN_MODEL");
         edt_txt_first_name.setText(model.getDisplay_name()+"");
@@ -193,4 +209,52 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
         currencyAdaptor.filter(newlist);
         return true;
                }
-               }
+    private void selectImage() {
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Take Photo")) {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                } else if (options[item].equals("Choose from Gallery")) {
+                    openGallery();
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void openGallery() {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+    }
+
+  //  String imageImagePath = "";
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imgProfile.setImageBitmap(photo);
+           // imageImagePath = data.getData().getPath();
+           // image_path.setText(imageImagePath);
+        } else if (requestCode == SELECT_PHOTO) {
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                if (selectedImage != null) {
+                    imgProfile.setImageURI(selectedImage);
+                 //   imageImagePath = selectedImage.getPath();
+                  //  image_path.setText(imageImagePath);
+                }
+            }
+        }
+    }
+
+}

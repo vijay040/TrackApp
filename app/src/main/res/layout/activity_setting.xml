@@ -21,8 +21,10 @@
         android:id="@+id/imgProfile"
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_80sdp"
-        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_gravity="center_horizontal"
         android:src="@drawable/user_profile_image_background" />
 
     <RelativeLayout

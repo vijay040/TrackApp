@@ -25,8 +25,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 public class SettingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
-EditText edt_txt_currency,edt_txt_dateformate,edt_txt_language;
+EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_txt_manager,edt_txt_numberformate,edt_txt_position,edt_txt_joiningdate ,edt_txt_department,edt_txt_home_address,edt_txt_conf_personal_number,edt_txt_currency,edt_txt_dateformate,edt_txt_language;
     Shprefrences sh;
+    TextView edt_txt_password_professional;
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,18 @@ EditText edt_txt_currency,edt_txt_dateformate,edt_txt_language;
         setContentView(R.layout.activity_setting);
         //getSupportActionBar().setTitle("Settings");
         sh = new Shprefrences(this);
+        edt_txt_first_name=findViewById(R.id.edt_txt_first_name);
+        edt_txt_last_name=findViewById(R.id.edt_txt_last_name);
+        edt_txt_email_id=findViewById(R.id.edt_txt_email_id);
+        edt_txt_conf_personal_number=findViewById(R.id.edt_txt_conf_personal_number);
+        edt_txt_password_professional=findViewById(R.id.edt_txt_password_professional);
+        edt_txt_home_address=findViewById(R.id.edt_txt_home_address);
+        edt_txt_position=findViewById(R.id.edt_txt_position);
+        edt_txt_manager=findViewById(R.id.edt_txt_manager);
+        edt_txt_role=findViewById(R.id.edt_txt_role) ;
+        edt_txt_numberformate=findViewById(R.id.edt_txt_numberformate);
+        edt_txt_department=findViewById(R.id.edt_txt_department);
+        edt_txt_joiningdate=findViewById(R.id.edt_txt_joiningdate);
         edt_txt_currency=findViewById(R.id.edt_txt_currency);
         edt_txt_dateformate=findViewById(R.id.edt_txt_dateformate);
         edt_txt_language=findViewById(R.id.edt_txt_language);

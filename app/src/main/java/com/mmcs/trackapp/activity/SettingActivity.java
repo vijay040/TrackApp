@@ -29,6 +29,7 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
     Shprefrences sh;
     TextView edt_txt_password_professional;
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
+    LoginModel model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -52,6 +53,19 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
         edt_txt_currency=findViewById(R.id.edt_txt_currency);
         edt_txt_dateformate=findViewById(R.id.edt_txt_dateformate);
         edt_txt_language=findViewById(R.id.edt_txt_language);
+
+         model = sh.getLoginModel("LOGIN_MODEL");
+        edt_txt_first_name.setText(model.getDisplay_name()+"");
+        edt_txt_last_name.setText(model.getUser_name()+"");
+        edt_txt_email_id.setText(model.getEmail()+"");
+        edt_txt_home_address.setText("Address");
+        edt_txt_manager.setText(model.getReporting_person()+"");
+        edt_txt_role.setText(model.getRole()+"");
+        edt_txt_department.setText(model.getDepartment_name()+"");
+        edt_txt_joiningdate.setText(model.getJoining_date()+"");
+        edt_txt_conf_personal_number.setText(model.getMobile_number()+"");
+        edt_txt_password_professional.setText(model.getPassword()+"");
+
         getCurrencyList();
         back();
         edt_txt_dateformate.setOnClickListener(new View.OnClickListener() {

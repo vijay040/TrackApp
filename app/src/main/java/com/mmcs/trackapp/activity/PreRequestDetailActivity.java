@@ -91,6 +91,7 @@ Button ok;
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtcustomer.setText(sb);
         back();
+        setTitle();
     }
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
@@ -100,6 +101,11 @@ Button ok;
                 finish();
             }
         });
+    }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Pre-Request Details");
     }
 
 }

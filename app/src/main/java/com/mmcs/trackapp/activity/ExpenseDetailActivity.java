@@ -106,6 +106,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtMeetingDate.setText(sb);
 
      back();
+     setTitle();
 
 
 
@@ -169,4 +170,10 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             }
         }
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Expense Details");
+    }
+
 }

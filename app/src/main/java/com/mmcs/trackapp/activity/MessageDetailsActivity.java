@@ -29,6 +29,7 @@ public class MessageDetailsActivity extends AppCompatActivity {
         txt_message=findViewById(R.id.txt_message);
         btn_ok=findViewById(R.id.btn_ok);
         back();
+        setTitle();
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,4 +50,10 @@ public class MessageDetailsActivity extends AppCompatActivity {
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Message Details");
+    }
+
 }

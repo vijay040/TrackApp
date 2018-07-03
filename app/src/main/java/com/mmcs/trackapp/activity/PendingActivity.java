@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.PendingAdaptor;
@@ -43,6 +44,7 @@ public class PendingActivity extends AppCompatActivity {
        // getSupportActionBar().setTitle("Request List");
         sh=new Shprefrences(this);
         back();
+        setTitle();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -86,5 +88,11 @@ public class PendingActivity extends AppCompatActivity {
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Pending List");
+    }
+
 }
 

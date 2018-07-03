@@ -85,6 +85,7 @@ public class ExpenseReportDetailsActivity extends AppCompatActivity {
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_Toatal_Amount.setText(sb);
         back();
+        setTitle();
     }
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
@@ -95,4 +96,10 @@ public class ExpenseReportDetailsActivity extends AppCompatActivity {
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Report Details");
+    }
+
 }

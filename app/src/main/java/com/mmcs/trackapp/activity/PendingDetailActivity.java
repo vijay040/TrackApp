@@ -47,7 +47,8 @@ Shprefrences sh;
 
         reject=findViewById(R.id.reject);
         approve=findViewById(R.id.approve);
-
+      setTitle();
+      back();
         //getSupportActionBar().setTitle("Request");
         list_requesttype=findViewById(R.id.list_requesttype);
         txtdescreption.setText("Descreption:"+prerequestmodel.getComment());
@@ -107,5 +108,20 @@ Shprefrences sh;
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Pending Details");
+    }
+    private void back() {
+        RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
+        drawerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
 
 }

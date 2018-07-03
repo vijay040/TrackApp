@@ -74,6 +74,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         address = findViewById(R.id.txtaddress);
         contact = findViewById(R.id.txtcontactperson);
         back();
+        setTitle();
         descreption.setText("Description: " + model.getDescreption());
         purpose.setText("Purpose: " + model.getPurpose());
         customer.setText("Client  :" + model.getCustomer_name());
@@ -171,6 +172,12 @@ public class MeetingDetailsActivity extends AppCompatActivity {
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Meeting Details");
+    }
+
 
 
     AppLocationService appLocationService;

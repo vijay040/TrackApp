@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.PreRequestAdaptor;
@@ -46,6 +47,7 @@ public class PreRequestActivity extends AppCompatActivity {
         //getSupportActionBar().setTitle("Pre-Requests");
         sh=new Shprefrences(this);
         back();
+        setTitle();
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,5 +101,10 @@ public class PreRequestActivity extends AppCompatActivity {
                 }
                 });
                 }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Pre-Requests ");
+    }
                 }
 

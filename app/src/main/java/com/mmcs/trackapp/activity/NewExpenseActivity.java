@@ -125,7 +125,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             }
         });
         back();
-
+       setTitle();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -432,4 +432,10 @@ String requestTypeId;
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Create Expense");
+    }
+
 }

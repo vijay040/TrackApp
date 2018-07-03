@@ -102,6 +102,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);
         back();
+        setTitle();
        //getSupportActionBar().setTitle("Create Meeting");
         mGoogleApiClient = new GoogleApiClient.Builder(CreateMeetingActivity.this)
                 .addApi(Places.GEO_DATA_API)
@@ -264,6 +265,11 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                 finish();
             }
         });
+    }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Create Meeting");
     }
 
     public void getPurposeList() {

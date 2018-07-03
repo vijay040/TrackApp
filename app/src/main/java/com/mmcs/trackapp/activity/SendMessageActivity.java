@@ -71,6 +71,7 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
 
 
         back();
+        setTitle();
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,6 +180,11 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
                 progress.setVisibility(View.GONE);
             }
         });
+    }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("New Message");
     }
 
     @Override

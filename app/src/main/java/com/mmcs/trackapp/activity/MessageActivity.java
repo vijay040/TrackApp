@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.MessageAdapter;
@@ -43,6 +44,7 @@ public class MessageActivity extends AppCompatActivity {
         txtAdd=findViewById(R.id.txtAdd);
         sh=new Shprefrences(this);
         back();
+        setTitle();
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +63,12 @@ public class MessageActivity extends AppCompatActivity {
         });
 
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Messages");
+    }
+
     private void getMessageList()
     {
         LoginModel model = sh.getLoginModel("LOGIN_MODEL");

@@ -52,6 +52,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         progressBar.setVisibility(View.VISIBLE);
         getCustomerList();
         back();
+        setTitle();
         edtCustomer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -165,6 +166,12 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Feedback");
+    }
+
 }
 
 

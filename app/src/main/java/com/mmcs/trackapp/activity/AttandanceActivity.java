@@ -81,6 +81,7 @@ public class AttandanceActivity extends AppCompatActivity {
             }
         });
         back();
+        setTitle();
     }
 
     AppLocationService appLocationService;
@@ -145,6 +146,11 @@ public class AttandanceActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Attendance");
     }
 
     private void postAttandance() {

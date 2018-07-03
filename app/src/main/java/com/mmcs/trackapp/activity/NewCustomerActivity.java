@@ -66,6 +66,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
         taxdetails=findViewById(R.id.edt_taxdetails);
         submit=findViewById(R.id.btnSubmit);
         back();
+        setTitle();
         //getSupportActionBar().setTitle("New Customer");
         mGoogleApiClient = new GoogleApiClient.Builder(NewCustomerActivity.this)
                 .addApi(Places.GEO_DATA_API)
@@ -213,4 +214,10 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Add Customer");
+    }
+
 }

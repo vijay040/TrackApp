@@ -50,6 +50,7 @@ TextView txtPreRequest,txtExpanse,txtExpenseReport,txtApprovals;
         txtExpenseReport=findViewById(R.id.txtExpenseReport);
         txtApprovals=findViewById(R.id.txtApprovals);
         back();
+        setTitle();
         //getSupportActionBar().setTitle("Expenses");
         txtApprovals.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -345,6 +346,11 @@ preexpense.setOnClickListener(new View.OnClickListener() {
                 finish();
             }
         });
+    }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Expenses");
     }
 
 

@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
@@ -47,6 +48,7 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
        // getSupportActionBar().setTitle("Scheduled Meetings");
         // getMeetingList();
         back();
+        setTitle();
         listMeetingsView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -58,6 +60,12 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Meeting List");
+    }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {

@@ -84,6 +84,7 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
 
         getCurrencyList();
         back();
+        setTitle();
         edt_txt_dateformate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -255,6 +256,11 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
                 }
             }
         }
+    }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Settings");
     }
 
 }

@@ -101,6 +101,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         sh = new Shprefrences(this);
         progress.setVisibility(View.VISIBLE);
         back();
+        setTitle();
         getReqestTypes();
         getMeetingsList();
         getDepartmentList();
@@ -172,6 +173,11 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             }
         });*/
 
+    }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Add Pre-Request");
     }
 
     public void getMeetingsList() {

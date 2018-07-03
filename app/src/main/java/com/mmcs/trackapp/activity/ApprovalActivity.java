@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.PreRequestAdaptor;
@@ -41,6 +42,7 @@ public class ApprovalActivity extends AppCompatActivity {
         //getSupportActionBar().setTitle("Approvals");
         sh=new Shprefrences(this);
         back();
+        setTitle();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -61,6 +63,11 @@ public class ApprovalActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Approvals");
     }
     @Override
     protected void onResume(){

@@ -45,6 +45,7 @@ public class ExpenseListActivity extends AppCompatActivity {
 
         sh=new Shprefrences(this);
         back();
+        setTitle();
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,4 +97,10 @@ public class ExpenseListActivity extends AppCompatActivity {
             }
         });
     }
+    private void setTitle()
+    {
+        TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Expense List");
+    }
+
 }

@@ -70,7 +70,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
     private void setTitle()
     {
        TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Add Customer");
+        title.setText("Customer List");
     }
 
     public void getCustomerList() {

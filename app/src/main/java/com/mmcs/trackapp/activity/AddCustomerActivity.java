@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
@@ -43,6 +44,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         editTextName.setQueryHint("Search By Customer Name ");
         editTextName.setOnQueryTextListener(this);
         back();
+        setTitle();
        // getSupportActionBar().setTitle("Customer Details");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddCustomerActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -65,6 +67,12 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
             }
         });
     }
+    private void setTitle()
+    {
+       TextView title= (TextView) findViewById(R.id.title);
+        title.setText("Add Customer");
+    }
+
     public void getCustomerList() {
         Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
             @Override

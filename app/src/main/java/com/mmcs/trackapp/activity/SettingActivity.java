@@ -74,7 +74,7 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
         edt_txt_first_name.setText(model.getDisplay_name()+"");
         edt_txt_last_name.setText(model.getUser_name()+"");
         edt_txt_email_id.setText(model.getEmail()+"");
-        edt_txt_home_address.setText("Address");
+        edt_txt_home_address.setText("Noida, India");
         edt_txt_manager.setText(model.getReporting_person()+"");
         edt_txt_role.setText(model.getRole()+"");
         edt_txt_department.setText(model.getDepartment_name()+"");

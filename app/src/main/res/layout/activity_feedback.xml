@@ -10,7 +10,7 @@
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp"
      android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_80sdp"
         android:src="@drawable/ic_rating" />
 
         <com.rengwuxian.materialedittext.MaterialEditText

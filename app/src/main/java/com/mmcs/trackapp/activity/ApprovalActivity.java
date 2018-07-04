@@ -67,7 +67,7 @@ public class ApprovalActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Approvals");
+        title.setText(getString(R.string.Approvals));
     }
     @Override
     protected void onResume(){

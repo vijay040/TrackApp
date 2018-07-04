@@ -184,7 +184,7 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("New Message");
+        title.setText(getString(R.string.new_message));
     }
 
     @Override

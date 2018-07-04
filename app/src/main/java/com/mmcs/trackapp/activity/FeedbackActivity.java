@@ -169,7 +169,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Feedback");
+        title.setText(getString(R.string.feedback));
     }
 
 }

@@ -111,7 +111,7 @@ Shprefrences sh;
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Pending Details");
+        title.setText(getString(R.string.pending_details));
     }
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);

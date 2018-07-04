@@ -92,7 +92,7 @@ Shprefrences sh;
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Expense Report");
+        title.setText(getString(R.string.expense_report));
     }
 
 

@@ -244,7 +244,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Reminder Settings");
+        title.setText(getString(R.string.reminder_settings));
     }
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);

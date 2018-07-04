@@ -9,7 +9,7 @@
         android:layout_height="@dimen/_70sdp"
         android:layout_alignStart="@+id/imageView"
         android:layout_below="@+id/current_location"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_80sdp"
         android:background="@drawable/ic_attandance"/>
     <TextView
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textview_signin"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:drawableLeft="@drawable/ic_loc"
         android:text="@string/Location"
         android:textColor="#5fb0c9"

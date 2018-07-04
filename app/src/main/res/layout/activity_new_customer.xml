@@ -7,7 +7,7 @@
             <ImageView
                 android:id="@+id/img"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/_60sdp"
+                android:layout_marginTop="@dimen/_80sdp"
                 android:src="@drawable/ic_addcustomer"
                 android:layout_centerHorizontal="true"
                 android:layout_height="80dp"/>

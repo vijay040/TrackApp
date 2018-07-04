@@ -63,7 +63,7 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Meeting List");
+        title.setText(getString(R.string.meeting_list));
     }
 
     private void back() {

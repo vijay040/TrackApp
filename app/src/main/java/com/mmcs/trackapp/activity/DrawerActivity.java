@@ -197,7 +197,7 @@ public class DrawerActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("BTrack");
+        title.setText(getString(R.string.bTrack));
     }
 
 

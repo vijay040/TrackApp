@@ -105,7 +105,7 @@ Button ok;
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Pre-Request Details");
+        title.setText(getString(R.string.pre_request_details));
     }
 
 }

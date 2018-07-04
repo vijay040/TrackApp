@@ -177,7 +177,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Add Pre-Request");
+        title.setText(getString(R.string.add_prerequest));
     }
 
     public void getMeetingsList() {

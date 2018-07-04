@@ -91,7 +91,7 @@ public class PendingActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Pending List");
+        title.setText(getString(R.string.pending_list));
     }
 
 }

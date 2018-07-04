@@ -1,6 +1,9 @@
 package com.mmcs.trackapp.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +52,13 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin=findViewById(R.id.btn_signin);
         progress=findViewById(R.id.progress);
         sh=new Shprefrences(this);
+        final ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
+       /* if (activeNetwork != null && activeNetwork.isConnected()) {
+           Toast.makeText(LoginActivity.this,"Available",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(LoginActivity.this,"Available",Toast.LENGTH_SHORT).show();
+        }*/
 
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override

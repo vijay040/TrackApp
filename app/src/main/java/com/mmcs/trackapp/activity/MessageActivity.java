@@ -66,7 +66,7 @@ public class MessageActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Messages");
+        title.setText(getString(R.string.messages));
     }
 
     private void getMessageList()

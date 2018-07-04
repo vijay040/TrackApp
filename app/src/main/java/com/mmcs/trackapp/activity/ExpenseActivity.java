@@ -350,7 +350,7 @@ preexpense.setOnClickListener(new View.OnClickListener() {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Expenses");
+        title.setText(getText(R.string.Expenses));
     }
 
 

@@ -217,7 +217,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Add Customer");
+        title.setText(getString(R.string.add_customer));
     }
 
 }

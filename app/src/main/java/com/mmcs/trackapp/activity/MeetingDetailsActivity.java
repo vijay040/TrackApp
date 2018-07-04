@@ -175,7 +175,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Meeting Details");
+        title.setText(getString(R.string.meeting_details));
     }
 
 

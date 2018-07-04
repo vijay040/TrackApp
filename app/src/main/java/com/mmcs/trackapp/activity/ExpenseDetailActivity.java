@@ -124,18 +124,18 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         });
     }
     private void selectImage() {
-        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+        final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.choose_from_gallery), getString(R.string.cancel)};
         AlertDialog.Builder builder = new AlertDialog.Builder(ExpenseDetailActivity.this);
-        builder.setTitle("Add Photo!");
+        builder.setTitle(getString(R.string.add_photo));
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
+                if (options[item].equals(getString(R.string.take_photo))) {
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                } else if (options[item].equals("Choose from Gallery")) {
+                } else if (options[item].equals(getString(R.string.choose_from_gallery))) {
                     openGallery();
-                } else if (options[item].equals("Cancel")) {
+                } else if (options[item].equals(getString(R.string.cancel))) {
                     dialog.dismiss();
                 }
             }
@@ -173,7 +173,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Expense Details");
+        title.setText(getString(R.string.expensedetails));
     }
 
 }

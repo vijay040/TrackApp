@@ -150,7 +150,7 @@ public class AttandanceActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Attendance");
+        title.setText(getString(R.string.Attendance));
     }
 
     private void postAttandance() {

@@ -263,7 +263,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Create Meeting");
+        title.setText(getString(R.string.CreateMeeting));
     }
 
     public void getPurposeList() {

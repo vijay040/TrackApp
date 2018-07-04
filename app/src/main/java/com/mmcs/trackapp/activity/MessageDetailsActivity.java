@@ -53,7 +53,7 @@ public class MessageDetailsActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Message Details");
+        title.setText(getString(R.string.message_details));
     }
 
 }

@@ -104,7 +104,7 @@ public class PreRequestActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Pre-Requests ");
+        title.setText(getString(R.string.pre_requests));
     }
                 }
 

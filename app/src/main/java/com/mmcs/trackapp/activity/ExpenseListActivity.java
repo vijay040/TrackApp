@@ -100,7 +100,7 @@ public class ExpenseListActivity extends AppCompatActivity {
     private void setTitle()
     {
         TextView title= (TextView) findViewById(R.id.title);
-        title.setText("Expense List");
+        title.setText(getString(R.string.expense_list));
     }
 
 }

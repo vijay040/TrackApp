@@ -423,7 +423,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                 listtype.add(list);
         }
         progress.setVisibility(View.VISIBLE);
-        Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetingId, des, addres, datetime, listtype).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetingId, des, addres, datetime, listtype,model.getReporting_manager_id()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);

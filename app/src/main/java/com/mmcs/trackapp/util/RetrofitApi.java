@@ -77,6 +77,7 @@ public interface RetrofitApi {
     Call<ResMetaMeeting> postPreRequest(@Field("user_id") String user_id,
                                         @Field("advance") String advance, @Field("currency") String currency, @Field("department") String department, @Field("meeting_id") String meeting_id,
                                         @Field("description") String description, @Field("address") String address, @Field("date") String date, @Field("requesttype[]") ArrayList<RequestTypeModel> requesttypes
+                                        ,@Field("reporting_manager_id") String reporting_manager_id
 
     );
 

@@ -38,6 +38,8 @@ public class LoginModel {
 
     private String department_name;
 
+    private String reporting_manager_id;
+
     private String group;
 
     private String mobile;
@@ -45,6 +47,14 @@ public class LoginModel {
     private String msg;
 
     private String user_name;
+
+    public String getReporting_manager_id() {
+        return reporting_manager_id;
+    }
+
+    public void setReporting_manager_id(String reporting_manager_id) {
+        this.reporting_manager_id = reporting_manager_id;
+    }
 
     public String getUser_name() {
         return user_name;

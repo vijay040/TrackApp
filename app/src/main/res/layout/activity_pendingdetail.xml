@@ -66,12 +66,33 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_12sdp" />
 
-         
+            <TextView
+                android:id="@+id/txtaddress"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+
+                android:text="@string/Address"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/txtcustomername"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+
+                android:text="@string/CustomerName"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12sdp" />
+
             <ListView
                 android:id="@+id/list_requesttype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"/>
+                android:layout_marginTop="@dimen/_10sdp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

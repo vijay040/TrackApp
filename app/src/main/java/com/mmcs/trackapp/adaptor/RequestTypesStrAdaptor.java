@@ -26,7 +26,9 @@ public class RequestTypesStrAdaptor extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list.size();
+        if(list!=null)
+            return list.size();
+        else return 0;
     }
 
     @Override

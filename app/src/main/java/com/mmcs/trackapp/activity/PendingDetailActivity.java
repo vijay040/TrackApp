@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.adaptor.RequestTypesStrAdaptor;
 import com.mmcs.trackapp.model.LoginModel;
 import com.mmcs.trackapp.model.PreRequestModel;
 import com.mmcs.trackapp.model.PreRequestResMeta;
@@ -28,7 +29,7 @@ import retrofit2.Response;
 
 public class PendingDetailActivity extends AppCompatActivity {
 PreRequestModel prerequestmodel;
-TextView txtdescreption,txtdate,txtadvance,txtstatus;
+TextView txtdescreption,txtdate,txtadvance,txtstatus,txtaddress,txtcustomername;
 ListView list_requesttype;
 Button reject,approve;
 Shprefrences sh;
@@ -41,9 +42,14 @@ Shprefrences sh;
         sh=new Shprefrences(this);
         setContentView(R.layout.activity_pendingdetail);
         prerequestmodel= (PreRequestModel) getIntent().getSerializableExtra("PREREQUESTMODEL");
+
+
         txtdescreption=findViewById(R.id.txtdescreption);
         txtdate=findViewById(R.id.txtdate);
         txtadvance=findViewById(R.id.txtadvance);
+        txtaddress=findViewById(R.id.txtaddress);
+        txtcustomername=findViewById(R.id.txtcustomername);
+
 
         reject=findViewById(R.id.reject);
         approve=findViewById(R.id.approve);
@@ -51,9 +57,13 @@ Shprefrences sh;
       back();
         //getSupportActionBar().setTitle("Request");
         list_requesttype=findViewById(R.id.list_requesttype);
+        RequestTypesStrAdaptor adaptor =new RequestTypesStrAdaptor(PendingDetailActivity.this,prerequestmodel.getRequest_type());
+        list_requesttype.setAdapter(adaptor);
         txtdescreption.setText(getString(R.string.description)+prerequestmodel.getComment());
         txtdate.setText(getString(R.string.date)+prerequestmodel.getDate());
         txtadvance.setText(getString(R.string.advance)+prerequestmodel.getAdvance());
+        txtaddress.setText(getString(R.string.address)+prerequestmodel.getAddress());
+        txtcustomername.setText(getString(R.string.customer_name)+prerequestmodel.getCustomer_name());
 
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         // Span to set text color to some RGB value
@@ -73,6 +83,16 @@ Shprefrences sh;
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtdate.setText(sb);
+
+        sb = new SpannableStringBuilder(txtaddress.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtaddress.setText(sb);
+
+        sb = new SpannableStringBuilder(txtcustomername.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 14, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtcustomername.setText(sb);
 
         approve.setOnClickListener(new View.OnClickListener() {
             @Override

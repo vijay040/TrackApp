@@ -91,10 +91,10 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                 String Country=country.getText().toString();
                 String Tax=taxdetails.getText().toString();
                 if(custmrname.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,"Enter Customer Name",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_customer_name),Toast.LENGTH_SHORT).show();
                 }
                 else if(add.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,"Enter Address",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_address),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(em.trim().isEmpty()||!em.matches("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -105,32 +105,32 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                         ")+")) {
 
-                    Toast.makeText(NewCustomerActivity.this,"Enter Valid Email",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_valid_email),Toast.LENGTH_SHORT).show();
                  return;
                 }
                 else if(phn.trim().isEmpty()||phone.getText().toString().length()<10||phn.length()>12){
-                    Toast.makeText(NewCustomerActivity.this,"Enter Valid Phone No.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_valid_phone_no_),Toast.LENGTH_SHORT).show();
                   return;
                 }
                 else if(Pin.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,"Enter Pin",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_pin),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(Company.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,"Enter Company",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_company),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(Country.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,"Enter Country",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_country),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(Tax.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,"Enter Tax Details",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_tax_details),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else {
                     progress.setVisibility(View.VISIBLE);
-                    LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+                    LoginModel model = sh.getLoginModel(getString(R.string.login_model));
 
                     postNewCustomer(custmrname,add,em,phn,Pin,Company,Country,Tax);
                 }
@@ -199,12 +199,12 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
 
     public void postNewCustomer(String customerName,String address,String email,String phhone,String pin,String company,String country,String taxdetails )
     {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().addNewCustomer(model.getId(),customerName,address,email,phhone,pin,company,country,taxdetails).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);
-                Toast.makeText(NewCustomerActivity.this, "Data submited successfully!",
+                Toast.makeText(NewCustomerActivity.this, getString(R.string.data_submited_successfully),
                         Toast.LENGTH_LONG).show();
                 finish();
             }

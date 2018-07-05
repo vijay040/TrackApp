@@ -71,7 +71,7 @@ public class PendingActivity extends AppCompatActivity {
         getPendingsList();
     }
     private void getPendingsList(){
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getPendingsList(model.getId()).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {

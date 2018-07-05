@@ -51,7 +51,7 @@ public class MeetingsAdaptor extends BaseAdapter {
             view = inflater.inflate(R.layout.inf_purpose_popup_list, null);
         }
         TextView txtTitle = view.findViewById(R.id.txtTitle);
-        Log.e("Description",""+list.get(i).getDescreption());
+        Log.e(context.getString(R.string.Descreption),""+list.get(i).getDescreption());
         txtTitle.setText(list.get(i).getDescreption());
         return view;
     }

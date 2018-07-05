@@ -45,15 +45,15 @@ public class ExpenseReportDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        txtdescreption.setText("Descreption:"+reportmodel.getDescription());
-        txtdate.setText("Date:"+reportmodel.getCreated_on());
-        txtTotalAmount.setText("Total:"+reportmodel.getTotal_amount());
-        txtAdvance.setText("Advance:"+reportmodel.getAdvance());
-        txt_balance.setText("Balance To Rct:"+reportmodel.getBalance_rct());
-        txt_Toatal_Amount.setText("Total Amount:"+reportmodel.getTotal_amount());
+        txtdescreption.setText(getString(R.string.description)+reportmodel.getDescription());
+        txtdate.setText(getString(R.string.date)+reportmodel.getCreated_on());
+        txtTotalAmount.setText(getString(R.string.total)+reportmodel.getTotal_amount());
+        txtAdvance.setText(getString(R.string.advance)+reportmodel.getAdvance());
+        txt_balance.setText(getString(R.string.balancetorct)+reportmodel.getBalance_rct());
+        txt_Toatal_Amount.setText(getString(R.string.TotalAmount)+reportmodel.getTotal_amount());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         // Span to set text color to some RGB value
-        ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold
         //    final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
         // Set the text color for first 4 characters
@@ -61,27 +61,27 @@ public class ExpenseReportDetailsActivity extends AppCompatActivity {
         txtdescreption.setText(sb);
 
         sb = new SpannableStringBuilder(txtdate.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtdate.setText(sb);
 
         sb = new SpannableStringBuilder(txtTotalAmount.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 6, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtTotalAmount.setText(sb);
 
         sb = new SpannableStringBuilder(txtAdvance.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtAdvance.setText(sb);
 
         sb = new SpannableStringBuilder(txt_balance.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 15, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_balance.setText(sb);
 
         sb = new SpannableStringBuilder(txt_Toatal_Amount.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_Toatal_Amount.setText(sb);
         back();

@@ -181,7 +181,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
     }
 
     public void getMeetingsList() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
@@ -195,7 +195,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
     }
 
     public void getDepartmentList() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getDepartmentList(model.getId()).enqueue(new Callback<ResMetaDepartment>() {
             @Override
             public void onResponse(Call<ResMetaDepartment> call, Response<ResMetaDepartment> response) {
@@ -219,7 +219,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
     }
 
     private void getCurrencyList() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
             @Override
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
@@ -231,7 +231,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         });
     }
     public void getReqestTypes() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getRequestTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
             @Override
             public void onResponse(Call<ResMetaReqTypes> call, Response<ResMetaReqTypes> response) {
@@ -259,10 +259,10 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
-        title.setText("Selected Created Meetings");
+        title.setText(getString(R.string.selected_created_meetings));
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
         popupId = 1;
@@ -291,9 +291,9 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         editTextName.setIconified(true);
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        title.setText("Select Department");
+        title.setText(getString(R.string.select_department));
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
@@ -320,9 +320,9 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         TextView title = dialogView.findViewById(R.id.title);
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        title.setText("Select Currency");
+        title.setText(getString(R.string.select_currency));
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
@@ -384,7 +384,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         return true;
     }
     private void submitPost() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         String userid = model.getId();
         String adv = edtAdvance.getText().toString();
         String curr = edtCurrency.getText().toString();
@@ -392,26 +392,26 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         String des = edtDescreption.getText().toString();
         String totalamount = adv + curr;
         if (userid.equals("")) {
-            Toast.makeText(AddPreRequestActivity.this, "Your session is time out please login again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPreRequestActivity.this, getString(R.string.session_time_msg), Toast.LENGTH_SHORT).show();
             return;
         } else if (adv.equals("")) {
-            Toast.makeText(AddPreRequestActivity.this, "Enter Advance Amount", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPreRequestActivity.this, getString(R.string.enter_advance_amount), Toast.LENGTH_SHORT).show();
             return;
         } else if (curr.equals("")) {
-            Toast.makeText(AddPreRequestActivity.this, "Select Currency", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPreRequestActivity.this, getString(R.string.select_currency), Toast.LENGTH_SHORT).show();
             return;
         } else if (dept.equals("")) {
-            Toast.makeText(AddPreRequestActivity.this, "Select Department", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPreRequestActivity.this,getString(R.string.select_department) , Toast.LENGTH_SHORT).show();
             return;
         } else if (meetingId.equals("")) {
-            Toast.makeText(AddPreRequestActivity.this, "Select Meeting", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPreRequestActivity.this, getString(R.string.select_meeting), Toast.LENGTH_SHORT).show();
             return;
         } else if (des.equals("")) {
-            Toast.makeText(AddPreRequestActivity.this, "Enter Descreption", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPreRequestActivity.this, getString(R.string.enter_descreption), Toast.LENGTH_SHORT).show();
             return;
         }
         String addres = edtAddress.getText() + "";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat(getString(R.string.formate_date));
         Date date = new Date();
         String datetime = dateFormat.format(date);
         Log.e("datetime", "**********" + datetime);
@@ -427,7 +427,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);
-                Toast.makeText(AddPreRequestActivity.this, "Pre-Request Submited Successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddPreRequestActivity.this, getString(R.string.pre_request_submited), Toast.LENGTH_SHORT).show();
                 finish();
             }
 

@@ -51,12 +51,12 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final CustomerModel current = data.get(position);
-        holder.name.setText("Customer Name: "+current.getCustomer_name());
-        holder.address.setText("Address: "+current.getAddress());
-        holder.email.setText("Email: "+current.getEmail());
-        holder.mobile.setText("Mobile: "+current.getPhone());
-        holder.taxDetail.setText("Tax Details: "+current.getTax_details());
-        holder.companyname.setText("Company Name: "+current.getCustomer_company ());
+        holder.name.setText(context.getString(R.string.customer_name)+current.getCustomer_name());
+        holder.address.setText(context.getString(R.string.address)+current.getAddress());
+        holder.email.setText(context.getString(R.string.email)+current.getEmail());
+        holder.mobile.setText(context.getString(R.string.mobile)+current.getPhone());
+        holder.taxDetail.setText(context.getString(R.string.tax_details)+current.getTax_details());
+        holder.companyname.setText(context.getString(R.string.company_name)+current.getCustomer_company ());
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -80,7 +80,7 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
     @Override
     public int getItemCount() {
         if (data.size() == 0) {
-            Toast.makeText(context,"No Record Found",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,context.getString(R.string.no_record_found),Toast.LENGTH_SHORT).show();
         }
 
         return data.size();

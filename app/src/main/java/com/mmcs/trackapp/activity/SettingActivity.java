@@ -72,7 +72,7 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
             }
         });
 
-         model = sh.getLoginModel("LOGIN_MODEL");
+         model = sh.getLoginModel(getString(R.string.login_model));
         edt_txt_first_name.setText(model.getDisplay_name()+"");
         edt_txt_last_name.setText(model.getUser_name()+"");
         edt_txt_email_id.setText(model.getEmail()+"");
@@ -107,7 +107,7 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
                });
                }
     private void getCurrencyList() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
             @Override
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
@@ -129,9 +129,9 @@ EditText edt_txt_first_name,edt_txt_last_name,edt_txt_email_id,edt_txt_role,edt_
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         TextView title = dialogView.findViewById(R.id.title);
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        title.setText("Select Currency");
+        title.setText(getString(R.string.select_currency));
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();

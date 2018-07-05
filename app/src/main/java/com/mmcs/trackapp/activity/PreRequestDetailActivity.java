@@ -51,15 +51,15 @@ Button ok;
         listTypes.setAdapter(adaptor);
 
 
-        txtdescreption.setText("Descreption:"+prerequestmodel.getComment());
-        txtdate.setText("Date:"+prerequestmodel.getDate());
-        txtadvance.setText("Advance:"+prerequestmodel.getAdvance());
-        txtaddress.setText("Address:"+prerequestmodel.getAddress());
-        txtcustomer.setText("Customer Name:"+prerequestmodel.getCustomer_name());
-        txtstatus.setText("Status:"+prerequestmodel.getStatus());
+        txtdescreption.setText(getString(R.string.description)+prerequestmodel.getComment());
+        txtdate.setText(getString(R.string.date)+prerequestmodel.getDate());
+        txtadvance.setText(getString(R.string.advance)+prerequestmodel.getAdvance());
+        txtaddress.setText(getString(R.string.address)+prerequestmodel.getAddress());
+        txtcustomer.setText(getString(R.string.customer_name)+prerequestmodel.getCustomer_name());
+        txtstatus.setText(getString(R.string.status)+prerequestmodel.getStatus());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         // Span to set text color to some RGB value
-        ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold
         //    final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
         // Set the text color for first 4 characters
@@ -67,27 +67,27 @@ Button ok;
         txtdescreption.setText(sb);
 
         sb = new SpannableStringBuilder(txtadvance.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtadvance.setText(sb);
 
         sb = new SpannableStringBuilder(txtdate.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtdate.setText(sb);
 
         sb = new SpannableStringBuilder(txtstatus.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtstatus.setText(sb);
 
         sb = new SpannableStringBuilder(txtaddress.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtaddress.setText(sb);
 
         sb = new SpannableStringBuilder(txtcustomer.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtcustomer.setText(sb);
         back();

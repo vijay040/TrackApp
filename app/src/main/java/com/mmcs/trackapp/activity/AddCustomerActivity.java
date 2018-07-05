@@ -41,7 +41,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         progress = findViewById(R.id.progress);
         progress.setVisibility(View.VISIBLE);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        editTextName.setQueryHint("Search By Customer Name ");
+        editTextName.setQueryHint(getString(R.string.search_by_customer_name));
         editTextName.setOnQueryTextListener(this);
         back();
         setTitle();

@@ -51,6 +51,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     public static String currentLocation;
     public String status = "";
     ProgressBar progressbar;
+    TextView txt_meetingstatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,20 +74,21 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         time = findViewById(R.id.txttime);
         address = findViewById(R.id.txtaddress);
         contact = findViewById(R.id.txtcontactperson);
+        txt_meetingstatus=findViewById(R.id.txt_meetingstatus);
         back();
         setTitle();
-        descreption.setText("Description: " + model.getDescreption());
-        purpose.setText("Purpose: " + model.getPurpose());
-        customer.setText("Client  :" + model.getCustomer_name());
-        agenda.setText("Agenda:" + model.getAgenda());
-        date.setText("Date: " + model.getDate());
-        time.setText("Time: " + model.getTime());
-        address.setText("Address: " + model.getAddress());
-        contact.setText("Contact Person: " + model.getContact_person());
+        descreption.setText(getString(R.string.description) + model.getDescreption());
+        purpose.setText(getString(R.string.purpose) + model.getPurpose());
+        customer.setText(getString(R.string.client) + model.getCustomer_name());
+        agenda.setText(getString(R.string.agenda) + model.getAgenda());
+        date.setText(getString(R.string.date) + model.getDate());
+        time.setText(getString(R.string.time) + model.getTime());
+        address.setText(getString(R.string.address) + model.getAddress());
+        contact.setText(getString(R.string.contact_person) + model.getContact_person());
         //getSupportActionBar().setTitle("Meeting Detail");
         SpannableStringBuilder sb = new SpannableStringBuilder(purpose.getText());
         // Span to set text color to some RGB value
-        ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold
         //    final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
         // Set the text color for first 4 characters
@@ -96,37 +98,37 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         // sb.setSpan(bss, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         purpose.setText(sb);
         sb = new SpannableStringBuilder(descreption.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         descreption.setText(sb);
 
         sb = new SpannableStringBuilder(customer.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
-        sb.setSpan(fcs, 0, 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         customer.setText(sb);
 
         sb = new SpannableStringBuilder(agenda.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         agenda.setText(sb);
 
         sb = new SpannableStringBuilder(date.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         date.setText(sb);
 
         sb = new SpannableStringBuilder(time.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         time.setText(sb);
 
         sb = new SpannableStringBuilder(address.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         address.setText(sb);
 
         sb = new SpannableStringBuilder(contact.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 15, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         contact.setText(sb);
 
@@ -134,19 +136,19 @@ public class MeetingDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressbar.setVisibility(View.VISIBLE);
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                DateFormat dateFormat = new SimpleDateFormat(getString(R.string.formate_date));
                 Date date = new Date();
                 String datetime = dateFormat.format(date);
                 String startTime = "", endTime = "", startAddress = "", endAddress = "";
                 String currentStatus = status;
-                if (status.equalsIgnoreCase("start")) {
+                if (status.equalsIgnoreCase(getString(R.string.s_start))) {
                     endTime = datetime;
                     endAddress = currentLocation;
-                    currentStatus = "END";
+                    currentStatus = getString(R.string.end);
                 } else {
                     startTime = datetime;
                     startAddress = currentLocation;
-                    currentStatus = "START";
+                    currentStatus =  getString(R.string.start);
                 }
 
                 updateMeetingStatus(startTime, endTime, currentStatus, startAddress, endAddress);
@@ -231,15 +233,17 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     }
 
     public void updateMeetingStatus(String startTime, String endTime, final String status, String startAddress, String endAddress) {
-        LoginModel mo = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel mo = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().updateMeedingStatus(mo.getId(), startTime, endTime, status, model.getId(), startAddress, endAddress).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
                 MeetingDetailsActivity.this.status=status;
-                if (status.equalsIgnoreCase("start")) {
+                if (status.equalsIgnoreCase(getString(R.string.s_start))) {
                     start.setBackground(ContextCompat.getDrawable(MeetingDetailsActivity.this, R.drawable.ic_stop));
+                    txt_meetingstatus.setText(getString(R.string.EndMeeting));
                 } else {
                     start.setBackground(ContextCompat.getDrawable(MeetingDetailsActivity.this, R.drawable.ic_start));
+                    txt_meetingstatus.setText(getString(R.string.StartMeeting));
                 }
                 progressbar.setVisibility(View.GONE);
             }
@@ -252,7 +256,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     }
 
     public void getMeetingStatus() {
-        LoginModel mo = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel mo = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getMeetingStatus(mo.getId(), model.getId()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
@@ -261,10 +265,12 @@ public class MeetingDetailsActivity extends AppCompatActivity {
                 if(meetingData!=null)
                 {
                     status=meetingData.getStatus();
-                       if (status.equalsIgnoreCase("start")) {
+                       if (status.equalsIgnoreCase(getString(R.string.s_start))) {
                            start.setBackground(ContextCompat.getDrawable(MeetingDetailsActivity.this, R.drawable.ic_stop));
+                           txt_meetingstatus.setText(getString(R.string.EndMeeting));
                        } else {
                            start.setBackground(ContextCompat.getDrawable(MeetingDetailsActivity.this, R.drawable.ic_start));
+                           txt_meetingstatus.setText(getString(R.string.StartMeeting));
                        }
 
 

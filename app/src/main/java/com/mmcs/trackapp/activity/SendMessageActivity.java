@@ -58,7 +58,7 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
         progress.setVisibility(View.VISIBLE);
         edtUserName = findViewById(R.id.edtUserName);
         edt_comment = findViewById(R.id.edt_comment);
-        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
         getUserList();
         edtUserName.setOnClickListener(new View.OnClickListener() {
@@ -78,10 +78,10 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
                 String name = edtUserName.getText() + "";
                 String message = edt_comment.getText() + "";
                 if (name.equals("")) {
-                    Toast.makeText(SendMessageActivity.this, "Select Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SendMessageActivity.this, getString(R.string.select_name), Toast.LENGTH_SHORT).show();
                     return;
                 } else if (message.equals("")) {
-                    Toast.makeText(SendMessageActivity.this, "Enter Your Message", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SendMessageActivity.this, getString(R.string.enter_your_message), Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
@@ -116,8 +116,8 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         final TextView title = dialogView.findViewById(R.id.title);
-        title.setText("Select Contact Name");
-        editTextName.setQueryHint("Search Here");
+        title.setText(getString(R.string.select_contact_name));
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
@@ -138,7 +138,7 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
     }
 
     public void getUserList() {
-      LoginModel  model = sh.getLoginModel("LOGIN_MODEL");
+      LoginModel  model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getUsers(model.getId()).enqueue(new Callback<ResMetaUsers>() {
             @Override
             public void onResponse(Call<ResMetaUsers> call, Response<ResMetaUsers> response) {
@@ -165,12 +165,12 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
     }
 
     public void sendMessage(String msg, String createdOn) {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         user_name=edtUserName.getText()+"";
         Singleton.getInstance().getApi().postMessage(model.getId(), userId, msg, createdOn,user_name).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
-                Toast.makeText(SendMessageActivity.this, " Message sent successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SendMessageActivity.this, getString(R.string.message_sent_successfully), Toast.LENGTH_SHORT).show();
                 progress.setVisibility(View.GONE);
                 finish();
             }

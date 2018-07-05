@@ -43,7 +43,7 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
         listMeetingsView = findViewById(R.id.listMeetingsView);
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
-        editTextName.setQueryHint("Search By Purpose/Customer Name ");
+        editTextName.setQueryHint(getString(R.string.search_by_purpose_customer_name));
         editTextName.setOnQueryTextListener(this);
        // getSupportActionBar().setTitle("Scheduled Meetings");
         // getMeetingList();
@@ -76,7 +76,7 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
         });
     }
     public void getMeetingList() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getMeetingsList("" + model.getId()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {

@@ -181,27 +181,27 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                 String contactperson = edtContactperson.getText().toString();
                 String address = edtAddress.getText().toString();
                 if (purpose.equals("")) {
-                    Toast.makeText(CreateMeetingActivity.this, "Select Purpose", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, getString(R.string.select_purpose), Toast.LENGTH_SHORT).show();
                 } else if (descreption.equals("")) {
-                    Toast.makeText(CreateMeetingActivity.this, "Enter Descreption", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, getString(R.string.enter_descreption), Toast.LENGTH_SHORT).show();
                 } else if (customer.equals("")) {
-                    Toast.makeText(CreateMeetingActivity.this, "Enter Customer Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, getString(R.string.enter_customer_name), Toast.LENGTH_SHORT).show();
                 } else if (date.equals("")) {
-                    Toast.makeText(CreateMeetingActivity.this, "Enter Date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, getString(R.string.enter_date), Toast.LENGTH_SHORT).show();
                 } else if (time.equals("")) {
-                    Toast.makeText(CreateMeetingActivity.this, "Enter Time", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, getString(R.string.enter_time), Toast.LENGTH_SHORT).show();
                 } else if (agenda.equals("")) {
-                    Toast.makeText(CreateMeetingActivity.this, "Enter Agenda", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, getString(R.string.enter_agenda), Toast.LENGTH_SHORT).show();
                 } else if (contactperson.equals("")) {
-                    Toast.makeText(CreateMeetingActivity.this, "Enter Contact Person", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, getString(R.string.enter_contact_person), Toast.LENGTH_SHORT).show();
                 } else if (address.equals("")) {
-                    Toast.makeText(CreateMeetingActivity.this, "Enter Address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateMeetingActivity.this, getString(R.string.enter_address), Toast.LENGTH_SHORT).show();
                 } else
 
                 {
                     // pDialog.show();
                     progress.setVisibility(View.VISIBLE);
-                    LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+                    LoginModel model = sh.getLoginModel(getString(R.string.login_model));
 
                     createMeeting(model.getId(), purpose, descreption, customer, date, time, agenda, contactperson, address, "", "", "", "", "");
                 }
@@ -318,7 +318,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
@@ -355,9 +355,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        title.setText("Select Customer");
+        title.setText(getString(R.string.select_customer));
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();

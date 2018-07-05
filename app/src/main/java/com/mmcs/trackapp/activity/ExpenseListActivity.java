@@ -81,7 +81,7 @@ public class ExpenseListActivity extends AppCompatActivity {
     }
     private void getExpenseList()
     {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getExpanseList(model.getId()).enqueue(new Callback<ExpenseResMeta>() {
             @Override
             public void onResponse(Call<ExpenseResMeta> call, Response<ExpenseResMeta> response) {

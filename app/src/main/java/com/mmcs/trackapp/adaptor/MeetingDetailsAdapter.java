@@ -62,13 +62,13 @@ public class MeetingDetailsAdapter extends BaseAdapter {
         TextView txtContactPerson=view.findViewById(R.id.txtcontactperson);
         TextView txtAddress=view.findViewById(R.id.txtaddress);
         txtDescreption.setText(list.get(i).getDescreption());
-        txtPurpose.setText("Purpose:"+list.get(i).getPurpose());
-        txtCustomer.setText("Client:"+list.get(i).getCustomer_name());
-        txtAgenda.setText("Agenda:"+list.get(i).getAgenda());
-        txtDate.setText("Date:"+list.get(i).getDate());
-        txtTime.setText("Time:"+list.get(i).getTime());
-        txtContactPerson.setText("Con. Person:"+list.get(i).getContact_person());
-        txtAddress.setText("Address: "+list.get(i).getAddress());
+        txtPurpose.setText(context.getString(R.string.purpose)+list.get(i).getPurpose());
+        txtCustomer.setText(context.getString(R.string.client)+list.get(i).getCustomer_name());
+        txtAgenda.setText(context.getString(R.string.agenda)+list.get(i).getAgenda());
+        txtDate.setText(context.getString(R.string.date)+list.get(i).getDate());
+        txtTime.setText(context.getString(R.string.time)+list.get(i).getTime());
+        txtContactPerson.setText(context.getString(R.string.con_person)+list.get(i).getContact_person());
+        txtAddress.setText(context.getString(R.string.address)+list.get(i).getAddress());
         return view;
     }
 }

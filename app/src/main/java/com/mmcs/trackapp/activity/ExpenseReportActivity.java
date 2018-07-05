@@ -58,7 +58,7 @@ Shprefrences sh;
 
     public void getReportList()
     {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getReportList(model.getId()).enqueue(new Callback<ReportResMeta>() {
             @Override
             public void onResponse(Call<ReportResMeta> call, Response<ReportResMeta> response) {

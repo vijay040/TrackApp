@@ -33,7 +33,7 @@ public class MessageAdapter extends BaseAdapter {
         this.list = list;
         this.context = context;
         sh=new Shprefrences(context);
-         model = sh.getLoginModel("LOGIN_MODEL");
+         model = sh.getLoginModel(context.getString(R.string.login_model));
     }
 
     @Override

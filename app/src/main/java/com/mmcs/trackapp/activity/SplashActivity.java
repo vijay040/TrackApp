@@ -53,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
 
     public void test()
     {
-        Singleton.getInstance().getApi().test("samir@gmail.com","samir@123").enqueue(new Callback<ResAttandance>() {
+        Singleton.getInstance().getApi().test(getString(R.string.test_email),getString(R.string.test_password)).enqueue(new Callback<ResAttandance>() {
             @Override
             public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
 

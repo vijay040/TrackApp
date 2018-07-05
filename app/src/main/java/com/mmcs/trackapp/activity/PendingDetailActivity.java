@@ -51,13 +51,13 @@ Shprefrences sh;
       back();
         //getSupportActionBar().setTitle("Request");
         list_requesttype=findViewById(R.id.list_requesttype);
-        txtdescreption.setText("Descreption:"+prerequestmodel.getComment());
-        txtdate.setText("Date:"+prerequestmodel.getDate());
-        txtadvance.setText("Advance:"+prerequestmodel.getAdvance());
+        txtdescreption.setText(getString(R.string.description)+prerequestmodel.getComment());
+        txtdate.setText(getString(R.string.date)+prerequestmodel.getDate());
+        txtadvance.setText(getString(R.string.advance)+prerequestmodel.getAdvance());
 
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         // Span to set text color to some RGB value
-        ForegroundColorSpan fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold
         //    final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
         // Set the text color for first 4 characters
@@ -65,19 +65,19 @@ Shprefrences sh;
         txtdescreption.setText(sb);
 
         sb = new SpannableStringBuilder(txtadvance.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtadvance.setText(sb);
 
         sb = new SpannableStringBuilder(txtdate.getText());
-        fcs = new ForegroundColorSpan(Color.parseColor("#5fb0c9"));
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtdate.setText(sb);
 
         approve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postStatus("ACCEPT");
+                postStatus(getString(R.string.accept));
                 finish();
             }
         });
@@ -85,7 +85,7 @@ Shprefrences sh;
         reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postStatus("REJECT");
+                postStatus(getString(R.string.reject));
                 finish();
             }
         });
@@ -95,7 +95,7 @@ Shprefrences sh;
 
     private void postStatus(String status)
     {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().postAcceptRejectPendings(model.getId(),prerequestmodel.getId(),status).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {

@@ -107,5 +107,7 @@
                android:layout_alignParentBottom="true"
                android:layout_centerHorizontal="true"
                android:visibility="gone"
-               android:layout_marginBottom="@dimen/_10sdp"/>
+                android:indeterminateDrawable="@drawable/progressbar"
+
+                android:layout_marginBottom="@dimen/_40sdp"/>
                </RelativeLayout>

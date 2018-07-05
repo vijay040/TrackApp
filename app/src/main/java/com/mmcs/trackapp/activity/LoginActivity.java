@@ -52,13 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin=findViewById(R.id.btn_signin);
         progress=findViewById(R.id.progress);
         sh=new Shprefrences(this);
-        final ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
-       /* if (activeNetwork != null && activeNetwork.isConnected()) {
-           Toast.makeText(LoginActivity.this,"Available",Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(LoginActivity.this,"Available",Toast.LENGTH_SHORT).show();
-        }*/
 
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,9 +59,9 @@ public class LoginActivity extends AppCompatActivity {
                 String user_name = username.getText().toString();
                 String pass = password.getText().toString();
                 if (user_name.equals("")) {
-                    Toast.makeText(LoginActivity.this, "Enter User Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.enter_user_name), Toast.LENGTH_SHORT).show();
                 } else if (pass.equals("")) {
-                    Toast.makeText(LoginActivity.this, "Enter Your Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.enter_your_password), Toast.LENGTH_SHORT).show();
                 } else {
                     progress.setVisibility(View.VISIBLE);
                     login(user_name,pass);
@@ -89,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e("","inside*****************************model!=null********");
                     if(model.getId()!=null)
                     {
-                        sh.setLoginModel("LOGIN_MODEL", model);
+                        sh.setLoginModel(getString(R.string.login_model), model);
                         sh.setBoolean("ISLOGIN",true);
                         startActivity(new Intent(LoginActivity.this, DrawerActivity.class));
                         finish();
@@ -99,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                        Toast.makeText(LoginActivity.this, "Please Try Again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, getString(R.string.please_try_again), Toast.LENGTH_SHORT).show();
                 }
 
                 progress.setVisibility(View.GONE);
@@ -109,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginResMeta> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), "Please Try Again!",
+                Toast.makeText(getApplicationContext(),  getString(R.string.please_try_again),
                         Toast.LENGTH_SHORT).show();
             }
         });

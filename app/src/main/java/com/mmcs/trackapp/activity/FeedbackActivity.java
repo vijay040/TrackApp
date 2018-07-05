@@ -65,13 +65,13 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
              String customer_name=edtCustomer.getText().toString();
              String comm=comment.getText().toString();
              if(customer_name.equals("")){
-                 Toast.makeText(FeedbackActivity.this,"Select Customer Name",Toast.LENGTH_SHORT).show();
+                 Toast.makeText(FeedbackActivity.this,getString(R.string.select_customer),Toast.LENGTH_SHORT).show();
              }
              else if(comm.equals("")) {
-                 Toast.makeText(FeedbackActivity.this, "Enter Your Comment", Toast.LENGTH_SHORT).show();
+                 Toast.makeText(FeedbackActivity.this, getString(R.string.enter_your_comment), Toast.LENGTH_SHORT).show();
              }
              else{
-                 DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+                 DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
                  final String createddate = df.format(Calendar.getInstance().getTime());
                  postFeedback(customerid,comm,createddate);
              }
@@ -91,9 +91,9 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
 
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        title.setText("Select Customer");
+        title.setText(getString(R.string.select_customer));
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
@@ -151,12 +151,12 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
 
     public void postFeedback(String customerId,String feedback, String posted_on)
     {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         progressBar.setVisibility(View.VISIBLE);
         Singleton.getInstance().getApi().postFeedback(model.getId(),customerId,feedback,posted_on).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
-                Toast.makeText(FeedbackActivity.this,"Successfully posted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(FeedbackActivity.this,getString(R.string.successfully_posted),Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 finish();
                  }

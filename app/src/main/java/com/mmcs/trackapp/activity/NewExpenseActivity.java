@@ -111,7 +111,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         if (imgUrl != null && !imgUrl.equalsIgnoreCase(""))
             Picasso.get().load(imgUrl).into(imageView);
         sh = new Shprefrences(this);
-        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
         getDate.setText("Created On:" + createddate);
         progress.setVisibility(View.VISIBLE);
@@ -132,19 +132,25 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 String selectmeeting = meeting.getText().toString();
                 String amnt = amount.getText().toString();
                 String currenc = currency.getText().toString();
+                String expensetype=edRequestTypes.getText().toString();
                 String cmnt = comments.getText().toString();
                 String totalamount = amnt + currenc;
                 if (selectmeeting.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "Select Meeting", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewExpenseActivity.this, getString(R.string.select_meeting), Toast.LENGTH_SHORT).show();
                     return;
                 } else if (amnt.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewExpenseActivity.this, getString(R.string.enter_amount), Toast.LENGTH_SHORT).show();
                     return;
                 } else if (currenc.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "Select Currency", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewExpenseActivity.this, getString(R.string.select_currency), Toast.LENGTH_SHORT).show();
                     return;
-                } else if (cmnt.equals("")) {
-                    Toast.makeText(NewExpenseActivity.this, "Enter Your Comment", Toast.LENGTH_SHORT).show();
+                }
+                else if (expensetype.equals("")) {
+                    Toast.makeText(NewExpenseActivity.this, getString(R.string.select_expensetype), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (cmnt.equals("")) {
+                    Toast.makeText(NewExpenseActivity.this, getString(R.string.enter_your_comment), Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
@@ -174,7 +180,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     }
 
     public void getMeetingsList() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getMeetingsList(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
@@ -188,7 +194,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     }
 
     public void getReqestTypes() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getExpenseTypes(model.getId()).enqueue(new Callback<ResMetaReqTypes>() {
             @Override
             public void onResponse(Call<ResMetaReqTypes> call, Response<ResMetaReqTypes> response) {
@@ -206,7 +212,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     }
 
     private void getCurrencyList() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
             @Override
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
@@ -280,10 +286,10 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
-        title.setText("Selected Created Meetings");
+        title.setText(getString(R.string.selected_created_meetings));
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
         popupId = 1;
@@ -312,10 +318,10 @@ String requestTypeId;
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         TextView title = dialogView.findViewById(R.id.title);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
-        title.setText("Selected Expense Types");
+        title.setText(getString(R.string.selected_expense_types));
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
         popupId = 1;
@@ -347,9 +353,9 @@ String requestTypeId;
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         TextView title = dialogView.findViewById(R.id.title);
-        editTextName.setQueryHint("Search Here");
+        editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
-        title.setText("Select Currency");
+        title.setText(getString(R.string.select_currency));
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
@@ -415,12 +421,12 @@ String requestTypeId;
     }
 
     private void postExpanse(String amnt, String createddate, String cmnt) {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         String userid = model.getId();
         Singleton.getInstance().getApi().postExpanse(userid, meetingId, amnt, requestTypeId, createddate, cmnt).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
-                Toast.makeText(NewExpenseActivity.this, "Expanse posted successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewExpenseActivity.this, getString(R.string.expanse_posted_successfully), Toast.LENGTH_SHORT).show();
                 progress.setVisibility(View.GONE);
                 finish();
             }
@@ -428,7 +434,7 @@ String requestTypeId;
             @Override
             public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toast.makeText(NewExpenseActivity.this, "Sorry!Try Again!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewExpenseActivity.this, getString(R.string.sorry_try_again), Toast.LENGTH_SHORT).show();
             }
         });
     }

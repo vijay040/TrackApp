@@ -71,7 +71,7 @@ public class MessageActivity extends AppCompatActivity {
 
     private void getMessageList()
     {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getMessages(model.getId()).enqueue(new Callback<MessageResMeta>() {
             @Override
             public void onResponse(Call<MessageResMeta> call, Response<MessageResMeta> response) {

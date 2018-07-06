@@ -123,8 +123,8 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         edtDate.setText(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         H = calendar.get(Calendar.HOUR_OF_DAY);
         M = calendar.get(Calendar.MINUTE);
-
-      if (H < 12 && H >= 0) {
+        edtTime.setText(String.valueOf(H) + ":" + String.valueOf(M));
+     /* if (H < 12 && H >= 0) {
             edtTime.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
         } else {
             H -= 12;
@@ -132,7 +132,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                 H = 12;
             }
             edtTime.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
-        }
+        }*/
         edtTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -224,7 +224,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         if (id == 111) {
             return new DatePickerDialog(this, onDateSetListener, YY, MM, DD);
         } else if (id == 121) {
-            return new TimePickerDialog(this, onTimeSetListener, H, M, false);
+            return new TimePickerDialog(this, onTimeSetListener, H, M, true);
         }
         return onCreateDialog(id);
     }
@@ -238,8 +238,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements
     TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int h, int m) {
+            timePicker.is24HourView();
 
-          if (h < 12 && h >= 0) {
+        /*  if (h < 12 && h >= 0) {
                 edtTime.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "AM");
             } else {
                 h -= 12;
@@ -247,8 +248,8 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                     h = 12;
                 }
                 edtTime.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "PM");
-            }
-
+            }*/
+            edtTime.setText(String.valueOf(h) + ":" + String.valueOf(m));
         }
     };
     private void back() {

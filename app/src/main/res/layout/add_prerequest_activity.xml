@@ -183,7 +183,7 @@
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:background="#FFDA44"
+                        android:background="@drawable/btn"
                         android:text="@string/Create"
                         android:textColor="@color/white_color"
                         android:textSize="@dimen/_15sdp"

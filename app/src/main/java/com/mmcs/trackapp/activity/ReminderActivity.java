@@ -74,7 +74,9 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         Calendar alarmCal = Calendar.getInstance();
         H = calendar.get(Calendar.HOUR_OF_DAY);
         M = calendar.get(Calendar.MINUTE);
-        if (H < 12 && H >= 0) {
+        edt_time.setText(String.valueOf(H) + ":" + String.valueOf(M));
+        edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M));
+       /* if (H < 12 && H >= 0) {
             edt_time.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
             edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
         } else {
@@ -84,7 +86,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
             }
             edt_time.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
             edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
-        }
+        }*/
 
         edtStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,11 +169,11 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
             case TIME_DIALOG_ID:
                 System.out.println("onCreateDialog  : " + id);
                 cur = TIME_DIALOG_ID;
-                return new TimePickerDialog(this, onTimeSetListener, H, M, false);
+                return new TimePickerDialog(this, onTimeSetListener, H, M, true);
             case TIME_DIALOG_ID2:
                 System.out.println("onCreateDialog  : " + id);
                 cur = TIME_DIALOG_ID2;
-                return new TimePickerDialog(this, onTimeSetListener, H, M, false);
+                return new TimePickerDialog(this, onTimeSetListener, H, M, true);
 
         }
 
@@ -196,6 +198,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int h, int m) {
+            timePicker.is24HourView();
             if (cur == TIME_DIALOG_ID) {
                 // set selected date into textview
                /* if (h < 12 && h >= 0) {
@@ -212,6 +215,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
                 ReminderActivity.this.t = t;
 
             } else {
+               /*
                 if (h < 12 && h >= 0) {
                     edt_EndTime.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "AM");
                 } else {
@@ -220,8 +224,8 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
                         h = 12;
                     }
                     edt_EndTime.setText(String.valueOf(h) + ":" + String.valueOf(m) + " " + "PM");
-                }
-
+                }*/
+                edt_EndTime.setText(String.valueOf(h) + ":" + String.valueOf(m));
             }
         }
     };

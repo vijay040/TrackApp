@@ -69,7 +69,7 @@ public class AttandanceActivity extends AppCompatActivity {
         txtLocation = findViewById(R.id.current_location);
         txtLocation.setText(currentLocation);
         getLocation();
-        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
         texDate.setText(createddate);
         getAttandanceStatus();
@@ -154,8 +154,8 @@ public class AttandanceActivity extends AppCompatActivity {
     }
 
     private void postAttandance() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
-        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
+        DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
         if (status.equalsIgnoreCase("signin")) {
             status = "signout";
@@ -179,7 +179,7 @@ public class AttandanceActivity extends AppCompatActivity {
     }
 
     private void getAttandanceStatus() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>() {
             @Override
             public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {

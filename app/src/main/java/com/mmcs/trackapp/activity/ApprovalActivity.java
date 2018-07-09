@@ -50,7 +50,7 @@ public class ApprovalActivity extends AppCompatActivity {
                 PreRequestAdaptor adapter = (PreRequestAdaptor) adapterView.getAdapter();
                 PreRequestModel preRequestModel = adapter.list.get(i);
                 Intent intent = new Intent(ApprovalActivity.this, PreRequestDetailActivity.class);
-                intent.putExtra("PREREQUESTMODEL", preRequestModel);
+                intent.putExtra(getString(R.string.prerequest_model), preRequestModel);
                 startActivity(intent);
                 }
                });

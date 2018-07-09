@@ -411,7 +411,7 @@ String customerid;
             @Override
             public void onResponse(Call<MeetingModel> call, Response<MeetingModel> response) {
                 progress.setVisibility(View.GONE);
-                Toast.makeText(CreateMeetingActivity.this, "Data submited successfully!",
+                Toast.makeText(CreateMeetingActivity.this, getString(R.string.data_submited_successfully),
                         Toast.LENGTH_LONG).show();
                 finish();
             }

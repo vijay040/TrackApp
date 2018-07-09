@@ -1,15 +1,22 @@
 package com.mmcs.trackapp.activity;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -63,6 +70,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.squareup.picasso.Picasso;
 
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -88,6 +96,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     ArrayList<MeetingModel> meetingList = new ArrayList<>();
     ArrayList<RequestTypeModel> requestTyoesList = new ArrayList<>();
     TextView image_path,edRequestTypes;
+    final int MY_PERMISSIONS_REQUEST_WRITE=103;
     String createddate;
 
     @Override
@@ -114,6 +123,10 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
         getDate.setText("Created On:" + createddate);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
+        }
         progress.setVisibility(View.VISIBLE);
         getReqestTypes();
         getMeetingsList();
@@ -224,6 +237,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             }
         });
     }
+    Uri fileUri;
 
     private void selectImage() {
         final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.choose_from_gallery),getString(R.string.cancel)};
@@ -233,8 +247,16 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals(getString(R.string.take_photo))) {
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                    /*Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
+                    String fileName = System.currentTimeMillis()+".jpg";
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.Images.Media.TITLE, fileName);
+                    fileUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    startActivityForResult(intent, CAMERA_REQUEST);
                 } else if (options[item].equals(getString(R.string.choose_from_gallery))) {
                     openGallery();
                 } else if (options[item].equals(getString(R.string.cancel))) {
@@ -257,10 +279,24 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
+           /* Bitmap photo = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(photo);
             imageImagePath = data.getData().getPath();
-            image_path.setText(imageImagePath);
+            image_path.setText(imageImagePath);*/
+            try
+            {
+                String  photoPath = getPath(fileUri);
+
+                System.out.println("Image Path : " + photoPath);
+                image_path.setText(photoPath);
+                Bitmap b = decodeUri(fileUri);
+                imageView.setImageBitmap(b);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+
         } else if (requestCode == SELECT_PHOTO) {
             if (resultCode == RESULT_OK) {
                 Uri selectedImage = data.getData();
@@ -443,5 +479,63 @@ String requestTypeId;
         TextView title= (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.create_expense));
     }
+    private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException
+    {
+        BitmapFactory.Options o = new BitmapFactory.Options();
+
+        o.inJustDecodeBounds = true;
+
+        BitmapFactory.decodeStream(getContentResolver()
+                .openInputStream(selectedImage), null, o);
+
+        final int REQUIRED_SIZE = 72;
+
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+
+        int scale = 1;
+
+        while (true)
+        {
+            if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE)
+            {
+                break;
+            }
+            width_tmp /= 2;
+
+            height_tmp /= 2;
+
+            scale *= 2;
+        }
+
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+
+        o2.inSampleSize = scale;
+
+        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver()
+                .openInputStream(selectedImage), null, o2);
+
+        return bitmap;
+    }
+
+    @SuppressWarnings("deprecation")
+    private String getPath(Uri selectedImaeUri)
+    {
+        String[] projection = { MediaStore.Images.Media.DATA };
+
+        Cursor cursor = managedQuery(selectedImaeUri, projection, null, null,
+                null);
+
+        if (cursor != null)
+        {
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+            return cursor.getString(columnIndex);
+        }
+
+        return selectedImaeUri.getPath();
+    }
+
 
 }

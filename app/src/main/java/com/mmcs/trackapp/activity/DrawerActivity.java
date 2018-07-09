@@ -35,6 +35,7 @@ public class DrawerActivity extends AppCompatActivity {
     public static FragmentManager fragmentManager;
     TextView txt_meeting, txt_myschedule, txt_feedback, txt_client, txt_attendance, txt_expense, txt_setting, txt_pending, txt_message, txt_logout;
    final int MY_PERMISSIONS_REQUEST_LOCATION=102;
+    final int MY_PERMISSIONS_REQUEST_WRITE=103;
     Shprefrences sh;
 
     @Override
@@ -64,6 +65,13 @@ public class DrawerActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
         }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
+        }
+
+
 
         sh = new Shprefrences(this);
         fragmentManager = getSupportFragmentManager();
@@ -161,7 +169,7 @@ public class DrawerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sh.clearData();
-                Toast.makeText(DrawerActivity.this, "You have logged out successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DrawerActivity.this, getString(R.string.you_have_logged_out_successfully), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DrawerActivity.this, LoginActivity.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(Gravity.LEFT);

@@ -32,7 +32,7 @@ Button ok;
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_request_detail);
-        prerequestmodel= (PreRequestModel) getIntent().getSerializableExtra("PREREQUESTMODEL");
+        prerequestmodel= (PreRequestModel) getIntent().getSerializableExtra(getString(R.string.prerequest_model));
         txtdescreption=findViewById(R.id.txtdescreption);
         txtdate=findViewById(R.id.txtdate);
         txtadvance=findViewById(R.id.txtadvance);

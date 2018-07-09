@@ -254,7 +254,7 @@ preexpense.setOnClickListener(new View.OnClickListener() {
 
         myDir.mkdirs();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_pattern));
         String fileName = dateFormat.format(new Date()) + ".png";
         file = new File(myDir, fileName);
 

@@ -219,6 +219,10 @@
     <string name="session_time_msg">Your session is time out please login again</string>
     <string name="enter_advance_amount">Enter Advance Amount</string>
     <string name="login_model">LOGIN_MODEL</string>
+<string name="prerequest_model">PREREQUESTMODEL</string>
+    <string name="you_have_logged_out_successfully">You have logged out successfully!</string>
+    <string name="date_pattern">yyyyMMdd-HHmmss</string>
+
 
 </resources>
 

@@ -64,7 +64,7 @@ public class FragmentHome extends Fragment {
         txtWelcomeText = view.findViewById(R.id.txtWelcomeText);
         sh = new Shprefrences(getActivity());
 
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         if (model != null)
             name = model.getDisplay_name();
         txtWelcomeText.setText("Hi " + name + "! B Tracker Welcomes You.");

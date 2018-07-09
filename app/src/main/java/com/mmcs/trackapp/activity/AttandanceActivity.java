@@ -154,7 +154,7 @@ public class AttandanceActivity extends AppCompatActivity {
     }
 
     private void postAttandance() {
-        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
         if (status.equalsIgnoreCase("signin")) {
@@ -179,7 +179,7 @@ public class AttandanceActivity extends AppCompatActivity {
     }
 
     private void getAttandanceStatus() {
-        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
+        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
         Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>() {
             @Override
             public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {

@@ -122,7 +122,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         sh = new Shprefrences(this);
         DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
-        getDate.setText("Created On:" + createddate);
+        getDate.setText(getString(R.string.expense_created_on) + createddate);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);

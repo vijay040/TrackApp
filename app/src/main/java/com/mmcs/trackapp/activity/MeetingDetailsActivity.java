@@ -60,7 +60,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         sh = new Shprefrences(this);
         setContentView(R.layout.acitivity_meetingdetails);
-        model = (MeetingModel) getIntent().getSerializableExtra("MEETINGMODEL");
+        model = (MeetingModel) getIntent().getSerializableExtra(getString(R.string.meeting_model));
         progressbar = findViewById(R.id.progressbar);
         progressbar.setVisibility(View.VISIBLE);
         getMeetingStatus();

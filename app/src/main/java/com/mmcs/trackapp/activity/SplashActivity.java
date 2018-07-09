@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                boolean isLogin = sh.getBoolean("ISLOGIN", false);
+                boolean isLogin = sh.getBoolean(getString(R.string.is_login), false);
                 if (isLogin)
                     startActivity(new Intent(SplashActivity.this, DrawerActivity.class));
                 else

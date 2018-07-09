@@ -74,7 +74,7 @@
     <string name="RequestTypes">RequestType</string>
     <string name="Attachment">Attachment</string>
     <string name="Create">Create</string>
-    <string name="name">name</string>
+    <string name="name">Name</string>
     <string name="Email">Email</string>
     <string name="CompanyName">Company Name</string>
     <string name="Mobile">Mobile</string>
@@ -220,8 +220,11 @@
     <string name="enter_advance_amount">Enter Advance Amount</string>
     <string name="login_model">LOGIN_MODEL</string>
 <string name="prerequest_model">PREREQUESTMODEL</string>
+    <string name="report_model">REPORTMODEL</string>
+    <string name="meeting_model">MEETINGMODEL</string>
     <string name="you_have_logged_out_successfully">You have logged out successfully!</string>
     <string name="date_pattern">yyyyMMdd-HHmmss</string>
+    <string name="is_login">ISLOGIN</string>
 
 
 </resources>

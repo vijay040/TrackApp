@@ -50,7 +50,7 @@ Shprefrences sh;
                 ReportAdapter adap = (ReportAdapter) adapterView.getAdapter();
                 ReportModel model = adap.list.get(i);
                 Intent intent = new Intent(ExpenseReportActivity.this, ExpenseReportDetailsActivity.class);
-                intent.putExtra("REPORTMODEL", model);
+                intent.putExtra(getString(R.string.report_model), model);
                 startActivity(intent);
             }
         });

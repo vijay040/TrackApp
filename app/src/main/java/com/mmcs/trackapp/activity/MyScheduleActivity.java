@@ -55,7 +55,7 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
                 MeetingDetailsAdapter adapter = (MeetingDetailsAdapter) adapterView.getAdapter();
                 MeetingModel model = adapter.list.get(i);
                 Intent intent = new Intent(MyScheduleActivity.this, MeetingDetailsActivity.class);
-                intent.putExtra("MEETINGMODEL", model);
+                intent.putExtra(getString(R.string.meeting_model), model);
                 startActivity(intent);
             }
         });

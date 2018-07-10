@@ -53,7 +53,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location_activity);
-        model = (MeetingModel) getIntent().getSerializableExtra("MEETINGMODEL");
+        model = (MeetingModel) getIntent().getSerializableExtra(getString(R.string.meeting_model));
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

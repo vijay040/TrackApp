@@ -23,7 +23,7 @@ public class MessageDetailsActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_details);
-        messageModel= (MessageModel) getIntent().getSerializableExtra("MESSAGEMODEL");
+        messageModel= (MessageModel) getIntent().getSerializableExtra(getString(R.string.message_model));
         txt_name=findViewById(R.id.txt_name);
         txt_Date=findViewById(R.id.txt_Date);
         txt_message=findViewById(R.id.txt_message);

@@ -5,7 +5,7 @@
     <include layout="@layout/toolbar"/>
     <TextView
         android:layout_width="wrap_content"
-        android:text="Select:"
+        android:text="@string/select"
         android:textSize="@dimen/_15sdp"
         android:layout_marginLeft="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_20sdp"

@@ -101,7 +101,7 @@
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelTextSize="@dimen/_10sdp"
                 app:met_primaryColor="@color/text_hint_color" />
-                app:met_primaryColor="@color/text_hint_color" />
+
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/edt_pin"
                     android:layout_width="match_parent"

@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/user_profile_image_background" />
+        android:src="@drawable/ic_userlogin" />
 
     <RelativeLayout
         android:id="@+id/layLogOut"

@@ -2,25 +2,28 @@ package com.mmcs.trackapp.model;
 
 public class LoginModel {
 
+
     private String position;
 
-    private String Code;
+    private String company_id;
 
-    private String is_active;
+    private String role_id;
+
+    private String status;
+
+    private String department;
 
     private String country_id;
 
-    private String date;
-
-    private String password;
+    private String image;
 
     private String location_id;
 
     private String id;
 
-    private String display_name;
+    private String user_name;
 
-    private String time;
+    private String display_name;
 
     private String joining_date;
 
@@ -28,57 +31,19 @@ public class LoginModel {
 
     private String email;
 
-    private String company_name;
+    private String longitude;
 
-    private String role;
-
-    private String user_id;
+    private String admin_id;
 
     private String reporting_person;
 
-    private String department_name;
-
-    private String reporting_manager_id;
+    private String latitude;
 
     private String group;
 
+    private String reporting_manager_id;
+
     private String mobile;
-
-    private String msg;
-
-    private String user_name;
-
-    public String getReporting_manager_id() {
-        return reporting_manager_id;
-    }
-
-    public void setReporting_manager_id(String reporting_manager_id) {
-        this.reporting_manager_id = reporting_manager_id;
-    }
-
-    public String getUser_name() {
-        return user_name;
-    }
-
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getCode() {
-        return Code;
-    }
-
-    public void setCode(String Code) {
-        this.Code = Code;
-    }
 
     public String getPosition ()
     {
@@ -90,14 +55,44 @@ public class LoginModel {
         this.position = position;
     }
 
-    public String getIs_active ()
+    public String getCompany_id ()
     {
-        return is_active;
+        return company_id;
     }
 
-    public void setIs_active (String is_active)
+    public void setCompany_id (String company_id)
     {
-        this.is_active = is_active;
+        this.company_id = company_id;
+    }
+
+    public String getRole_id ()
+    {
+        return role_id;
+    }
+
+    public void setRole_id (String role_id)
+    {
+        this.role_id = role_id;
+    }
+
+    public String getStatus ()
+    {
+        return status;
+    }
+
+    public void setStatus (String status)
+    {
+        this.status = status;
+    }
+
+    public String getDepartment ()
+    {
+        return department;
+    }
+
+    public void setDepartment (String department)
+    {
+        this.department = department;
     }
 
     public String getCountry_id ()
@@ -110,24 +105,14 @@ public class LoginModel {
         this.country_id = country_id;
     }
 
-    public String getDate ()
+    public String getImage ()
     {
-        return date;
+        return image;
     }
 
-    public void setDate (String date)
+    public void setImage (String image)
     {
-        this.date = date;
-    }
-
-    public String getPassword ()
-    {
-        return password;
-    }
-
-    public void setPassword (String password)
-    {
-        this.password = password;
+        this.image = image;
     }
 
     public String getLocation_id ()
@@ -150,6 +135,16 @@ public class LoginModel {
         this.id = id;
     }
 
+    public String getUser_name ()
+    {
+        return user_name;
+    }
+
+    public void setUser_name (String user_name)
+    {
+        this.user_name = user_name;
+    }
+
     public String getDisplay_name ()
     {
         return display_name;
@@ -158,16 +153,6 @@ public class LoginModel {
     public void setDisplay_name (String display_name)
     {
         this.display_name = display_name;
-    }
-
-    public String getTime ()
-    {
-        return time;
-    }
-
-    public void setTime (String time)
-    {
-        this.time = time;
     }
 
     public String getJoining_date ()
@@ -200,34 +185,24 @@ public class LoginModel {
         this.email = email;
     }
 
-    public String getCompany_name ()
+    public String getLongitude ()
     {
-        return company_name;
+        return longitude;
     }
 
-    public void setCompany_name (String company_name)
+    public void setLongitude (String longitude)
     {
-        this.company_name = company_name;
+        this.longitude = longitude;
     }
 
-    public String getRole ()
+    public String getAdmin_id ()
     {
-        return role;
+        return admin_id;
     }
 
-    public void setRole (String role)
+    public void setAdmin_id (String admin_id)
     {
-        this.role = role;
-    }
-
-    public String getUser_id ()
-    {
-        return user_id;
-    }
-
-    public void setUser_id (String user_id)
-    {
-        this.user_id = user_id;
+        this.admin_id = admin_id;
     }
 
     public String getReporting_person ()
@@ -240,14 +215,14 @@ public class LoginModel {
         this.reporting_person = reporting_person;
     }
 
-    public String getDepartment_name ()
+    public String getLatitude ()
     {
-        return department_name;
+        return latitude;
     }
 
-    public void setDepartment_name (String department_name)
+    public void setLatitude (String latitude)
     {
-        this.department_name = department_name;
+        this.latitude = latitude;
     }
 
     public String getGroup ()
@@ -260,6 +235,16 @@ public class LoginModel {
         this.group = group;
     }
 
+    public String getReporting_manager_id ()
+    {
+        return reporting_manager_id;
+    }
+
+    public void setReporting_manager_id (String reporting_manager_id)
+    {
+        this.reporting_manager_id = reporting_manager_id;
+    }
+
     public String getMobile ()
     {
         return mobile;
@@ -269,6 +254,7 @@ public class LoginModel {
     {
         this.mobile = mobile;
     }
+
 
     @Override
     public String toString()

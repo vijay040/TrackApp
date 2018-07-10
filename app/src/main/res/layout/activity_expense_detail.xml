@@ -22,7 +22,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/ic_receipt" />
+        android:src="@drawable/ic_receipt" />
 
     <TextView
         android:id="@+id/txtEdit"

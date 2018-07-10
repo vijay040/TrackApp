@@ -19,7 +19,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:text="@string/welcome"
-                android:textColor="#00008B"
+                android:textColor="@color/welcome_text_color"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         <LinearLayout

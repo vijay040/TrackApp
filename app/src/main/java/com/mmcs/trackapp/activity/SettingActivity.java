@@ -32,8 +32,12 @@ import com.mmcs.trackapp.model.CurrencyModel;
 import com.mmcs.trackapp.model.LoginModel;
 import com.mmcs.trackapp.model.ResMetaCurrency;
 import com.mmcs.trackapp.model.ResMetaMeeting;
+import com.mmcs.trackapp.model.UploadImageModel;
+import com.mmcs.trackapp.model.UploadImageResMeta;
+import com.mmcs.trackapp.util.CircleTransform;
 import com.mmcs.trackapp.util.Shprefrences;
 import com.mmcs.trackapp.util.Singleton;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,6 +48,8 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static java.security.AccessController.getContext;
 
 public class SettingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     EditText edt_txt_first_name, edt_txt_last_name, edt_txt_email_id, edt_txt_role, edt_txt_manager, edt_txt_numberformate, edt_txt_position, edt_txt_joiningdate, edt_txt_department, edt_txt_home_address, edt_txt_conf_personal_number, edt_txt_currency, edt_txt_dateformate, edt_txt_language;
@@ -93,11 +99,11 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
         edt_txt_email_id.setText(model.getEmail() + "");
         edt_txt_home_address.setText("Noida, India");
         edt_txt_manager.setText(model.getReporting_person() + "");
-        edt_txt_role.setText(model.getRole() + "");
-        edt_txt_department.setText(model.getDepartment_name() + "");
+        edt_txt_role.setText(model.getRole_id() + "");
+        edt_txt_department.setText(model.getDepartment() + "");
         edt_txt_joiningdate.setText(model.getJoining_date() + "");
         edt_txt_conf_personal_number.setText(model.getMobile_number() + "");
-        edt_txt_password_professional.setText(model.getPassword() + "");
+        //edt_txt_password_professional.setText(model.get() + "");
 
         getCurrencyList();
         back();
@@ -124,7 +130,7 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
 
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
-        Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
+        Singleton.getInstance().getApi().getCurrencyList(model.getId()).enqueue(new Callback<ResMetaCurrency>() {
             @Override
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
                 currencyList = response.body().getResponse();
@@ -278,8 +284,6 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                Bitmap b = decodeUri(fileUri);
-                imgProfile.setImageBitmap(b);
                 updateUserProfile(imageImagePath);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -289,7 +293,6 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
             if (resultCode == RESULT_OK) {
                 Uri selectedImage = data.getData();
                 if (selectedImage != null) {
-                    imgProfile.setImageURI(selectedImage);
                     imageImagePath = getPath(selectedImage);
                     updateUserProfile(imageImagePath);
                 }
@@ -362,14 +365,19 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
         if (imagPh != null)
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestId = RequestBody.create(MediaType.parse("text/plain"), model.getId());
-        Singleton.getInstance().getApi().updateUserProfile(requestId, imgFile).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().updateUserProfile(requestId, imgFile).enqueue(new Callback<UploadImageResMeta>() {
             @Override
-            public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
-
+            public void onResponse(Call<UploadImageResMeta> call, Response<UploadImageResMeta> response) {
+                if (response.body().getCode().equalsIgnoreCase("200")) {
+                    UploadImageModel up = response.body().getData();
+                    model.setImage(up.getImage());
+                    sh.setLoginModel(getString(R.string.login_model), model);
+                    Picasso.get().load(up.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
+                }
             }
 
             @Override
-            public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
+            public void onFailure(Call<UploadImageResMeta> call, Throwable t) {
 
             }
         });

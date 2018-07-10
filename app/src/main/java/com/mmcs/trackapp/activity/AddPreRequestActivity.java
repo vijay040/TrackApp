@@ -220,7 +220,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
 
     private void getCurrencyList() {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
-        Singleton.getInstance().getApi().getCurrencyList(model.getUser_id()).enqueue(new Callback<ResMetaCurrency>() {
+        Singleton.getInstance().getApi().getCurrencyList(model.getId()).enqueue(new Callback<ResMetaCurrency>() {
             @Override
             public void onResponse(Call<ResMetaCurrency> call, Response<ResMetaCurrency> response) {
                 currencyList = response.body().getResponse();

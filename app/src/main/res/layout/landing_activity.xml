@@ -31,12 +31,76 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_userlogin" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/txtName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vijay Prakash"
+                        android:textColor="@color/welcome_text_color"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:textStyle="bold|italic"
+                        />
+                    <TextView
+                        android:id="@+id/txtEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/them_color"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="bold"
+                        android:text="vijay@gmail.com"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtDepartment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/them_color"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Department"
+                        />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/them_color"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    />
+
                 <TextView
                     android:id="@+id/txt_meeting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/ic_meeting"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/CreateMeeting"
@@ -49,7 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/schedule"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/MySchedule"
@@ -62,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/ic_feedback"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/Feedback"
@@ -75,7 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/ic_customer"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/Clients"
@@ -88,7 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/attaindance"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/Attendance"
@@ -101,7 +165,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/ic_expense"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/Expense"
@@ -114,7 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/ic_settings"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/Settings"
@@ -127,7 +191,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/ic_notification"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/Pendings"
@@ -140,7 +204,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/msgicon"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/Messages"
@@ -154,7 +218,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/ic_logout"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/logout"

@@ -15,9 +15,9 @@ import com.mmcs.trackapp.model.ResMetaMeeting;
 import com.mmcs.trackapp.model.ResMetaReqTypes;
 import com.mmcs.trackapp.model.ResMetaUsers;
 import com.mmcs.trackapp.model.ResponseMeta;
+import com.mmcs.trackapp.model.UploadImageResMeta;
 
 import java.util.ArrayList;
-
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -101,7 +101,7 @@ public interface RetrofitApi {
 
     @Multipart
     @POST("update_user_profile_image.php?request=updateuserprofile")
-    Call<ResMetaMeeting> updateUserProfile(@Part("user_id") RequestBody user_id,@Part("image\"; filename=\"profile.jpg") RequestBody image
+    Call<UploadImageResMeta> updateUserProfile(@Part("user_id") RequestBody user_id, @Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );
 

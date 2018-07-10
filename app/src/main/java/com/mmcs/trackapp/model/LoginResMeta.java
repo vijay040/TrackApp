@@ -1,17 +1,37 @@
 package com.mmcs.trackapp.model;
 
-public class LoginResMeta {
-    private LoginModel response;
+import java.util.ArrayList;
 
-    public LoginModel getResponse ()
-    {
+public class LoginResMeta {
+    private ArrayList<LoginModel> response;
+
+    private String code;
+
+    private String msg;
+
+
+    public ArrayList<LoginModel> getResponse() {
         return response;
     }
 
-    public void setResponse (LoginModel response)
-    {
+    public void setResponse(ArrayList<LoginModel> response) {
         this.response = response;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 }
 

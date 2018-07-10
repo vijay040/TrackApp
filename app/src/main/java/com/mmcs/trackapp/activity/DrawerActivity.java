@@ -23,7 +23,10 @@ import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.fragment.FragmentHome;
+import com.mmcs.trackapp.model.LoginModel;
+import com.mmcs.trackapp.util.CircleTransform;
 import com.mmcs.trackapp.util.Shprefrences;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by aphroecs on 10/10/2016.
@@ -33,22 +36,24 @@ public class DrawerActivity extends AppCompatActivity {
     RelativeLayout drawerIcon;
     public static boolean isHome = true;
     public static FragmentManager fragmentManager;
-    TextView txt_meeting, txt_myschedule, txt_feedback, txt_client, txt_attendance, txt_expense, txt_setting, txt_pending, txt_message, txt_logout;
-   final int MY_PERMISSIONS_REQUEST_LOCATION=102;
-    final int MY_PERMISSIONS_REQUEST_WRITE=103;
+    TextView txtName,txtEmail,txtDepartment, txt_meeting, txt_myschedule, txt_feedback, txt_client, txt_attendance, txt_expense, txt_setting, txt_pending, txt_message, txt_logout;
+    final int MY_PERMISSIONS_REQUEST_LOCATION = 102;
+    final int MY_PERMISSIONS_REQUEST_WRITE = 103;
     Shprefrences sh;
-
+    LoginModel model;
+    ImageView imgProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-      // requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // requestWindowFeature(Window.FEATURE_NO_TITLE);
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT > 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-       // activity=this;
+        // activity=this;
         setContentView(R.layout.landing_activity);
+        sh = new Shprefrences(this);
         txt_meeting = (TextView) findViewById(R.id.txt_meeting);
         txt_myschedule = (TextView) findViewById(R.id.txt_myschedule);
         txt_feedback = (TextView) findViewById(R.id.txt_feedback);
@@ -59,6 +64,14 @@ public class DrawerActivity extends AppCompatActivity {
         txt_pending = (TextView) findViewById(R.id.txt_pending);
         txt_message = (TextView) findViewById(R.id.txt_message);
         txt_logout = (TextView) findViewById(R.id.txt_logout);
+        txtName = (TextView) findViewById(R.id.txtName);
+        txtEmail = (TextView) findViewById(R.id.txtEmail);
+        txtDepartment = (TextView) findViewById(R.id.txtDepartment);
+
+        imgProfile = findViewById(R.id.imgProfile);
+        model = sh.getLoginModel(getString(R.string.login_model));
+        Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
+        txtName.setText(model.getDisplay_name());
         setTitle();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -68,18 +81,17 @@ public class DrawerActivity extends AppCompatActivity {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
         }
 
 
 
-        sh = new Shprefrences(this);
         fragmentManager = getSupportFragmentManager();
         pushFragment(new FragmentHome());
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
         drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
-        ImageView imgDrawer= findViewById(R.id.imgDrawer);
+        ImageView imgDrawer = findViewById(R.id.imgDrawer);
         imgDrawer.setBackground(ContextCompat.getDrawable(DrawerActivity.this, R.drawable.ic_menu));
         drawerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,19 +189,6 @@ public class DrawerActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public static void pushFragment(Fragment fragment) {
@@ -202,11 +201,18 @@ public class DrawerActivity extends AppCompatActivity {
         }
     }
 
-    private void setTitle()
-    {
-        TextView title= (TextView) findViewById(R.id.title);
+    private void setTitle() {
+        TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.bTrack));
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        model = sh.getLoginModel(getString(R.string.login_model));
+        Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
+        txtName.setText(model.getDisplay_name());
+        txtEmail.setText(model.getEmail());
+        txtDepartment.setText("("+model.getDepartment()+")");
+    }
 }

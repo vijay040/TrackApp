@@ -75,25 +75,17 @@ public class LoginActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().login(email,pass,"","").enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
-                LoginModel model=response.body().getResponse();
-                Log.e("","inside**************************************");
-                if(model!=null)
-                {
-                    Log.e("","inside*****************************model!=null********");
-                    if(model.getId()!=null)
-                    {
+                    if(response.body().getCode()!=null && response.body().getCode().equalsIgnoreCase("200"))
+                    {  LoginModel model=response.body().getResponse().get(0);
                         sh.setLoginModel(getString(R.string.login_model), model);
                         sh.setBoolean("ISLOGIN",true);
                         startActivity(new Intent(LoginActivity.this, DrawerActivity.class));
                         finish();
                     }
-                    if(model.getCode()!=null) {
-                        Toast.makeText(LoginActivity.this, ""+ model.getMsg(), Toast.LENGTH_SHORT).show();
+                    else{
+                        Toast.makeText(LoginActivity.this, "Invalid userid and password!", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else {
-                        Toast.makeText(LoginActivity.this, getString(R.string.please_try_again), Toast.LENGTH_SHORT).show();
-                }
+
 
                 progress.setVisibility(View.GONE);
 

@@ -70,12 +70,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -167,7 +170,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postExpanse(totalamount, createddate, cmnt);
+                    postExpanse(totalamount, createddate, cmnt,imageImagePath);
                 }
             }
         });
@@ -279,21 +282,12 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-           /* Bitmap photo = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(photo);
-            imageImagePath = data.getData().getPath();
-            image_path.setText(imageImagePath);*/
-            try
-            {
-                String  photoPath = getPath(fileUri);
-
-                System.out.println("Image Path : " + photoPath);
-                image_path.setText(photoPath);
+            try {
+                imageImagePath = getPath(fileUri);
+                image_path.setText(imageImagePath);
                 Bitmap b = decodeUri(fileUri);
                 imageView.setImageBitmap(b);
-            }
-            catch(Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -302,7 +296,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 Uri selectedImage = data.getData();
                 if (selectedImage != null) {
                     imageView.setImageURI(selectedImage);
-                    imageImagePath = selectedImage.getPath();
+                    imageImagePath = getPath(selectedImage);
                     image_path.setText(imageImagePath);
                 }
             }
@@ -456,10 +450,22 @@ String requestTypeId;
         return true;
     }
 
-    private void postExpanse(String amnt, String createddate, String cmnt) {
+    private void postExpanse(String amnt, String createddate, String cmnt,String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         String userid = model.getId();
-        Singleton.getInstance().getApi().postExpanse(userid, meetingId, amnt, requestTypeId, createddate, cmnt).enqueue(new Callback<ResMetaMeeting>() {
+        RequestBody imgFile = null;
+        File imagPh = new File(fileUrl);
+        Log.e("***********","*************"+imagPh.getAbsolutePath());
+        if (imagPh != null)
+            imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
+        RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
+        RequestBody requestMeetingId = RequestBody.create(MediaType.parse("text/plain"), meetingId);
+        RequestBody requestAmount = RequestBody.create(MediaType.parse("text/plain"), amnt);
+        RequestBody requestReqType = RequestBody.create(MediaType.parse("text/plain"),requestTypeId);
+        RequestBody requestDate = RequestBody.create(MediaType.parse("text/plain"),createddate);
+        RequestBody requestCmnt = RequestBody.create(MediaType.parse("text/plain"),cmnt);
+
+        Singleton.getInstance().getApi().postExpanse(requestUserId, requestMeetingId, requestAmount, requestReqType, requestDate, requestCmnt,imgFile).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 Toast.makeText(NewExpenseActivity.this, getString(R.string.expanse_posted_successfully), Toast.LENGTH_SHORT).show();

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ExpenseModel implements Serializable{
+    private String id;
+
     private String amount;
 
     private String descreption;
@@ -23,6 +25,14 @@ public class ExpenseModel implements Serializable{
     private String image;
 
     private String status;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getStatus() {
         return status;

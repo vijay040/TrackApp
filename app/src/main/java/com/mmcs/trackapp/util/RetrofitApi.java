@@ -18,10 +18,13 @@ import com.mmcs.trackapp.model.ResponseMeta;
 
 import java.util.ArrayList;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface RetrofitApi {
 
@@ -82,14 +85,25 @@ public interface RetrofitApi {
     );
 
 
-    @FormUrlEncoded
+    @Multipart
     @POST("post_expense.php?request=saveexpense_data")
-    Call<ResMetaMeeting> postExpanse(@Field("user_id") String user_id, @Field("meeting_id") String meeting_id,
-                                     @Field("amount") String amount, @Field("expense_type") String requesttypes, @Field("created_on") String createddate,
-                                     @Field("comment") String comment
+    Call<ResMetaMeeting> postExpanse(@Part("user_id") RequestBody user_id, @Part("meeting_id") RequestBody meeting_id,
+                                     @Part("amount") RequestBody amount, @Part("expense_type") RequestBody requesttypes, @Part("created_on") RequestBody createddate,
+                                     @Part("comment") RequestBody comment ,@Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );
 
+    @Multipart
+    @POST("post_expense.php?request=saveexpense_data")
+    Call<ResMetaMeeting> updateExpanseReceipt(@Part("expense_id") RequestBody user_id,@Part("image\"; filename=\"profile.jpg") RequestBody image
+
+    );
+
+    @Multipart
+    @POST("update_user_profile_image.php?request=updateuserprofile")
+    Call<ResMetaMeeting> updateUserProfile(@Part("user_id") RequestBody user_id,@Part("image\"; filename=\"profile.jpg") RequestBody image
+
+    );
 
     @FormUrlEncoded
     @POST("fetch_expense.php")
@@ -141,11 +155,14 @@ public interface RetrofitApi {
     );
 
 
-    @FormUrlEncoded
+    @Multipart
     @POST("feedback_post_api.php?request=savefeedback_data")
-    Call<PreRequestResMeta> postFeedback(@Field("user_id") String user_id, @Field("customer_id") String customer_id, @Field("feedback") String feedback, @Field("posted_on") String posted_on
+    Call<PreRequestResMeta> postFeedback(@Part("user_id") RequestBody user_id, @Part("customer_id") RequestBody customer_id, @Part("feedback") RequestBody feedback, @Part("posted_on") RequestBody posted_on,  @Part("image\"; filename=\"profile.jpg") RequestBody image);
 
-    );
+
+
+
+
 
     @FormUrlEncoded
     @POST("start_meeting_post.php?request=startMeeting")
@@ -176,5 +193,12 @@ public interface RetrofitApi {
     Call<ResMetaMeeting> postMessage(@Field("from_user_id") String from_user_id,@Field("to_user_id") String to_user_id, @Field("text_msg") String text_msg
             , @Field("created_on") String created_on , @Field("user_name") String user_name
     );
+
+   /* @Multipart
+    @POST("feedback_post_api.php?request=savefeedback_data")
+    Call<PreRequestResMeta> postFeedback(@Part("user_id") RequestBody user_id, @Part("customer_id") RequestBody customer_id, @Part("feedback") RequestBody feedback, @Part("posted_on") RequestBody posted_on,  @Part("image\"; filename=\"profile.jpg") RequestBody image);
+
+
+*/
 
 }

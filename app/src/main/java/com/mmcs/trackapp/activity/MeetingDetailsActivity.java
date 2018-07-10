@@ -158,7 +158,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new  Intent(MeetingDetailsActivity.this,LocationActivity.class);
-                intent.putExtra("MEETINGMODEL", model);
+                intent.putExtra(getString(R.string.meeting_model), model);
                 startActivity(intent);
             }
         });

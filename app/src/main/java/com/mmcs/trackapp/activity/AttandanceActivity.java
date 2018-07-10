@@ -154,17 +154,17 @@ public class AttandanceActivity extends AppCompatActivity {
     }
 
     private void postAttandance() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
         if (status.equalsIgnoreCase("signin")) {
             status = "signout";
             signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
-            textViewsignin.setText("SIGN IN");
+            textViewsignin.setText(getString(R.string.SIGNIN));
         } else {
             status = "signin";
             signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
-            textViewsignin.setText("SIGN OUT");
+            textViewsignin.setText(getString(R.string.SIGNOUT));
         }
         Singleton.getInstance().getApi().postAttendance(model.getId(), currentLocation, createddate, status).enqueue(new Callback<ResMetaMeeting>() {
             @Override
@@ -179,7 +179,7 @@ public class AttandanceActivity extends AppCompatActivity {
     }
 
     private void getAttandanceStatus() {
-        LoginModel model = sh.getLoginModel("LOGIN_MODEL");
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>() {
             @Override
             public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
@@ -189,10 +189,10 @@ public class AttandanceActivity extends AppCompatActivity {
                     status = model.get(0).getStatus();
                 if (status.equalsIgnoreCase("signin")) {
                     signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
-                    textViewsignin.setText("SIGN OUT");
+                    textViewsignin.setText(getString(R.string.SIGNOUT));
                 } else {
                     signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
-                    textViewsignin.setText("SIGN IN");
+                    textViewsignin.setText(getString(R.string.SIGNIN));
                 }
                 progress.setVisibility(View.GONE);
             }

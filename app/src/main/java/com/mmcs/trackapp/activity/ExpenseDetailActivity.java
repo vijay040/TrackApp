@@ -52,7 +52,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_detail);
-        expensemodel = (ExpenseModel) getIntent().getSerializableExtra("EXPENSEMODEL");
+        expensemodel = (ExpenseModel) getIntent().getSerializableExtra(getString(R.string.expense_model));
         txtdescreption = findViewById(R.id.txtdescreption);
         txtCreatedOn = findViewById(R.id.txtCreatedOn);
         txtAddress = findViewById(R.id.txtAddress);

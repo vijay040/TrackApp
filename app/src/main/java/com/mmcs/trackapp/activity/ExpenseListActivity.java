@@ -58,7 +58,7 @@ public class ExpenseListActivity extends AppCompatActivity {
                 ExpenseListAdaptor adapter = (ExpenseListAdaptor) adapterView.getAdapter();
                 ExpenseModel model = adapter.list.get(i);
                 Intent intent = new Intent(ExpenseListActivity.this, ExpenseDetailActivity.class);
-                intent.putExtra("EXPENSEMODEL", model);
+                intent.putExtra(getString(R.string.expense_model), model);
                 startActivity(intent);
             }
         });

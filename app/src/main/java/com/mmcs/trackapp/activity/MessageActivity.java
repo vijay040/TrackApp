@@ -57,7 +57,7 @@ public class MessageActivity extends AppCompatActivity {
                 MessageAdapter adaptor = (MessageAdapter) adapterView.getAdapter();
                 MessageModel model = adaptor.list.get(i);
                 Intent intent = new Intent(MessageActivity.this, MessageDetailsActivity.class);
-                intent.putExtra("MESSAGEMODEL", model);
+                intent.putExtra(getString(R.string.message_model), model);
                 startActivity(intent);
             }
         });

@@ -71,7 +71,7 @@
             android:layout_below="@+id/txtdescreption"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/_10sdp"
-            android:text="Agenda"
+            android:text="@string/Agenda"
             android:singleLine="true"
             android:ems="10"
             android:textColor="@color/text_color"

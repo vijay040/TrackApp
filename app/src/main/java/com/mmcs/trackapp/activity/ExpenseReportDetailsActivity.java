@@ -30,7 +30,7 @@ public class ExpenseReportDetailsActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_report_details);
-        reportmodel= (ReportModel) getIntent().getSerializableExtra("REPORTMODEL");
+        reportmodel= (ReportModel) getIntent().getSerializableExtra(getString(R.string.report_model));
         txtdescreption=findViewById(R.id.txtdescreption);
         txtdate=findViewById(R.id.txtdate);
         txtTotalAmount=findViewById(R.id.txtTotalAmount);

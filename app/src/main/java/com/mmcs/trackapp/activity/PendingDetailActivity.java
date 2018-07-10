@@ -41,7 +41,7 @@ Shprefrences sh;
         super.onCreate(savedInstanceState);
         sh=new Shprefrences(this);
         setContentView(R.layout.activity_pendingdetail);
-        prerequestmodel= (PreRequestModel) getIntent().getSerializableExtra("PREREQUESTMODEL");
+        prerequestmodel= (PreRequestModel) getIntent().getSerializableExtra(getString(R.string.prerequest_model));
 
 
         txtdescreption=findViewById(R.id.txtdescreption);

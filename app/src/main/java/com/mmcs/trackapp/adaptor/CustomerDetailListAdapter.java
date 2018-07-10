@@ -28,8 +28,6 @@ public class CustomerDetailListAdapter extends RecyclerView.Adapter<CustomerDeta
     public CustomerDetailListAdapter(Activity context, List<CustomerModel> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Please Wait ...........");
         this.data = data;
     }
     public void delete(int position) {

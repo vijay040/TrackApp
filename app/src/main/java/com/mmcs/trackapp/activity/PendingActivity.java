@@ -51,7 +51,7 @@ public class PendingActivity extends AppCompatActivity {
                PendingAdaptor adapter = (PendingAdaptor) adapterView.getAdapter();
                 PreRequestModel preRequestModel = adapter.list.get(i);
                 Intent intent = new Intent(PendingActivity.this, PendingDetailActivity.class);
-                intent.putExtra("PREREQUESTMODEL", preRequestModel);
+                intent.putExtra(getString(R.string.prerequest_model), preRequestModel);
                 startActivity(intent);
             }
         });

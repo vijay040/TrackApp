@@ -32,7 +32,7 @@ import java.util.Calendar;
 
 public class ReminderActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText edtStartDate, edt_time, edtEndDate, edt_EndTime;
-    Button btnOk;
+    Button btnOk,btnfollowup;
     Spinner edt_EndTimer;
     int H, M;
     Calendar calendar;
@@ -60,6 +60,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         edt_EndTime = findViewById(R.id.edt_EndTime);
         edt_EndTimer = findViewById(R.id.edt_EndTimer);
         btnOk = findViewById(R.id.btnOk);
+        btnfollowup=findViewById(R.id.btnfollow);
         calendar = Calendar.getInstance();
         setTitle();
         back();
@@ -87,6 +88,12 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
             edt_time.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
             edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
         }*/
+        btnfollowup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ReminderActivity.this,ReminderdetailActivity.class));
+            }
+        });
 
         edtStartDate.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -153,6 +153,18 @@
                   android:textSize="@dimen/_20sdp"
                   android:textStyle="bold"
                  android:textColor="@color/white_color" />
+
+        <Button
+            android:id="@+id/btnfollow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_15sdp"
+            android:background="@drawable/btn"
+            android:text="followup"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
                  </LinearLayout>
 </ScrollView>
 </RelativeLayout>

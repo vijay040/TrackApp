@@ -1,0 +1,119 @@
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <TextView
+        android:id="@+id/txt_reminder"
+        android:layout_width="wrap_content"
+        android:text="Reminder"
+        android:textSize="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="@color/text_hint_color"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_below="@+id/txt_reminder"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_remindr" />
+    <TextView
+        android:id="@+id/txtdescreption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="@string/Descreption"
+        android:layout_below="@+id/image"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtpurpose"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+   android:layout_below="@+id/txtdescreption"
+        android:text="@string/Purpose"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp" />
+
+    <TextView
+        android:id="@+id/txtcustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_below="@+id/txtpurpose"
+        android:text="@string/Client"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp" />
+
+    <TextView
+        android:id="@+id/txtcontactperson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_below="@+id/txtcustomer"
+        android:text="@string/ContactPerson"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp" />
+
+    <TextView
+        android:id="@+id/txtagenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_below="@+id/txtcontactperson"
+        android:text="@string/Agenda"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp" />
+
+    <TextView
+        android:id="@+id/txtdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_below="@+id/txtagenda"
+        android:text="@string/Date"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp" />
+
+    <TextView
+        android:id="@+id/txttime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_below="@+id/txtdate"
+        android:text="@string/Time"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp" />
+
+    <TextView
+        android:id="@+id/txtaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_below="@+id/txttime"
+        android:text="@string/Address"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_12sdp" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/image"
+        android:layout_below="@+id/txtaddress"
+        android:background="@drawable/btn"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/Ok" />
+</RelativeLayout>

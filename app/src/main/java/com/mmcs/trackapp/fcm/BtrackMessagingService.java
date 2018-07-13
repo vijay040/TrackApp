@@ -55,14 +55,14 @@ public class BtrackMessagingService extends FirebaseMessagingService {
         }
 
         Map<String, String> params = remoteMessage.getData();
-        String subtitle = params.get("subtitle").toString();
-        String title = params.get("title").toString();
+        String subtitle = "Messece Recived";//params.get("subtitle").toString();
+        String title ="BTrack Chat";// params.get("title").toString();
         //   String message = params.get("message").toString();
 
         //  String tickerText = params.get("tickerText").toString();
 
         intent = new Intent(this, DrawerActivity.class);
-        intent.putExtra("NOTIFICATION_VALUE", "enquiry");
+        //intent.putExtra("NOTIFICATION_VALUE", "enquiry");
 
         sendNotification(subtitle, title);
         // Also if you intend on generating your own notifications as a result of a received FCM

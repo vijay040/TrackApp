@@ -23,11 +23,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.ExpenseModel;
 import com.mmcs.trackapp.model.ResMetaMeeting;
+import com.mmcs.trackapp.model.UploadImageModel;
+import com.mmcs.trackapp.model.UploadImageResMeta;
 import com.mmcs.trackapp.util.Singleton;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -83,6 +87,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtExpenseType.setText(getString(R.string.expense_type) + expensemodel.getExpense_type());
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
+        Picasso.get().load(expensemodel.getImage()).placeholder(R.drawable.ic_bill).into(image_uploaded);
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold
@@ -180,8 +185,6 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                Bitmap b = decodeUri(fileUri);
-                image_uploaded.setImageBitmap(b);
                 updateExpenseReceipt(imageImagePath);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -191,7 +194,6 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Uri selectedImage = data.getData();
                 if (selectedImage != null) {
-                    image_uploaded.setImageURI(selectedImage);
                     imageImagePath = getPath(selectedImage);
                     updateExpenseReceipt(imageImagePath);
                 }
@@ -263,15 +265,20 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         Log.e("***********", "*************" + imagPh.getAbsolutePath());
         if (imagPh != null)
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
-        RequestBody requestId = RequestBody.create(MediaType.parse("text/plain"), expensemodel.getId());
-        Singleton.getInstance().getApi().updateExpanseReceipt(requestId, imgFile).enqueue(new Callback<ResMetaMeeting>() {
+            RequestBody requestId = RequestBody.create(MediaType.parse("text/plain"), expensemodel.getId());
+            Singleton.getInstance().getApi().updateExpanseReceipt(requestId, imgFile).enqueue(new Callback<UploadImageResMeta>() {
             @Override
-            public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
+            public void onResponse(Call<UploadImageResMeta> call, Response<UploadImageResMeta> response) {
 
+               UploadImageModel model= response.body().getData();
+                if(model!=null && model.getImage()!=null)
+                    Picasso.get().load(model.getImage()).placeholder(R.drawable.ic_bill).resize(100,100).into(image_uploaded);
+                else
+                    Toast.makeText(ExpenseDetailActivity.this, "Please Try Again!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
+            public void onFailure(Call<UploadImageResMeta> call, Throwable t) {
 
             }
         });

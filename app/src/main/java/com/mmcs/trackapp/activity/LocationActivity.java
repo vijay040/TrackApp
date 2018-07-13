@@ -75,7 +75,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
       LatLng latlng=  LocationFromAddress(this,model.getAddress());
 
-        Marker mark = mMap.addMarker(new MarkerOptions().position(latlng).title(model.getDescreption()));
+       Marker mark = mMap.addMarker(new MarkerOptions().position(latlng).title(model.getDescreption()));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 10.0f));
         mMap.setOnInfoWindowClickListener(this);

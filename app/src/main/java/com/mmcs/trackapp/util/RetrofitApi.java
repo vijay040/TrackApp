@@ -93,9 +93,10 @@ public interface RetrofitApi {
 
     );
 
+
     @Multipart
-    @POST("post_expense.php?request=saveexpense_data")
-    Call<ResMetaMeeting> updateExpanseReceipt(@Part("expense_id") RequestBody user_id,@Part("image\"; filename=\"profile.jpg") RequestBody image
+    @POST("update_expense_image.php?request=updateExpendseReceipt")
+    Call<UploadImageResMeta> updateExpanseReceipt(@Part("expense_id") RequestBody user_id,@Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );
 

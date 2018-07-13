@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.ResAttandance;
 import com.mmcs.trackapp.util.Shprefrences;
@@ -26,7 +28,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         sh = new Shprefrences(SplashActivity.this);
-       // test();
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.e("MYTAG", "This is your Firebase token" + token);
         Handler h = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {

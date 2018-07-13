@@ -14,7 +14,7 @@
             android:id="@+id/img"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
-            android:background="@drawable/ic_bill" />
+            android:src="@drawable/ic_bill" />
 
         <TextView
             android:id="@+id/txtDescreption"

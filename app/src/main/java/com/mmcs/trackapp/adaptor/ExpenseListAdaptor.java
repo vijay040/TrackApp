@@ -12,6 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.ExpenseModel;
+import com.mmcs.trackapp.util.CircleTransform;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class ExpenseListAdaptor extends BaseAdapter {
@@ -72,6 +75,8 @@ public class ExpenseListAdaptor extends BaseAdapter {
         RelativeLayout    relativeLayout=view.findViewById(R.id.relativelayout);
         final RelativeLayout  lay=view.findViewById(R.id.lay);
 
+        ImageView img = view.findViewById(R.id.img);
+
         if(list.get(i).isVisible()) {
             lay.setVisibility(View.VISIBLE);
             hide.setImageResource( R.drawable.ic_up);
@@ -98,7 +103,7 @@ public class ExpenseListAdaptor extends BaseAdapter {
 
 
 
-        ImageView img = view.findViewById(R.id.img);
+        Picasso.get().load(list.get(i).getImage()).placeholder(R.drawable.ic_bill).resize(50,50).into(img);
         return view;
     }
 }

@@ -15,8 +15,10 @@
         android:layout_marginTop="@dimen/_60sdp"
         android:id="@+id/listExpenseView"
         android:layout_width="match_parent"
-
-android:layout_marginBottom="@dimen/_20sdp"
+        android:smoothScrollbar="true"
+        android:stackFromBottom="true"
+        android:transcriptMode="disabled"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:layout_height="wrap_content">
 
     </ListView>

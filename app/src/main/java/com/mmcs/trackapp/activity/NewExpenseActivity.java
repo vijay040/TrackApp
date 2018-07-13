@@ -151,6 +151,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 String expensetype=edRequestTypes.getText().toString();
                 String cmnt = comments.getText().toString();
                 String totalamount = amnt + currenc;
+                Log.e("***************","imageImagePath "+imageImagePath);
                 if (selectmeeting.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, getString(R.string.select_meeting), Toast.LENGTH_SHORT).show();
                     return;

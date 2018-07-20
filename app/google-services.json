@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "1074362731420-hm59qqm3407r86683i00jubpc7c5o9dc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mmcs.trackapp",
+            "certificate_hash": "4c02b4f30b7179065d5df87090f3aa4b243f1c52"
+          }
+        },
+        {
           "client_id": "1074362731420-puc5t8n5b1p60rhivm1g9k0hdm1stok8.apps.googleusercontent.com",
           "client_type": 3
         }

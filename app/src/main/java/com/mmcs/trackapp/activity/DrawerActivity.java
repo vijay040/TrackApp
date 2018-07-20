@@ -42,6 +42,7 @@ public class DrawerActivity extends AppCompatActivity {
     Shprefrences sh;
     LoginModel model;
     ImageView imgProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -70,6 +71,7 @@ public class DrawerActivity extends AppCompatActivity {
 
         imgProfile = findViewById(R.id.imgProfile);
         model = sh.getLoginModel(getString(R.string.login_model));
+        if(model.getImage()!=null)
         Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
         txtName.setText(model.getDisplay_name());
         setTitle();
@@ -124,7 +126,7 @@ public class DrawerActivity extends AppCompatActivity {
         txt_feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, FeedbackActivity.class);
+                Intent intent = new Intent(DrawerActivity.this, FeedbackListActivity.class);
                 startActivity(intent);
                 drawerLayout.closeDrawer(Gravity.LEFT);
             }

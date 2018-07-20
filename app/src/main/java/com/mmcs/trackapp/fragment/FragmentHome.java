@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
@@ -17,6 +19,7 @@ import com.mmcs.trackapp.activity.AttandanceActivity;
 import com.mmcs.trackapp.activity.CreateMeetingActivity;
 import com.mmcs.trackapp.activity.ExpenseActivity;
 import com.mmcs.trackapp.activity.FeedbackActivity;
+import com.mmcs.trackapp.activity.FeedbackListActivity;
 import com.mmcs.trackapp.activity.MyScheduleActivity;
 import com.mmcs.trackapp.activity.PendingActivity;
 import com.mmcs.trackapp.activity.MessageActivity;
@@ -32,6 +35,8 @@ public class FragmentHome extends Fragment {
     TextView addvisit, expenses, attandance, schedule, addcustomer, feedback, pending, message, setting;
     Shprefrences sh;
     String name;
+    ImageView animatedClockView;
+    private AnimatedVectorDrawableCompat animatedClock;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +67,12 @@ public class FragmentHome extends Fragment {
         message =  view.findViewById(R.id.btn_message);
         setting =  view.findViewById(R.id.btn_setting);
         txtWelcomeText = view.findViewById(R.id.txtWelcomeText);
+        ImageView animatedClockView = view.findViewById(R.id.img_clock);
+
+        // Creating though compat library
+      //  animatedClock = AnimatedVectorDrawableCompat.create(getActivity(), R.drawable.avd_clock_rotate);
+       // animatedClockView.setImageDrawable(animatedClock);
+
         sh = new Shprefrences(getActivity());
 
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
@@ -95,7 +106,7 @@ public class FragmentHome extends Fragment {
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FeedbackActivity.class);
+                Intent intent = new Intent(getActivity(), FeedbackListActivity.class);
                 startActivity(intent);
             }
         });

@@ -204,7 +204,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
         Log.e("***********","*************"+imagPh.getAbsolutePath());
-        if (imagPh != null)
+        if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestId = RequestBody.create(MediaType.parse("text/plain"), model.getId());
         RequestBody requestCustomerID = RequestBody.create(MediaType.parse("text/plain"), customerId);

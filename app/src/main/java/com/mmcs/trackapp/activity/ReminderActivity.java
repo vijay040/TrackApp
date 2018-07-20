@@ -47,7 +47,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     int d, y, m, h, t;
     String remindertime[] = {"5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "2 hours", "3 hours", "4 hours", "5 hours",
             "6 hours", "7 hours", "8 hours", " 9 hours", "10 hours", "11 hours", "18 hours", "1 day", "2 days", "3 days", "4 days", "1 week", "2 weeks"};
-
+public static String startDate,startTime,endDate,endTime;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -70,13 +70,13 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         YY = calendar.get(Calendar.YEAR);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, remindertime);
         edt_EndTimer.setAdapter(adapter);
-        edtStartDate.setText(String.valueOf(DD) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(YY));
-        edtEndDate.setText(String.valueOf(DD) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(YY));
-        Calendar alarmCal = Calendar.getInstance();
-        H = calendar.get(Calendar.HOUR_OF_DAY);
-        M = calendar.get(Calendar.MINUTE);
-        edt_time.setText(String.valueOf(H) + ":" + String.valueOf(M));
-        edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M));
+        edtStartDate.setText(startDate);
+       // edtEndDate.setText(String.valueOf(DD) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(YY));
+        //Calendar alarmCal = Calendar.getInstance();
+      //  H = calendar.get(Calendar.HOUR_OF_DAY);
+      //  M = calendar.get(Calendar.MINUTE);
+        edt_time.setText(startTime);
+       // edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M));
        /* if (H < 12 && H >= 0) {
             edt_time.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
             edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
@@ -127,7 +127,7 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String strtdt = edtStartDate.getText() + "";
+           /*     String strtdt = edtStartDate.getText() + "";
                 String strttm = edt_time.getText() + "";
                 String enddt = edtEndDate.getText() + "";
                 String endtm = edt_EndTime.getText() + "";
@@ -141,10 +141,10 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
                 intent.putExtra("ALARM", alarm);
                 setResult(RESULT_OK, intent);
 
-               /* Calendar cal = Calendar.getInstance();
+               *//* Calendar cal = Calendar.getInstance();
                 cal.setTimeInMillis(System.currentTimeMillis());
                 cal.clear();
-                cal.set(2018,5,30,22,28);*/
+                cal.set(2018,5,30,22,28);*//*
 
                 Calendar cal = Calendar.getInstance();
 
@@ -154,9 +154,10 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
 
                 AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 Intent inte = new Intent(ReminderActivity.this, AlarmReciver.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(ReminderActivity.this, 0, inte, 0);
+                PendingIntent alarmIntent = PendingIntent.getBroadcast(ReminderActivity.this, 0, inte, 0);
                 // cal.add(Calendar.SECOND, 5);
-                alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+                alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), alarmIntent);*/
+
 
                 finish();
             }

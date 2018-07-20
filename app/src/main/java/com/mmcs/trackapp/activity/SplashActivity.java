@@ -28,8 +28,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         sh = new Shprefrences(SplashActivity.this);
-        String token = FirebaseInstanceId.getInstance().getToken();
-        Log.e("MYTAG", "This is your Firebase token" + token);
+  LoginActivity.fcmToken= FirebaseInstanceId.getInstance().getToken();
+        Log.e("MYTAG", "This is your Firebase token     " + LoginActivity.fcmToken);
         Handler h = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {

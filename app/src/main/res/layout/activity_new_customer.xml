@@ -75,7 +75,6 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:textColor="@color/text_color"
                 android:paddingLeft="@dimen/_5sdp"
-                android:maxLength="20"
                 android:textCursorDrawable="@drawable/drable_edittext"
                 app:met_baseColor="@color/text_color"
                 app:met_bottomTextSize="@dimen/_1sdp"

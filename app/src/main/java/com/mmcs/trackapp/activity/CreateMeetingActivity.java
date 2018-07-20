@@ -103,7 +103,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         sh = new Shprefrences(this);
         back();
         setTitle();
-       //getSupportActionBar().setTitle("Create Meeting");
+        //getSupportActionBar().setTitle("Create Meeting");
         mGoogleApiClient = new GoogleApiClient.Builder(CreateMeetingActivity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
@@ -120,7 +120,10 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
 
-        edtDate.setText(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+        if ((MM + 1) < 10)
+            edtDate.setText(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+        else
+            edtDate.setText(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         H = calendar.get(Calendar.HOUR_OF_DAY);
         M = calendar.get(Calendar.MINUTE);
         edtTime.setText(String.valueOf(H) + ":" + String.valueOf(M));
@@ -166,6 +169,8 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         txtReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ReminderActivity.startDate = edtDate.getText() + "";
+                ReminderActivity.startTime = edtTime.getText() + "";
                 startActivityForResult(new Intent(CreateMeetingActivity.this, ReminderActivity.class), 10);
             }
         });
@@ -208,14 +213,16 @@ public class CreateMeetingActivity extends AppCompatActivity implements
             }
         });
     }
+
     AlarmModel alarm;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==10 && resultCode == RESULT_OK) {
+        if (requestCode == 10 && resultCode == RESULT_OK) {
             alarm = (AlarmModel) data.getSerializableExtra("ALARM");
-            if(alarm!=null)
-            Log.e("***************", "on ativity**********************" + alarm.getStartTime());
+            if (alarm != null)
+                Log.e("***************", "on ativity**********************" + alarm.getStartTime());
         }
     }
 
@@ -231,8 +238,11 @@ public class CreateMeetingActivity extends AppCompatActivity implements
 
     DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
-        public void onDateSet(DatePicker datePicker, int d, int m, int y) {
-            edtDate.setText(String.valueOf(y) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(d));
+        public void onDateSet(DatePicker datePicker, int y, int m, int d) {
+            if ((m + 1) < 10)
+                edtDate.setText(String.valueOf(y) + "-0" + String.valueOf(m + 1) + "-" + String.valueOf(d));
+            else
+                edtDate.setText(String.valueOf(y) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(d));
         }
     };
     TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
@@ -252,6 +262,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
             edtTime.setText(String.valueOf(h) + ":" + String.valueOf(m));
         }
     };
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -261,9 +272,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements
             }
         });
     }
-    private void setTitle()
-    {
-        TextView title= (TextView) findViewById(R.id.title);
+
+    private void setTitle() {
+        TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.CreateMeeting));
     }
 
@@ -371,14 +382,15 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                                     int position, long id) {
                 CustomerModel obj = (CustomerModel) listPurpose.getAdapter().getItem(position);
                 edtCustomer.setText(obj.getCustomer_name());
-                customerid=obj.getId();
+                customerid = obj.getId();
                 alertDialog.dismiss();
             }
         });
 
     }
 
-String customerid;
+    String customerid;
+
     private void createMeeting(String user_id, String purpose, String descreption
             , String customer
             , String date

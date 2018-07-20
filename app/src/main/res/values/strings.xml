@@ -228,6 +228,22 @@
     <string name="date_pattern">yyyyMMdd-HHmmss</string>
     <string name="is_login">ISLOGIN</string>
     <string name="select">Select:</string>
+    <string name="need_follow_up">Need Follow-up</string>
+    <string name="please_enter_meeting_results">Please enter meeting results</string>
+    <string name="please_enter_minutes_of_meeting">Please enter Minutes of Meeting</string>
+
+
+    <string name="minute_hand">minute_hand</string>
+    <string name="second_hand">second_hand</string>
+    <string name="stop">STOP</string>
+    <string name="circle">circle</string>
+
+
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Bahasa Indonesia</item>
+        <item>Tiếng Việt</item>
+    </string-array>
 </resources>
 
 

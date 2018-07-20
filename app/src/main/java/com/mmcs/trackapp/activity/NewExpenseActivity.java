@@ -98,8 +98,8 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
     ArrayList<MeetingModel> meetingList = new ArrayList<>();
     ArrayList<RequestTypeModel> requestTyoesList = new ArrayList<>();
-    TextView image_path,edRequestTypes;
-    final int MY_PERMISSIONS_REQUEST_WRITE=103;
+    TextView image_path, edRequestTypes;
+    final int MY_PERMISSIONS_REQUEST_WRITE = 103;
     String createddate;
 
     @Override
@@ -115,7 +115,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         comments = (EditText) findViewById(R.id.edt_comment);
         image_path = findViewById(R.id.image_path);
         progress = findViewById(R.id.progress);
-        edRequestTypes=findViewById(R.id.edRequestTypes);
+        edRequestTypes = findViewById(R.id.edRequestTypes);
         currency = (EditText) findViewById(R.id.edt_Currency);
         getDate = (EditText) findViewById(R.id.edt_date1);
         submit = findViewById(R.id.btnSubmit);
@@ -128,7 +128,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         getDate.setText(getString(R.string.expense_created_on) + createddate);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
         }
         progress.setVisibility(View.VISIBLE);
         getReqestTypes();
@@ -141,17 +141,17 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             }
         });
         back();
-       setTitle();
+        setTitle();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String selectmeeting = meeting.getText().toString();
                 String amnt = amount.getText().toString();
                 String currenc = currency.getText().toString();
-                String expensetype=edRequestTypes.getText().toString();
+                String expensetype = edRequestTypes.getText().toString();
                 String cmnt = comments.getText().toString();
                 String totalamount = amnt + currenc;
-                Log.e("***************","imageImagePath "+imageImagePath);
+                Log.e("***************", "imageImagePath " + imageImagePath);
                 if (selectmeeting.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, getString(R.string.select_meeting), Toast.LENGTH_SHORT).show();
                     return;
@@ -161,17 +161,15 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 } else if (currenc.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, getString(R.string.select_currency), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (expensetype.equals("")) {
+                } else if (expensetype.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, getString(R.string.select_expensetype), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (cmnt.equals("")) {
+                } else if (cmnt.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, getString(R.string.enter_your_comment), Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postExpanse(totalamount, createddate, cmnt,imageImagePath);
+                    postExpanse(totalamount, createddate, cmnt, imageImagePath);
                 }
             }
         });
@@ -241,10 +239,11 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             }
         });
     }
+
     Uri fileUri;
 
     private void selectImage() {
-        final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.choose_from_gallery),getString(R.string.cancel)};
+        final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.choose_from_gallery), getString(R.string.cancel)};
         AlertDialog.Builder builder = new AlertDialog.Builder(NewExpenseActivity.this);
         builder.setTitle(getString(R.string.add_photo));
         builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -253,7 +252,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 if (options[item].equals(getString(R.string.take_photo))) {
                     /*Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
-                    String fileName = System.currentTimeMillis()+".jpg";
+                    String fileName = System.currentTimeMillis() + ".jpg";
                     ContentValues values = new ContentValues();
                     values.put(MediaStore.Images.Media.TITLE, fileName);
                     fileUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
@@ -339,7 +338,8 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     }
 
 
-String requestTypeId;
+    String requestTypeId;
+
     private void showRequests() {
         ExpenseTypesAdaptor adapto = new ExpenseTypesAdaptor(NewExpenseActivity.this, requestTyoesList);
         android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
@@ -451,22 +451,22 @@ String requestTypeId;
         return true;
     }
 
-    private void postExpanse(String amnt, String createddate, String cmnt,String fileUrl) {
+    private void postExpanse(String amnt, String createddate, String cmnt, String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         String userid = model.getId();
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
-        Log.e("***********","*************"+imagPh.getAbsolutePath());
-        if (imagPh != null)
+        Log.e("***********", "*************" + fileUrl);
+       if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
         RequestBody requestMeetingId = RequestBody.create(MediaType.parse("text/plain"), meetingId);
         RequestBody requestAmount = RequestBody.create(MediaType.parse("text/plain"), amnt);
-        RequestBody requestReqType = RequestBody.create(MediaType.parse("text/plain"),requestTypeId);
-        RequestBody requestDate = RequestBody.create(MediaType.parse("text/plain"),createddate);
-        RequestBody requestCmnt = RequestBody.create(MediaType.parse("text/plain"),cmnt);
+        RequestBody requestReqType = RequestBody.create(MediaType.parse("text/plain"), requestTypeId);
+        RequestBody requestDate = RequestBody.create(MediaType.parse("text/plain"), createddate);
+        RequestBody requestCmnt = RequestBody.create(MediaType.parse("text/plain"), cmnt);
 
-        Singleton.getInstance().getApi().postExpanse(requestUserId, requestMeetingId, requestAmount, requestReqType, requestDate, requestCmnt,imgFile).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postExpanse(requestUserId, requestMeetingId, requestAmount, requestReqType, requestDate, requestCmnt, imgFile).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 Toast.makeText(NewExpenseActivity.this, getString(R.string.expanse_posted_successfully), Toast.LENGTH_SHORT).show();
@@ -481,13 +481,13 @@ String requestTypeId;
             }
         });
     }
-    private void setTitle()
-    {
-        TextView title= (TextView) findViewById(R.id.title);
+
+    private void setTitle() {
+        TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.create_expense));
     }
-    private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException
-    {
+
+    private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
         BitmapFactory.Options o = new BitmapFactory.Options();
 
         o.inJustDecodeBounds = true;
@@ -501,10 +501,8 @@ String requestTypeId;
 
         int scale = 1;
 
-        while (true)
-        {
-            if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE)
-            {
+        while (true) {
+            if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE) {
                 break;
             }
             width_tmp /= 2;
@@ -525,15 +523,13 @@ String requestTypeId;
     }
 
     @SuppressWarnings("deprecation")
-    private String getPath(Uri selectedImaeUri)
-    {
-        String[] projection = { MediaStore.Images.Media.DATA };
+    private String getPath(Uri selectedImaeUri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
 
         Cursor cursor = managedQuery(selectedImaeUri, projection, null, null,
                 null);
 
-        if (cursor != null)
-        {
+        if (cursor != null) {
             cursor.moveToFirst();
 
             int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);

@@ -1,6 +1,7 @@
 package com.mmcs.trackapp.util;
 
 import com.mmcs.trackapp.model.ExpenseResMeta;
+import com.mmcs.trackapp.model.FeedbackResMeta;
 import com.mmcs.trackapp.model.LoginResMeta;
 import com.mmcs.trackapp.model.MeetingModel;
 import com.mmcs.trackapp.model.MessageResMeta;
@@ -194,6 +195,11 @@ public interface RetrofitApi {
     Call<ResMetaMeeting> postMessage(@Field("from_user_id") String from_user_id,@Field("to_user_id") String to_user_id, @Field("text_msg") String text_msg
             , @Field("created_on") String created_on , @Field("user_name") String user_name
     );
+
+
+    @FormUrlEncoded
+    @POST("feedbacklistapi.php")
+    Call<FeedbackResMeta> getFeedbackList(@Field("user_id") String user_id);
 
    /* @Multipart
     @POST("feedback_post_api.php?request=savefeedback_data")

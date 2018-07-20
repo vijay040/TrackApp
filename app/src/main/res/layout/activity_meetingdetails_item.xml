@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp">
@@ -15,7 +16,7 @@
             android:layout_toRightOf="@id/img"
             android:text="@string/Descreption"
             android:singleLine="true"
-            android:textColor="@color/them_color"
+            android:textColor="@color/white_color"
             android:textSize="@dimen/_10sdp"
             android:textStyle="bold" />
         <TextView
@@ -26,8 +27,9 @@
             android:layout_below="@+id/txtdescreption"
             android:text="@string/Purpose"
             android:singleLine="true"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/_7sdp" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_7sdp"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/txtcustomer"
             android:layout_width="wrap_content"
@@ -38,8 +40,9 @@
             android:text="@string/Customer"
             android:singleLine="true"
             android:ems="10"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/_7sdp" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_7sdp"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/txtdate"
             android:layout_width="wrap_content"
@@ -49,8 +52,9 @@
             android:ems="7"
             android:singleLine="true"
             android:text="@string/Date"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/_6sdp" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_6sdp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txttime"
@@ -62,8 +66,9 @@
             android:ems="5"
             android:singleLine="true"
             android:text="@string/Time"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/_7sdp" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_7sdp"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/txtagenda"
             android:layout_width="wrap_content"
@@ -74,8 +79,9 @@
             android:text="@string/Agenda"
             android:singleLine="true"
             android:ems="10"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/_7sdp" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_7sdp"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/txtcontactperson"
             android:layout_width="wrap_content"
@@ -87,8 +93,9 @@
             android:text="@string/ContactPerson"
             android:ems="10"
             android:singleLine="true"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/_7sdp" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_7sdp"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/txtaddress"
             android:layout_width="wrap_content"
@@ -97,7 +104,9 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:text="@string/Address"
             android:singleLine="true"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/_7sdp" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textStyle="bold" />
     </RelativeLayout>
 </RelativeLayout>

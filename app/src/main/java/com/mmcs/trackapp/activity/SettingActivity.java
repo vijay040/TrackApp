@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,15 +21,27 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.CurrencyAdaptor;
+import com.mmcs.trackapp.adaptor.PlaceArrayAdapter;
 import com.mmcs.trackapp.model.CurrencyModel;
 import com.mmcs.trackapp.model.LoginModel;
 import com.mmcs.trackapp.model.ResMetaCurrency;
@@ -51,8 +65,10 @@ import retrofit2.Response;
 
 import static java.security.AccessController.getContext;
 
-public class SettingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
-    EditText edt_txt_first_name, edt_txt_last_name, edt_txt_email_id, edt_txt_role, edt_txt_manager, edt_txt_numberformate, edt_txt_position, edt_txt_joiningdate, edt_txt_department, edt_txt_home_address, edt_txt_conf_personal_number, edt_txt_currency, edt_txt_dateformate, edt_txt_language;
+public class SettingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener ,
+        GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks{
+    EditText edt_txt_first_name, edt_txt_last_name, edt_txt_email_id, edt_txt_role, edt_txt_manager, edt_txt_numberformate, edt_txt_position, edt_txt_joiningdate, edt_txt_department, edt_txt_conf_personal_number, edt_txt_currency, edt_txt_dateformate, edt_txt_language;
     Shprefrences sh;
     TextView edt_txt_password_professional, text_edit;
     ArrayList<CurrencyModel> currencyList = new ArrayList<>();
@@ -60,6 +76,13 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
     ImageView imgProfile;
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
+
+    private static final int GOOGLE_API_CLIENT_ID = 0;
+    private AutoCompleteTextView edtAddress;
+    private GoogleApiClient mGoogleApiClient;
+    private PlaceArrayAdapter mPlaceArrayAdapter;
+    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
+            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +97,7 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
         edt_txt_email_id = findViewById(R.id.edt_txt_email_id);
         edt_txt_conf_personal_number = findViewById(R.id.edt_txt_conf_personal_number);
         edt_txt_password_professional = findViewById(R.id.edt_txt_password_professional);
-        edt_txt_home_address = findViewById(R.id.edt_txt_home_address);
+        edtAddress = findViewById(R.id.edtAddress);
         edt_txt_position = findViewById(R.id.edt_txt_position);
         edt_txt_manager = findViewById(R.id.edt_txt_manager);
         edt_txt_role = findViewById(R.id.edt_txt_role);
@@ -86,6 +109,19 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
         edt_txt_language = findViewById(R.id.edt_txt_language);
         imgProfile = findViewById(R.id.imgProfile);
         text_edit = findViewById(R.id.text_edit);
+
+        mGoogleApiClient = new GoogleApiClient.Builder(SettingActivity.this)
+                .addApi(Places.GEO_DATA_API)
+                .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
+                .addConnectionCallbacks(this)
+                .build();
+        edtAddress.setOnItemClickListener(mAutocompleteClickListener);
+        mPlaceArrayAdapter = new PlaceArrayAdapter(
+                this, android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
+        edtAddress.setAdapter(mPlaceArrayAdapter);
+        edtAddress.setThreshold(1);
+
         text_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,13 +133,16 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
         edt_txt_first_name.setText(model.getDisplay_name() + "");
         edt_txt_last_name.setText(model.getUser_name() + "");
         edt_txt_email_id.setText(model.getEmail() + "");
-        edt_txt_home_address.setText("Noida, India");
         edt_txt_manager.setText(model.getReporting_person() + "");
         edt_txt_role.setText(model.getRole_id() + "");
         edt_txt_department.setText(model.getDepartment() + "");
         edt_txt_joiningdate.setText(model.getJoining_date() + "");
         edt_txt_conf_personal_number.setText(model.getMobile_number() + "");
         //edt_txt_password_professional.setText(model.get() + "");
+        model = sh.getLoginModel(getString(R.string.login_model));
+        if(model.getImage()!=null)
+            Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
+       // txtName.setText(model.getDisplay_name());
 
         getCurrencyList();
         back();
@@ -382,5 +421,55 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
             }
         });
     }
+
+
+
+    private AdapterView.OnItemClickListener mAutocompleteClickListener
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+
+        }
+    };
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                        places.getStatus().toString();
+                return;
+            }
+            //Selecting the first object buffer.
+            final Place place = places.get(0);
+            CharSequence attributions = places.getAttributions();
+            Toast.makeText(SettingActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
+
+        }
+    };
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mPlaceArrayAdapter.setGoogleApiClient(null);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+        Toast.makeText(this,
+                "Google Places API connection failed with error code:" +
+                        connectionResult.getErrorCode(),
+                Toast.LENGTH_LONG).show();
+    }
+
 
 }

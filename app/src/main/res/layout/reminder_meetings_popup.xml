@@ -164,7 +164,9 @@
             android:text="followup"
             android:textColor="@color/white_color"
             android:textSize="@dimen/_20sdp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+            />
                  </LinearLayout>
 </ScrollView>
 </RelativeLayout>

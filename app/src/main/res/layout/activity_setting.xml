@@ -90,7 +90,6 @@
                     android:layout_weight="1"
                     android:background="@color/white_color"
                     android:drawableRight="@drawable/ic_edit"
-                    android:editable="false"
                     android:hint="@string/edt_txt__name"
                     android:paddingLeft="@dimen/_15sdp"
                     android:singleLine="true"
@@ -110,7 +109,6 @@
                     android:layout_weight="1"
                     android:background="@color/white_color"
                     android:drawableRight="@drawable/ic_edit"
-                    android:editable="false"
                     android:hint="@string/edt_txt_last_name"
                     android:paddingLeft="@dimen/_15sdp"
                     android:singleLine="true"
@@ -133,11 +131,9 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:background="@color/white_color"
-
                 android:drawableLeft="@drawable/ic_email"
                 android:drawablePadding="@dimen/_20sdp"
                 android:drawableRight="@drawable/ic_edit"
-                android:editable="false"
                 android:hint="@string/EmailAddress"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
@@ -162,7 +158,6 @@
                 android:drawableLeft="@drawable/ic_phone"
                 android:drawablePadding="@dimen/_20sdp"
                 android:drawableRight="@drawable/ic_edit"
-                android:editable="false"
                 android:hint="@string/Mobile"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
@@ -176,7 +171,7 @@
                 android:layout_below="@+id/edt_txt_email_id"
                 android:background="@color/view_devider" />
 
-            <TextView
+            <EditText
                 android:id="@+id/edt_txt_password_professional"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
@@ -203,8 +198,8 @@
                 android:layout_below="@+id/edt_txt_password_professional"
                 android:background="@color/view_devider" />
 
-            <EditText
-                android:id="@+id/edt_txt_home_address"
+            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+                android:id="@+id/edtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_38sdp"
                 android:layout_below="@+id/view_professional_screen_2_password"
@@ -214,12 +209,12 @@
                 android:drawableLeft="@drawable/ic_loc"
                 android:drawablePadding="@dimen/_20sdp"
                 android:drawableRight="@drawable/ic_edit"
-                android:editable="false"
                 android:hint="@string/Address"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
+
 
             <View
                 android:id="@+id/view1"

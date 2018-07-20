@@ -108,12 +108,15 @@
         android:textSize="@dimen/_12sdp" />
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btnOK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/image"
         android:layout_below="@+id/txtaddress"
         android:background="@drawable/btn"
         android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="@color/white_color"
+        android:textStyle="bold"
+        android:textSize="@dimen/_20sdp"
         android:text="@string/Ok" />
 </RelativeLayout>

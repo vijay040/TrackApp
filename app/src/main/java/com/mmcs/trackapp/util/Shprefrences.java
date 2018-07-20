@@ -2,6 +2,7 @@ package com.mmcs.trackapp.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
 
 import com.mmcs.trackapp.model.LoginModel;
 import com.google.gson.Gson;
@@ -66,6 +67,23 @@ public class Shprefrences {
         Gson gson = new Gson();
         String json = sharedpreferences.getString(key, "");
         LoginModel ob= gson.fromJson(json, LoginModel.class);
+        return ob;
+    }
+
+
+    public void setRington(String key, Ringtone obj)
+    {
+        Gson gson = new Gson();
+        String json = gson.toJson(obj);
+        editor.putString(key, json);
+        editor.commit();
+    }
+
+    public Ringtone getRington(String key)
+    {
+        Gson gson = new Gson();
+        String json = sharedpreferences.getString(key, "");
+        Ringtone ob= gson.fromJson(json, Ringtone.class);
         return ob;
     }
 

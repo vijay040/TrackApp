@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     Shprefrences sh;
     ProgressBar progress;
     RelativeLayout lay;
+    public static String fcmToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -72,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String email,String pass)
     {
-        Singleton.getInstance().getApi().login(email,pass,"","").enqueue(new Callback<LoginResMeta>() {
+        Singleton.getInstance().getApi().login(email,pass,"",fcmToken).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                     if(response.body().getCode()!=null && response.body().getCode().equalsIgnoreCase("200"))

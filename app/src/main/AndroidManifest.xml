@@ -76,6 +76,8 @@
         <activity android:name=".activity.ExpenseDetailActivity" />
         <activity android:name=".activity.SendMessageActivity" />
         <activity android:name=".activity.MessageDetailsActivity" />
+        <activity android:name=".activity.FeedbackListActivity" />
+        <activity android:name=".activity.FollowupActivity" />
 
         <service
             android:name=".fcm.BtrackIstanceIDService"

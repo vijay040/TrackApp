@@ -44,10 +44,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MeetingDetailsActivity extends AppCompatActivity {
+
     TextView descreption, purpose, customer, agenda, date, time, address, contact;
     MeetingModel model;
     Shprefrences sh;
-    ImageView start,imgMap;
+    ImageView start, imgMap;
     public static String currentLocation;
     public String status = "";
     ProgressBar progressbar;
@@ -65,7 +66,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         progressbar.setVisibility(View.VISIBLE);
         getMeetingStatus();
         start = findViewById(R.id.start);
-        imgMap= findViewById(R.id.imgMap);
+        imgMap = findViewById(R.id.imgMap);
         descreption = findViewById(R.id.txtdescreption);
         purpose = findViewById(R.id.txtpurpose);
         customer = findViewById(R.id.txtcustomer);
@@ -74,7 +75,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         time = findViewById(R.id.txttime);
         address = findViewById(R.id.txtaddress);
         contact = findViewById(R.id.txtcontactperson);
-        txt_meetingstatus=findViewById(R.id.txt_meetingstatus);
+        txt_meetingstatus = findViewById(R.id.txt_meetingstatus);
         back();
         setTitle();
         descreption.setText(getString(R.string.description) + model.getDescreption());
@@ -136,28 +137,13 @@ public class MeetingDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressbar.setVisibility(View.VISIBLE);
-                DateFormat dateFormat = new SimpleDateFormat(getString(R.string.formate_date));
-                Date date = new Date();
-                String datetime = dateFormat.format(date);
-                String startTime = "", endTime = "", startAddress = "", endAddress = "";
-                String currentStatus = status;
-                if (status.equalsIgnoreCase(getString(R.string.s_start))) {
-                    endTime = datetime;
-                    endAddress = currentLocation;
-                    currentStatus = getString(R.string.end);
-                } else {
-                    startTime = datetime;
-                    startAddress = currentLocation;
-                    currentStatus =  getString(R.string.start);
-                }
-
-                updateMeetingStatus(startTime, endTime, currentStatus, startAddress, endAddress);
+                chkUpdate();
             }
         });
         imgMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new  Intent(MeetingDetailsActivity.this,LocationActivity.class);
+                Intent intent = new Intent(MeetingDetailsActivity.this, LocationActivity.class);
                 intent.putExtra(getString(R.string.meeting_model), model);
                 startActivity(intent);
             }
@@ -165,6 +151,47 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         getLocation();
 
     }
+
+    private void chkUpdate() {
+        DateFormat dateFormat = new SimpleDateFormat(getString(R.string.formate_date));
+        Date date = new Date();
+        String datetime = dateFormat.format(date);
+        String startTime = "", endTime = "", startAddress = "", endAddress = "";
+        String currentStatus = status;
+        if (status.equalsIgnoreCase(getString(R.string.s_start))) {
+            endTime = datetime;
+            endAddress = currentLocation;
+            currentStatus = getString(R.string.end);
+            startActivityForResult(new Intent(MeetingDetailsActivity.this, FollowupActivity.class), 200);
+        } else {
+            startTime = datetime;
+            startAddress = currentLocation;
+            currentStatus = getString(R.string.start);
+            updateMeetingStatus(startTime, endTime, currentStatus, startAddress, endAddress);
+        }
+
+    }
+
+    private void update() {
+        DateFormat dateFormat = new SimpleDateFormat(getString(R.string.formate_date));
+        Date date = new Date();
+        String datetime = dateFormat.format(date);
+        String startTime = "", endTime = "", startAddress = "", endAddress = "";
+        String currentStatus = status;
+        if (status.equalsIgnoreCase(getString(R.string.s_start))) {
+            endTime = datetime;
+            endAddress = currentLocation;
+            currentStatus = getString(R.string.end);
+        } else {
+            startTime = datetime;
+            startAddress = currentLocation;
+            currentStatus = getString(R.string.start);
+        }
+        updateMeetingStatus(startTime, endTime, currentStatus, startAddress, endAddress);
+    }
+
+
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -174,12 +201,11 @@ public class MeetingDetailsActivity extends AppCompatActivity {
             }
         });
     }
-    private void setTitle()
-    {
-        TextView title= (TextView) findViewById(R.id.title);
+
+    private void setTitle() {
+        TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.meeting_details));
     }
-
 
 
     AppLocationService appLocationService;
@@ -212,6 +238,15 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 200 && resultCode == RESULT_OK) {
+             update();
+        }
+        else
+            progressbar.setVisibility(View.GONE);
+    }
 
     public String GetAddress(double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -237,7 +272,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().updateMeedingStatus(mo.getId(), startTime, endTime, status, model.getId(), startAddress, endAddress).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
-                MeetingDetailsActivity.this.status=status;
+                MeetingDetailsActivity.this.status = status;
                 if (status.equalsIgnoreCase(getString(R.string.s_start))) {
                     start.setBackground(ContextCompat.getDrawable(MeetingDetailsActivity.this, R.drawable.ic_stop));
                     txt_meetingstatus.setText(getString(R.string.EndMeeting));
@@ -261,20 +296,19 @@ public class MeetingDetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
 
-                MeetingModel meetingData=response.body().getResponse().get(0);
-                if(meetingData!=null)
-                {
-                    status=meetingData.getStatus();
-                       if (status.equalsIgnoreCase(getString(R.string.s_start))) {
-                           start.setBackground(ContextCompat.getDrawable(MeetingDetailsActivity.this, R.drawable.ic_stop));
-                           txt_meetingstatus.setText(getString(R.string.EndMeeting));
-                       } else {
-                           start.setBackground(ContextCompat.getDrawable(MeetingDetailsActivity.this, R.drawable.ic_start));
-                           txt_meetingstatus.setText(getString(R.string.StartMeeting));
-                       }
+                MeetingModel meetingData = response.body().getResponse().get(0);
+                if (meetingData != null) {
+                    status = meetingData.getStatus();
+                    if (status.equalsIgnoreCase(getString(R.string.s_start))) {
+                        start.setBackground(ContextCompat.getDrawable(MeetingDetailsActivity.this, R.drawable.ic_stop));
+                        txt_meetingstatus.setText(getString(R.string.EndMeeting));
+                    } else {
+                        start.setBackground(ContextCompat.getDrawable(MeetingDetailsActivity.this, R.drawable.ic_start));
+                        txt_meetingstatus.setText(getString(R.string.StartMeeting));
+                    }
 
 
-                       progressbar.setVisibility(View.GONE);
+                    progressbar.setVisibility(View.GONE);
                 }
 
             }

@@ -107,6 +107,7 @@
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/dropdownyello"
                         android:editable="false"
+                        android:visibility="gone"
                         android:hint="@string/SelectDepartment"
                         android:textCursorDrawable="@drawable/drable_edittext"
                         app:met_baseColor="@color/text_color"
@@ -145,6 +146,23 @@
                         app:met_floatingLabelTextSize="@dimen/_10sdp"
                         app:met_maxCharacters="20"
                         app:met_primaryColor="@color/text_hint_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/SelectRequestTypes"
+                        android:textColor="@color/them_color"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                    <ListView
+                        android:id="@+id/listTypes"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp">
+                    </ListView>
+
                     <Button
                         android:id="@+id/btAttchment"
                         android:layout_width="@dimen/_150sdp"
@@ -161,21 +179,8 @@
                         android:textSize="@dimen/_15sdp"
                         android:textStyle="bold"
                         android:visibility="gone" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/SelectRequestTypes"
-                        android:textColor="@color/them_color"
-                        android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold" />
-                    <ListView
-                        android:id="@+id/listTypes"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_100sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_5sdp">
-                    </ListView>
+
+
                     <Button
                         android:id="@+id/btnSubmit"
                         android:layout_width="match_parent"

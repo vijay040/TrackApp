@@ -208,7 +208,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                     progress.setVisibility(View.VISIBLE);
                     LoginModel model = sh.getLoginModel(getString(R.string.login_model));
 
-                    createMeeting(model.getId(), purpose, descreption, customer, date, time, agenda, contactperson, address, "", "", "", "", "");
+                    createMeeting(model.getId(), purpose, descreption, customer, date, time, agenda, contactperson, address, alarm.getStartDate(), alarm.getStartTime(), alarm.getEndDate(), alarm.getEndTime(), "");
                 }
             }
         });
@@ -405,6 +405,13 @@ public class CreateMeetingActivity extends AppCompatActivity implements
             , String alarm_time
 
     ) {
+
+
+            Log.e("start_date","**********start_date"+start_date);
+            Log.e("end_date","**********end_date"+end_date);
+            Log.e("start_time","**********start_time"+start_time);
+            Log.e("end_time","**********end_time"+end_time);
+
         Singleton.getInstance().getApi().postMeeting(user_id, purpose
                 , descreption
                 , customerid

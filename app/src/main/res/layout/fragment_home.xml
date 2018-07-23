@@ -280,11 +280,12 @@
 
             <ImageView
                 android:id="@+id/img_clock"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:visibility="visible" />
+                android:background="@drawable/ic_reunion"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>

@@ -59,7 +59,7 @@ public class FeedbackListActivity extends AppCompatActivity {
                 startActivity(new Intent(FeedbackListActivity.this, FeedbackActivity.class));
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 PreRequestAdaptor adapter = (PreRequestAdaptor) adapterView.getAdapter();
@@ -68,7 +68,7 @@ public class FeedbackListActivity extends AppCompatActivity {
                 intent.putExtra(getString(R.string.prerequest_model), preRequestModel);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     private void back() {
@@ -91,7 +91,7 @@ public class FeedbackListActivity extends AppCompatActivity {
 
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
-        title.setText(getString(R.string.pre_requests));
+        title.setText(getString(R.string.feedback));
     }
 
 

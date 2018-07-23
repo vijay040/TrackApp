@@ -212,9 +212,11 @@ public class DrawerActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         model = sh.getLoginModel(getString(R.string.login_model));
-        Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
-        txtName.setText(model.getDisplay_name());
-        txtEmail.setText(model.getEmail());
-        txtDepartment.setText("("+model.getDepartment()+")");
+        if(model!=null) {
+            Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
+            txtName.setText(model.getDisplay_name());
+            txtEmail.setText(model.getEmail());
+            txtDepartment.setText("(" + model.getDepartment() + ")");
+        }
     }
 }

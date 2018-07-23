@@ -69,4 +69,36 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
+
+
+ /*   public void createNotification() {
+        String SERVER_KEY = "******";
+        String TOKEN = "*******";
+
+        OkHttpClient client = new OkHttpClient();
+        JSONObject json = new JSONObject();
+        JSONObject dataJson = new JSONObject();
+        try {
+            dataJson.put("body", "Test");
+            dataJson.put("title", "New Notification!");
+            json.put("notification", dataJson);
+            json.put("to", TOKEN);
+
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            RequestBody body = RequestBody.create(JSON, json.toString());
+            Request request = new Request.Builder()
+                    .header("Authorization","key=" + SERVER_KEY)
+                    .url("https://fcm.googleapis.com/fcm/send")
+                    .post(body)
+                    .build();
+            Response response = client.newCall(request).execute();
+            String finalResponse = response.body().string();
+            Log.d("VVV", "map: " + finalResponse);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
 }

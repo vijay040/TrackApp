@@ -15,6 +15,7 @@ public class MeetingModel implements Serializable {
     private String customer_name;
     private String title;
     private String address;
+    private String meeting_count;
 
     private String start_address;
 
@@ -34,6 +35,14 @@ public class MeetingModel implements Serializable {
     private String user_id;
 
     private String customer_id;
+
+    public String getMeeting_count() {
+        return meeting_count;
+    }
+
+    public void setMeeting_count(String meeting_count) {
+        this.meeting_count = meeting_count;
+    }
 
     public String getCustomer_name() {
         return customer_name;

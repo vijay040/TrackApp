@@ -10,8 +10,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.activity.AddCustomerActivity;
@@ -23,9 +28,20 @@ import com.mmcs.trackapp.activity.FeedbackListActivity;
 import com.mmcs.trackapp.activity.MyScheduleActivity;
 import com.mmcs.trackapp.activity.PendingActivity;
 import com.mmcs.trackapp.activity.MessageActivity;
+import com.mmcs.trackapp.activity.ReminderdetailActivity;
 import com.mmcs.trackapp.activity.SettingActivity;
+import com.mmcs.trackapp.model.FeedbackResMeta;
 import com.mmcs.trackapp.model.LoginModel;
+import com.mmcs.trackapp.model.MeetingModel;
+import com.mmcs.trackapp.model.ResMetaMeeting;
 import com.mmcs.trackapp.util.Shprefrences;
+import com.mmcs.trackapp.util.Singleton;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by aphroecs on 8/12/2016.
@@ -67,7 +83,23 @@ public class FragmentHome extends Fragment {
         message =  view.findViewById(R.id.btn_message);
         setting =  view.findViewById(R.id.btn_setting);
         txtWelcomeText = view.findViewById(R.id.txtWelcomeText);
-        ImageView animatedClockView = view.findViewById(R.id.img_clock);
+         animatedClockView = view.findViewById(R.id.img_clock);
+       // Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+       // animatedClockView.startAnimation(shake);
+
+        Animation animation = new AlphaAnimation(1, 0);
+        animation.setDuration(1000);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.REVERSE);
+        animatedClockView.startAnimation(animation);
+
+        animatedClockView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Meeting Is Running!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // Creating though compat library
       //  animatedClock = AnimatedVectorDrawableCompat.create(getActivity(), R.drawable.avd_clock_rotate);
@@ -166,7 +198,34 @@ public class FragmentHome extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if(animatedClockView!=null)
+            getRunningMeetings();
     }
+
+    private void getRunningMeetings()
+    {
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
+        Singleton.getInstance().getApi().getRunningMeetings(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
+            @Override
+            public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
+                ArrayList<MeetingModel>list=response.body().getResponse();
+                if(Integer.parseInt(list.get(0).getMeeting_count())>0)
+                {
+                    animatedClockView.setVisibility(View.VISIBLE);
+                }
+                else {
+                    animatedClockView.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResMetaMeeting> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 
 }

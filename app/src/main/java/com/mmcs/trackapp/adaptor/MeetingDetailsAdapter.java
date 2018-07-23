@@ -85,7 +85,6 @@ public class MeetingDetailsAdapter extends BaseAdapter {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
-
             Log.e("Date ", "**************** list.get(i).getDate()**************" + list.get(i).getDate());
             Date strDate = sdf.parse(list.get(i).getDate());//list.get(i).getDate()
             Date today = sdf.parse(sdf.format(new Date()));

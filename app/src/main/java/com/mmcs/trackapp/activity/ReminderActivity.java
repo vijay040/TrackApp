@@ -32,7 +32,7 @@ import java.util.Calendar;
 
 public class ReminderActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText edtStartDate, edt_time, edtEndDate, edt_EndTime;
-    Button btnOk,btnfollowup;
+    Button btnOk, btnfollowup;
     Spinner edt_EndTimer;
     int H, M;
     Calendar calendar;
@@ -47,7 +47,8 @@ public class ReminderActivity extends AppCompatActivity implements AdapterView.O
     int d, y, m, h, t;
     String remindertime[] = {"5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes", "1 hour", "2 hours", "3 hours", "4 hours", "5 hours",
             "6 hours", "7 hours", "8 hours", " 9 hours", "10 hours", "11 hours", "18 hours", "1 day", "2 days", "3 days", "4 days", "1 week", "2 weeks"};
-public static String startDate,startTime,endDate,endTime;
+    public static String startDate, startTime, endDate, endTime;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -60,7 +61,7 @@ public static String startDate,startTime,endDate,endTime;
         edt_EndTime = findViewById(R.id.edt_EndTime);
         edt_EndTimer = findViewById(R.id.edt_EndTimer);
         btnOk = findViewById(R.id.btnOk);
-        btnfollowup=findViewById(R.id.btnfollow);
+        btnfollowup = findViewById(R.id.btnfollow);
         calendar = Calendar.getInstance();
         setTitle();
         back();
@@ -71,27 +72,12 @@ public static String startDate,startTime,endDate,endTime;
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, remindertime);
         edt_EndTimer.setAdapter(adapter);
         edtStartDate.setText(startDate);
-       // edtEndDate.setText(String.valueOf(DD) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(YY));
-        //Calendar alarmCal = Calendar.getInstance();
-      //  H = calendar.get(Calendar.HOUR_OF_DAY);
-      //  M = calendar.get(Calendar.MINUTE);
         edt_time.setText(startTime);
-       // edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M));
-       /* if (H < 12 && H >= 0) {
-            edt_time.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
-            edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
-        } else {
-            H -= 12;
-            if (H == 0) {
-                H = 12;
-            }
-            edt_time.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "PM");
-            edt_EndTime.setText(String.valueOf(H) + ":" + String.valueOf(M) + " " + "AM");
-        }*/
+
         btnfollowup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ReminderActivity.this,ReminderdetailActivity.class));
+                startActivity(new Intent(ReminderActivity.this, ReminderdetailActivity.class));
             }
         });
 
@@ -127,7 +113,7 @@ public static String startDate,startTime,endDate,endTime;
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-           /*     String strtdt = edtStartDate.getText() + "";
+                String strtdt = edtStartDate.getText() + "";
                 String strttm = edt_time.getText() + "";
                 String enddt = edtEndDate.getText() + "";
                 String endtm = edt_EndTime.getText() + "";
@@ -140,29 +126,11 @@ public static String startDate,startTime,endDate,endTime;
                 Intent intent = new Intent();
                 intent.putExtra("ALARM", alarm);
                 setResult(RESULT_OK, intent);
-
-               *//* Calendar cal = Calendar.getInstance();
-                cal.setTimeInMillis(System.currentTimeMillis());
-                cal.clear();
-                cal.set(2018,5,30,22,28);*//*
-
-                Calendar cal = Calendar.getInstance();
-
-                cal.setTimeInMillis(System.currentTimeMillis());
-                cal.clear();
-                cal.set(y, m, d, h, t);
-
-                AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                Intent inte = new Intent(ReminderActivity.this, AlarmReciver.class);
-                PendingIntent alarmIntent = PendingIntent.getBroadcast(ReminderActivity.this, 0, inte, 0);
-                // cal.add(Calendar.SECOND, 5);
-                alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), alarmIntent);*/
-
-
                 finish();
             }
         });
     }
+
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -193,13 +161,18 @@ public static String startDate,startTime,endDate,endTime;
         public void onDateSet(DatePicker datePicker, int d, int m, int y) {
             if (cur == DATE_DIALOG_ID) {
                 // set selected date into textview
-                edtStartDate.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));
+                if ((m + 1) < 10)
+                    edtStartDate.setText(String.valueOf(d) + "-0" + String.valueOf(m + 1) + "-" + String.valueOf(y));
+                else
+                    edtStartDate.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));
                 ReminderActivity.this.d = d;
                 ReminderActivity.this.m = m;
                 ReminderActivity.this.y = y;
             } else {
-
-                edtEndDate.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));
+                if ((m + 1) < 10)
+                    edtEndDate.setText(String.valueOf(d) + "-0" + String.valueOf(m + 1) + "-" + String.valueOf(y));
+                else
+                    edtEndDate.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));
             }
         }
     };
@@ -249,15 +222,15 @@ public static String startDate,startTime,endDate,endTime;
 
     }
 
-    public void setAlarm()
-    {
+    public void setAlarm() {
 
     }
-    private void setTitle()
-    {
-        TextView title= (TextView) findViewById(R.id.title);
+
+    private void setTitle() {
+        TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.reminder_settings));
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {

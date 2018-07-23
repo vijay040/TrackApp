@@ -13,6 +13,8 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.activity.DrawerActivity;
+import com.mmcs.trackapp.activity.MessageActivity;
+import com.mmcs.trackapp.activity.ReminderdetailActivity;
 
 import java.util.Map;
 
@@ -29,44 +31,40 @@ public class BtrackMessagingService extends FirebaseMessagingService {
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        // [START_EXCLUDE]
-        // There are two types of messages data messages and notification messages. Data messages are handled
-        // here in onMessageReceived whether the app is in the foreground or background. Data messages are the type
-        // traditionally used with GCM. Notification messages are only received here in onMessageReceived when the app
-        // is in the foreground. When the app is in the background an automatically generated notification is displayed.
-        // When the user taps on the notification they are returned to the app. Messages containing both notification
-        // and data payloads are treated as notification messages. The Firebase console always sends notification
-        // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
-        // [END_EXCLUDE]
 
-        // TODO(developer): Handle FCM messages here.
-        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.e("dataChat", remoteMessage.getData().toString());
-        // Log.e(TAG, "From: " + remoteMessage.getFrom());
-
-        // Check if message contains a data payload.
+        Log.e("dataChat", remoteMessage.getData() + "");
+        Log.e("remoteMessage","************************"+remoteMessage);
         if (remoteMessage.getData().size() > 0) {
             Log.e(TAG, "Message data payload: " + remoteMessage.getData());
         }
-
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.e(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.e(TAG, "Message getBodyLocalizationKey " + remoteMessage.getNotification().getBodyLocalizationKey());
+            Log.e(TAG, "Message getTag " + remoteMessage.getNotification().getTag());
+            Log.e(TAG, "Message getBodyLocalizationArgs " + remoteMessage.getNotification().getBodyLocalizationArgs());
+            Log.e(TAG, "Message getTitle " + remoteMessage.getNotification().getTitle());
+        }
+
+        for (Map.Entry<String, String> entry : remoteMessage.getData().entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            Log.e("*****************", "key, " + key + " value " + value);
         }
 
         Map<String, String> params = remoteMessage.getData();
-        String subtitle = "Messece Recived";//params.get("subtitle").toString();
-        String title ="BTrack Chat";// params.get("title").toString();
-        //   String message = params.get("message").toString();
-
-        //  String tickerText = params.get("tickerText").toString();
 
         intent = new Intent(this, DrawerActivity.class);
-        //intent.putExtra("NOTIFICATION_VALUE", "enquiry");
 
-        sendNotification(subtitle, title);
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
+         if (remoteMessage.getNotification().getTag().equalsIgnoreCase("meeting"))
+                intent = new Intent(this, ReminderdetailActivity.class);
+            else if (params.get("type").equalsIgnoreCase("message"))
+                intent = new Intent(this, MessageActivity.class);
+
+        intent.putExtra("NOTIFICATION_VALUE", remoteMessage);
+
+        sendNotification(params.get("body"), params.get("title"));
+
     }
     // [END receive_message]
 
@@ -89,9 +87,9 @@ public class BtrackMessagingService extends FirebaseMessagingService {
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
-
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+
     }
 }

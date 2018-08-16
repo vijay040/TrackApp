@@ -1,6 +1,7 @@
 package com.mmcs.trackapp.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -37,8 +38,7 @@ public class DrawerActivity extends AppCompatActivity {
     public static boolean isHome = true;
     public static FragmentManager fragmentManager;
     TextView txtName,txtEmail,txtDepartment, txt_meeting, txt_myschedule, txt_feedback, txt_client, txt_attendance, txt_expense, txt_setting, txt_pending, txt_message, txt_logout;
-    final int MY_PERMISSIONS_REQUEST_LOCATION = 102;
-    final int MY_PERMISSIONS_REQUEST_WRITE = 103;
+
     Shprefrences sh;
     LoginModel model;
     ImageView imgProfile;
@@ -52,8 +52,11 @@ public class DrawerActivity extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        // activity=this;
         setContentView(R.layout.landing_activity);
+        if(!hasPermissions(this, PERMISSIONS)){
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+
         sh = new Shprefrences(this);
         txt_meeting = (TextView) findViewById(R.id.txt_meeting);
         txt_myschedule = (TextView) findViewById(R.id.txt_myschedule);
@@ -72,21 +75,9 @@ public class DrawerActivity extends AppCompatActivity {
         imgProfile = findViewById(R.id.imgProfile);
         model = sh.getLoginModel(getString(R.string.login_model));
         if(model.getImage()!=null)
-        Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
+       //Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).resize(100,100).into(imgProfile);
         txtName.setText(model.getDisplay_name());
         setTitle();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-        }
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
-        }
-
-
 
         fragmentManager = getSupportFragmentManager();
         pushFragment(new FragmentHome());
@@ -219,4 +210,29 @@ public class DrawerActivity extends AppCompatActivity {
             txtDepartment.setText("(" + model.getDepartment() + ")");
         }
     }
+
+    //*********************************check permission*************************
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    int PERMISSION_ALL = 1;
+    String[] PERMISSIONS = {
+            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.CAMERA
+    };
+
+
+
 }

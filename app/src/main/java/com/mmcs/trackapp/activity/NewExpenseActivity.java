@@ -70,8 +70,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -284,6 +286,8 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
+                File file=new File(imageImagePath);
+                resize(file,"");
                 image_path.setText(imageImagePath);
                 Bitmap b = decodeUri(fileUri);
                 imageView.setImageBitmap(b);
@@ -297,6 +301,8 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 if (selectedImage != null) {
                     imageView.setImageURI(selectedImage);
                     imageImagePath = getPath(selectedImage);
+                    File file=new File(imageImagePath);
+                    resize(file,"");
                     image_path.setText(imageImagePath);
                 }
             }
@@ -540,5 +546,41 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         return selectedImaeUri.getPath();
     }
 
+    BitmapFactory.Options bmOptions;
+    Bitmap bitmap;
+    public void resize(File file, String benchMark) {
+        try {
+            bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inPreferredConfig = Bitmap.Config.RGB_565;
+            bmOptions.inDither = true;
+            bitmap = BitmapFactory.decodeFile(imageImagePath, bmOptions);
+            int w = bitmap.getWidth();
+            int h = bitmap.getHeight();
+            Log.e("width & Height", "width " + bitmap.getWidth());
+            if (bitmap.getWidth() > 1200) {
+                w = bitmap.getWidth() * 30 / 100;
+                h = bitmap.getHeight() * 30 / 100;
+            }
+
+            Log.e("width & Height", "width " + w + " height " + h);
+            bitmap = Bitmap.createScaledBitmap(bitmap, w, h, true);
+
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes);
+            try {
+                Log.e("Compressing", "Compressing");
+                FileOutputStream fo = new FileOutputStream(file);
+                fo.write(bytes.toByteArray());
+                fo.close();
+            } catch (Exception e) {
+                Log.e("Exception", "Image Resizing" + e.getMessage());
+            }
+        } catch (
+                Exception e
+                ) {
+            Log.e("Exception", "Exception in resizing image");
+        }
+    }
 
 }

@@ -16,6 +16,9 @@ import com.mmcs.trackapp.activity.DrawerActivity;
 import com.mmcs.trackapp.activity.MessageActivity;
 import com.mmcs.trackapp.activity.ReminderdetailActivity;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Map;
 
 public class BtrackMessagingService extends FirebaseMessagingService {
@@ -52,18 +55,25 @@ public class BtrackMessagingService extends FirebaseMessagingService {
             Log.e("*****************", "key, " + key + " value " + value);
         }
 
-        Map<String, String> params = remoteMessage.getData();
-
+        String str = remoteMessage.getNotification().getTag();
+        try {
+            JSONObject o = new JSONObject(str);
+            JSONArray a = o.getJSONArray("types");
+            for (int i = 0; i < a.length(); i++) {
+                Log.d("Type", a.getString(i));
+            }
+        }catch (Exception e){}
+Log.e("str****************",""+str);
         intent = new Intent(this, DrawerActivity.class);
 
-         if (remoteMessage.getNotification().getTag().equalsIgnoreCase("meeting"))
+        /* if (remoteMessage.getNotification().getTag().equalsIgnoreCase("meeting"))
                 intent = new Intent(this, ReminderdetailActivity.class);
             else if (params.get("type").equalsIgnoreCase("message"))
-                intent = new Intent(this, MessageActivity.class);
+                intent = new Intent(this, MessageActivity.class);*/
 
         intent.putExtra("NOTIFICATION_VALUE", remoteMessage);
 
-        sendNotification(params.get("body"), params.get("title"));
+        sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
 
     }
     // [END receive_message]

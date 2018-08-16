@@ -152,6 +152,8 @@ public class MeetingDetailsActivity extends AppCompatActivity {
 
     }
 
+    String followup, mom;
+
     private void chkUpdate() {
         DateFormat dateFormat = new SimpleDateFormat(getString(R.string.formate_date));
         Date date = new Date();
@@ -189,7 +191,6 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         }
         updateMeetingStatus(startTime, endTime, currentStatus, startAddress, endAddress);
     }
-
 
 
     private void back() {
@@ -238,13 +239,17 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         }
     }
 
+    String indate,intime;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 200 && resultCode == RESULT_OK) {
-             update();
-        }
-        else
+            followup = (String) data.getExtras().get("NEED_FOLLOWUP");
+            mom = (String) data.getExtras().get("MOM");
+            indate = (String) data.getExtras().get("DATE");
+            intime = (String) data.getExtras().get("TIME");
+            update();
+        } else
             progressbar.setVisibility(View.GONE);
     }
 
@@ -269,7 +274,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
 
     public void updateMeetingStatus(String startTime, String endTime, final String status, String startAddress, String endAddress) {
         LoginModel mo = sh.getLoginModel(getString(R.string.login_model));
-        Singleton.getInstance().getApi().updateMeedingStatus(mo.getId(), startTime, endTime, status, model.getId(), startAddress, endAddress).enqueue(new Callback<PreRequestResMeta>() {
+        Singleton.getInstance().getApi().updateMeedingStatus(mo.getId(), startTime, endTime, status, model.getId(), startAddress, endAddress, followup, mom,indate,intime).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
                 MeetingDetailsActivity.this.status = status;

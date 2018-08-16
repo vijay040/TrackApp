@@ -85,6 +85,9 @@ public class ExpenseListActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().getExpanseList(model.getId()).enqueue(new Callback<ExpenseResMeta>() {
             @Override
             public void onResponse(Call<ExpenseResMeta> call, Response<ExpenseResMeta> response) {
+
+                if(response.body()==null)
+                    return;
                 ArrayList<ExpenseModel> model=response.body().getResponse();
                 ExpenseListAdaptor adaptor=new ExpenseListAdaptor(ExpenseListActivity.this,model);
                 listExpenseView.setAdapter(adaptor);

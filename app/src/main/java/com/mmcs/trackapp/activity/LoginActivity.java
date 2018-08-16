@@ -2,6 +2,7 @@ package com.mmcs.trackapp.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +11,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.engine.Resource;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.LoginModel;
 import com.mmcs.trackapp.model.LoginResMeta;
@@ -37,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progress;
     RelativeLayout lay;
     public static String fcmToken;
+    Spinner spnEnvironment,spnLoginType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -48,6 +53,13 @@ public class LoginActivity extends AppCompatActivity {
       //  getSupportActionBar().hide();
         username = findViewById(R.id.edt_usernsme);
         password = findViewById(R.id.edt_password);
+        spnEnvironment=findViewById(R.id.spnEnvironment);
+        spnLoginType=findViewById(R.id.spnUserType);
+        String envList[] = {"Select Environment","Testing","Development","Production"};
+        spnEnvironment.setAdapter( new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item,envList ));
+
+        String typeList[] = {"Select Login Types","User","Location Manager","Admin"};
+        spnLoginType.setAdapter( new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item,typeList ));
       /*  forgotpassword = findViewById(R.id.txt_forgot);
         remember = findViewById(R.id.checkBox1);*/
         btn_signin=findViewById(R.id.btn_signin);
@@ -59,6 +71,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String user_name = username.getText().toString();
                 String pass = password.getText().toString();
+                if(spnEnvironment.getSelectedItemPosition()==0) {
+                    Toast.makeText(LoginActivity.this, R.string.select_environment, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(spnLoginType.getSelectedItemPosition()==0) {
+                    Toast.makeText(LoginActivity.this, R.string.select_logintype, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (user_name.equals("")) {
                     Toast.makeText(LoginActivity.this, getString(R.string.enter_user_name), Toast.LENGTH_SHORT).show();
                 } else if (pass.equals("")) {
@@ -73,7 +93,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String email,String pass)
     {
-        Singleton.getInstance().getApi().login(email,pass,"",fcmToken).enqueue(new Callback<LoginResMeta>() {
+       String env=(String) spnEnvironment.getSelectedItem();
+        String user=(String) spnLoginType.getSelectedItem();
+        Singleton.getInstance().getApi().login(email,pass,"",fcmToken,user,env).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                     if(response.body().getCode()!=null && response.body().getCode().equalsIgnoreCase("200"))

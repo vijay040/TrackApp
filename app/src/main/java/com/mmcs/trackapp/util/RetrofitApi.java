@@ -53,7 +53,7 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("apilogin.php")
-    Call<LoginResMeta> login(@Field("email") String email, @Field("password") String password, @Field("device_token") String device_token, @Field("fcm_token") String fcm_token);
+    Call<LoginResMeta> login(@Field("email") String email, @Field("password") String password, @Field("device_token") String device_token, @Field("fcm_token") String fcm_token,@Field("userType") String userType,@Field("environment") String environment);
 
     @FormUrlEncoded
     @POST("fetch_meeting.php")
@@ -169,7 +169,7 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("start_meeting_post.php?request=startMeeting")
     Call<PreRequestResMeta> updateMeedingStatus(@Field("user_id") String user_id, @Field("start_date_time") String start_date_time, @Field("end_date_time") String end_date_time, @Field("status") String status, @Field("meeting_id") String meeting_id
-            , @Field("start_address") String start_address, @Field("end_address") String end_address
+            , @Field("start_address") String start_address, @Field("end_address") String end_address,@Field("need_followup") String need_followup,@Field("mom") String mom,@Field("date") String date,@Field("time") String time
     );
 
     @FormUrlEncoded

@@ -7,6 +7,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -53,8 +57,10 @@ import com.mmcs.trackapp.util.Shprefrences;
 import com.mmcs.trackapp.util.Singleton;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import okhttp3.MediaType;
@@ -323,7 +329,11 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
+                File file=new File(imageImagePath);
+                resize(file,"");
+                Picasso.get().load(fileUri).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
                 updateUserProfile(imageImagePath);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -333,6 +343,9 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
                 Uri selectedImage = data.getData();
                 if (selectedImage != null) {
                     imageImagePath = getPath(selectedImage);
+                    File file=new File(imageImagePath);
+                    resize(file,"");
+                    Picasso.get().load(file).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).resize(100,100).into(imgProfile);
                     updateUserProfile(imageImagePath);
                 }
             }
@@ -411,7 +424,7 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
                     UploadImageModel up = response.body().getData();
                     model.setImage(up.getImage());
                     sh.setLoginModel(getString(R.string.login_model), model);
-                    Picasso.get().load(up.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
+                   // Picasso.get().load(up.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
                 }
             }
 
@@ -471,5 +484,51 @@ public class SettingActivity extends AppCompatActivity implements SearchView.OnQ
                 Toast.LENGTH_LONG).show();
     }
 
+
+    BitmapFactory.Options bmOptions;
+    Bitmap bitmap;
+    public void resize(File file, String benchMark) {
+        try {
+            bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inPreferredConfig = Bitmap.Config.RGB_565;
+            bmOptions.inDither = true;
+            bitmap = BitmapFactory.decodeFile(imageImagePath, bmOptions);
+            int w = bitmap.getWidth();
+            int h = bitmap.getHeight();
+            Log.e("width & Height", "width " + bitmap.getWidth());
+            if (bitmap.getWidth() > 1200) {
+                w = (bitmap.getWidth() * 30 )/ 100;
+                h =(bitmap.getHeight() * 30) / 100;
+            }
+
+            Log.e("width & Height", "width " + w + " height " + h);
+            bitmap = Bitmap.createScaledBitmap(bitmap, w, h, true);
+
+            /*Canvas c = new Canvas(bitmap);
+            Paint p = new Paint();
+            p.setColor(Color.BLUE);
+            p.setStyle(Paint.Style.FILL);
+            p.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+            // paint.setColor(Color.BLACK);
+            p.setTextSize(30);
+            c.drawText(benchMark, 20, 40, p);*/
+
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes);
+            try {
+                Log.e("Compressing", "Compressing");
+                FileOutputStream fo = new FileOutputStream(file);
+                fo.write(bytes.toByteArray());
+                fo.close();
+            } catch (Exception e) {
+                Log.e("Exception", "Image Resizing" + e.getMessage());
+            }
+        } catch (
+                Exception e
+                ) {
+            Log.e("Exception", "Exception in resizing image");
+        }
+    }
 
 }

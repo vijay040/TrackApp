@@ -25,22 +25,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.ExpenseModel;
 import com.mmcs.trackapp.model.ResMetaMeeting;
 import com.mmcs.trackapp.model.UploadImageModel;
 import com.mmcs.trackapp.model.UploadImageResMeta;
+import com.mmcs.trackapp.util.CircleTransform;
 import com.mmcs.trackapp.util.Singleton;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class ExpenseDetailActivity extends AppCompatActivity {
     ExpenseModel expensemodel;
@@ -87,7 +92,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtExpenseType.setText(getString(R.string.expense_type) + expensemodel.getExpense_type());
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
-        Picasso.get().load(expensemodel.getImage()).placeholder(R.drawable.ic_bill).into(image_uploaded);
+        Glide.with(this).load(expensemodel.getImage()).into(image_uploaded);
+
+       // Picasso.get().load(expensemodel.getImage()).placeholder(R.drawable.ic_bill).resize(100,100).into(image_uploaded);
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold
@@ -185,6 +192,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
+                File file=new File(imageImagePath);
+                resize(file,"");
+                Picasso.get().load(file).placeholder(R.drawable.ic_userlogin).resize(100,100).into(image_uploaded);
                 updateExpenseReceipt(imageImagePath);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -195,6 +205,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 Uri selectedImage = data.getData();
                 if (selectedImage != null) {
                     imageImagePath = getPath(selectedImage);
+                    File file=new File(imageImagePath);
+                    resize(file,"");
+                    Picasso.get().load(file).placeholder(R.drawable.ic_userlogin).resize(100,100).into(image_uploaded);
                     updateExpenseReceipt(imageImagePath);
                 }
             }
@@ -284,5 +297,42 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         });
     }
 
+
+    BitmapFactory.Options bmOptions;
+    Bitmap bitmap;
+    public void resize(File file, String benchMark) {
+        try {
+            bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inPreferredConfig = Bitmap.Config.RGB_565;
+            bmOptions.inDither = true;
+            bitmap = BitmapFactory.decodeFile(imageImagePath, bmOptions);
+            int w = bitmap.getWidth();
+            int h = bitmap.getHeight();
+            Log.e("width & Height", "width " + bitmap.getWidth());
+            if (bitmap.getWidth() > 1200) {
+                w = bitmap.getWidth() * 30 / 100;
+                h = bitmap.getHeight() * 30 / 100;
+            }
+
+            Log.e("width & Height", "width " + w + " height " + h);
+            bitmap = Bitmap.createScaledBitmap(bitmap, w, h, true);
+
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes);
+            try {
+                Log.e("Compressing", "Compressing");
+                FileOutputStream fo = new FileOutputStream(file);
+                fo.write(bytes.toByteArray());
+                fo.close();
+            } catch (Exception e) {
+                Log.e("Exception", "Image Resizing" + e.getMessage());
+            }
+        } catch (
+                Exception e
+                ) {
+            Log.e("Exception", "Exception in resizing image");
+        }
+    }
 
 }

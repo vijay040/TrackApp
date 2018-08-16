@@ -400,10 +400,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         } else if (curr.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, getString(R.string.select_currency), Toast.LENGTH_SHORT).show();
             return;
-        } else if (dept.equals("")) {
-            Toast.makeText(AddPreRequestActivity.this,getString(R.string.select_department) , Toast.LENGTH_SHORT).show();
-            return;
-        } else if (meetingId.equals("")) {
+        }  else if (meetingId.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, getString(R.string.select_meeting), Toast.LENGTH_SHORT).show();
             return;
         } else if (des.equals("")) {

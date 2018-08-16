@@ -205,10 +205,14 @@ public class FragmentHome extends Fragment {
     private void getRunningMeetings()
     {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
+        if(model==null)
+            return;
         Singleton.getInstance().getApi().getRunningMeetings(model.getId()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 ArrayList<MeetingModel>list=response.body().getResponse();
+                if(list.get(0).getMeeting_count()==null)
+                    list.get(0).setMeeting_count("0");
                 if(Integer.parseInt(list.get(0).getMeeting_count())>0)
                 {
                     animatedClockView.setVisibility(View.VISIBLE);

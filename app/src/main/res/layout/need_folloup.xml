@@ -1,11 +1,12 @@
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
-     android:orientation="vertical">
-            <include layout="@layout/toolbar"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-        <ImageView
+    <include layout="@layout/toolbar" />
+
+    <ImageView
         android:id="@+id/img"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp"
@@ -14,58 +15,120 @@
         android:src="@drawable/ic_rating" />
 
 
-        <EditText
-            android:id="@+id/edt_comment"
+    <EditText
+        android:id="@+id/edt_comment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_below="@+id/img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/commentbck"
+        android:gravity="top"
+        android:hint="@string/please_enter_minutes_of_meeting"
+        android:paddingLeft="@dimen/_10sdp"
+        android:textColor="#000"
+        android:textColorHint="#000" />
+
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/progressbar"
+        android:visibility="gone" />
+
+    <CheckBox
+        android:id="@+id/chkFollowup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_comment"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/need_follow_up"
+        android:textColor="@color/them_color"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chkFollowup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
-            android:layout_below="@+id/img"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/commentbck"
-            android:gravity="top"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:hint="@string/please_enter_minutes_of_meeting"
-            android:paddingLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:textColor="#000"
-            android:textColorHint="#000" />
+            android:layout_height="0.5dp"
+            android:background="@color/view_devider" />
 
-
-        <ProgressBar
-            android:id="@+id/progressbar"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            android:indeterminateDrawable="@drawable/progressbar"
-            android:layout_height="@dimen/_30sdp" />
-
-        <CheckBox
-            android:id="@+id/chkFollowup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/need_follow_up"
-            android:layout_below="@+id/edt_comment"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:textSize="@dimen/_15sdp"
-            android:textStyle="bold"
-            android:textColor="@color/them_color"
-            android:layout_marginLeft="@dimen/_10sdp"
-            />
-
-        <Button
-            android:id="@+id/btnSubmit"
+        <LinearLayout
+            android:id="@+id/linear_layout_professional_names"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/chkFollowup"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/btn"
-            android:text="@string/Submit"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:textColor="@color/white_color"
-            android:textSize="@dimen/_15sdp"
-            android:textStyle="bold" />
+            android:layout_height="@dimen/_38sdp"
+            android:layout_below="@+id/view_2_professional_screen_2"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <EditText
+                android:id="@+id/edtDate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:background="@color/white_color"
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="@string/Date"
+                android:paddingLeft="@dimen/_15sdp"
+                android:singleLine="true"
+                android:textColor="#6d6e71"
+                android:textSize="@dimen/_11sdp" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/view_devider" />
+
+            <EditText
+                android:id="@+id/edtTime"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:background="@color/white_color"
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="@string/Time"
+                android:paddingLeft="@dimen/_15sdp"
+                android:singleLine="true"
+                android:textColor="#6d6e71"
+                android:textSize="@dimen/_11sdp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/view_devider" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lay"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/btn"
+        android:text="@string/Submit"
+        android:textColor="@color/white_color"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold" />
 
 
-                    </RelativeLayout>
+</RelativeLayout>

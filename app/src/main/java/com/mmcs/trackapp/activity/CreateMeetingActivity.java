@@ -207,8 +207,12 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                     // pDialog.show();
                     progress.setVisibility(View.VISIBLE);
                     LoginModel model = sh.getLoginModel(getString(R.string.login_model));
+                    String startedDate="",startedTime="",endDate="",endTime="";
+                    if(alarm!=null)
+                    { startedDate= alarm.getStartDate();startedTime= alarm.getStartTime();endDate= alarm.getEndDate();endTime= alarm.getEndTime();
+                    }
 
-                    createMeeting(model.getId(), purpose, descreption, customer, date, time, agenda, contactperson, address, alarm.getStartDate(), alarm.getStartTime(), alarm.getEndDate(), alarm.getEndTime(), "");
+                    createMeeting(model.getId(), purpose, descreption, customer, date, time, agenda, contactperson, address, startedDate,startedTime, endDate, endTime, "");
                 }
             }
         });

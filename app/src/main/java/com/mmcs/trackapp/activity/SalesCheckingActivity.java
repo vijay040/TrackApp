@@ -2,6 +2,7 @@ package com.mmcs.trackapp.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -64,6 +65,16 @@ EditText edt_port_loading,edt_port_destination;
         getPurposeList();
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
+        listvendor_details.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MeetingDetailsAdapter adapter = (MeetingDetailsAdapter) adapterView.getAdapter();
+                MeetingModel model = adapter.list.get(i);
+                Intent intent = new Intent(SalesCheckingActivity.this, VendorDetailsActivity.class);
+                intent.putExtra(getString(R.string.meeting_model), model);
+                startActivity(intent);
+            }
+        });
         txt_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

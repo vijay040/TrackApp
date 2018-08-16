@@ -29,6 +29,7 @@ import com.mmcs.trackapp.activity.MyScheduleActivity;
 import com.mmcs.trackapp.activity.PendingActivity;
 import com.mmcs.trackapp.activity.MessageActivity;
 import com.mmcs.trackapp.activity.ReminderdetailActivity;
+import com.mmcs.trackapp.activity.SalesCheckingActivity;
 import com.mmcs.trackapp.activity.SettingActivity;
 import com.mmcs.trackapp.model.FeedbackResMeta;
 import com.mmcs.trackapp.model.LoginModel;
@@ -48,7 +49,7 @@ import retrofit2.Response;
  */
 public class FragmentHome extends Fragment {
 
-    TextView addvisit, expenses, attandance, schedule, addcustomer, feedback, pending, message, setting;
+    TextView addvisit, expenses, attandance, schedule, addcustomer, feedback, pending, message, setting,sales_checking;
     Shprefrences sh;
     String name;
     ImageView animatedClockView;
@@ -84,6 +85,7 @@ public class FragmentHome extends Fragment {
         setting =  view.findViewById(R.id.btn_setting);
         txtWelcomeText = view.findViewById(R.id.txtWelcomeText);
          animatedClockView = view.findViewById(R.id.img_clock);
+        sales_checking=view.findViewById(R.id.btn_salescheckin);
        // Animation shake = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
        // animatedClockView.startAnimation(shake);
 
@@ -183,6 +185,13 @@ public class FragmentHome extends Fragment {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(getActivity(), ExpenseActivity.class);
                 startActivity(intent);
+            }
+        });
+        sales_checking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), SalesCheckingActivity.class);
+                   startActivity(intent);
             }
         });
 

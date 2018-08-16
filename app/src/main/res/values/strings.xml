@@ -37,6 +37,10 @@
     <string name="ContactPerson">Contact Person</string>
     <string name="Agenda">Agenda</string>
     <string name="Date">Date</string>
+    <string name="valid_till">Valid Till</string>
+    <string name="cost">Cost</string>
+    <string name="margin">Margin</string>
+    <string name="vendor_name">Vendor Name</string>
     <string name="Time">Time</string>
     <string name="Address">Address</string>
     <string name="Location">Location</string>
@@ -231,6 +235,7 @@
     <string name="need_follow_up">Need Follow-up</string>
     <string name="please_enter_meeting_results">Please enter meeting results</string>
     <string name="please_enter_minutes_of_meeting">Please enter Minutes of Meeting</string>
+    <string name="sales_checking">Sales Checking</string>
 
 
     <string name="minute_hand">minute_hand</string>

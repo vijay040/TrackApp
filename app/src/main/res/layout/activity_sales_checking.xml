@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_professional_names"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_38sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <EditText
+            android:id="@+id/edt_port_loading"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:background="@color/white_color"
+            android:clickable="false"
+            android:focusable="false"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableRight="@drawable/dropdownyello"
+            android:hint="SELECT POL"
+            android:paddingLeft="@dimen/_15sdp"
+            android:singleLine="true"
+            android:textColor="#6d6e71"
+            android:textSize="@dimen/_11sdp" />
+        <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@color/view_devider" />
+        <EditText
+            android:id="@+id/edt_port_destination"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:background="@color/white_color"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableRight="@drawable/dropdownyello"
+            android:clickable="false"
+            android:focusable="false"
+            android:hint="SELECT POD"
+            android:paddingLeft="@dimen/_15sdp"
+            android:singleLine="true"
+            android:textColor="#6d6e71"
+            android:textSize="@dimen/_11sdp" />
+    </LinearLayout>
+<TextView
+    android:id="@+id/txt_next"
+    android:layout_height="wrap_content"
+    android:text="NEXT"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:paddingLeft="@dimen/_5sdp"
+    android:textColor="@color/white_color"
+    android:background="@color/welcome_text_color"
+    android:layout_width="@dimen/_40sdp"/>
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:visibility="gone"
+        android:indeterminateDrawable="@drawable/progressbar"
+        android:layout_gravity="center"
+        />
+
+
+    <ListView
+            android:layout_marginTop="@dimen/_40sdp"
+            android:id="@+id/listvendor_details"
+            android:smoothScrollbar="true"
+android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ListView>
+
+</LinearLayout>

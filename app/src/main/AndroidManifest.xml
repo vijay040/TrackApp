@@ -106,7 +106,8 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/them_color" />
 
-        <activity android:name=".activity.ReminderdetailActivity"></activity>
+        <activity android:name=".activity.ReminderdetailActivity" />
+        <activity android:name=".activity.SalesCheckingActivity"></activity>
     </application>
 
 </manifest>

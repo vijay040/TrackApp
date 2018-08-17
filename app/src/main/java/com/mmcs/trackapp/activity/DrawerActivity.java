@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -25,9 +27,17 @@ import android.widget.Toast;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.fragment.FragmentHome;
 import com.mmcs.trackapp.model.LoginModel;
+import com.mmcs.trackapp.model.PreRequestResMeta;
+import com.mmcs.trackapp.util.AppLocationService;
 import com.mmcs.trackapp.util.CircleTransform;
+import com.mmcs.trackapp.util.MyLocation;
 import com.mmcs.trackapp.util.Shprefrences;
+import com.mmcs.trackapp.util.Singleton;
 import com.squareup.picasso.Picasso;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by aphroecs on 10/10/2016.
@@ -38,7 +48,6 @@ public class DrawerActivity extends AppCompatActivity {
     public static boolean isHome = true;
     public static FragmentManager fragmentManager;
     TextView txtName,txtEmail,txtDepartment, txt_meeting, txt_myschedule, txt_feedback, txt_client, txt_attendance, txt_expense, txt_setting, txt_pending, txt_message, txt_logout;
-
     Shprefrences sh;
     LoginModel model;
     ImageView imgProfile;
@@ -181,6 +190,7 @@ public class DrawerActivity extends AppCompatActivity {
             }
         });
 
+        getLocation();
 
     }
 
@@ -233,6 +243,49 @@ public class DrawerActivity extends AppCompatActivity {
             android.Manifest.permission.CAMERA
     };
 
+    private void updateLocation(String lat,String lng)
+    {
+        Singleton.getInstance().getApi().postDeviceLocation(model.getId(),lat,lng).enqueue(new Callback<PreRequestResMeta>() {
+            @Override
+            public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
+
+            }
+        });
+    }
+
+    AppLocationService appLocationService;
+    Location nwLocation;
+
+    public void getLocation() {
+        appLocationService = new AppLocationService(DrawerActivity.this);
+        nwLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
+        if (nwLocation != null) {
+            MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
+                @Override
+                public void gotLocation(Location location) {
+                    //Got the location
+                    try {
+                        if (location != null) {
+                            double lat= location.getLatitude();
+                            double lon = location.getLongitude();
+                            updateLocation(lat+"",""+lon);
+                        }
+                    } catch (Exception e) {
+                        e.getMessage();
+                    }
+                }
+            };
+            MyLocation myLocation = new MyLocation();
+            myLocation.getLocation(this, locationResult);
+        } else {
+            // showSettingsAlert("NETWORK");
+        }
+    }
 
 
 }

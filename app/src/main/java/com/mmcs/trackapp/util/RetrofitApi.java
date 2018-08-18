@@ -18,6 +18,7 @@ import com.mmcs.trackapp.model.ResMetaReqTypes;
 import com.mmcs.trackapp.model.ResMetaUsers;
 import com.mmcs.trackapp.model.ResponseMeta;
 import com.mmcs.trackapp.model.UploadImageResMeta;
+import com.mmcs.trackapp.model.VQuotationResMeta;
 
 import java.util.ArrayList;
 import okhttp3.RequestBody;
@@ -219,6 +220,6 @@ public interface RetrofitApi {
 
     @FormUrlEncoded
     @POST("quotation_get_api.php")
-    Call<PortResMeta> getVQuotationList(@Field("user_id") String user_id,@Field("pol") String pol,@Field("pod") String pod);
+    Call<VQuotationResMeta> getVQuotationList(@Field("user_id") String user_id, @Field("pol") String pol, @Field("pod") String pod);
 
 }

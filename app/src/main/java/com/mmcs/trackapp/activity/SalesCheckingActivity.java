@@ -33,6 +33,8 @@ import com.mmcs.trackapp.model.PurposeModel;
 import com.mmcs.trackapp.model.ResMetaCustomer;
 import com.mmcs.trackapp.model.ResMetaMeeting;
 import com.mmcs.trackapp.model.ResponseMeta;
+import com.mmcs.trackapp.model.VQuotationModel;
+import com.mmcs.trackapp.model.VQuotationResMeta;
 import com.mmcs.trackapp.util.Shprefrences;
 import com.mmcs.trackapp.util.Singleton;
 
@@ -115,16 +117,18 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
         });
     }
 
+    ArrayList<VQuotationModel> vQModelList;
     private void getVQuotation(String user_id,String pol,String pod)
     {
-        Singleton.getInstance().getApi().getVQuotationList(user_id,pol,pod).enqueue(new Callback<PortResMeta>() {
+        Singleton.getInstance().getApi().getVQuotationList(user_id,pol,pod).enqueue(new Callback<VQuotationResMeta>() {
             @Override
-            public void onResponse(Call<PortResMeta> call, Response<PortResMeta> response) {
+            public void onResponse(Call<VQuotationResMeta> call, Response<VQuotationResMeta> response) {
+                vQModelList=response.body().getResponse();
 
             }
 
             @Override
-            public void onFailure(Call<PortResMeta> call, Throwable t) {
+            public void onFailure(Call<VQuotationResMeta> call, Throwable t) {
 
             }
         });

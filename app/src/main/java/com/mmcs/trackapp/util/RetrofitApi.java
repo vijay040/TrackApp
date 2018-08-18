@@ -5,6 +5,7 @@ import com.mmcs.trackapp.model.FeedbackResMeta;
 import com.mmcs.trackapp.model.LoginResMeta;
 import com.mmcs.trackapp.model.MeetingModel;
 import com.mmcs.trackapp.model.MessageResMeta;
+import com.mmcs.trackapp.model.PortResMeta;
 import com.mmcs.trackapp.model.PreRequestResMeta;
 import com.mmcs.trackapp.model.ReportResMeta;
 import com.mmcs.trackapp.model.RequestTypeModel;
@@ -210,5 +211,10 @@ public interface RetrofitApi {
 
 
 */
+
+
+    @FormUrlEncoded
+    @POST("port_loading_get_api.php")
+    Call<PortResMeta> getPOLAndPOD(@Field("user_id") String user_id);
 
 }

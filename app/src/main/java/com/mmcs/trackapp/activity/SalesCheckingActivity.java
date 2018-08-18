@@ -23,8 +23,10 @@ import com.mmcs.trackapp.adaptor.CustomerPopupAdaptor;
 import com.mmcs.trackapp.adaptor.MeetingDetailsAdapter;
 import com.mmcs.trackapp.adaptor.PurposePopupAdaptor;
 import com.mmcs.trackapp.model.CustomerModel;
+import com.mmcs.trackapp.model.ExpenseResMeta;
 import com.mmcs.trackapp.model.LoginModel;
 import com.mmcs.trackapp.model.MeetingModel;
+import com.mmcs.trackapp.model.PortResMeta;
 import com.mmcs.trackapp.model.PurposeModel;
 import com.mmcs.trackapp.model.ResMetaCustomer;
 import com.mmcs.trackapp.model.ResMetaMeeting;
@@ -47,6 +49,7 @@ EditText edt_port_loading,edt_port_destination;
     ProgressBar progressBar;
     ArrayList<MeetingModel>  meetinglist = new ArrayList<>();
     MeetingDetailsAdapter meetingadapter;
+    LoginModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +58,14 @@ EditText edt_port_loading,edt_port_destination;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_checking);
         sh = new Shprefrences(this);
+        model=sh.getLoginModel(getResources().getString(R.string.login_model));
         txt_next=findViewById(R.id.txt_next);
         edt_port_loading=findViewById(R.id.edt_port_loading);
         edt_port_destination=findViewById(R.id.edt_port_destination);
         listvendor_details=findViewById(R.id.listvendor_details);
         setTitle();
         back();
-        getCustomerList();
-        getPurposeList();
+        getPOLAndPOD();
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
         listvendor_details.setOnItemClickListener( new AdapterView.OnItemClickListener() {
@@ -95,57 +98,43 @@ EditText edt_port_loading,edt_port_destination;
         edt_port_loading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCustomerPopup();
+                showPolPopup();
             }
         });
         edt_port_destination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPurposePopup();
+                showPODPopup();
             }
         });
+
     }
-    public void getCustomerList() {
-        Singleton.getInstance().getApi().getCustomerList("").enqueue(new Callback<ResMetaCustomer>() {
-            @Override
-            public void onResponse(Call<ResMetaCustomer> call, Response<ResMetaCustomer> response) {
 
-                listCustomer = response.body().getResponse();
+
+
+    private void getPOLAndPOD()
+    {
+        Singleton.getInstance().getApi().getPOLAndPOD(model.getId()).enqueue(new Callback<PortResMeta>() {
+            @Override
+            public void onResponse(Call<PortResMeta> call, Response<PortResMeta> response) {
+
             }
 
             @Override
-            public void onFailure(Call<ResMetaCustomer> call, Throwable t) {
-
-            }
-        });
-    }
-    public void getPurposeList() {
-        Singleton.getInstance().getApi().getPurposeList("").enqueue(new Callback<ResponseMeta>() {
-            @Override
-            public void onResponse(Call<ResponseMeta> call, Response<ResponseMeta> response) {
-
-                purposeList = response.body().getResponse();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseMeta> call, Throwable t) {
+            public void onFailure(Call<PortResMeta> call, Throwable t) {
 
             }
         });
     }
+
     AlertDialog alertDialog;
     ArrayList<CustomerModel> listCustomer;
     CustomerPopupAdaptor customerPopupAdaptor;
     String customerid;
     private int popupId = 0;
-    private void showCustomerPopup() {
-       /* PurposeModel m=new PurposeModel();
-        m.setPurpose("Business Meeting in Noida");
-        m.setId("0");
+    private void showPolPopup() {
 
-        purposeList.add(m);*/
         customerPopupAdaptor = new CustomerPopupAdaptor(SalesCheckingActivity.this, listCustomer);
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -178,7 +167,7 @@ EditText edt_port_loading,edt_port_destination;
     PurposePopupAdaptor purposePopupAdaptor;
 
 
-    private void showPurposePopup() {
+    private void showPODPopup() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
         m.setId("0");

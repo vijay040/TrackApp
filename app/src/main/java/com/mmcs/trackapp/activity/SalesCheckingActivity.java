@@ -23,6 +23,7 @@ import com.mmcs.trackapp.adaptor.CustomerPopupAdaptor;
 import com.mmcs.trackapp.adaptor.MeetingDetailsAdapter;
 import com.mmcs.trackapp.adaptor.PortAdapter;
 import com.mmcs.trackapp.adaptor.PurposePopupAdaptor;
+import com.mmcs.trackapp.adaptor.VQuotationAdapter;
 import com.mmcs.trackapp.model.CustomerModel;
 import com.mmcs.trackapp.model.ExpenseResMeta;
 import com.mmcs.trackapp.model.LoginModel;
@@ -118,12 +119,18 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
     }
 
     ArrayList<VQuotationModel> vQModelList;
+ VQuotationAdapter vQuotationAdapter;
     private void getVQuotation(String user_id,String pol,String pod)
     {
         Singleton.getInstance().getApi().getVQuotationList(user_id,pol,pod).enqueue(new Callback<VQuotationResMeta>() {
             @Override
             public void onResponse(Call<VQuotationResMeta> call, Response<VQuotationResMeta> response) {
-                vQModelList=response.body().getResponse();
+                if(response.body()!=null) {
+                    vQModelList = response.body().getResponse();
+                    vQuotationAdapter = new VQuotationAdapter(SalesCheckingActivity.this, vQModelList);
+                    listvendor_details.setAdapter(vQuotationAdapter);
+
+                }
 
             }
 

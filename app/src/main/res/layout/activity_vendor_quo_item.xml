@@ -9,7 +9,7 @@
         android:layout_margin="@dimen/_10sdp">
 
         <TextView
-            android:id="@+id/txt_vendor_name"
+            android:id="@+id/txt_quotation_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
@@ -26,41 +26,30 @@
             android:layout_marginRight="@dimen/_15sdp">
 
             <TextView
-                android:id="@+id/txtDate"
+                android:id="@+id/txt_exchange_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Date"
+                android:text="@string/exchange"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_8sdp" />
-
-            <TextView
-                android:id="@+id/txt_valid_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/valid_till"
-                android:layout_below="@+id/txtDate"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/_8sdp" />
-
-
 
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/txt_cost"
+            android:id="@+id/txt_container_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_vendor_name"
+            android:layout_below="@+id/txt_quotation_no"
             android:layout_marginLeft="@dimen/_10sdp"
             android:ems="20"
-            android:text="@string/cost"
+            android:text="@string/container"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_10sdp" />
         <TextView
             android:id="@+id/txt_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_cost"
+            android:layout_below="@+id/txt_container_size"
             android:layout_marginLeft="@dimen/_10sdp"
             android:ems="20"
             android:text="@string/margin"

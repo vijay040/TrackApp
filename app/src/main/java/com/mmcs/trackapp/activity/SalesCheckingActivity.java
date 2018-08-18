@@ -21,11 +21,13 @@ import android.widget.Toast;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.CustomerPopupAdaptor;
 import com.mmcs.trackapp.adaptor.MeetingDetailsAdapter;
+import com.mmcs.trackapp.adaptor.PortAdapter;
 import com.mmcs.trackapp.adaptor.PurposePopupAdaptor;
 import com.mmcs.trackapp.model.CustomerModel;
 import com.mmcs.trackapp.model.ExpenseResMeta;
 import com.mmcs.trackapp.model.LoginModel;
 import com.mmcs.trackapp.model.MeetingModel;
+import com.mmcs.trackapp.model.PortModel;
 import com.mmcs.trackapp.model.PortResMeta;
 import com.mmcs.trackapp.model.PurposeModel;
 import com.mmcs.trackapp.model.ResMetaCustomer;
@@ -67,18 +69,7 @@ EditText edt_port_loading,edt_port_destination;
         back();
         getPOLAndPOD();
         progressBar = findViewById(R.id.progress);
-        progressBar.setVisibility(View.VISIBLE);
-        listvendor_details.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MeetingDetailsAdapter adapter = (MeetingDetailsAdapter) adapterView.getAdapter();
-                MeetingModel model = adapter.list.get(i);
-                Intent intent = new Intent(SalesCheckingActivity.this, VendorDetailsActivity.class);
-                intent.putExtra(getString(R.string.meeting_model), model);
-                startActivity(intent);
-            }
-        });
-        txt_next.setOnClickListener(new View.OnClickListener() {
+   txt_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String pol=edt_port_loading.getText().toString();
@@ -98,25 +89,25 @@ EditText edt_port_loading,edt_port_destination;
         edt_port_loading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPolPopup();
+                showPortPopup_loading();
+
             }
         });
         edt_port_destination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPODPopup();
+                showPortPopup_Des();
             }
         });
 
     }
-
-
-
     private void getPOLAndPOD()
     {
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getPOLAndPOD(model.getId()).enqueue(new Callback<PortResMeta>() {
             @Override
             public void onResponse(Call<PortResMeta> call, Response<PortResMeta> response) {
+                portList = response.body().getResponse();
 
             }
 
@@ -127,8 +118,7 @@ EditText edt_port_loading,edt_port_destination;
         });
     }
 
-    AlertDialog alertDialog;
-    ArrayList<CustomerModel> listCustomer;
+    /* ArrayList<CustomerModel> listCustomer;
     CustomerPopupAdaptor customerPopupAdaptor;
     String customerid;
     private int popupId = 0;
@@ -162,18 +152,17 @@ EditText edt_port_loading,edt_port_destination;
             }
         });
 
-    }
-    ArrayList<PurposeModel> purposeList = new ArrayList<>();
-    PurposePopupAdaptor purposePopupAdaptor;
-
-
-    private void showPODPopup() {
+    }*/
+    AlertDialog alertDialog;
+    ArrayList<PortModel> portList = new ArrayList<>();
+    PortAdapter portAdapter;
+    private void showPortPopup_loading() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
         m.setId("0");
 
         purposeList.add(m);*/
-        purposePopupAdaptor = new PurposePopupAdaptor(SalesCheckingActivity.this, purposeList);
+        portAdapter = new PortAdapter(SalesCheckingActivity.this, portList);
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and title
@@ -187,14 +176,43 @@ EditText edt_port_loading,edt_port_destination;
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
         alertDialog.show();
-        popupId = 2;
-        listPurpose.setAdapter(purposePopupAdaptor);
-
+                   listPurpose.setAdapter(portAdapter);
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                PurposeModel obj = (PurposeModel) listPurpose.getAdapter().getItem(position);
-                edt_port_destination.setText(obj.getPurpose());
+                PortModel obj = (PortModel) listPurpose.getAdapter().getItem(position);
+                edt_port_loading.setText(obj.getPort());
+                alertDialog.dismiss();
+            }
+        });
+
+    }
+    private void showPortPopup_Des() {
+       /* PurposeModel m=new PurposeModel();
+        m.setPurpose("Business Meeting in Noida");
+        m.setId("0");
+
+        purposeList.add(m);*/
+        portAdapter = new PortAdapter(SalesCheckingActivity.this, portList);
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        // ...Irrelevant code for customizing the buttons and title
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.meeting_popup, null);
+        final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
+        //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
+        final SearchView editTextName = dialogView.findViewById(R.id.edt);
+        editTextName.setQueryHint(getString(R.string.search_here));
+        editTextName.setOnQueryTextListener(this);
+        dialogBuilder.setView(dialogView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.show();
+        listPurpose.setAdapter(portAdapter);
+        listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                PortModel obj = (PortModel) listPurpose.getAdapter().getItem(position);
+                edt_port_destination.setText(obj.getPort());
                 alertDialog.dismiss();
             }
         });
@@ -223,55 +241,15 @@ EditText edt_port_loading,edt_port_destination;
     @Override
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
-        switch (popupId) {
-            case 1:
-                ArrayList<CustomerModel> newlist1 = new ArrayList<>();
-                for (CustomerModel list : listCustomer) {
-                    String getCustomer = list.getCustomer_name().toLowerCase();
+
+                ArrayList<PortModel> newlist1 = new ArrayList<>();
+                for (PortModel list : portList) {
+                    String getCustomer = list.getPort().toLowerCase();
                     if (getCustomer.contains(s)) {
                         newlist1.add(list);
                     }
                 }
-                customerPopupAdaptor.filter(newlist1);
-                break;
-            case 2:
-                ArrayList<PurposeModel> newlist = new ArrayList<>();
-                for (PurposeModel list : purposeList) {
-                    String getPurpose = list.getPurpose().toLowerCase();
-
-                    if (getPurpose.contains(s)) {
-                        newlist.add(list);
-                    }
-                }
-                purposePopupAdaptor.filter(newlist);
-                break;
-        }
+                portAdapter.filter(newlist1);
         return false;
     }
-    public void getMeetingList() {
-        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
-        Singleton.getInstance().getApi().getMeetingsList("" + model.getId()).enqueue(new Callback<ResMetaMeeting>() {
-            @Override
-            public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
-                if(response.body()!=null) {
-                    meetinglist = response.body().getResponse();
-                    meetingadapter = new MeetingDetailsAdapter(SalesCheckingActivity.this, meetinglist);
-                    listvendor_details.setAdapter(meetingadapter);
-
-                  progressBar.setVisibility(View.GONE);
-                }
-             progressBar.setVisibility(View.GONE);
-            }
-            @Override
-            public void onFailure(Call<ResMetaMeeting> call, Throwable throwable) {
-               progressBar.setVisibility(View.GONE);
-            }
-        });
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getMeetingList();
-    }
-
-}
+   }

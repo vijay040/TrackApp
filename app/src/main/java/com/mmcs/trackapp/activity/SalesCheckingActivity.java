@@ -104,7 +104,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 VQuotationAdapter adapter = (VQuotationAdapter) adapterView.getAdapter();
                 VQuotationModel model = adapter.list.get(i);
-                Intent intent = new Intent(SalesCheckingActivity.this,VQuotationDetailActivity.class);
+                Intent intent = new Intent(SalesCheckingActivity.this,VendorDetailsActivity.class);
                 intent.putExtra(getString(R.string.vender_model), model);
                 startActivity(intent);
             }

@@ -238,8 +238,8 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_13sdp" />
                         <TextView
-                            android:id="@+id/textOffice_idr"
-                            android:text="Office In IDR"
+                            android:id="@+id/textAmnt_idr"
+                            android:text="Amount In IDR"
                             android:textColor="#000"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_width="wrap_content"
@@ -277,212 +277,69 @@
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:id="@+id/editText1"
+                            android:id="@+id/editConatiner"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:singleLine="true"
-                            android:id="@+id/editText2"
+                            android:id="@+id/edtCommodity"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:singleLine="true"
-                            android:id="@+id/editText3"
+                            android:id="@+id/editCharge_code"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:singleLine="true"
-                            android:id="@+id/editText4"
+                            android:id="@+id/editUnitBase"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:id="@+id/editText5"
+                            android:id="@+id/editCurrency"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:id="@+id/editText6"
+                            android:id="@+id/editChargeAmnt"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:id="@+id/editText7"
+                            android:id="@+id/editExchangeRate"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:id="@+id/editText8"
+                            android:id="@+id/editIDR"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:id="@+id/editText9"
+                            android:id="@+id/editMargin"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:id="@+id/editText10"
+                            android:id="@+id/editMarginCurr"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:id="@+id/editText11"
+                            android:id="@+id/editCustomer_Amt"
                             android:singleLine="true"
                             android:hint="" />
 
-                    </TableRow>
-
-                    <TableRow
-                        android:id="@+id/tableRow3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText31"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText32"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:singleLine="true"
-                            android:id="@+id/editText33"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText34"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText35"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText61"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText36"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText37"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText38"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText39"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText30"
-                            android:singleLine="true"
-                            android:hint="" />
-                    </TableRow>
-                    <TableRow
-                        android:id="@+id/tableRow4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText41"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText42"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText43"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText411"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText44"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText45"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText46"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText47"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText48"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText49"
-                            android:singleLine="true"
-                            android:hint="" />
-                        <EditText
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/editText40"
-                            android:singleLine="true"
-                            android:hint="" />
                     </TableRow>
                 </TableLayout>
             </HorizontalScrollView>

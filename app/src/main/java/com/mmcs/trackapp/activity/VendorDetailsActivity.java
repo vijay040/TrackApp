@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.model.VQuotationModel;
 
 import java.util.Calendar;
 
@@ -25,13 +26,15 @@ public class VendorDetailsActivity extends AppCompatActivity {
     int cur = 0;
     Calendar calendar;
     Button btnSubmit;
-
+    EditText editConatiner,edtCommodity,editIDR,editCharge_code,editUnitBase,editCurrency,editChargeAmnt,editExchangeRate,editMargin,editMarginCurr;
+    VQuotationModel quotationModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_details);
+        quotationModel = (VQuotationModel) getIntent().getSerializableExtra(getString(R.string.vender_model));
         edtQuotation = findViewById(R.id.edtQuotation);
         edtport_loading = findViewById(R.id.edtport_loading);
         edtport_destination = findViewById(R.id.edtport_destination);
@@ -40,20 +43,34 @@ public class VendorDetailsActivity extends AppCompatActivity {
         edtStaffName = findViewById(R.id.edtStaffName);
         edtReceiveDate = findViewById(R.id.edtReceiveDate);
         edtValidDate = findViewById(R.id.edtValidDate);
+             editConatiner=findViewById(R.id.editConatiner);
+        edtCommodity=findViewById(R.id.edtCommodity);
+        editCharge_code=findViewById(R.id.editCharge_code);
+        editUnitBase=findViewById(R.id.editUnitBase);
+        editCurrency=findViewById(R.id.editCurrency);
+        editChargeAmnt=findViewById(R.id.editChargeAmnt);
+        editExchangeRate=findViewById(R.id.editExchangeRate);
+        editMargin=findViewById(R.id.editMargin);
+        editMarginCurr=findViewById(R.id.editMarginCurr);
+        editIDR=findViewById(R.id.editIDR);
         btnSubmit = findViewById(R.id.btnSubmit);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
-        edtQuotation.setText("QUOTATION NO:VXLKD124");
-        edtVersion.setText("VESION NO:version 2.0");
-        edtsubject.setText("SUBJECT:Vendor Quotation Details");
-        edtStaffName.setText("STAFF NAME:Mr.Vijay");
-        edtValidDate.setText("VALID TILL:12/12/2018");
-        edtport_loading.setText("PORT OF LOADING:MUMBAI");
-        edtport_destination.setText("PORT OF DESTINATION:INDONESIA");
-
-        if ((MM + 1) < 10)
+        back();
+        setTitle();
+        editConatiner.setText(quotationModel.getContainer_size());
+        edtCommodity.setText(quotationModel.getCommodity());
+        editCharge_code.setText(quotationModel.getCharge_code());
+        editUnitBase.setText(quotationModel.getUnit_base());
+        editCurrency.setText(quotationModel.getCurrency());
+        editChargeAmnt.setText(quotationModel.getCrg_amt());
+        editExchangeRate.setText(quotationModel.getEx_rate());
+        editMargin.setText(quotationModel.getMargin());
+        editMarginCurr.setText(quotationModel.getMargin_curr());
+        editIDR.setText(quotationModel.getCurrency());
+               if ((MM + 1) < 10)
             edtReceiveDate.setText(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         else
             edtReceiveDate.setText(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));

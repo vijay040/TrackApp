@@ -40,7 +40,7 @@
     <string name="exchange">Exchange Rate</string>
     <string name="valid_till">Valid Till</string>
     <string name="container">Container Size</string>
-    <string name="margin">Margin</string>
+    <string name="margin">Margin:</string>
     <string name="vendor_name">Vendor Quo No</string>
     <string name="Time">Time</string>
     <string name="Address">Address</string>
@@ -122,6 +122,7 @@
     <string name="balancetorct">Balance To Rct:</string>
     <string name="close">close</string>
     <string name="expensedetails">Expense Details</string>
+    <string name="quotation_details">Quotation Details</string>
     <string name="meetingdate">Meeting Date</string>
     <string name="expensetype">ExpenseType</string>
     <string name="edit">Edit</string>
@@ -238,14 +239,25 @@
     <string name="please_enter_minutes_of_meeting">Please enter Minutes of Meeting</string>
     <string name="sales_checking">Sales Checking</string>
 
-
+    <string name="vender_model">VENDORMODEL</string>
     <string name="minute_hand">minute_hand</string>
     <string name="second_hand">second_hand</string>
     <string name="stop">STOP</string>
     <string name="circle">circle</string>
     <string name="select_environment">Please Select Environment!</string>
     <string name="select_logintype">Select Login Type!</string>
+    <string name="master_id">Master Id:</string>
+    <string name="exchange_rate">Exchange Rate:</string>
+<string name="margin_currency">Margin Currency:</string>
 
+    <string name="audit_mster_id">Audit Master:</string>
+    <string name="commodity">Commodity:</string>
+    <string name="s_no">Serial No:</string>
+    <string name="charge_code">Charge Code:</string>
+    <string name="v_quot_no">Quotation No:</string>
+    <string name="crg_amt">Charge Amount:</string>
+<string name="v_quo_detail">Quotation Details</string>
+    <string name="container_size">Container Size:</string>
 
     <string-array name="language_list">
         <item>English</item>

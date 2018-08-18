@@ -49,16 +49,16 @@ public class VQuotationAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.activity_vendor_quo_item, null);
         }
         TextView quotation = view.findViewById(R.id.txt_quotation_no);
-        quotation.setText(list.get(i).getV_quot_no());
+        quotation.setText("Quotation No."+list.get(i).getV_quot_no());
 
         TextView exchange_rate=view.findViewById(R.id.txt_exchange_rate);
-        exchange_rate.setText(list.get(i).getEx_rate());
+        exchange_rate.setText("Exchange Rate:"+list.get(i).getEx_rate());
 
         TextView margin_txt=view.findViewById(R.id.txt_margin);
-        margin_txt.setText(list.get(i).getMargin());
+        margin_txt.setText("Margin:"+list.get(i).getMargin());
 
         TextView txt_container=view.findViewById(R.id.txt_container_size);
-        txt_container.setText(list.get(i).getContainer_size());
+        txt_container.setText("Container Size:"+list.get(i).getContainer_size());
         return view;
     }
 }

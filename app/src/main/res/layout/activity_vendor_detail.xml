@@ -1,0 +1,129 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/txtvender_masterid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="@string/master_id"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtexchange_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/exchange_rate"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/txtMargin_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/margin_currency"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/txtAudit_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/audit_mster_id"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/txtCommodity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/commodity"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/txtSerial_No"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/s_no"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/txtCharge_Code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/charge_code"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+    <TextView
+        android:id="@+id/txtQuotation_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/v_quot_no"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+    <TextView
+        android:id="@+id/txtCharge_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/crg_amt"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+    <TextView
+        android:id="@+id/txtMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/margin"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+    <TextView
+        android:id="@+id/txtContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/container_size"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/_10sdp" />
+
+
+
+    <Button
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/btn"
+        android:text="@string/Ok"
+        android:textColor="@color/white_color"
+        android:textSize="@dimen/_15sdp" />
+
+
+</LinearLayout>
+

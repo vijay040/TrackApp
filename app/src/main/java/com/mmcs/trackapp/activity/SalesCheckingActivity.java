@@ -99,6 +99,16 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                 showPortPopup_Des();
             }
         });
+        listvendor_details.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                VQuotationAdapter adapter = (VQuotationAdapter) adapterView.getAdapter();
+                VQuotationModel model = adapter.list.get(i);
+                Intent intent = new Intent(SalesCheckingActivity.this,VQuotationDetailActivity.class);
+                intent.putExtra(getString(R.string.vender_model), model);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -129,14 +139,15 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                     vQModelList = response.body().getResponse();
                     vQuotationAdapter = new VQuotationAdapter(SalesCheckingActivity.this, vQModelList);
                     listvendor_details.setAdapter(vQuotationAdapter);
+                    progressBar.setVisibility(View.GONE);
 
                 }
-
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<VQuotationResMeta> call, Throwable t) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
 

@@ -108,7 +108,8 @@
 
         <activity android:name=".activity.ReminderdetailActivity" />
         <activity android:name=".activity.SalesCheckingActivity" />
-        <activity android:name=".activity.VendorDetailsActivity"></activity>
+        <activity android:name=".activity.VendorDetailsActivity" />
+        <activity android:name=".activity.VQuotationDetailActivity"></activity>
     </application>
 
 </manifest>

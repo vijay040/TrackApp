@@ -1,6 +1,8 @@
 package com.mmcs.trackapp.model;
 
-public class VQuotationModel {
+import java.io.Serializable;
+
+public class VQuotationModel implements Serializable {
     private String ex_rate;
 
     private String v_quot_mstr_id;

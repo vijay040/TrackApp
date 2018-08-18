@@ -79,7 +79,8 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                 } else if (pod.equals("")) {
                     Toast.makeText(SalesCheckingActivity.this, "select port of Destination", Toast.LENGTH_SHORT).show();
                 } else
-                    listvendor_details.setVisibility(View.VISIBLE);
+
+                   getVQuotation(model.getId(),pol,pod);
             }
         });
         edt_port_loading.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +185,8 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
+        TextView title=dialogView.findViewById(R.id.title);
+        title.setText("SELECT POL");
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         dialogBuilder.setView(dialogView);
@@ -216,6 +219,8 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
         final ListView listPurpose = dialogView.findViewById(R.id.listPurpose);
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
+        TextView title=dialogView.findViewById(R.id.title);
+        title.setText("SELECT POD");
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         dialogBuilder.setView(dialogView);

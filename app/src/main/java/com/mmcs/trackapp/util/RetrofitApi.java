@@ -217,4 +217,8 @@ public interface RetrofitApi {
     @POST("port_loading_get_api.php")
     Call<PortResMeta> getPOLAndPOD(@Field("user_id") String user_id);
 
+    @FormUrlEncoded
+    @POST("quotation_get_api.php")
+    Call<PortResMeta> getVQuotationList(@Field("user_id") String user_id,@Field("pol") String pol,@Field("pod") String pod);
+
 }

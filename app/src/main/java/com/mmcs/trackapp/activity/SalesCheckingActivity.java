@@ -42,14 +42,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SalesCheckingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class SalesCheckingActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     TextView txt_next;
-ListView listvendor_details;
-EditText edt_port_loading,edt_port_destination;
+    ListView listvendor_details;
+    EditText edt_port_loading, edt_port_destination;
     ProgressBar progress;
     Shprefrences sh;
     ProgressBar progressBar;
-    ArrayList<MeetingModel>  meetinglist = new ArrayList<>();
+    ArrayList<MeetingModel> meetinglist = new ArrayList<>();
     MeetingDetailsAdapter meetingadapter;
     LoginModel model;
 
@@ -60,29 +60,25 @@ EditText edt_port_loading,edt_port_destination;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_checking);
         sh = new Shprefrences(this);
-        model=sh.getLoginModel(getResources().getString(R.string.login_model));
-        txt_next=findViewById(R.id.txt_next);
-        edt_port_loading=findViewById(R.id.edt_port_loading);
-        edt_port_destination=findViewById(R.id.edt_port_destination);
-        listvendor_details=findViewById(R.id.listvendor_details);
+        model = sh.getLoginModel(getResources().getString(R.string.login_model));
+        txt_next = findViewById(R.id.txt_next);
+        edt_port_loading = findViewById(R.id.edt_port_loading);
+        edt_port_destination = findViewById(R.id.edt_port_destination);
+        listvendor_details = findViewById(R.id.listvendor_details);
         setTitle();
         back();
         getPOLAndPOD();
         progressBar = findViewById(R.id.progress);
-   txt_next.setOnClickListener(new View.OnClickListener() {
+        txt_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String pol=edt_port_loading.getText().toString();
-                String pod=edt_port_destination.getText().toString();
-                if(pol.equals(""))
-                {
-                    Toast.makeText(SalesCheckingActivity.this,"select port of loading",Toast.LENGTH_SHORT).show();
-                }
-              else if(pod.equals(""))
-                {
-                    Toast.makeText(SalesCheckingActivity.this,"select port of Destination",Toast.LENGTH_SHORT).show();
-                }
-                else
+                String pol = edt_port_loading.getText().toString();
+                String pod = edt_port_destination.getText().toString();
+                if (pol.equals("")) {
+                    Toast.makeText(SalesCheckingActivity.this, "select port of loading", Toast.LENGTH_SHORT).show();
+                } else if (pod.equals("")) {
+                    Toast.makeText(SalesCheckingActivity.this, "select port of Destination", Toast.LENGTH_SHORT).show();
+                } else
                     listvendor_details.setVisibility(View.VISIBLE);
             }
         });
@@ -101,8 +97,8 @@ EditText edt_port_loading,edt_port_destination;
         });
 
     }
-    private void getPOLAndPOD()
-    {
+
+    private void getPOLAndPOD() {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().getPOLAndPOD(model.getId()).enqueue(new Callback<PortResMeta>() {
             @Override
@@ -116,6 +112,22 @@ EditText edt_port_loading,edt_port_destination;
 
             }
         });
+    }
+
+    private void getVQuotation(String user_id,String pol,String pod)
+    {
+        Singleton.getInstance().getApi().getVQuotationList(user_id,pol,pod).enqueue(new Callback<PortResMeta>() {
+            @Override
+            public void onResponse(Call<PortResMeta> call, Response<PortResMeta> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<PortResMeta> call, Throwable t) {
+
+            }
+        });
+
     }
 
     /* ArrayList<CustomerModel> listCustomer;
@@ -156,6 +168,7 @@ EditText edt_port_loading,edt_port_destination;
     AlertDialog alertDialog;
     ArrayList<PortModel> portList = new ArrayList<>();
     PortAdapter portAdapter;
+
     private void showPortPopup_loading() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
@@ -176,7 +189,7 @@ EditText edt_port_loading,edt_port_destination;
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
         alertDialog.show();
-                   listPurpose.setAdapter(portAdapter);
+        listPurpose.setAdapter(portAdapter);
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -187,6 +200,7 @@ EditText edt_port_loading,edt_port_destination;
         });
 
     }
+
     private void showPortPopup_Des() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
@@ -223,6 +237,7 @@ EditText edt_port_loading,edt_port_destination;
         TextView title = (TextView) findViewById(R.id.title);
         title.setText("SALES CHECKING");
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -242,14 +257,14 @@ EditText edt_port_loading,edt_port_destination;
     public boolean onQueryTextChange(String s) {
         s = s.toLowerCase();
 
-                ArrayList<PortModel> newlist1 = new ArrayList<>();
-                for (PortModel list : portList) {
-                    String getCustomer = list.getPort().toLowerCase();
-                    if (getCustomer.contains(s)) {
-                        newlist1.add(list);
-                    }
-                }
-                portAdapter.filter(newlist1);
+        ArrayList<PortModel> newlist1 = new ArrayList<>();
+        for (PortModel list : portList) {
+            String getCustomer = list.getPort().toLowerCase();
+            if (getCustomer.contains(s)) {
+                newlist1.add(list);
+            }
+        }
+        portAdapter.filter(newlist1);
         return false;
     }
-   }
+}

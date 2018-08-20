@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.CustomerPopupAdaptor;
 import com.mmcs.trackapp.adaptor.MeetingDetailsAdapter;
@@ -82,7 +81,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                 } else if (pod.equals("")) {
                     Toast.makeText(SalesCheckingActivity.this, "select port of Destination", Toast.LENGTH_SHORT).show();
                 } else
-
+                    progressBar.setVisibility(View.VISIBLE);
                    getVQuotation(model.getId(),pol,pod);
             }
         });

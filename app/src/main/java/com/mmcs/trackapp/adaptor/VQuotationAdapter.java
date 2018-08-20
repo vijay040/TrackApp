@@ -55,8 +55,8 @@ public class VQuotationAdapter extends BaseAdapter {
       final   TextView quotation = view.findViewById(R.id.txt_quotation_no);
         quotation.setText("Quotation No."+list.get(i).getV_quot_no());
 
-        final  TextView txt_liner=view.findViewById(R.id.txt_liner);
-        txt_liner.setText("Liner:"+list.get(i).getLiner_id());
+        final  TextView txt_vendor_name=view.findViewById(R.id.txt_vendor_name);
+        txt_vendor_name.setText("Vendor Name:"+list.get(i).getVendor_name());
 
         final TextView txt_valid_till=view.findViewById(R.id.txt_valid_till);
         txt_valid_till.setText("Valid Till:"+list.get(i).getVaild_dt());
@@ -68,7 +68,7 @@ public class VQuotationAdapter extends BaseAdapter {
         txt_charge_amt.setText("Charge Amount:"+list.get(i).getCrg_amt());
 
         final   TextView txt_custmr_amt=view.findViewById(R.id.txt_custmr_amt);
-        txt_custmr_amt.setText("Customer Amount:"+list.get(i).getCustomer_amt());
+        txt_custmr_amt.setText("Total Amount:"+list.get(i).getTotal_amount());
 
         final  ImageView hide=view.findViewById(R.id.imz_down);
         final   RelativeLayout relativeLayout=view.findViewById(R.id.relative);
@@ -78,13 +78,13 @@ public class VQuotationAdapter extends BaseAdapter {
                 list.get(i).isVisible=! list.get(i).isVisible;
                 if(list.get(i).isVisible) {
                     txt_charge_amt.setVisibility(view.VISIBLE);
-                    txt_custmr_amt.setVisibility(view.VISIBLE);
+                    txt_valid_till.setVisibility(view.VISIBLE);
                     hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_up));
                 }
                 else
                 {
                     txt_charge_amt.setVisibility(view.GONE);
-                    txt_custmr_amt.setVisibility(view.GONE);
+                    txt_valid_till.setVisibility(view.GONE);
                     hide.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_down));
                 }
 

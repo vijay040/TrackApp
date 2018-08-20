@@ -38,7 +38,7 @@
     <string name="Agenda">Agenda</string>
     <string name="Date">Date</string>
     <string name="cust_amt">Customer Amount</string>
-    <string name="liner">Liner</string>
+    <string name="vendor">Vendor Name</string>
     <string name="valid_till">Valid Till</string>
     <string name="container">Container Size</string>
     <string name="margin">Margin:</string>

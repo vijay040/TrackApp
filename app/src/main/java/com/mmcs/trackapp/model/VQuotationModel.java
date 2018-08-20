@@ -34,25 +34,27 @@ public class VQuotationModel implements Serializable {
     private String ver_no;
     private String vaild_dt;
     private String staff_id;
-    private String customer_amt;
-    public boolean isVisible=false;
-    public String getCustomer_amt() {
-        return customer_amt;
+      public boolean isVisible=false;
+    private String total_amount;
+    private String vendor_name;
+
+    public String getTotal_amount() {
+        return total_amount;
     }
 
-    public void setCustomer_amt(String customer_amt) {
-        this.customer_amt = customer_amt;
+    public void setTotal_amount(String total_amount) {
+        this.total_amount = total_amount;
     }
 
-    public String getLiner_id() {
-        return liner_id;
+    public String getVendor_name() {
+        return vendor_name;
     }
 
-    public void setLiner_id(String liner_id) {
-        this.liner_id = liner_id;
+    public void setVendor_name(String vendor_name) {
+        this.vendor_name = vendor_name;
     }
 
-    private String liner_id;
+
 
     public String getRcv_dt() {
         return rcv_dt;
@@ -113,12 +115,6 @@ public class VQuotationModel implements Serializable {
     }
 
     private String quot_subject;
-
-
-
-
-
-
     public String getEx_rate() {
         return ex_rate;
     }

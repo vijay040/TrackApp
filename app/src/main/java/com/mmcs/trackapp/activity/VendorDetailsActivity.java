@@ -25,7 +25,7 @@ public class VendorDetailsActivity extends AppCompatActivity {
     int DD, MM, YY;
     int cur = 0;
     Calendar calendar;
-    Button btnSubmit;
+    Button btnOk;
     EditText editConatiner,edtCommodity,editIDR,editCharge_code,editUnitBase,editCurrency,editChargeAmnt,editExchangeRate,editMargin,editMarginCurr;
     VQuotationModel quotationModel;
     @Override
@@ -53,17 +53,24 @@ public class VendorDetailsActivity extends AppCompatActivity {
         editMargin=findViewById(R.id.editMargin);
         editMarginCurr=findViewById(R.id.editMarginCurr);
         editIDR=findViewById(R.id.editIDR);
-        btnSubmit = findViewById(R.id.btnSubmit);
+        btnOk = findViewById(R.id.btnOk);
         calendar = Calendar.getInstance();
         DD = calendar.get(Calendar.DAY_OF_MONTH);
         MM = calendar.get(Calendar.MONTH);
         YY = calendar.get(Calendar.YEAR);
         back();
         setTitle();
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        edtReceiveDate.setText("Rcv Date:"+quotationModel.getRcv_dt());
         edtQuotation.setText("Quotation No:"+quotationModel.getV_quot_no());
         edtport_loading.setText("POL:"+quotationModel.getPol());
         edtport_destination.setText("POD:"+quotationModel.getPod());
-        edtValidDate.setText("Valid Till:"+quotationModel.getValid_dt());
+        edtValidDate.setText("Valid Till:"+quotationModel.getVaild_dt());
         edtVersion.setText("Version No:"+quotationModel.getVer_no());
         edtsubject.setText("Subject:"+quotationModel.getQuot_subject());
         edtStaffName.setText("Staff Name:"+quotationModel.getStaff_id());

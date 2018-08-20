@@ -32,8 +32,18 @@ public class VQuotationModel implements Serializable {
 
     private String pod;
     private String ver_no;
-    private String valid_dt;
+    private String vaild_dt;
     private String staff_id;
+
+    public String getRcv_dt() {
+        return rcv_dt;
+    }
+
+    public void setRcv_dt(String rcv_dt) {
+        this.rcv_dt = rcv_dt;
+    }
+
+    private String rcv_dt;
 
     public String getPol() {
         return pol;
@@ -59,12 +69,12 @@ public class VQuotationModel implements Serializable {
         this.ver_no = ver_no;
     }
 
-    public String getValid_dt() {
-        return valid_dt;
+    public String getVaild_dt() {
+        return vaild_dt;
     }
 
     public void setValid_dt(String valid_dt) {
-        this.valid_dt = valid_dt;
+        this.vaild_dt = valid_dt;
     }
 
     public String getStaff_id() {

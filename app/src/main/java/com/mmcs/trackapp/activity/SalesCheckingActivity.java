@@ -82,7 +82,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                     Toast.makeText(SalesCheckingActivity.this, "select port of Destination", Toast.LENGTH_SHORT).show();
                 } else
                     progressBar.setVisibility(View.VISIBLE);
-                   getVQuotation(model.getId(),pol,pod);
+                   getVQuotation(model.getId(),polCode,podCode);
             }
         });
         edt_port_loading.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +191,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
     ArrayList<PortModel> portList = new ArrayList<>();
     PortAdapter portAdapter;
 
+    String polCode,podCode;
     private void showPortPopup_loading() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
@@ -219,6 +220,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                                     int position, long id) {
                 PortModel obj = (PortModel) listPurpose.getAdapter().getItem(position);
                 edt_port_loading.setText(obj.getPort());
+                polCode=obj.getId();
                 alertDialog.dismiss();
             }
         });
@@ -253,6 +255,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                                     int position, long id) {
                 PortModel obj = (PortModel) listPurpose.getAdapter().getItem(position);
                 edt_port_destination.setText(obj.getPort());
+                podCode=obj.getId();
                 alertDialog.dismiss();
             }
         });

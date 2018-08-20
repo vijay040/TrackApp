@@ -60,6 +60,13 @@ public class VendorDetailsActivity extends AppCompatActivity {
         YY = calendar.get(Calendar.YEAR);
         back();
         setTitle();
+        edtQuotation.setText("Quotation No:"+quotationModel.getV_quot_no());
+        edtport_loading.setText("POL:"+quotationModel.getPol());
+        edtport_destination.setText("POD:"+quotationModel.getPod());
+        edtValidDate.setText("Valid Till:"+quotationModel.getValid_dt());
+        edtVersion.setText("Version No:"+quotationModel.getVer_no());
+        edtsubject.setText("Subject:"+quotationModel.getQuot_subject());
+        edtStaffName.setText("Staff Name:"+quotationModel.getStaff_id());
         editConatiner.setText(quotationModel.getContainer_size());
         edtCommodity.setText(quotationModel.getCommodity());
         editCharge_code.setText(quotationModel.getCharge_code());

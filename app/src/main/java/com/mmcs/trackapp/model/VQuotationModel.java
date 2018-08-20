@@ -28,6 +28,67 @@ public class VQuotationModel implements Serializable {
     private String container_size;
 
     private String currency;
+    private String pol;
+
+    private String pod;
+    private String ver_no;
+    private String valid_dt;
+    private String staff_id;
+
+    public String getPol() {
+        return pol;
+    }
+
+    public void setPol(String pol) {
+        this.pol = pol;
+    }
+
+    public String getPod() {
+        return pod;
+    }
+
+    public void setPod(String pod) {
+        this.pod = pod;
+    }
+
+    public String getVer_no() {
+        return ver_no;
+    }
+
+    public void setVer_no(String ver_no) {
+        this.ver_no = ver_no;
+    }
+
+    public String getValid_dt() {
+        return valid_dt;
+    }
+
+    public void setValid_dt(String valid_dt) {
+        this.valid_dt = valid_dt;
+    }
+
+    public String getStaff_id() {
+        return staff_id;
+    }
+
+    public void setStaff_id(String staff_id) {
+        this.staff_id = staff_id;
+    }
+
+    public String getQuot_subject() {
+        return quot_subject;
+    }
+
+    public void setQuot_subject(String quot_subject) {
+        this.quot_subject = quot_subject;
+    }
+
+    private String quot_subject;
+
+
+
+
+
 
     public String getEx_rate() {
         return ex_rate;

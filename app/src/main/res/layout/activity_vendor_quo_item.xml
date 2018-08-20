@@ -24,7 +24,7 @@
             android:id="@+id/txt_container_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_custmr_amt"
+            android:layout_below="@+id/txt_total_amt"
             android:layout_marginLeft="@dimen/_10sdp"
             android:ems="20"
             android:text="@string/container"
@@ -32,11 +32,11 @@
             android:textSize="@dimen/_8sdp" />
 
         <TextView
-            android:id="@+id/txt_custmr_amt"
+            android:id="@+id/txt_total_amt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            android:layout_below="@+id/txt_quotation_no"
-            android:text="@string/cust_amt"
+            android:text="@string/total_amt"
             android:layout_marginLeft="@dimen/_10sdp"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_8sdp" />
@@ -72,6 +72,18 @@
             android:text="@string/vendor_name"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_8sdp" />
+
+        <TextView
+            android:id="@+id/txt_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          android:layout_below="@+id/txt_valid_till"
+          android:layout_marginLeft="@dimen/_10sdp"
+            android:text="@string/margin"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_8sdp" />
+
+
 
         <ImageView
             android:id="@+id/imz_down"

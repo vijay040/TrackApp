@@ -82,7 +82,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                     Toast.makeText(SalesCheckingActivity.this, "select port of Destination", Toast.LENGTH_SHORT).show();
                 } else
                     progressBar.setVisibility(View.VISIBLE);
-                   getVQuotation(model.getId(),pol,pod);
+                getVQuotation(model.getId(),polCode,podCode);
             }
         });
         edt_port_loading.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +128,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
     }
 
     ArrayList<VQuotationModel> vQModelList;
- VQuotationAdapter vQuotationAdapter;
+    VQuotationAdapter vQuotationAdapter;
     private void getVQuotation(String user_id,String pol,String pod)
     {
         Singleton.getInstance().getApi().getVQuotationList(user_id,pol,pod).enqueue(new Callback<VQuotationResMeta>() {
@@ -191,6 +191,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
     ArrayList<PortModel> portList = new ArrayList<>();
     PortAdapter portAdapter;
 
+    String polCode,podCode;
     private void showPortPopup_loading() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
@@ -219,6 +220,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                                     int position, long id) {
                 PortModel obj = (PortModel) listPurpose.getAdapter().getItem(position);
                 edt_port_loading.setText(obj.getPort());
+                polCode=obj.getId();
                 alertDialog.dismiss();
             }
         });
@@ -253,6 +255,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                                     int position, long id) {
                 PortModel obj = (PortModel) listPurpose.getAdapter().getItem(position);
                 edt_port_destination.setText(obj.getPort());
+                podCode=obj.getId();
                 alertDialog.dismiss();
             }
         });

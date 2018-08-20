@@ -34,6 +34,25 @@ public class VQuotationModel implements Serializable {
     private String ver_no;
     private String vaild_dt;
     private String staff_id;
+    private String customer_amt;
+    public boolean isVisible=false;
+    public String getCustomer_amt() {
+        return customer_amt;
+    }
+
+    public void setCustomer_amt(String customer_amt) {
+        this.customer_amt = customer_amt;
+    }
+
+    public String getLiner_id() {
+        return liner_id;
+    }
+
+    public void setLiner_id(String liner_id) {
+        this.liner_id = liner_id;
+    }
+
+    private String liner_id;
 
     public String getRcv_dt() {
         return rcv_dt;

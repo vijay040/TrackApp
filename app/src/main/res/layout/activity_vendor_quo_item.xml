@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp">
@@ -12,20 +13,14 @@
             android:id="@+id/txt_quotation_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/txt_container_size"
             android:text="@string/vendor_name"
             android:textColor="@color/them_color"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/_15sdp">
-
-        </RelativeLayout>
 
         <TextView
             android:id="@+id/txt_container_size"
@@ -38,27 +33,53 @@
             android:textColor="@color/text_color"
             android:textSize="@dimen/_10sdp" />
         <TextView
-            android:id="@+id/txt_margin"
+            android:id="@+id/txt_valid_till"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_container_size"
             android:layout_marginLeft="@dimen/_10sdp"
             android:ems="20"
-            android:text="@string/margin"
+            android:text="@string/valid_till"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_10sdp" />
 
         <TextView
-            android:id="@+id/txt_exchange_rate"
+            android:id="@+id/txt_liner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:text="@string/exchange"
+            android:layout_alignTop="@+id/txt_quotation_no"
+            android:layout_toEndOf="@+id/txt_container_size"
+            android:text="@string/liner"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_8sdp" />
+        <TextView
+            android:id="@+id/txt_custmr_amt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_below="@+id/txt_valid_till"
+            android:text="@string/cust_amt"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_8sdp" />
+        <TextView
+            android:id="@+id/txt_charge_amt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_custmr_amt"
+            android:text="@string/crg_amt"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_8sdp" />
 
-
+        <ImageView
+            android:id="@+id/imz_down"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignTop="@+id/txt_container_size"
+            android:layout_toEndOf="@+id/txt_container_size"
+            android:background="@drawable/ic_down" />
     </RelativeLayout>
 
 

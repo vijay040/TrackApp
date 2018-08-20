@@ -20,11 +20,6 @@ import java.util.Calendar;
 
 public class VendorDetailsActivity extends AppCompatActivity {
     EditText edtQuotation, edtport_destination, edtVersion, edtsubject, edtStaffName, edtReceiveDate, edtValidDate, edtport_loading;
-    static final int DATE_DIALOG_ID = 1;
-    static final int DATE_DIALOG_ID2 = 2;
-    int DD, MM, YY;
-    int cur = 0;
-    Calendar calendar;
     Button btnOk;
     EditText editConatiner,edtCommodity,editIDR,editCharge_code,editUnitBase,editCurrency,editChargeAmnt,editExchangeRate,editMargin,editMarginCurr;
     VQuotationModel quotationModel;
@@ -54,10 +49,6 @@ public class VendorDetailsActivity extends AppCompatActivity {
         editMarginCurr=findViewById(R.id.editMarginCurr);
         editIDR=findViewById(R.id.editIDR);
         btnOk = findViewById(R.id.btnOk);
-        calendar = Calendar.getInstance();
-        DD = calendar.get(Calendar.DAY_OF_MONTH);
-        MM = calendar.get(Calendar.MONTH);
-        YY = calendar.get(Calendar.YEAR);
         back();
         setTitle();
         btnOk.setOnClickListener(new View.OnClickListener() {

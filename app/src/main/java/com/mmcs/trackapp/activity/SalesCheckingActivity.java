@@ -98,7 +98,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                 showPortPopup_Des();
             }
         });
-        listvendor_details.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+       /* listvendor_details.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 VQuotationAdapter adapter = (VQuotationAdapter) adapterView.getAdapter();
@@ -107,7 +107,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                 intent.putExtra(getString(R.string.vender_model), model);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 

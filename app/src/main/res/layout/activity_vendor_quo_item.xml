@@ -7,14 +7,16 @@
         android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp">
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp">
 
         <TextView
             android:id="@+id/txt_quotation_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/txt_container_size"
+            android:layout_alignStart="@+id/txt_total_amt"
             android:text="@string/vendor_name"
             android:textColor="@color/them_color"
             android:textSize="@dimen/_12sdp"
@@ -35,11 +37,12 @@
             android:id="@+id/txt_total_amt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_below="@+id/txt_quotation_no"
-            android:text="@string/total_amt"
+            android:layout_below="@+id/txt_quotation_no"
             android:layout_marginLeft="@dimen/_10sdp"
+            android:text="@string/total_amt"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_8sdp" />
+
         <TextView
             android:id="@+id/txt_valid_till"
             android:layout_width="wrap_content"
@@ -47,28 +50,29 @@
             android:layout_below="@+id/txt_charge_amt"
             android:layout_marginLeft="@dimen/_10sdp"
             android:ems="20"
-            android:visibility="gone"
             android:text="@string/valid_till"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/_8sdp" />
+            android:textSize="@dimen/_8sdp"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/txt_charge_amt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_container_size"
-            android:text="@string/crg_amt"
-           android:visibility="gone"
             android:layout_marginLeft="@dimen/_10sdp"
+            android:text="@string/crg_amt"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/_8sdp" />
+            android:textSize="@dimen/_8sdp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/txt_vendor_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/txt_container_size"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_alignBaseline="@+id/txt_container_size"
+            android:layout_alignBottom="@+id/txt_container_size"
+            android:layout_centerHorizontal="true"
             android:text="@string/vendor_name"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_8sdp" />
@@ -77,12 +81,21 @@
             android:id="@+id/txt_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-          android:layout_below="@+id/txt_valid_till"
-          android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_below="@+id/txt_valid_till"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:text="@string/margin"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_8sdp" />
 
+        <TextView
+            android:id="@+id/txt_amnt_idr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_margin"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:text="@string/amt_in_idr"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_8sdp" />
 
 
         <ImageView

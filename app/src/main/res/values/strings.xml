@@ -44,6 +44,7 @@
     <string name="margin">Margin:</string>
     <string name="vendor_name">Vendor Quo No</string>
     <string name="Time">Time</string>
+    <string name="amt_in_idr">Amount in IDR</string>
     <string name="Address">Address</string>
     <string name="Location">Location</string>
     <string name="StartMeeting">Start Meeting</string>

@@ -68,11 +68,17 @@ public class VQuotationAdapter extends BaseAdapter {
         txt_charge_amt.setText("Charge Amount:"+list.get(i).getCrg_amt());
 
         final   TextView txt_total_amt=view.findViewById(R.id.txt_total_amt);
-        txt_total_amt.setText("Final Amount=margin+charge Amt:"+list.get(i).getTotal_amount());
+        if(list.get(i).getAmount_in_idr()==null)
+            list.get(i).setAmount_in_idr("0");
+        if(list.get(i).getMargin()==null)
+            list.get(i).setMargin("0");
+        txt_total_amt.setText("Final Amount=amount("+list.get(i).getAmount_in_idr()+")"+"+"+"margin("+list.get(i).getMargin()+")="+(Long.valueOf(list.get(i).getAmount_in_idr())+(Long.valueOf(list.get(i).getMargin()))));
 
         final   TextView txt_margin=view.findViewById(R.id.txt_margin);
         txt_margin.setText("Margin:"+list.get(i).getMargin());
 
+        final   TextView txt_amnt_idr=view.findViewById(R.id.txt_amnt_idr);
+        txt_amnt_idr.setText("Amount In IDR:"+list.get(i).getAmount_in_idr());
 
 
         final  ImageView hide=view.findViewById(R.id.imz_down);

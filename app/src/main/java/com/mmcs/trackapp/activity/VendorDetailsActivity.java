@@ -84,22 +84,6 @@ public class VendorDetailsActivity extends AppCompatActivity {
         editMargin.setText(quotationModel.getMargin());
         editMarginCurr.setText(quotationModel.getMargin_curr());
         editIDR.setText(quotationModel.getCurrency());
-               if ((MM + 1) < 10)
-            edtReceiveDate.setText(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
-        else
-            edtReceiveDate.setText(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
-        edtReceiveDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog(DATE_DIALOG_ID);
-            }
-        });
-        edtValidDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog(DATE_DIALOG_ID2);
-            }
-        });
         setTitle();
         back();
     }
@@ -116,38 +100,7 @@ public class VendorDetailsActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DATE_DIALOG_ID:
-                System.out.println("onCreateDialog  : " + id);
-                cur = DATE_DIALOG_ID;
-                return new DatePickerDialog(this, onDateSetListener, YY, MM, DD);
-            case DATE_DIALOG_ID2:
-                cur = DATE_DIALOG_ID2;
-                System.out.println("onCreateDialog2  : " + id);
-                return new DatePickerDialog(this, onDateSetListener, YY, MM, DD);
-        }
-        return null;
-    }
-    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker datePicker, int d, int m, int y) {
-            if (cur == DATE_DIALOG_ID) {
-                // set selected date into textview
-                if ((m + 1) < 10)
-                    edtReceiveDate.setText(String.valueOf(d) + "-0" + String.valueOf(m + 1) + "-" + String.valueOf(y));
-                else
-                    edtReceiveDate.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));
-            }
-            else    {
-                if ((m + 1) < 10)
-                    edtValidDate.setText(String.valueOf(d) + "-0" + String.valueOf(m + 1) + "-" + String.valueOf(y));
-                else
-                    edtValidDate.setText(String.valueOf(d) + "-" + String.valueOf(m + 1) + "-" + String.valueOf(y));
-            }
-        }
-    };
+
 }
 
 

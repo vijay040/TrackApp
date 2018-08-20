@@ -10,7 +10,7 @@
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_quotation"
+        android:src="@drawable/ic_details"
         android:layout_marginTop="@dimen/_20sdp" />
     <ScrollView
         android:layout_width="wrap_content"
@@ -280,41 +280,48 @@
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:id="@+id/editConatiner"
+                            android:editable="false"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:singleLine="true"
+                            android:editable="false"
                             android:id="@+id/edtCommodity"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:singleLine="true"
+                            android:editable="false"
                             android:id="@+id/editCharge_code"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:singleLine="true"
+                            android:editable="false"
                             android:id="@+id/editUnitBase"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:id="@+id/editCurrency"
+                            android:editable="false"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:id="@+id/editChargeAmnt"
+                            android:editable="false"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
+                            android:editable="false"
                             android:id="@+id/editExchangeRate"
                             android:singleLine="true"
                             android:hint="" />
@@ -322,23 +329,27 @@
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:id="@+id/editIDR"
+                            android:editable="false"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:id="@+id/editMargin"
+                            android:editable="false"
                             android:singleLine="true"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:id="@+id/editMarginCurr"
+                            android:editable="false"
                             android:hint="" />
                         <EditText
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:id="@+id/editCustomer_Amt"
+                            android:editable="false"
                             android:singleLine="true"
                             android:hint="" />
 

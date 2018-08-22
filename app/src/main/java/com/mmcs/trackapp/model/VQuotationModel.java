@@ -30,21 +30,25 @@ public class VQuotationModel implements Serializable {
     private String currency;
     private String pol;
 
+    public String getAmount_in_idr() {
+        return amount_in_idr;
+    }
+
+    public void setAmount_in_idr(String amount_in_idr) {
+        this.amount_in_idr = amount_in_idr;
+    }
+
+    private String amount_in_idr;
+
     private String pod;
     private String ver_no;
     private String vaild_dt;
     private String staff_id;
       public boolean isVisible=false;
-    private String total_amount;
+
     private String vendor_name;
 
-    public String getTotal_amount() {
-        return total_amount;
-    }
 
-    public void setTotal_amount(String total_amount) {
-        this.total_amount = total_amount;
-    }
 
     public String getVendor_name() {
         return vendor_name;

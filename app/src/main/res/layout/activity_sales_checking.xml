@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
-
     <include layout="@layout/toolbar" />
-
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="@dimen/_30sdp"
@@ -13,22 +11,18 @@
         android:layout_centerInParent="true"
         android:indeterminateDrawable="@drawable/progressbar"
         android:visibility="invisible" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_50sdp"
         android:orientation="vertical">
-
         <LinearLayout
             android:id="@+id/linear_layout_professional_names"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_38sdp"
             android:layout_marginTop="@dimen/_30sdp"
             android:orientation="horizontal"
-
             android:weightSum="2">
-
             <EditText
                 android:id="@+id/edt_port_loading"
                 android:layout_width="0dp"
@@ -40,17 +34,15 @@
                 android:drawablePadding="@dimen/_10sdp"
                 android:drawableRight="@drawable/dropdownyello"
                 android:focusable="false"
-                android:hint="SELECT POL"
+                android:hint="@string/select_pol"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
-
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
                 android:background="@color/view_devider" />
-
             <EditText
                 android:id="@+id/edt_port_destination"
                 android:layout_width="0dp"
@@ -62,13 +54,12 @@
                 android:drawablePadding="@dimen/_10sdp"
                 android:drawableRight="@drawable/dropdownyello"
                 android:focusable="false"
-                android:hint="SELECT POD"
+                android:hint="@string/select_pod"
                 android:paddingLeft="@dimen/_15sdp"
                 android:singleLine="true"
                 android:textColor="#6d6e71"
                 android:textSize="@dimen/_11sdp" />
         </LinearLayout>
-
         <TextView
             android:id="@+id/txt_next"
             android:layout_width="@dimen/_40sdp"
@@ -77,16 +68,23 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@color/welcome_text_color"
             android:paddingLeft="@dimen/_5sdp"
-            android:text="NEXT"
+            android:text="@string/next"
             android:textColor="@color/white_color" />
-
-
         <ListView
             android:id="@+id/listvendor_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_40sdp"
-            android:smoothScrollbar="true"></ListView>
+            android:smoothScrollbar="true">
+        </ListView>
     </LinearLayout>
-
-</RelativeLayout>
+    <TextView
+        android:id="@+id/txt_nodata"
+        android:layout_width="wrap_content"
+        android:text="@string/no_record_found"
+        android:textSize="@dimen/_20sdp"
+        android:textColor="@color/text_hint_color"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content" />
+   </RelativeLayout>

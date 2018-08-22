@@ -296,7 +296,7 @@
                         android:id="@+id/btn_salescheckin"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
-                        android:background="@drawable/ic_sales" />
+                        android:background="@drawable/ic_sale" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -51,8 +51,6 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
     ProgressBar progress;
     Shprefrences sh;
     ProgressBar progressBar;
-    ArrayList<MeetingModel> meetinglist = new ArrayList<>();
-    MeetingDetailsAdapter meetingadapter;
     LoginModel model;
 
     @Override
@@ -77,9 +75,9 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                 String pol = edt_port_loading.getText().toString();
                 String pod = edt_port_destination.getText().toString();
                 if (pol.equals("")) {
-                    Toast.makeText(SalesCheckingActivity.this, "select port of loading", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SalesCheckingActivity.this, getString(R.string.select_pol), Toast.LENGTH_SHORT).show();
                 } else if (pod.equals("")) {
-                    Toast.makeText(SalesCheckingActivity.this, "select port of Destination", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SalesCheckingActivity.this, getString(R.string.select_pod), Toast.LENGTH_SHORT).show();
                 } else
                     progressBar.setVisibility(View.VISIBLE);
                 getVQuotation(model.getId(),polCode,podCode);
@@ -138,12 +136,11 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                     vQModelList = response.body().getResponse();
                     vQuotationAdapter = new VQuotationAdapter(SalesCheckingActivity.this, vQModelList);
                     listvendor_details.setAdapter(vQuotationAdapter);
+                    listvendor_details.setEmptyView(findViewById(R.id.txt_nodata));
                     progressBar.setVisibility(View.GONE);
-
                 }
                 progressBar.setVisibility(View.GONE);
-            }
-
+                }
             @Override
             public void onFailure(Call<VQuotationResMeta> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
@@ -208,7 +205,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         TextView title=dialogView.findViewById(R.id.title);
-        title.setText("SELECT POL");
+        title.setText(getString(R.string.select_pol));
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         dialogBuilder.setView(dialogView);
@@ -243,7 +240,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
         //Button btnUpgrade = (Button) dialogView.findViewById(R.id.btnUpgrade);
         final SearchView editTextName = dialogView.findViewById(R.id.edt);
         TextView title=dialogView.findViewById(R.id.title);
-        title.setText("SELECT POD");
+        title.setText(getString(R.string.select_pod));
         editTextName.setQueryHint(getString(R.string.search_here));
         editTextName.setOnQueryTextListener(this);
         dialogBuilder.setView(dialogView);
@@ -264,7 +261,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
 
     private void setTitle() {
         TextView title = (TextView) findViewById(R.id.title);
-        title.setText("SALES CHECKING");
+        title.setText(getString(R.string.sales_checking));
     }
 
     private void back() {

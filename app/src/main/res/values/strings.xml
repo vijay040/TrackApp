@@ -39,12 +39,12 @@
     <string name="Date">Date</string>
     <string name="total_amt">Total Amount</string>
     <string name="vendor">Vendor Name</string>
-    <string name="valid_till">Valid Till</string>
+    <string name="valid_till">Valid Till:</string>
     <string name="container">Container Size</string>
     <string name="margin">Margin:</string>
-    <string name="vendor_name">Vendor Quo No</string>
+    <string name="vendor_name">Vendor Name:</string>
     <string name="Time">Time</string>
-    <string name="amt_in_idr">Amount in IDR</string>
+    <string name="amt_in_idr">Amount in IDR:</string>
     <string name="Address">Address</string>
     <string name="Location">Location</string>
     <string name="StartMeeting">Start Meeting</string>
@@ -260,6 +260,9 @@
     <string name="crg_amt">Charge Amount:</string>
 <string name="v_quo_detail">Quotation Details</string>
     <string name="container_size">Container Size:</string>
+    <string name="select_pol">SELECT POL</string>
+    <string name="select_pod">SELECT POD</string>
+    <string name="next">NEXT</string>
 
     <string-array name="language_list">
         <item>English</item>

@@ -151,6 +151,7 @@
     <string name="pre_request_details">Pre-Request Details</string>
     <string name="reminder_settings">Reminder Settings</string>
     <string name="new_message">New Message</string>
+    <string name="status_detail">Status details</string>
     <string name="settings">Settings</string>
     <string name="take_photo">Take Photo</string>
     <string name="choose_from_gallery">Choose from Gallery</string>
@@ -250,7 +251,7 @@
     <string name="select_logintype">Select Login Type!</string>
     <string name="master_id">Master Id:</string>
     <string name="exchange_rate">Exchange Rate:</string>
-<string name="margin_currency">Margin Currency:</string>
+    <string name="margin_currency">Margin Currency:</string>
 
     <string name="audit_mster_id">Audit Master:</string>
     <string name="commodity">Commodity:</string>
@@ -258,7 +259,7 @@
     <string name="charge_code">Charge Code:</string>
     <string name="v_quot_no">Quotation No:</string>
     <string name="crg_amt">Charge Amount:</string>
-<string name="v_quo_detail">Quotation Details</string>
+    <string name="v_quo_detail">Quotation Details</string>
     <string name="container_size">Container Size:</string>
     <string name="select_pol">SELECT POL</string>
     <string name="select_pod">SELECT POD</string>

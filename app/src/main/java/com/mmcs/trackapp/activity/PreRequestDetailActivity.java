@@ -1,6 +1,7 @@
 package com.mmcs.trackapp.activity;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,10 +11,12 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 ;
 
 import com.mmcs.trackapp.R;
@@ -47,10 +50,19 @@ Button ok;
                 finish();
             }
         });
-        RequestTypesStrAdaptor adaptor =new RequestTypesStrAdaptor(PreRequestDetailActivity.this,prerequestmodel.getRequest_type());
+        final RequestTypesStrAdaptor adaptor =new RequestTypesStrAdaptor(PreRequestDetailActivity.this,prerequestmodel.getRequest_type());
         listTypes.setAdapter(adaptor);
-
-
+        listTypes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int
+                    position, long id) {
+                RequestTypesStrAdaptor adapter = (RequestTypesStrAdaptor) parent.getAdapter();
+                String type = adapter.list.get(position);
+                Intent intent = new Intent(PreRequestDetailActivity.this,PreRequestStatusActivity.class);
+                intent.putExtra("reqst_type", type);
+                startActivity(intent);
+            }
+        });
         txtdescreption.setText(getString(R.string.description)+prerequestmodel.getComment());
         txtdate.setText(getString(R.string.date)+prerequestmodel.getDate());
         txtadvance.setText(getString(R.string.advance)+prerequestmodel.getAdvance());

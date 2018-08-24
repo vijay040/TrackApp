@@ -52,7 +52,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
-    TextView txtdescreption, txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
+    TextView check_status,txtdescreption, txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
     ImageView image_uploaded;
 
     @Override
@@ -62,6 +62,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_detail);
         expensemodel = (ExpenseModel) getIntent().getSerializableExtra(getString(R.string.expense_model));
+
         txtdescreption = findViewById(R.id.txtdescreption);
         txtCreatedOn = findViewById(R.id.txtCreatedOn);
         txtAddress = findViewById(R.id.txtAddress);
@@ -72,6 +73,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         image_uploaded = findViewById(R.id.image_uploaded);
         txtEdit = findViewById(R.id.txtEdit);
         btn_close = findViewById(R.id.btn_close);
+        check_status=findViewById(R.id.check_status);
         txtEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +93,15 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtAdvance.setText(getString(R.string.advance) + expensemodel.getAmount());
         txtExpenseType.setText(getString(R.string.expense_type) + expensemodel.getExpense_type());
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
+        check_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(ExpenseDetailActivity.this, ExpenseStatusActivity.class);
+                intent.putExtra(getString(R.string.expense_model), expensemodel);
+                startActivity(intent);
+            }
+        });
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         Glide.with(this).load(expensemodel.getImage()).into(image_uploaded);
 

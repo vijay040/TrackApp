@@ -23,6 +23,35 @@ public class ExpenseModel implements Serializable{
     private String customer_name;
 
     private String image;
+    private String comment;
+    private String update_image;
+
+    public String getUpdate_comment() {
+        return update_comment;
+    }
+
+    public void setUpdate_comment(String update_comment) {
+        this.update_comment = update_comment;
+    }
+
+    private String update_comment;
+    public String getUpdate_image() {
+        return update_image;
+    }
+
+    public void setUpdate_image(String update_image) {
+        this.update_image = update_image;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+
 
     private String status;
 

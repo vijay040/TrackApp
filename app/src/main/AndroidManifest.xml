@@ -110,7 +110,8 @@
         <activity android:name=".activity.SalesCheckingActivity" />
         <activity android:name=".activity.VendorDetailsActivity" />
         <activity android:name=".activity.VQuotationDetailActivity" />
-        <activity android:name=".activity.PreRequestStatusActivity"></activity>
+        <activity android:name=".activity.PreRequestStatusActivity" />
+        <activity android:name=".activity.ExpenseStatusActivity"></activity>
     </application>
 
 </manifest>

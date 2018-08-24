@@ -48,7 +48,7 @@ public class VQuotationAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.activity_vendor_quo_item, null);
         }
-      final   TextView quotation = view.findViewById(R.id.txt_quotation_no);
+        final  TextView quotation = view.findViewById(R.id.txt_quotation_no);
         quotation.setText(context.getString(R.string.v_quot_no)+list.get(i).getV_quot_no());
 
         final  TextView txt_vendor_name=view.findViewById(R.id.txt_vendor_name);
@@ -78,7 +78,7 @@ public class VQuotationAdapter extends BaseAdapter {
 
 
         final  ImageView hide=view.findViewById(R.id.imz_down);
-        final   RelativeLayout relativeLayout=view.findViewById(R.id.relative);
+        final  RelativeLayout relativeLayout=view.findViewById(R.id.relative);
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

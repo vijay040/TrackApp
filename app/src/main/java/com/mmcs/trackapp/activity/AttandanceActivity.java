@@ -47,7 +47,7 @@ public class AttandanceActivity extends AppCompatActivity {
     ImageView signin;
     TextView textViewsignin;
     LocationManager locationManager;
-    public static String currentLocation;
+    public static String currentLocation="";
     private String status = "signin";
     boolean isLogin = false;
     Shprefrences sh;
@@ -157,6 +157,11 @@ public class AttandanceActivity extends AppCompatActivity {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
+
+        if(currentLocation.equalsIgnoreCase("")) {
+            Toast.makeText(AttandanceActivity.this, "Please wait while fetching location!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (status.equalsIgnoreCase("signin")) {
             status = "signout";
             signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));

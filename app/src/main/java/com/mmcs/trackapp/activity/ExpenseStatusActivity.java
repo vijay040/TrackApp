@@ -24,7 +24,7 @@ import java.util.List;
 
 public class ExpenseStatusActivity extends AppCompatActivity {
     Spinner spnStatusType;
-    EditText edt_data;
+    TextView txt_data;
     ImageView image_uploaded;
     ExpenseModel expensemodel;
     Button btn_submit;
@@ -34,7 +34,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_status);
-        edt_data=findViewById(R.id.edt_data);
+        txt_data=findViewById(R.id.txt_data);
         spnStatusType=findViewById(R.id.spnStatusType);
         image_uploaded=findViewById(R.id.image_uploaded);
         btn_submit=findViewById(R.id.btn_submit);
@@ -43,7 +43,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
         expensemodel = (ExpenseModel) getIntent().getSerializableExtra(getString(R.string.expense_model));
         back();
         setTitle();
-        edt_data.setText( expensemodel.getUpdate_comment());
+        txt_data.setText( expensemodel.getUpdate_comment());
         Glide.with(this).load(expensemodel.getUpdate_image()).into(image_uploaded);
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override

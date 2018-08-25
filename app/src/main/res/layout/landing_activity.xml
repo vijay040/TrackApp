@@ -61,7 +61,7 @@
                         android:textAllCaps="true"
                         android:textStyle="bold|italic"
                         android:drawableRight="@drawable/ic_login"
-                        android:drawablePadding="@dimen/_10sdp"
+                        android:drawablePadding="@dimen/_3sdp"
                         />
                     <TextView
                         android:id="@+id/txtEmail"
@@ -86,7 +86,6 @@
                         android:gravity="center"
                         android:text="Department"
                         />
-
 
                 </LinearLayout>
 

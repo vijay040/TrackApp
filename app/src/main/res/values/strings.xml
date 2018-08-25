@@ -265,6 +265,7 @@
     <string name="select_pol">SELECT POL</string>
     <string name="select_pod">SELECT POD</string>
     <string name="next">NEXT</string>
+    <string name="your_message">Your Message...</string>
 
     <string-array name="language_list">
         <item>English</item>

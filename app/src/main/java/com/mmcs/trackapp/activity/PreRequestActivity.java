@@ -89,7 +89,7 @@ public class PreRequestActivity extends AppCompatActivity {
                     list = response.body().getResponse();
                     PreRequestAdaptor adaptor = new PreRequestAdaptor(PreRequestActivity.this, list);
                     listView.setAdapter(adaptor);
-                    listView.setEmptyView(findViewById(R.id.txt_nodata));
+                    listView.setEmptyView(findViewById(R.id.imz_nodata));
                     progress.setVisibility(View.GONE);
                 }
                     progress.setVisibility(View.GONE);

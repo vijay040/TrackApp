@@ -136,7 +136,7 @@ public class SalesCheckingActivity extends AppCompatActivity implements SearchVi
                     vQModelList = response.body().getResponse();
                     vQuotationAdapter = new VQuotationAdapter(SalesCheckingActivity.this, vQModelList);
                     listvendor_details.setAdapter(vQuotationAdapter);
-                    listvendor_details.setEmptyView(findViewById(R.id.txt_nodata));
+                    listvendor_details.setEmptyView(findViewById(R.id.imz_nodata));
                     progressBar.setVisibility(View.GONE);
                 }
                 progressBar.setVisibility(View.GONE);

@@ -78,7 +78,7 @@ public class PendingActivity extends AppCompatActivity {
                 list = response.body().getResponse();
                 PendingAdaptor adaptor = new PendingAdaptor(PendingActivity.this, list);
                 listView.setAdapter(adaptor);
-                listView.setEmptyView(findViewById(R.id.txt_nodata));
+                listView.setEmptyView(findViewById(R.id.imz_nodata));
                 progress.setVisibility(View.GONE);
             }
             @Override

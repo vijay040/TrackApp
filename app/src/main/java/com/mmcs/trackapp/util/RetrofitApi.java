@@ -222,4 +222,9 @@ public interface RetrofitApi {
     @POST("quotation_get_api.php")
     Call<VQuotationResMeta> getVQuotationList(@Field("user_id") String user_id, @Field("pol") String pol, @Field("pod") String pod);
 
+
+    @FormUrlEncoded
+    @POST("update_expense_status.php?request=update_expense_Status")
+    Call<VQuotationResMeta> updateExpense(@Field("id") String user_id, @Field("update_comment") String pol, @Field("final_status") String pod);
+
 }

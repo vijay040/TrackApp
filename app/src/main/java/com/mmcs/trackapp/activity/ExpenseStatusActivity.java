@@ -28,6 +28,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
     ImageView image_uploaded;
     ExpenseModel expensemodel;
     Button btn_submit;
+    EditText edt_message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -37,6 +38,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
         txt_data=findViewById(R.id.txt_data);
         spnStatusType=findViewById(R.id.spnStatusType);
         image_uploaded=findViewById(R.id.image_uploaded);
+        edt_message=findViewById(R.id.edt_message);
         btn_submit=findViewById(R.id.btn_submit);
         String type[] = {"Got It","Not Required Yet"};
         spnStatusType.setAdapter( new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item,type ));
@@ -49,7 +51,17 @@ public class ExpenseStatusActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String text = spnStatusType.getSelectedItem().toString();
-                Toast.makeText(ExpenseStatusActivity.this,text,Toast.LENGTH_SHORT).show();
+                String msg=edt_message.getText().toString();
+                if (text.equals("")){
+                    Toast.makeText(ExpenseStatusActivity.this,"Select Your Choice",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(msg.equals("")){
+                    Toast.makeText(ExpenseStatusActivity.this,"Please Enter Your Message",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
             }
         });
     }

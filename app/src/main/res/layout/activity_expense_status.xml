@@ -41,7 +41,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/commentbck"
         android:gravity="top"
-        android:hint="You Message"
+        android:hint="Your Message"
         android:paddingLeft="@dimen/_10sdp"
         android:textColor="#000"
         android:textColorHint="#000" />

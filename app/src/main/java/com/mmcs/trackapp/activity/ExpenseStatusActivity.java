@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
     ExpenseModel expensemodel;
     Button btn_submit;
     EditText edt_message;
+    ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
         image_uploaded = findViewById(R.id.image_uploaded);
         edt_message = findViewById(R.id.edt_message);
         btn_submit = findViewById(R.id.btn_submit);
+        progress = findViewById(R.id.progress);
         String type[] = {"Got It", "Not Required Yet"};
         spnStatusType.setAdapter(new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item, type));
         expensemodel = (ExpenseModel) getIntent().getSerializableExtra(getString(R.string.expense_model));
@@ -66,8 +69,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
                     Toast.makeText(ExpenseStatusActivity.this, "Please Enter Your Message", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-
+                progress.setVisibility(View.VISIBLE);
                 updateExpense(msg, text);
 
             }
@@ -78,11 +80,16 @@ public class ExpenseStatusActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().updateExpense(expensemodel.getId(), comment, status).enqueue(new Callback<VQuotationResMeta>() {
             @Override
             public void onResponse(Call<VQuotationResMeta> call, Response<VQuotationResMeta> response) {
+                progress.setVisibility(View.GONE);
+                Toast.makeText(ExpenseStatusActivity.this, getString(R.string.data_submited_successfully),
+                        Toast.LENGTH_LONG).show();
+                finish();
 
             }
 
             @Override
             public void onFailure(Call<VQuotationResMeta> call, Throwable t) {
+                progress.setVisibility(View.GONE);
 
             }
         });

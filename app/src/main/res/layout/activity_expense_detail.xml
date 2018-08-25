@@ -108,6 +108,15 @@
         android:text="@string/expensetype"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_10sdp" />
+    <TextView
+        android:id="@+id/check_status"
+        android:layout_width="wrap_content"
+        android:text="Check Status"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_height="wrap_content" />
 
 
     <Button

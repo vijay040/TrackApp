@@ -136,6 +136,7 @@
     <string name="add_prerequest">Add Pre-Request</string>
     <string name="bTrack">BTrack</string>
     <string name="expense_list">Expense List</string>
+    <string name="expense_status">Expense Status</string>
     <string name="expense_report">Expense Report</string>
     <string name="report_details">Report Details</string>
     <string name="feedback">Feedback</string>

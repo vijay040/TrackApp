@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         lay=findViewById(R.id.lay);
         lay.setVisibility(View.GONE);
-      //  getSupportActionBar().hide();
+      //getSupportActionBar().hide();
         username = findViewById(R.id.edt_usernsme);
         password = findViewById(R.id.edt_password);
         spnEnvironment=findViewById(R.id.spnEnvironment);
@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
         String typeList[] = {"Select Login Types","User","Location Manager","Admin"};
         spnLoginType.setAdapter( new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item,typeList ));
-      /*  forgotpassword = findViewById(R.id.txt_forgot);
+      /*forgotpassword = findViewById(R.id.txt_forgot);
         remember = findViewById(R.id.checkBox1);*/
         btn_signin=findViewById(R.id.btn_signin);
         progress=findViewById(R.id.progress);
@@ -71,14 +71,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String user_name = username.getText().toString();
                 String pass = password.getText().toString();
-                if(spnEnvironment.getSelectedItemPosition()==0) {
+               /* if(spnEnvironment.getSelectedItemPosition()==0) {
                     Toast.makeText(LoginActivity.this, R.string.select_environment, Toast.LENGTH_SHORT).show();
                     return;
-                }
-                if(spnLoginType.getSelectedItemPosition()==0) {
+                }*/
+               /* if(spnLoginType.getSelectedItemPosition()==0) {
                     Toast.makeText(LoginActivity.this, R.string.select_logintype, Toast.LENGTH_SHORT).show();
                     return;
-                }
+                }*/
                 if (user_name.equals("")) {
                     Toast.makeText(LoginActivity.this, getString(R.string.enter_user_name), Toast.LENGTH_SHORT).show();
                 } else if (pass.equals("")) {
@@ -93,13 +93,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String email,String pass)
     {
-       String env=(String) spnEnvironment.getSelectedItem();
+        String env=(String) spnEnvironment.getSelectedItem();
         String user=(String) spnLoginType.getSelectedItem();
         Singleton.getInstance().getApi().login(email,pass,"",fcmToken,user,env).enqueue(new Callback<LoginResMeta>() {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
                     if(response.body().getCode()!=null && response.body().getCode().equalsIgnoreCase("200"))
-                    {  LoginModel model=response.body().getResponse().get(0);
+                    {   LoginModel model=response.body().getResponse().get(0);
                         sh.setLoginModel(getString(R.string.login_model), model);
                         sh.setBoolean("ISLOGIN",true);
                         startActivity(new Intent(LoginActivity.this, DrawerActivity.class));
@@ -108,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
                     else{
                         Toast.makeText(LoginActivity.this, "Invalid userid and password!", Toast.LENGTH_SHORT).show();
                     }
-
 
                 progress.setVisibility(View.GONE);
 

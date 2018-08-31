@@ -57,6 +57,7 @@
                 android:gravity="center"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
+                android:visibility="gone"
                 />
 
             <Spinner
@@ -70,6 +71,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
+                android:visibility="gone"
                 />
 
             <android.support.design.widget.TextInputLayout

@@ -105,6 +105,7 @@ public class FeedbackListActivity extends AppCompatActivity {
                     ArrayList<FeedbackModel> list=response.body().getResponse();
                     FeedbackListAdaptor adaptor=new FeedbackListAdaptor(FeedbackListActivity.this,list);
                     listView.setAdapter(adaptor);
+                    listView.setEmptyView(findViewById(R.id.imz_nodata));
                     progress.setVisibility(View.GONE);
                 }
             }

@@ -308,16 +308,21 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
-            <ImageView
-                android:id="@+id/img_clock"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:background="@drawable/ic_reunion"
-                android:visibility="gone" />
+
 
         </LinearLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/img_clock"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/ic_reunion"
+        android:visibility="gone" />
 </RelativeLayout>
 

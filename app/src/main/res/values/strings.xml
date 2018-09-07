@@ -242,7 +242,7 @@
     <string name="please_enter_meeting_results">Please enter meeting results</string>
     <string name="please_enter_minutes_of_meeting">Please enter Minutes of Meeting</string>
     <string name="sales_checking">Sales Checking</string>
-
+<string name="client_address">Customer Address</string>
     <string name="vender_model">VENDORMODEL</string>
     <string name="minute_hand">minute_hand</string>
     <string name="second_hand">second_hand</string>

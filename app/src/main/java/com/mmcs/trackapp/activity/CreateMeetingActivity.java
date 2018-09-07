@@ -20,6 +20,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -68,6 +70,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
     private AutoCompleteTextView edtAddress;
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
+    CheckBox chk_address;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     int H, M;
@@ -101,6 +104,19 @@ public class CreateMeetingActivity extends AppCompatActivity implements
         btnSubmit = findViewById(R.id.btnSubmit);
         progress = findViewById(R.id.progress);
         sh = new Shprefrences(this);
+        chk_address=findViewById(R.id.chk_address);
+        chk_address.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    edtAddress.setText("NOIDA SECTOR 63");
+                    edtAddress.setEnabled(false);
+                } else {
+                    edtAddress.getText().clear();
+                  edtAddress.setEnabled(true);
+                }
+            }
+        });
         back();
         setTitle();
         //getSupportActionBar().setTitle("Create Meeting");

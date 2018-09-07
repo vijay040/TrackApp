@@ -173,6 +173,17 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/view_devider" />
+        <CheckBox
+            android:id="@+id/chk_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edt_comment"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/client_address"
+            android:textColor="@color/them_color"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
 
         <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
             android:id="@+id/edtAddress"

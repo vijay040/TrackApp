@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -29,11 +30,11 @@ public class FollowupActivity extends AppCompatActivity {
 
     Button button;
     EditText edt_comment, edtDate, edtTime;
-    CheckBox chkBok;
+    CheckBox chkFollowup;
     int H, M;
     Calendar calendar;
     int DD, MM, YY;
-    RelativeLayout lay;
+    LinearLayout lay;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,9 +43,9 @@ public class FollowupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.need_folloup);
         edt_comment = findViewById(R.id.edt_comment);
-        chkBok = findViewById(R.id.chkFollowup);
+        chkFollowup = findViewById(R.id.chkFollowup);
         button = findViewById(R.id.btnSubmit);
-        lay = findViewById(R.id.lay);
+        lay = findViewById(R.id.linear_layout);
         edtTime = findViewById(R.id.edtTime);
         edtDate = findViewById(R.id.edtDate);
         calendar = Calendar.getInstance();
@@ -79,7 +80,7 @@ public class FollowupActivity extends AppCompatActivity {
         back();
 
 
-        chkBok.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        chkFollowup.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
@@ -100,7 +101,7 @@ public class FollowupActivity extends AppCompatActivity {
                 String date = edtDate.getText().toString();
                 String time = edtTime.getText().toString();
                 Intent output = new Intent();
-                output.putExtra("NEED_FOLLOWUP", "" + chkBok.isChecked());
+                output.putExtra("NEED_FOLLOWUP", "" + chkFollowup.isChecked());
                 output.putExtra("MOM", edt_comment.getText() + "");
                 output.putExtra("DATE", date + "");
                 output.putExtra("TIME", time + "");

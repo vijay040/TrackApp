@@ -2,6 +2,7 @@ package com.mmcs.trackapp.util;
 
 import com.mmcs.trackapp.model.ExpenseResMeta;
 import com.mmcs.trackapp.model.FeedbackResMeta;
+import com.mmcs.trackapp.model.HomeItemResMeta;
 import com.mmcs.trackapp.model.LoginResMeta;
 import com.mmcs.trackapp.model.MeetingModel;
 import com.mmcs.trackapp.model.MessageResMeta;
@@ -226,5 +227,10 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("update_expense_status.php?request=update_expense_Status")
     Call<VQuotationResMeta> updateExpense(@Field("id") String user_id, @Field("update_comment") String pol, @Field("final_status") String pod);
+
+
+    @FormUrlEncoded
+    @POST("mobile_menu_get.php")
+    Call<HomeItemResMeta> getMenu(@Field("user_id") String user_id);
 
 }

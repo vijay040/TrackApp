@@ -96,7 +96,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     />
 
-                <TextView
+               <!-- <TextView
                     android:id="@+id/txt_meeting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -225,7 +225,13 @@
                     android:text="@string/logout"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold" />-->
+
+                <ListView
+                    android:id="@+id/listItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view"></ListView>
 
             </LinearLayout>
 

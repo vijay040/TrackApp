@@ -20,13 +20,19 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.adaptor.HomeRecyclerAdaptor;
+import com.mmcs.trackapp.adaptor.SideBarAdaptor;
 import com.mmcs.trackapp.fragment.FragmentHome;
+import com.mmcs.trackapp.model.HomeItemModel;
+import com.mmcs.trackapp.model.HomeItemResMeta;
 import com.mmcs.trackapp.model.LoginModel;
+import com.mmcs.trackapp.model.PortResMeta;
 import com.mmcs.trackapp.model.PreRequestResMeta;
 import com.mmcs.trackapp.util.AppLocationService;
 import com.mmcs.trackapp.util.CircleTransform;
@@ -34,6 +40,8 @@ import com.mmcs.trackapp.util.MyLocation;
 import com.mmcs.trackapp.util.Shprefrences;
 import com.mmcs.trackapp.util.Singleton;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,49 +55,40 @@ public class DrawerActivity extends AppCompatActivity {
     RelativeLayout drawerIcon;
     public static boolean isHome = true;
     public static FragmentManager fragmentManager;
-    TextView txtName,txtEmail,txtDepartment, txt_meeting, txt_myschedule, txt_feedback, txt_client, txt_attendance, txt_expense, txt_setting, txt_pending, txt_message, txt_logout;
+    TextView txtName, txtEmail, txtDepartment, txt_meeting, txt_myschedule, txt_feedback, txt_client, txt_attendance, txt_expense, txt_setting, txt_pending, txt_message, txt_logout;
     Shprefrences sh;
     LoginModel model;
     ImageView imgProfile;
+    ListView list;
+    public static ArrayList<HomeItemModel> listHomeItems;
+    public static HomeRecyclerAdaptor homeAdaptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+        listHomeItems = new ArrayList<>();
+        fragmentManager = getSupportFragmentManager();
+        getMenu();
         if (Build.VERSION.SDK_INT > 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.landing_activity);
-        if(!hasPermissions(this, PERMISSIONS)){
+        list = findViewById(R.id.listItem);
+        if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
-
         sh = new Shprefrences(this);
-        txt_meeting = (TextView) findViewById(R.id.txt_meeting);
-        txt_myschedule = (TextView) findViewById(R.id.txt_myschedule);
-        txt_feedback = (TextView) findViewById(R.id.txt_feedback);
-        txt_client = (TextView) findViewById(R.id.txt_client);
-        txt_attendance = (TextView) findViewById(R.id.txt_attendance);
-        txt_expense = (TextView) findViewById(R.id.txt_expense);
-        txt_setting = (TextView) findViewById(R.id.txt_setting);
-        txt_pending = (TextView) findViewById(R.id.txt_pending);
-        txt_message = (TextView) findViewById(R.id.txt_message);
-        txt_logout = (TextView) findViewById(R.id.txt_logout);
         txtName = (TextView) findViewById(R.id.txtName);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
         txtDepartment = (TextView) findViewById(R.id.txtDepartment);
-
         imgProfile = findViewById(R.id.imgProfile);
         model = sh.getLoginModel(getString(R.string.login_model));
-        if(model.getImage()!=null)
-       //Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).resize(100,100).into(imgProfile);
+        if (model.getImage() != null)
+            Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).resize(100, 100).into(imgProfile);
         txtName.setText(model.getDisplay_name());
         setTitle();
-
-        fragmentManager = getSupportFragmentManager();
-        pushFragment(new FragmentHome());
+       // pushFragment(new FragmentHome());
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
         drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
@@ -106,93 +105,10 @@ public class DrawerActivity extends AppCompatActivity {
             }
         });
 
-        txt_meeting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, CreateMeetingActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-        txt_myschedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, MyScheduleActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-        txt_feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, FeedbackListActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-        txt_client.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, AddCustomerActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-        txt_attendance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, AttandanceActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-        txt_expense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, ExpenseActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-        txt_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, SettingActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-        txt_pending.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, PendingActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-        txt_message.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DrawerActivity.this, MessageActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-        txt_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sh.clearData();
-                Toast.makeText(DrawerActivity.this, getString(R.string.you_have_logged_out_successfully), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(DrawerActivity.this, LoginActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(Gravity.LEFT);
-            }
-        });
-
         getLocation();
 
     }
+
 
     public static void pushFragment(Fragment fragment) {
         if (fragment != null) {
@@ -213,7 +129,7 @@ public class DrawerActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         model = sh.getLoginModel(getString(R.string.login_model));
-        if(model!=null) {
+        if (model != null) {
             Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
             txtName.setText(model.getDisplay_name());
             txtEmail.setText(model.getEmail());
@@ -243,9 +159,8 @@ public class DrawerActivity extends AppCompatActivity {
             android.Manifest.permission.CAMERA
     };
 
-    private void updateLocation(String lat,String lng)
-    {
-        Singleton.getInstance().getApi().postDeviceLocation(model.getId(),lat,lng).enqueue(new Callback<PreRequestResMeta>() {
+    private void updateLocation(String lat, String lng) {
+        Singleton.getInstance().getApi().postDeviceLocation(model.getId(), lat, lng).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
 
@@ -271,9 +186,9 @@ public class DrawerActivity extends AppCompatActivity {
                     //Got the location
                     try {
                         if (location != null) {
-                            double lat= location.getLatitude();
+                            double lat = location.getLatitude();
                             double lon = location.getLongitude();
-                            updateLocation(lat+"",""+lon);
+                            updateLocation(lat + "", "" + lon);
                         }
                     } catch (Exception e) {
                         e.getMessage();
@@ -285,6 +200,30 @@ public class DrawerActivity extends AppCompatActivity {
         } else {
             // showSettingsAlert("NETWORK");
         }
+    }
+
+
+    public void getMenu() {
+        Singleton.getInstance().getApi().getMenu("").enqueue(new Callback<HomeItemResMeta>() {
+            @Override
+            public void onResponse(Call<HomeItemResMeta> call, Response<HomeItemResMeta> response) {
+
+                listHomeItems = response.body().getResponse();
+                //setMenuItemIcons();
+                HomeItemModel logout=new HomeItemModel();
+                logout.setTitle("Logout");
+                listHomeItems.add(logout);
+                SideBarAdaptor adaptor = new SideBarAdaptor(DrawerActivity.this, listHomeItems);
+                homeAdaptor= new HomeRecyclerAdaptor(DrawerActivity.this, listHomeItems);
+                list.setAdapter(adaptor);
+                pushFragment(new FragmentHome());
+            }
+
+            @Override
+            public void onFailure(Call<HomeItemResMeta> call, Throwable t) {
+                Log.e("except", "**exception****" + t.getMessage());
+            }
+        });
     }
 
 

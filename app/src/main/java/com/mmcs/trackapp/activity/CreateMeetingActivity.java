@@ -228,7 +228,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                     { startedDate= alarm.getStartDate();startedTime= alarm.getStartTime();endDate= alarm.getEndDate();endTime= alarm.getEndTime();
                     }
 
-                    createMeeting(model.getId(), purpose, descreption, customer, date, time, agenda, contactperson, address, startedDate,startedTime, endDate, endTime, "");
+                    createMeeting(model.getId(), purposeId, descreption, customer, date, time, agenda, contactperson, address, startedDate,startedTime, endDate, endTime, "");
                 }
             }
         });
@@ -334,7 +334,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
     ArrayList<PurposeModel> purposeList = new ArrayList<>();
     PurposePopupAdaptor purposePopupAdaptor;
     private int popupId = 0;
-
+private String purposeId;
     private void showPurposePopup() {
        /* PurposeModel m=new PurposeModel();
         m.setPurpose("Business Meeting in Noida");
@@ -363,6 +363,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
                                     int position, long id) {
                 PurposeModel obj = (PurposeModel) listPurpose.getAdapter().getItem(position);
                 edtPurpose.setText(obj.getPurpose());
+                purposeId=obj.getId();
                 alertDialog.dismiss();
             }
         });

@@ -118,7 +118,7 @@ public interface RetrofitApi {
     @POST("customer_post_api.php?request=savecustomer_data")
     Call<ResMetaMeeting> addNewCustomer(@Field("user_id") String user_id, @Field("customer_name") String customer_name,
                                         @Field("address") String address, @Field("email") String email, @Field("phone") String phone, @Field("pin'") String pin,
-                                        @Field("customer_company") String customer_company, @Field("country") String country, @Field("tax_details") String details
+                                        @Field("customer_company") String customer_company, @Field("country") String country, @Field("tax_details") String details, @Field("admin_id") String admin_id
 
     );
 

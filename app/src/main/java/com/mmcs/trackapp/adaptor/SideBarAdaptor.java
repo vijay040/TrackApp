@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.activity.AddCustomerActivity;
 import com.mmcs.trackapp.activity.AttandanceActivity;
 import com.mmcs.trackapp.activity.CreateMeetingActivity;
 import com.mmcs.trackapp.activity.DrawerActivity;
@@ -103,7 +104,7 @@ Shprefrences sh;
                         break;
 
                     case "Clients":
-                        Intent intent5 = new Intent(ctx, NewCustomerActivity.class);
+                        Intent intent5 = new Intent(ctx, AddCustomerActivity.class);
                         ctx.startActivity(intent5);
                         break;
 

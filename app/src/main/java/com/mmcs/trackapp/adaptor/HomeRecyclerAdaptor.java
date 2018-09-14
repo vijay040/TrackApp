@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.activity.AddCustomerActivity;
 import com.mmcs.trackapp.activity.AttandanceActivity;
 import com.mmcs.trackapp.activity.CreateMeetingActivity;
 import com.mmcs.trackapp.activity.ExpenseActivity;
@@ -88,7 +89,7 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                         break;
 
                     case "Clients":
-                        Intent intent5 = new Intent(context, NewCustomerActivity.class);
+                        Intent intent5 = new Intent(context, AddCustomerActivity.class);
                         context.startActivity(intent5);
                         break;
 

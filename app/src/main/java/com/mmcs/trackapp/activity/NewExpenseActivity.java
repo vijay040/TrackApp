@@ -152,7 +152,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 String currenc = currency.getText().toString();
                 String expensetype = edRequestTypes.getText().toString();
                 String cmnt = comments.getText().toString();
-                String totalamount = amnt + currenc;
+
                 Log.e("***************", "imageImagePath " + imageImagePath);
                 if (selectmeeting.equals("")) {
                     Toast.makeText(NewExpenseActivity.this, getString(R.string.select_meeting), Toast.LENGTH_SHORT).show();
@@ -171,7 +171,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postExpanse(totalamount, createddate, cmnt, imageImagePath);
+                    postExpanse(amnt, createddate, cmnt, imageImagePath);
                 }
             }
         });
@@ -405,11 +405,13 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                                     int position, long id) {
                 CurrencyModel obj = (CurrencyModel) listPurpose.getAdapter().getItem(position);
                 currency.setText(obj.getCurrency_name());
+                currencyId=obj.getId();
                 alertDialog.dismiss();
             }
         });
 
     }
+    String currencyId="";
 
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
@@ -457,7 +459,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         return true;
     }
 
-    private void postExpanse(String amnt, String createddate, String cmnt, String fileUrl) {
+    private void postExpanse(String amnt ,String createddate, String cmnt, String fileUrl) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         String userid = model.getId();
         RequestBody imgFile = null;
@@ -467,12 +469,13 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestUserId = RequestBody.create(MediaType.parse("text/plain"), userid);
         RequestBody requestMeetingId = RequestBody.create(MediaType.parse("text/plain"), meetingId);
+        RequestBody requestCurrencyId = RequestBody.create(MediaType.parse("text/plain"), currencyId);
         RequestBody requestAmount = RequestBody.create(MediaType.parse("text/plain"), amnt);
         RequestBody requestReqType = RequestBody.create(MediaType.parse("text/plain"), requestTypeId);
         RequestBody requestDate = RequestBody.create(MediaType.parse("text/plain"), createddate);
         RequestBody requestCmnt = RequestBody.create(MediaType.parse("text/plain"), cmnt);
 
-        Singleton.getInstance().getApi().postExpanse(requestUserId, requestMeetingId, requestAmount, requestReqType, requestDate, requestCmnt, imgFile).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postExpanse(requestUserId, requestMeetingId, requestAmount,requestCurrencyId ,requestReqType, requestDate, requestCmnt, imgFile).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 Toast.makeText(NewExpenseActivity.this, getString(R.string.expanse_posted_successfully), Toast.LENGTH_SHORT).show();

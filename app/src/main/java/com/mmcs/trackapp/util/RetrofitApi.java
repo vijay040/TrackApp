@@ -92,7 +92,7 @@ public interface RetrofitApi {
     @Multipart
     @POST("post_expense.php?request=saveexpense_data")
     Call<ResMetaMeeting> postExpanse(@Part("user_id") RequestBody user_id, @Part("meeting_id") RequestBody meeting_id,
-                                     @Part("amount") RequestBody amount, @Part("expense_type") RequestBody requesttypes, @Part("created_on") RequestBody createddate,
+                                     @Part("amount") RequestBody amount,@Part("currency") RequestBody currency ,@Part("expense_type") RequestBody requesttypes, @Part("created_on") RequestBody createddate,
                                      @Part("comment") RequestBody comment ,@Part("image\"; filename=\"profile.jpg") RequestBody image
 
     );

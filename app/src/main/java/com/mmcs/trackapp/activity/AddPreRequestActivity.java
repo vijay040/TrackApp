@@ -334,10 +334,12 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                                     int position, long id) {
                 CurrencyModel obj = (CurrencyModel) listPurpose.getAdapter().getItem(position);
                 edtCurrency.setText(obj.getCurrency_name());
+                currencyId=obj.getId();
                 alertDialog.dismiss();
             }
         });
     }
+    String currencyId = "";
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
@@ -390,7 +392,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
         String curr = edtCurrency.getText().toString();
         String dept = edtDepartment.getText().toString();
         String des = edtDescreption.getText().toString();
-        String totalamount = adv + curr;
+
         if (userid.equals("")) {
             Toast.makeText(AddPreRequestActivity.this, getString(R.string.session_time_msg), Toast.LENGTH_SHORT).show();
             return;
@@ -420,7 +422,7 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
                 listtype.add(list);
         }
         progress.setVisibility(View.VISIBLE);
-        Singleton.getInstance().getApi().postPreRequest(userid, totalamount, curr, dept, meetingId, des, addres, datetime, listtype,model.getReporting_person()).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postPreRequest(userid, adv, currencyId, dept, meetingId, des, addres, datetime, listtype,model.getReporting_person()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);

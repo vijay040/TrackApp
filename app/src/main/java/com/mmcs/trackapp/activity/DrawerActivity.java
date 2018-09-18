@@ -1,13 +1,19 @@
 package com.mmcs.trackapp.activity;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -62,6 +68,12 @@ public class DrawerActivity extends AppCompatActivity {
     ListView list;
     public static ArrayList<HomeItemModel> listHomeItems;
     public static HomeRecyclerAdaptor homeAdaptor;
+    public static int TYPE_WIFI = 1;
+    public static int TYPE_MOBILE = 2;
+    public static int TYPE_NOT_CONNECTED = 0;
+    private Snackbar snackbar;
+    RelativeLayout relativeLayout;
+    private boolean internetConnected=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +93,7 @@ public class DrawerActivity extends AppCompatActivity {
         sh = new Shprefrences(this);
         txtName = (TextView) findViewById(R.id.txtName);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
+        relativeLayout=findViewById(R.id.relativeLayout);
         txtDepartment = (TextView) findViewById(R.id.txtDepartment);
         imgProfile = findViewById(R.id.imgProfile);
         model = sh.getLoginModel(getString(R.string.login_model));
@@ -128,6 +141,7 @@ public class DrawerActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        registerInternetCheckReceiver();
         model = sh.getLoginModel(getString(R.string.login_model));
         if (model != null) {
             Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).into(imgProfile);
@@ -225,6 +239,90 @@ public class DrawerActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(broadcastReceiver);
+    }
+    /**
+     *  Method to register runtime broadcast receiver to show snackbar alert for internet connection..
+     */
+    private void registerInternetCheckReceiver() {
+        IntentFilter internetFilter = new IntentFilter();
+        internetFilter.addAction("android.net.wifi.STATE_CHANGE");
+        internetFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(broadcastReceiver, internetFilter);
+    }
+    /**
+     *  Runtime Broadcast receiver inner class to capture internet connectivity events
+     */
+    public BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String status = getConnectivityStatusString(context);
+            setSnackbarMessage(status,false);
+        }
+    };
+    public static int getConnectivityStatus(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (null != activeNetwork) {
+            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+                return TYPE_WIFI;
+
+            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
+                return TYPE_MOBILE;
+        }
+        return TYPE_NOT_CONNECTED;
+    }
+    public static String getConnectivityStatusString(Context context) {
+        int conn = getConnectivityStatus(context);
+        String status = null;
+        if (conn == TYPE_WIFI) {
+            status = "Wifi enabled";
+        } else if (conn == TYPE_MOBILE) {
+            status = "Mobile data enabled";
+        } else if (conn == TYPE_NOT_CONNECTED) {
+            status = "Not connected to Internet";
+        }
+        return status;
+    }
+    private void setSnackbarMessage(String status,boolean showBar) {
+        String internetStatus="";
+        if(status.equalsIgnoreCase("Wifi enabled")||status.equalsIgnoreCase("Mobile data enabled")){
+            internetStatus="Internet Connected";
+        }else {
+            internetStatus="Check Internet Connection";
+        }
+        snackbar = Snackbar
+                .make(relativeLayout, internetStatus, Snackbar.LENGTH_LONG)
+                .setAction("Refresh", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                       // snackbar.dismiss();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                });
+        snackbar.setActionTextColor(Color.WHITE);
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        if(internetStatus.equalsIgnoreCase("Check Internet Connection")){
+            if(internetConnected){
+                snackbar.show();
+                internetConnected=false;
+            }
+        }else{
+            if(!internetConnected){
+                internetConnected=true;
+                snackbar.show();
+            }
+        }
+    }
+
 
 
 }

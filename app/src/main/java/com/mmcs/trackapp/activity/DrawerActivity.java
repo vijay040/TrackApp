@@ -301,7 +301,6 @@ public class DrawerActivity extends AppCompatActivity {
                 .setAction("Refresh", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                       // snackbar.dismiss();
                         finish();
                         startActivity(getIntent());
                     }

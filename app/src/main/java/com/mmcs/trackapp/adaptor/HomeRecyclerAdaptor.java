@@ -16,6 +16,7 @@ import com.mmcs.trackapp.activity.AddCustomerActivity;
 import com.mmcs.trackapp.activity.AttandanceActivity;
 import com.mmcs.trackapp.activity.CreateMeetingActivity;
 import com.mmcs.trackapp.activity.ExpenseActivity;
+import com.mmcs.trackapp.activity.ExpenseApprovalActivity;
 import com.mmcs.trackapp.activity.FeedbackListActivity;
 import com.mmcs.trackapp.activity.MessageActivity;
 import com.mmcs.trackapp.activity.MyScheduleActivity;
@@ -101,7 +102,7 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                         Intent intent7 = new Intent(context, ExpenseActivity.class);
                         context.startActivity(intent7);
                         break;
-                    case "Pendings":
+                    case "Pre-Req Approval":
 
                         Intent intent8 = new Intent(context, PendingActivity.class);
                         context.startActivity(intent8);
@@ -110,6 +111,10 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
                     case "Sales Checking":
                         Intent intent9 = new Intent(context, SalesCheckingActivity.class);
                         context.startActivity(intent9);
+                        break;
+                    case "Exp Approval":
+                        Intent intent10 = new Intent(context, ExpenseApprovalActivity.class);
+                        context.startActivity(intent10);
                         break;
                     case "Logout":
 
@@ -167,13 +172,16 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
             case "Expense":
                 img.setBackground(context.getResources().getDrawable(R.drawable.ic_expense));
                 break;
-            case "Pendings":
+            case "Pre-Req Approval":
 
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_notification));
+                img.setBackground(context.getResources().getDrawable(R.drawable.ic_pre_appr));
                 break;
 
             case "Sales Checking":
                 img.setBackground(context.getResources().getDrawable(R.drawable.ic_sale));
+                break;
+            case "Exp Approval":
+                img.setBackground(context.getResources().getDrawable(R.drawable.ic_expense_app));
                 break;
             case "Logout":
                 layUser.setVisibility(View.GONE);

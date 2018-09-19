@@ -1,5 +1,6 @@
 package com.mmcs.trackapp.util;
 
+import com.mmcs.trackapp.model.ExpResListMeta;
 import com.mmcs.trackapp.model.ExpenseResMeta;
 import com.mmcs.trackapp.model.FeedbackResMeta;
 import com.mmcs.trackapp.model.HomeItemResMeta;
@@ -232,5 +233,20 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("mobile_menu_get.php")
     Call<HomeItemResMeta> getMenu(@Field("user_id") String user_id);
+
+
+
+    @FormUrlEncoded
+    @POST("expense_approval_get_api.php")
+    Call<ExpResListMeta> getExpenseApprovalsList(@Field("user_id") String user_id
+
+    );
+
+
+
+/* @FormUrlEncoded
+    @POST("pending_post_api.php?request=setPendingStatus")
+    Call<PreRequestResMeta> postAcceptRejectPendings(@Field("user_id") String user_id, @Field("id") String id, @Field("manager_status") String manager_status
+    );*/
 
 }

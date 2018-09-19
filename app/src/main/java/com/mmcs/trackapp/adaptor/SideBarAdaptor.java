@@ -18,6 +18,7 @@ import com.mmcs.trackapp.activity.AttandanceActivity;
 import com.mmcs.trackapp.activity.CreateMeetingActivity;
 import com.mmcs.trackapp.activity.DrawerActivity;
 import com.mmcs.trackapp.activity.ExpenseActivity;
+import com.mmcs.trackapp.activity.ExpenseApprovalActivity;
 import com.mmcs.trackapp.activity.FeedbackListActivity;
 import com.mmcs.trackapp.activity.LoginActivity;
 import com.mmcs.trackapp.activity.MessageActivity;
@@ -116,7 +117,7 @@ Shprefrences sh;
                         Intent intent7 = new Intent(ctx, ExpenseActivity.class);
                         ctx.startActivity(intent7);
                         break;
-                    case "Pendings":
+                    case "Pre-Req Approval":
 
                         Intent intent8 = new Intent(ctx, PendingActivity.class);
                         ctx.startActivity(intent8);
@@ -125,6 +126,10 @@ Shprefrences sh;
                     case "Sales Checking":
                         Intent intent9 = new Intent(ctx, SalesCheckingActivity.class);
                         ctx.startActivity(intent9);
+                        break;
+                    case "Exp Approval":
+                        Intent intent10 = new Intent(ctx, ExpenseApprovalActivity.class);
+                        ctx.startActivity(intent10);
                         break;
                     case "Logout":
                         sh.clearData();
@@ -172,13 +177,16 @@ Shprefrences sh;
             case "Expense":
                 img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_expense));
                 break;
-            case "Pendings":
+            case "Pre-Req Approval":
 
-                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_notification));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_pre_appr));
                 break;
 
             case "Sales Checking":
                 img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_sale));
+                break;
+            case "Exp Approval":
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_expense_app));
                 break;
             case "Logout":
                 img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_logout));

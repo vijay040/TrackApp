@@ -146,8 +146,10 @@
     <string name="meeting_list">Meeting List</string>
     <string name="add_customer">Add Customer</string>
     <string name="create_expense">Create Expense</string>
-    <string name="pending_list">Pending List</string>
-    <string name="pending_details">Pending Details</string>
+    <string name="pending_list">Pre-Request List</string>
+    <string name="expense_approval">Expense Approval</string>
+    <string name="pending_details">Pre-Request Details</string>
+    <string name="exp_app_details">Exp Approval Detail</string>
     <string name="pre_requests">Pre-Requests </string>
     <string name="pre_request_details">Pre-Request Details</string>
     <string name="reminder_settings">Reminder Settings</string>
@@ -230,6 +232,7 @@
     <string name="enter_advance_amount">Enter Advance Amount</string>
     <string name="login_model">LOGIN_MODEL</string>
     <string name="prerequest_model">PREREQUESTMODEL</string>
+    <string name="expense_appro_model">EXPAPPROVMODEL</string>
     <string name="report_model">REPORTMODEL</string>
     <string name="meeting_model">MEETINGMODEL</string>
     <string name="expense_model">EXPENSEMODEL</string>
@@ -242,7 +245,7 @@
     <string name="please_enter_meeting_results">Please enter meeting results</string>
     <string name="please_enter_minutes_of_meeting">Please enter Minutes of Meeting</string>
     <string name="sales_checking">Sales Checking</string>
-<string name="client_address">Customer Address</string>
+    <string name="client_address">Customer Address</string>
     <string name="vender_model">VENDORMODEL</string>
     <string name="minute_hand">minute_hand</string>
     <string name="second_hand">second_hand</string>

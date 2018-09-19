@@ -243,10 +243,11 @@ public interface RetrofitApi {
     );
 
 
+    @FormUrlEncoded
+    @POST("expense_appr_post_api.php?request=setExpenseApproval")
+    Call<PreRequestResMeta> postAcceptRejectExpense(@Field("user_id") String user_id, @Field("id") String id, @Field("manager_status") String manager_status
 
-/* @FormUrlEncoded
-    @POST("pending_post_api.php?request=setPendingStatus")
-    Call<PreRequestResMeta> postAcceptRejectPendings(@Field("user_id") String user_id, @Field("id") String id, @Field("manager_status") String manager_status
-    );*/
+    );
+
 
 }

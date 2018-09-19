@@ -116,7 +116,7 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
     private void postStatus(String status)
     {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
-        Singleton.getInstance().getApi().postAcceptRejectPendings(model.getId(),expenseApprovalListModel
+        Singleton.getInstance().getApi().postAcceptRejectExpense(model.getId(),expenseApprovalListModel
                 .getId(),status).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {

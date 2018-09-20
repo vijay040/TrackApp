@@ -1,15 +1,21 @@
 package com.mmcs.trackapp.activity;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.ExpResListMeta;
@@ -27,6 +33,8 @@ public class PreRequestStatusActivity extends AppCompatActivity {
 TextView reqst_type,status;
 Button btn_ok;
 String id;
+ProgressBar progress;
+EditText edt_message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -35,6 +43,9 @@ String id;
         setContentView(R.layout.activity_pre_request_status);
         reqst_type=findViewById(R.id.reqst_type);
         status=findViewById(R.id.status);
+        progress = findViewById(R.id.progressbar);
+        edt_message=findViewById(R.id.edt_message);
+        progress.setVisibility(View.VISIBLE);
         btn_ok=findViewById(R.id.btn_ok);
         Bundle bundle = getIntent().getExtras();
         String text_request = bundle.getString("reqst_type");
@@ -72,13 +83,27 @@ String id;
             @Override
             public void onResponse(Call<PreReqUpdateResMeta> call, Response<PreReqUpdateResMeta> response) {
                 PreReqUpdateModel model=response.body().getResponse().get(0);
-                status.setText("Status:"+model.getStatus());
+                if (model.getStatus().equals("")){
+                    edt_message.setVisibility(View.VISIBLE);
+                    edt_message.setText(model.getMessage());
+                }
+                else{
+                    status.setText("Status:"+model.getStatus());
+                    edt_message.setVisibility(View.GONE);
+
+
+                }
+
+
+                progress.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<PreReqUpdateResMeta> call, Throwable t) {
+                progress.setVisibility(View.GONE);
 
             }
         });
     }
+
 }

@@ -12,10 +12,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.model.ExpResListMeta;
+import com.mmcs.trackapp.model.PreReqUpdateModel;
+import com.mmcs.trackapp.model.PreReqUpdateResMeta;
+import com.mmcs.trackapp.util.Singleton;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PreRequestStatusActivity extends AppCompatActivity {
 TextView reqst_type,status;
 Button btn_ok;
+String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -27,8 +38,10 @@ Button btn_ok;
         btn_ok=findViewById(R.id.btn_ok);
         Bundle bundle = getIntent().getExtras();
         String text_request = bundle.getString("reqst_type");
+        id= bundle.getString("id");
         reqst_type.setText("Request Type:"+text_request);
-        status.setText("Status:");
+
+        getStatusDetails(id,text_request);
         back();
         setTitle();
         btn_ok.setOnClickListener(new View.OnClickListener() {
@@ -51,5 +64,21 @@ Button btn_ok;
     {
         TextView title= (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.status_detail));
+    }
+
+    private void getStatusDetails(String id,String type)
+    {
+        Singleton.getInstance().getApi().getPreRequestUpdate(id,type).enqueue(new Callback<PreReqUpdateResMeta>() {
+            @Override
+            public void onResponse(Call<PreReqUpdateResMeta> call, Response<PreReqUpdateResMeta> response) {
+                PreReqUpdateModel model=response.body().getResponse().get(0);
+                status.setText("Status:"+model.getStatus());
+            }
+
+            @Override
+            public void onFailure(Call<PreReqUpdateResMeta> call, Throwable t) {
+
+            }
+        });
     }
 }

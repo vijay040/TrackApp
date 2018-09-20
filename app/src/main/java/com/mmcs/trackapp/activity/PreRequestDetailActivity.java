@@ -60,6 +60,7 @@ Button ok;
                 String type = adapter.list.get(position);
                 Intent intent = new Intent(PreRequestDetailActivity.this,PreRequestStatusActivity.class);
                 intent.putExtra("reqst_type", type);
+                intent.putExtra("id",prerequestmodel.getId());
                 startActivity(intent);
             }
         });

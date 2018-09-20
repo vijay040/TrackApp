@@ -8,6 +8,7 @@ import com.mmcs.trackapp.model.LoginResMeta;
 import com.mmcs.trackapp.model.MeetingModel;
 import com.mmcs.trackapp.model.MessageResMeta;
 import com.mmcs.trackapp.model.PortResMeta;
+import com.mmcs.trackapp.model.PreReqUpdateResMeta;
 import com.mmcs.trackapp.model.PreRequestResMeta;
 import com.mmcs.trackapp.model.ReportResMeta;
 import com.mmcs.trackapp.model.RequestTypeModel;
@@ -248,6 +249,11 @@ public interface RetrofitApi {
     Call<PreRequestResMeta> postAcceptRejectExpense(@Field("user_id") String user_id, @Field("id") String id, @Field("manager_status") String manager_status
 
     );
+
+
+    @FormUrlEncoded
+    @POST("pre_request_type_update_api.php")
+    Call<PreReqUpdateResMeta> getPreRequestUpdate(@Field("id") String id, @Field("request_type") String request_type);
 
 
 }

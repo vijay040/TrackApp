@@ -110,7 +110,6 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void postStatus(String status)

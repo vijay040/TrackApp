@@ -12,11 +12,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.ExpResListMeta;
 import com.mmcs.trackapp.model.PreReqUpdateModel;
@@ -35,6 +37,7 @@ Button btn_ok;
 String id;
 ProgressBar progress;
 EditText edt_message;
+ImageView image_uploaded;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -45,13 +48,13 @@ EditText edt_message;
         status=findViewById(R.id.status);
         progress = findViewById(R.id.progressbar);
         edt_message=findViewById(R.id.edt_message);
+        image_uploaded=findViewById(R.id.image_uploaded);
         progress.setVisibility(View.VISIBLE);
         btn_ok=findViewById(R.id.btn_ok);
         Bundle bundle = getIntent().getExtras();
         String text_request = bundle.getString("reqst_type");
         id= bundle.getString("id");
         reqst_type.setText("Request Type:"+text_request);
-
         getStatusDetails(id,text_request);
         back();
         setTitle();
@@ -83,6 +86,7 @@ EditText edt_message;
             @Override
             public void onResponse(Call<PreReqUpdateResMeta> call, Response<PreReqUpdateResMeta> response) {
                 PreReqUpdateModel model=response.body().getResponse().get(0);
+                Glide.with(PreRequestStatusActivity.this).load(model.getImage()).placeholder(R.drawable.no_image).into(image_uploaded);
                 if (model.getStatus().equals("")){
                     edt_message.setVisibility(View.VISIBLE);
                     edt_message.setText(model.getMessage());

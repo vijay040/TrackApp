@@ -103,6 +103,8 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
     TextView image_path, edRequestTypes;
     final int MY_PERMISSIONS_REQUEST_WRITE = 103;
     String createddate;
+    Calendar calendar;
+    int DD, MM, YY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,9 +127,20 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         if (imgUrl != null && !imgUrl.equalsIgnoreCase(""))
             Picasso.get().load(imgUrl).into(imageView);
         sh = new Shprefrences(this);
-        DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
+       /* DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
         final String createddate = df.format(Calendar.getInstance().getTime());
-        getDate.setText(getString(R.string.expense_created_on) + createddate);
+        Log.e("createddate***",createddate);
+
+        getDate.setText(getString(R.string.expense_created_on) + createddate);*/
+
+        calendar = Calendar.getInstance();
+        DD = calendar.get(Calendar.DAY_OF_MONTH);
+        MM = calendar.get(Calendar.MONTH);
+        YY = calendar.get(Calendar.YEAR);
+        if ((MM + 1) < 10)
+            getDate.setText(String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+        else
+            getDate.setText(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE);
@@ -142,6 +155,12 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 showRequests();
             }
         });
+        getDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(NewExpenseActivity.this,"Can't Change Date",Toast.LENGTH_LONG).show();
+            }
+        });
         back();
         setTitle();
         submit.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +171,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                 String currenc = currency.getText().toString();
                 String expensetype = edRequestTypes.getText().toString();
                 String cmnt = comments.getText().toString();
+                String date=getDate.getText().toString();
 
                 Log.e("***************", "imageImagePath " + imageImagePath);
                 if (selectmeeting.equals("")) {
@@ -171,7 +191,7 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
                     return;
                 } else {
                     progress.setVisibility(View.VISIBLE);
-                    postExpanse(amnt, createddate, cmnt, imageImagePath);
+                    postExpanse(amnt, date, cmnt, imageImagePath);
                 }
             }
         });

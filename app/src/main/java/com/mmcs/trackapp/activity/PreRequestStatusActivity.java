@@ -87,14 +87,13 @@ ImageView image_uploaded;
             public void onResponse(Call<PreReqUpdateResMeta> call, Response<PreReqUpdateResMeta> response) {
                 PreReqUpdateModel model=response.body().getResponse().get(0);
                 Glide.with(PreRequestStatusActivity.this).load(model.getImage()).placeholder(R.drawable.no_image).into(image_uploaded);
-                if (model.getStatus().equals("")){
-                    edt_message.setVisibility(View.VISIBLE);
-                    edt_message.setText(model.getMessage());
+                if (model.getMessage().equals("")){
+                    edt_message.setVisibility(View.GONE);
                 }
                 else{
                     status.setText("Status:"+model.getStatus());
-                    edt_message.setVisibility(View.GONE);
-
+                    edt_message.setVisibility(View.VISIBLE);
+                    edt_message.setText(model.getMessage());
 
                 }
 

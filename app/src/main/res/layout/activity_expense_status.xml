@@ -15,7 +15,6 @@
         android:visibility="gone"
         />
 
-
     <ImageView
         android:id="@+id/image_uploaded"
         android:layout_width="match_parent"
@@ -24,6 +23,15 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
         android:src="@drawable/ic_receipt" />
+    <ScrollView
+        android:layout_below="@+id/image_uploaded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical">
 
     <TextView
         android:id="@+id/txt_data"
@@ -32,33 +40,46 @@
         android:layout_below="@+id/image_uploaded"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:editable="false"
         android:gravity="center"
         android:textColor="@color/text_color"
         android:textSize="@dimen/_13sdp" />
 
+
     <EditText
         android:id="@+id/edt_message"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_alignStart="@+id/txt_data"
         android:layout_below="@+id/txt_data"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
         android:background="@drawable/commentbck"
         android:gravity="top"
-        android:hint="Your Message"
+        android:editable="false"
+        android:hint=""
+        android:visibility="gone"
         android:paddingLeft="@dimen/_10sdp"
         android:textColor="#000"
         android:textColorHint="#000" />
-
+    <EditText
+        android:id="@+id/edt_your_msg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_alignStart="@+id/txt_data"
+        android:layout_below="@+id/edt_message"
+        android:background="@drawable/commentbck"
+        android:gravity="top"
+        android:layout_margin="@dimen/_5sdp"
+        android:hint="Enter Your Message"
+        android:paddingLeft="@dimen/_10sdp"
+        android:textColor="#000"
+        android:textColorHint="#000" />
     <Spinner
         android:id="@+id/spnStatusType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_message"
+        android:layout_below="@+id/edt_your_msg"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/_10sdp"
@@ -66,17 +87,20 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:entries="@array/array_logintypes" />
 
+
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/spnStatusType"
-        android:layout_centerInParent="true"
+      android:layout_gravity="center"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/btn"
         android:text="@string/Submit"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:textColor="@color/white_color"
         android:textSize="@dimen/_15sdp" />
-
+    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

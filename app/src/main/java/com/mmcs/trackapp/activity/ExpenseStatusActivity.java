@@ -35,7 +35,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
     ImageView image_uploaded;
     ExpenseModel expensemodel;
     Button btn_submit;
-    EditText edt_message;
+    EditText edt_message,edt_your_msg;
     ProgressBar progress;
 
     @Override
@@ -49,14 +49,21 @@ public class ExpenseStatusActivity extends AppCompatActivity {
         image_uploaded = findViewById(R.id.image_uploaded);
         edt_message = findViewById(R.id.edt_message);
         btn_submit = findViewById(R.id.btn_submit);
+        edt_your_msg=findViewById(R.id.edt_your_msg);
         progress = findViewById(R.id.progress);
         String type[] = {"Got It", "Not Required Yet"};
         spnStatusType.setAdapter(new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item, type));
         expensemodel = (ExpenseModel) getIntent().getSerializableExtra(getString(R.string.expense_model));
         back();
         setTitle();
-        txt_data.setText(expensemodel.getUpdate_comment());
-        Glide.with(this).load(expensemodel.getUpdate_image()).into(image_uploaded);
+        txt_data.setText("Status: "+expensemodel.getStatus());
+        if(expensemodel.getUpdate_comment().equals("")){
+            edt_message.setVisibility(View.GONE);
+        }else {
+            edt_message.setVisibility(View.VISIBLE);
+            edt_message.setText(expensemodel.getUpdate_comment());
+        }
+        Glide.with(this).load(expensemodel.getUpdate_image()).placeholder(R.drawable.no_image).into(image_uploaded);
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +73,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
                 }
 
                 String text = spnStatusType.getSelectedItem().toString();
-                String msg = edt_message.getText().toString();
+                String msg = edt_your_msg.getText().toString();
                 if (text.equals("")) {
                     Toast.makeText(ExpenseStatusActivity.this, "Select Your Choice", Toast.LENGTH_SHORT).show();
                     return;

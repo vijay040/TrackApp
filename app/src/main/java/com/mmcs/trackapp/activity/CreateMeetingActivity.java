@@ -109,7 +109,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    edtAddress.setText("NOIDA SECTOR 63");
+                    edtAddress.setText(customerAddress);
                     edtAddress.setEnabled(false);
                 } else {
                     edtAddress.getText().clear();
@@ -372,6 +372,7 @@ private String purposeId;
 
     ArrayList<CustomerModel> listCustomer;
     CustomerPopupAdaptor customerPopupAdaptor;
+    String customerAddress;
 
     private void showCustomerPopup() {
        /* PurposeModel m=new PurposeModel();
@@ -404,6 +405,7 @@ private String purposeId;
                 CustomerModel obj = (CustomerModel) listPurpose.getAdapter().getItem(position);
                 edtCustomer.setText(obj.getCustomer_name());
                 customerid = obj.getId();
+                customerAddress=obj.getAddress();
                 alertDialog.dismiss();
             }
         });

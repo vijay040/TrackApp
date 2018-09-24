@@ -96,7 +96,6 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
     AlertDialog alertDialog;
     ArrayList<LoginModel> userList = new ArrayList<>();
     UsersPopupAdaptor usersPopupAdaptor;
-    private int popupId = 0;
 
     String userId;
 
@@ -122,7 +121,7 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
         dialogBuilder.setView(dialogView);
         alertDialog = dialogBuilder.create();
         alertDialog.show();
-        popupId = 1;
+
         listPurpose.setAdapter(usersPopupAdaptor);
 
         listPurpose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -194,6 +193,22 @@ public class SendMessageActivity extends AppCompatActivity implements SearchView
 
     @Override
     public boolean onQueryTextChange(String s) {
+        s = s.toLowerCase();
+
+                ArrayList<LoginModel> newlist = new ArrayList<>();
+                for (LoginModel list : userList) {
+
+                    {
+                        String name=list.getUser_name().toLowerCase();
+
+                        if(name.contains(s)) {
+                            newlist.add(list);
+                        }
+                    }
+                }
+        usersPopupAdaptor.filter(newlist);
+
+
         return false;
     }
 }

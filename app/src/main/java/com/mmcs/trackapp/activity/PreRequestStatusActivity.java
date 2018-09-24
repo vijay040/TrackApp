@@ -24,6 +24,7 @@ import com.mmcs.trackapp.model.ExpResListMeta;
 import com.mmcs.trackapp.model.PreReqUpdateModel;
 import com.mmcs.trackapp.model.PreReqUpdateResMeta;
 import com.mmcs.trackapp.util.Singleton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -87,6 +88,8 @@ ImageView image_uploaded;
             public void onResponse(Call<PreReqUpdateResMeta> call, Response<PreReqUpdateResMeta> response) {
                 PreReqUpdateModel model=response.body().getResponse().get(0);
                 Glide.with(PreRequestStatusActivity.this).load(model.getImage()).placeholder(R.drawable.no_image).into(image_uploaded);
+               // Picasso.get().load(model.getImage()).placeholder(R.drawable.no_image).resize(100,100).into(image_uploaded);
+
                 if (model.getMessage().equals("")){
                     edt_message.setVisibility(View.GONE);
                 }

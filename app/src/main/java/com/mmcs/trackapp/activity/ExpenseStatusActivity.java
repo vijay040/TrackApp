@@ -67,14 +67,15 @@ public class ExpenseStatusActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String text = spnStatusType.getSelectedItem().toString();
+                String msg = edt_your_msg.getText().toString();
                 if (!expensemodel.getStatus().equalsIgnoreCase("PROCESSED")) {
+
                     Toast.makeText(ExpenseStatusActivity.this, "Expense not approved by your reporting manager yet!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                String text = spnStatusType.getSelectedItem().toString();
-                String msg = edt_your_msg.getText().toString();
-                if (text.equals("")) {
+                else if (text.equals("")) {
                     Toast.makeText(ExpenseStatusActivity.this, "Select Your Choice", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (msg.equals("")) {

@@ -33,6 +33,8 @@
     <string name="Meetingdetails">Meeting details</string>
     <string name="Descreption">Descreption</string>
     <string name="Purpose">Purpose</string>
+    <string name="payterm">PayTerm</string>
+    <string name="place">Place</string>
     <string name="Client">Client</string>
     <string name="ContactPerson">Contact Person</string>
     <string name="Agenda">Agenda</string>
@@ -83,6 +85,7 @@
     <string name="Create">Create</string>
     <string name="name">Name</string>
     <string name="Email">Email</string>
+    <string name="city">City</string>
     <string name="CompanyName">Company Name</string>
     <string name="Mobile">Mobile</string>
     <string name="TaxDetail">Tax Detail</string>
@@ -108,7 +111,9 @@
     <string name="SelectCustomer">Select Customer</string>
     <string name="FeedbackComment">Feedback/Comment</string>
     <string name="Pin">Pin</string>
+    <string name="customer_company">Customer Company</string>
     <string name="Country">Country</string>
+    <string name="location">Location</string>
     <string name="SelectMeeting">Select Meeting</string>
     <string name="SelectExpenseType">Select Expense Types </string>
     <string name="Currency">Currency</string>
@@ -170,7 +175,13 @@
     <string name="enter_agenda">Enter Agenda</string>
     <string name="enter_contact_person">Enter Contact Person</string>
     <string name="enter_address">Enter Address</string>
+    <string name="enter_place">Enter Place</string>
+    <string name="enter_city">Enter City</string>
     <string name="select_customer">Select Customer</string>
+    <string name="select_company">Select Company</string>
+    <string name="select_payterm">Select PayTerm</string>
+    <string name="select_country">Select Country</string>
+    <string name="select_location">Select Location</string>
     <string name="search_here">Search Here</string>
     <string name="successfully_posted">Successfully posted</string>
     <string name="description">Description: </string>
@@ -197,8 +208,10 @@
     <string name="enter_valid_email">Enter Valid Email</string>
     <string name="enter_valid_phone_no.">Enter Valid Phone No.</string>
     <string name="enter_pin">Enter Pin</string>
-    <string name="enter_company">Enter Company</string>
-    <string name="enter_country">Enter Country</string>
+    <string name="enter_customer_company">Enter Customer Company</string>
+    <string name="enter_company">Select Company</string>
+    <string name="enter_country">Select Country</string>
+    <string name="enter_location">Select Location</string>
     <string name="enter_tax_details">Enter Tax Details</string>
     <string name="data_submited_successfully">Data submited successfully!</string>
     <string name="selected_created_meetings">Selected Created Meetings</string>

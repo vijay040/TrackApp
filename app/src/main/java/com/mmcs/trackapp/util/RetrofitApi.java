@@ -20,6 +20,10 @@ import com.mmcs.trackapp.model.ResMetaMeeting;
 import com.mmcs.trackapp.model.ResMetaReqTypes;
 import com.mmcs.trackapp.model.ResMetaUsers;
 import com.mmcs.trackapp.model.ResponseMeta;
+import com.mmcs.trackapp.model.RestMetaCompany;
+import com.mmcs.trackapp.model.RestMetaCountry;
+import com.mmcs.trackapp.model.RestMetaLocation;
+import com.mmcs.trackapp.model.RestMetaPayTerm;
 import com.mmcs.trackapp.model.UploadImageResMeta;
 import com.mmcs.trackapp.model.VQuotationResMeta;
 
@@ -46,6 +50,22 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("purpose.php")
     Call<ResponseMeta> getPurposeList(@Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("pay_term_get.php")
+    Call<RestMetaPayTerm> getPayTermList(@Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("company_get_api.php")
+    Call<RestMetaCompany> getCompanyList(@Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("country_get_api.php")
+    Call<RestMetaCountry> getCountryList(@Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("location_get_api.php")
+    Call<RestMetaLocation> getLocationList(@Field("user_id") String user_id);
 
     @FormUrlEncoded
     @POST("fetch_matchDeatils.php")
@@ -119,10 +139,8 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("customer_post_api.php?request=savecustomer_data")
     Call<ResMetaMeeting> addNewCustomer(@Field("user_id") String user_id, @Field("customer_name") String customer_name,
-                                        @Field("address") String address, @Field("email") String email, @Field("phone") String phone, @Field("pin'") String pin,
-                                        @Field("customer_company") String customer_company, @Field("country") String country, @Field("tax_details") String details, @Field("admin_id") String admin_id
-
-    );
+                                        @Field("address") String address,@Field("place") String place,@Field("city") String city ,@Field("email") String email, @Field("phone") String phone, @Field("pin") String pin,@Field("customer_company") String customer_company,
+                                        @Field("company_id") String company_id, @Field("country_id") String country_id,@Field("location_id") String location_id,@Field("pay_term_id") String pay_term_id ,@Field("tax_details") String details, @Field("admin_id") String admin_id);
 
     @FormUrlEncoded
     @POST("attendance_post_api.php?request=saveattendance_data")

@@ -53,6 +53,9 @@ public class AttandanceActivity extends AppCompatActivity {
     Shprefrences sh;
     ProgressBar progress;
     TextView txtLocation, texDate;
+    Calendar calendar;
+    int DD, MM, YY;
+    String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,18 @@ public class AttandanceActivity extends AppCompatActivity {
         });
         back();
         setTitle();
+        calendar = Calendar.getInstance();
+        DD = calendar.get(Calendar.DAY_OF_MONTH);
+        MM = calendar.get(Calendar.MONTH);
+        YY = calendar.get(Calendar.YEAR);
+        if ((MM + 1) < 10) {
+            date = (String.valueOf(YY) + "-0" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+        }
+        else{
+             date=(String.valueOf(YY) + "-" + String.valueOf(MM + 1) + "-" + String.valueOf(DD));
+        }
+
+
     }
 
     AppLocationService appLocationService;
@@ -171,7 +186,7 @@ public class AttandanceActivity extends AppCompatActivity {
             signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signout));
             textViewsignin.setText(getString(R.string.SIGNOUT));
         }
-        Singleton.getInstance().getApi().postAttendance(model.getId(), currentLocation, createddate, status).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().postAttendance(model.getId(), currentLocation, createddate, status,date).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
             }

@@ -55,6 +55,8 @@ public class FeedbackListAdaptor extends BaseAdapter {
 
         TextView txtDate = view.findViewById(R.id.txtFeedback);
         txtDate.setText(list.get(i).getFeedback());
+        TextView txt_Customer_Name=view.findViewById(R.id.txt_Customer_Name);
+        txt_Customer_Name.setText(context.getString(R.string.Customer_Name)+list.get(i).getCustomer_id());
 
         ImageView img = view.findViewById(R.id.img);
         if(list.get(i).getImage().equalsIgnoreCase(""))

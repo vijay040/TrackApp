@@ -1,17 +1,23 @@
 package com.mmcs.trackapp.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.RequestTypesStrAdaptor;
@@ -97,26 +103,75 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         approve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postStatus(getString(R.string.accept));
-                finish();
+               AlertDialog.Builder alertDialog = new AlertDialog.Builder(ExpenseAppDetailActivity.this);
+                alertDialog.setTitle("Confirm Approve...");
+                alertDialog.setMessage("Are you sure you want to Approve it?");
+                alertDialog.setIcon(R.drawable.ic_expense_app);
+                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        postStatus(getString(R.string.accept),"");
+                        finish();
+                    }
+                });
+                alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alertDialogAndroid = alertDialog.create();
+                alertDialogAndroid.show();
+                Button buttonPositive = alertDialogAndroid.getButton(DialogInterface.BUTTON_POSITIVE);
+                buttonPositive.setTextColor(ContextCompat.getColor(ExpenseAppDetailActivity.this, R.color.them_color));
+                Button buttonNegative = alertDialogAndroid.getButton(DialogInterface.BUTTON_NEGATIVE);
+                buttonNegative.setTextColor(ContextCompat.getColor(ExpenseAppDetailActivity.this, R.color.them_color));
             }
         });
 
         reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postStatus(getString(R.string.reject));
-                finish();
+                LayoutInflater layoutInflaterAndroid = LayoutInflater.from(ExpenseAppDetailActivity.this);
+                View mView = layoutInflaterAndroid.inflate(R.layout.activity_rejection_reason, null);
+                AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(ExpenseAppDetailActivity.this);
+                alertDialogBuilderUserInput.setView(mView);
+                final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.edt_message);
+                alertDialogBuilderUserInput
+                        .setCancelable(false)
+                        .setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                                String message=userInputDialogEditText.getText().toString();
+                                if (message.equals("")){
+                                    Toast.makeText(ExpenseAppDetailActivity.this,"Enter Something..", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    postStatus(getString(R.string.reject),message);
+                                    finish();
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogBox, int id) {
+                                        dialogBox.cancel();
+                                    }
+                                });
+
+                AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+                alertDialogAndroid.show();
+                Button buttonPositive = alertDialogAndroid.getButton(DialogInterface.BUTTON_POSITIVE);
+                buttonPositive.setTextColor(ContextCompat.getColor(ExpenseAppDetailActivity.this, R.color.them_color));
+                Button buttonNegative = alertDialogAndroid.getButton(DialogInterface.BUTTON_NEGATIVE);
+                buttonNegative.setTextColor(ContextCompat.getColor(ExpenseAppDetailActivity.this, R.color.them_color));
             }
         });
 
     }
 
-    private void postStatus(String status)
+    private void postStatus(String status,String msg)
     {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().postAcceptRejectExpense(model.getId(),expenseApprovalListModel
-                .getId(),status).enqueue(new Callback<PreRequestResMeta>() {
+                .getId(),status,msg).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
 

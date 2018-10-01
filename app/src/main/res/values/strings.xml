@@ -61,6 +61,7 @@
     <string name="Submit">Submit</string>
     <string name="CreatedOn">Created On</string>
     <string name="CustomerName">Customer Name</string>
+    <string name="Customer_Name">Customer Name:</string>
     <string name="Amount">Amount</string>
     <string name="IDR2000">IDR2000</string>
     <string name="RequestType">Request Type</string>

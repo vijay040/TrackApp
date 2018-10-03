@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
+import com.mmcs.trackapp.model.ExpenseModel;
 import com.mmcs.trackapp.model.PreRequestModel;
 
 import java.util.ArrayList;
@@ -29,6 +30,11 @@ public class PreRequestAdaptor extends BaseAdapter {
         if(list!=null)
         return list.size();
         else return 0;
+    }
+    public void filter(ArrayList<PreRequestModel> newList) {
+        list = new ArrayList<>();
+        list.addAll(newList);
+        notifyDataSetChanged();
     }
 
     @Override

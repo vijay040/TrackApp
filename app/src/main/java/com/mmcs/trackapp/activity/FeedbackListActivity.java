@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
@@ -32,12 +33,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeedbackListActivity extends AppCompatActivity {
+public class FeedbackListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     ArrayList<PreRequestModel> list;
     ListView listView;
     ProgressBar progress;
     RelativeLayout txtAdd;
     Shprefrences sh;
+    ArrayList<FeedbackModel> feedbackModels;
+    FeedbackListAdaptor feedbackListAdaptor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class FeedbackListActivity extends AppCompatActivity {
         progress = findViewById(R.id.progress);
         txtAdd = findViewById(R.id.txtAdd);
         progress.setVisibility(View.VISIBLE);
+        SearchView editTextName=(SearchView) findViewById(R.id.edt);
+        editTextName.setQueryHint(getString(R.string.search_here));
+        editTextName.setOnQueryTextListener(this);
         //getSupportActionBar().setTitle("Pre-Requests");
         sh = new Shprefrences(this);
         back();
@@ -102,9 +108,9 @@ public class FeedbackListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<FeedbackResMeta> call, Response<FeedbackResMeta> response) {
                 if (response.body() != null) {
-                    ArrayList<FeedbackModel> list=response.body().getResponse();
-                    FeedbackListAdaptor adaptor=new FeedbackListAdaptor(FeedbackListActivity.this,list);
-                    listView.setAdapter(adaptor);
+                    feedbackModels=response.body().getResponse();
+                    feedbackListAdaptor=new FeedbackListAdaptor(FeedbackListActivity.this,feedbackModels);
+                    listView.setAdapter(feedbackListAdaptor);
                     listView.setEmptyView(findViewById(R.id.imz_nodata));
                     progress.setVisibility(View.GONE);
                 }
@@ -117,5 +123,28 @@ public class FeedbackListActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s=s.toLowerCase();
+        ArrayList<FeedbackModel> newlist=new ArrayList<>();
+        for(FeedbackModel filterlist:feedbackModels)
+        {
+
+            String cust_name =filterlist.getCustomer_id().toLowerCase();
+            String text_feedback =filterlist.getFeedback().toLowerCase();
+            String created_on =filterlist.getCreated_on().toLowerCase();
+
+            if(cust_name.contains(s)||text_feedback.contains(s)|| created_on.contains(s)) {
+                newlist.add(filterlist);
+            }
+        }
+        feedbackListAdaptor.filter(newlist);
+        return true;
+    }
 }
 

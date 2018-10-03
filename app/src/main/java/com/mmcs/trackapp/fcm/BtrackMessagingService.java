@@ -47,6 +47,7 @@ public class BtrackMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "Message getTag " + remoteMessage.getNotification().getTag());
             Log.e(TAG, "Message getBodyLocalizationArgs " + remoteMessage.getNotification().getBodyLocalizationArgs());
             Log.e(TAG, "Message getTitle " + remoteMessage.getNotification().getTitle());
+
         }
 
         for (Map.Entry<String, String> entry : remoteMessage.getData().entrySet()) {

@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.CompanyAdaptar;
 import com.mmcs.trackapp.adaptor.CountryAdaptar;
@@ -57,9 +58,10 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 public class NewCustomerActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks,SearchView.OnQueryTextListener {
-    EditText customername,email,edt_place,edt_city,edt_customer_company,phone,pin,edt_payterm,companyname,country,edt_location,taxdetails;
+        GoogleApiClient.ConnectionCallbacks, SearchView.OnQueryTextListener {
+    EditText customername, email, edt_place, edt_city, edt_customer_company, phone, pin, edt_payterm, companyname, country, edt_location, taxdetails;
     Button submit;
     TextView save;
     private AutoCompleteTextView address;
@@ -71,28 +73,29 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
     ProgressBar progress;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        sh=new Shprefrences(this);
+        sh = new Shprefrences(this);
         setContentView(R.layout.activity_new_customer);
-        customername=(EditText)findViewById(R.id.edt_name);
-        address=(AutoCompleteTextView)findViewById(R.id.edt_address);
-        email=(EditText)findViewById(R.id.edt_email);
-        phone=(EditText)findViewById(R.id.edt_phone);
-        pin=findViewById(R.id.edt_pin);
-        edt_place=findViewById(R.id.edt_place);
-        edt_city=findViewById(R.id.edt_city);
-        edt_payterm=findViewById(R.id.edt_payterm);
-        companyname=findViewById(R.id.edt_company);
+        customername = (EditText) findViewById(R.id.edt_name);
+        address = (AutoCompleteTextView) findViewById(R.id.edt_address);
+        email = (EditText) findViewById(R.id.edt_email);
+        phone = (EditText) findViewById(R.id.edt_phone);
+        pin = findViewById(R.id.edt_pin);
+        edt_place = findViewById(R.id.edt_place);
+        edt_city = findViewById(R.id.edt_city);
+        edt_payterm = findViewById(R.id.edt_payterm);
+        companyname = findViewById(R.id.edt_company);
         progress = findViewById(R.id.progress);
-        country=findViewById(R.id.edt_country);
-        edt_location=findViewById(R.id.edt_location);
-        taxdetails=findViewById(R.id.edt_taxdetails);
-        edt_customer_company=findViewById(R.id.edt_customer_company);
-        submit=findViewById(R.id.btnSubmit);
+        country = findViewById(R.id.edt_country);
+        edt_location = findViewById(R.id.edt_location);
+        taxdetails = findViewById(R.id.edt_taxdetails);
+        edt_customer_company = findViewById(R.id.edt_customer_company);
+        submit = findViewById(R.id.btnSubmit);
         back();
         setTitle();
         getPayTermList();
@@ -115,78 +118,63 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                String custmrname=customername.getText().toString();
-                String add=address.getText().toString();
-                String em=email.getText().toString();
-                String phn=phone.getText().toString();
-                String Pin=pin.getText().toString();
-                String Company=companyname.getText().toString();
-                String Country=country.getText().toString();
-                String Tax=taxdetails.getText().toString();
-                String payterm=edt_payterm.getText().toString();
-                String location=edt_location.getText().toString();
-                String place=edt_place.getText().toString();
-                String city=edt_city.getText().toString();
-                String customer_company=edt_customer_company.getText().toString();
-                if(custmrname.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_customer_name),Toast.LENGTH_SHORT).show();
-                }
-                else if(add.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_address),Toast.LENGTH_SHORT).show();
+                String custmrname = customername.getText().toString();
+                String add = address.getText().toString();
+                String em = email.getText().toString();
+                String phn = phone.getText().toString();
+                String Pin = pin.getText().toString();
+                String Company = companyname.getText().toString();
+                String Country = country.getText().toString();
+                String Tax = taxdetails.getText().toString();
+                String payterm = edt_payterm.getText().toString();
+                String location = edt_location.getText().toString();
+                String place = edt_place.getText().toString();
+                String city = edt_city.getText().toString();
+                String customer_company = edt_customer_company.getText().toString();
+                if (custmrname.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_customer_name), Toast.LENGTH_SHORT).show();
+                } else if (add.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_address), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(place.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_place),Toast.LENGTH_SHORT).show();
+                } else if (place.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_place), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(city.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_city),Toast.LENGTH_SHORT).show();
+                } else if (city.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_city), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(em.equals("")) {
+                } else if (em.equals("")) {
 
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_valid_email),Toast.LENGTH_SHORT).show();
-                 return;
-                }
-                else if(Pin.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_pin),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_valid_email), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(customer_company.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_customer_company),Toast.LENGTH_SHORT).show();
+                } else if (Pin.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_pin), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(payterm.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.select_payterm),Toast.LENGTH_SHORT).show();
+                } else if (customer_company.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_customer_company), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(phn.trim().isEmpty()||phone.getText().toString().length()<10||phn.length()>12){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_valid_phone_no_),Toast.LENGTH_SHORT).show();
-                  return;
-                }
-                else if(Tax.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_tax_details),Toast.LENGTH_SHORT).show();
+                } else if (payterm.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.select_payterm), Toast.LENGTH_SHORT).show();
                     return;
-                }
-
-                else if(Company.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_company),Toast.LENGTH_SHORT).show();
+                } else if (phn.trim().isEmpty() || phone.getText().toString().length() < 10 || phn.length() > 12) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_valid_phone_no_), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(Country.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_country),Toast.LENGTH_SHORT).show();
+                } else if (Tax.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_tax_details), Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(location.equals("")){
-                    Toast.makeText(NewCustomerActivity.this,getString(R.string.enter_location),Toast.LENGTH_SHORT).show();
+                } else if (Company.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_company), Toast.LENGTH_SHORT).show();
                     return;
-                }
-
-                else {
+                } else if (Country.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_country), Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (location.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, getString(R.string.enter_location), Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
                     progress.setVisibility(View.VISIBLE);
                     LoginModel model = sh.getLoginModel(getString(R.string.login_model));
 
-                    postNewCustomer(custmrname,add,em,phn,Pin,customer_company,Tax,place,city);
+                    postNewCustomer(custmrname, add, em, phn, Pin, customer_company, Tax, place, city);
                 }
             }
         });
@@ -215,6 +203,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
             }
         });
     }
+
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
@@ -228,6 +217,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
             Log.i(TAG, "Fetching details for ID: " + item.placeId);
         }
     };
+
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
             = new ResultCallback<PlaceBuffer>() {
         @Override
@@ -243,11 +233,13 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
             Toast.makeText(NewCustomerActivity.this, place.getAddress(), Toast.LENGTH_SHORT).show();
         }
     };
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         Log.i(TAG, "Google Places API connected.");
     }
+
     private void back() {
         RelativeLayout drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
         drawerIcon.setOnClickListener(new View.OnClickListener() {
@@ -257,6 +249,7 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
             }
         });
     }
+
     @Override
     public void onConnectionSuspended(int i) {
         mPlaceArrayAdapter.setGoogleApiClient(null);
@@ -275,10 +268,9 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                 Toast.LENGTH_LONG).show();
     }
 
-    public void postNewCustomer(String customerName,String address,String email,String phhone,String pin,String customer_company,String taxdetails,String place,String city )
-    {
+    public void postNewCustomer(String customerName, String address, String email, String phhone, String pin, String customer_company, String taxdetails, String place, String city) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
-        Singleton.getInstance().getApi().addNewCustomer(model.getId(),customerName,address,place,city,email,phhone,pin,customer_company,companyId,countryId,loactionId,paytermId,taxdetails,model.getAdmin_id()).enqueue(new Callback<ResMetaMeeting>() {
+        Singleton.getInstance().getApi().addNewCustomer(model.getId(), customerName, address, place, city, email, phhone, pin, customer_company, companyId, countryId, loactionId, paytermId, taxdetails, model.getAdmin_id()).enqueue(new Callback<ResMetaMeeting>() {
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
                 progress.setVisibility(View.GONE);
@@ -293,16 +285,18 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
             }
         });
     }
-    private void setTitle()
-    {
-        TextView title= (TextView) findViewById(R.id.title);
+
+    private void setTitle() {
+        TextView title = (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.add_customer));
     }
+
     AlertDialog alertDialog;
     ArrayList<PayTermModel> paytermList = new ArrayList<>();
     PayTermAdapter payTermAdapter;
     private int popupId = 0;
     String paytermId;
+
     private void showPayTermPopup() {
 
         payTermAdapter = new PayTermAdapter(NewCustomerActivity.this, paytermList);
@@ -328,16 +322,18 @@ public class NewCustomerActivity extends AppCompatActivity implements GoogleApiC
                                     int position, long id) {
                 PayTermModel obj = (PayTermModel) listPayterm.getAdapter().getItem(position);
                 edt_payterm.setText(obj.getPay_term_descrp());
-                paytermId=obj.getId();
+                paytermId = obj.getId();
                 alertDialog.dismiss();
             }
         });
 
     }
+
     ArrayList<CompanyModel> listCompany;
     CompanyAdaptar companyAdaptar;
 
-String companyId;
+    String companyId;
+
     private void showCompanyPopup() {
 
         companyAdaptar = new CompanyAdaptar(NewCustomerActivity.this, listCompany);
@@ -375,6 +371,7 @@ String companyId;
     ArrayList<CountryModel> listCountry;
     CountryAdaptar countryAdaptar;
     String countryId;
+
     private void showCountryPopup() {
 
         countryAdaptar = new CountryAdaptar(NewCustomerActivity.this, listCountry);
@@ -401,15 +398,17 @@ String companyId;
                                     int position, long id) {
                 CountryModel obj = (CountryModel) listCountry.getAdapter().getItem(position);
                 country.setText(obj.getCountry());
-                countryId=obj.getId();
+                countryId = obj.getId();
                 alertDialog.dismiss();
             }
         });
 
     }
+
     ArrayList<LocationModel> listLocation;
     LocationAdapter locationAdapter;
     String loactionId;
+
     private void showLocationPopup() {
 
         locationAdapter = new LocationAdapter(NewCustomerActivity.this, listLocation);
@@ -436,7 +435,7 @@ String companyId;
                                     int position, long id) {
                 LocationModel obj = (LocationModel) listLocation.getAdapter().getItem(position);
                 edt_location.setText(obj.getLocation());
-                loactionId=obj.getId();
+                loactionId = obj.getId();
                 alertDialog.dismiss();
             }
         });
@@ -458,6 +457,7 @@ String companyId;
             }
         });
     }
+
     public void getCompanyList() {
         Singleton.getInstance().getApi().getCompanyList("").enqueue(new Callback<RestMetaCompany>() {
             @Override
@@ -474,6 +474,7 @@ String companyId;
             }
         });
     }
+
     public void getCountryList() {
         Singleton.getInstance().getApi().getCountryList("").enqueue(new Callback<RestMetaCountry>() {
             @Override
@@ -489,6 +490,7 @@ String companyId;
             }
         });
     }
+
     public void getLocationList() {
         Singleton.getInstance().getApi().getLocationList("").enqueue(new Callback<RestMetaLocation>() {
             @Override
@@ -505,7 +507,6 @@ String companyId;
             }
         });
     }
-
 
 
     @Override

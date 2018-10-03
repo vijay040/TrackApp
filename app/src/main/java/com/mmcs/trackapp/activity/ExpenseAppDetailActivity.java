@@ -58,8 +58,8 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         back();
         //getSupportActionBar().setTitle("Request");
         list_requesttype=findViewById(R.id.list_requesttype);
-       // RequestTypesStrAdaptor adaptor =new RequestTypesStrAdaptor(ExpenseAppDetailActivity.this,expenseApprovalListModel.getRequest_type());
-      //  list_requesttype.setAdapter(adaptor);
+       //RequestTypesStrAdaptor adaptor =new RequestTypesStrAdaptor(ExpenseAppDetailActivity.this,expenseApprovalListModel.getRequest_type());
+      // list_requesttype.setAdapter(adaptor);
         txtdescreption.setText(getString(R.string.description)+expenseApprovalListModel.getComment());
         txtdate.setText(getString(R.string.date)+expenseApprovalListModel.getCreated_on());
         txtadvance.setText(getString(R.string.advance)+expenseApprovalListModel.getAmount());

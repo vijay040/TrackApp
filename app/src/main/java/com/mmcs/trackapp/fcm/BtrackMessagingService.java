@@ -63,9 +63,10 @@ public class BtrackMessagingService extends FirebaseMessagingService {
                 Log.d("Type", a.getString(i));
             }
         }catch (Exception e){}
-Log.e("str****************",""+str);
+        Log.e("str****************",""+str);
         intent = new Intent(this, DrawerActivity.class);
-
+        if( remoteMessage.getNotification().getTitle().contains("Messaged"))
+            intent = new Intent(this, MessageActivity.class);
         /* if (remoteMessage.getNotification().getTag().equalsIgnoreCase("meeting"))
                 intent = new Intent(this, ReminderdetailActivity.class);
             else if (params.get("type").equalsIgnoreCase("message"))

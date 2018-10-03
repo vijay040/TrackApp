@@ -9,7 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Singleton {
 private static String baseUrL="";
-private static String devURL="http://intellisysglobal.com/web/api/";//fetch_post_expense.php
+    private static String devURL = "http://dagmarffs.info/api/";
+//private static String devURL="http://intellisysglobal.com/web/api/";//fetch_post_expense.php
 
 
     private RetrofitApi api;

@@ -32,6 +32,11 @@ public class FeedbackListAdaptor extends BaseAdapter {
         return list.size();
         else return 0;
     }
+    public void filter(ArrayList<FeedbackModel> newList) {
+        list = new ArrayList<>();
+        list.addAll(newList);
+        notifyDataSetChanged();
+    }
 
     @Override
     public Object getItem(int i) {

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.mmcs.trackapp.R;
@@ -28,12 +29,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PreRequestActivity extends AppCompatActivity {
+public class PreRequestActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     ArrayList<PreRequestModel> list;
     ListView listView;
     ProgressBar progress;
     RelativeLayout txtAdd;
     Shprefrences sh;
+    PreRequestAdaptor preRequestAdaptor;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -43,6 +45,9 @@ public class PreRequestActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         progress = findViewById(R.id.progress);
         txtAdd = findViewById(R.id.txtAdd);
+        SearchView editTextName=(SearchView) findViewById(R.id.edt);
+        editTextName.setQueryHint(getString(R.string.search_here));
+        editTextName.setOnQueryTextListener(this);
         progress.setVisibility(View.VISIBLE);
         //getSupportActionBar().setTitle("Pre-Requests");
         sh=new Shprefrences(this);
@@ -87,8 +92,8 @@ public class PreRequestActivity extends AppCompatActivity {
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
                 if(response.body()!=null) {
                     list = response.body().getResponse();
-                    PreRequestAdaptor adaptor = new PreRequestAdaptor(PreRequestActivity.this, list);
-                    listView.setAdapter(adaptor);
+                    preRequestAdaptor = new PreRequestAdaptor(PreRequestActivity.this, list);
+                    listView.setAdapter(preRequestAdaptor);
                     listView.setEmptyView(findViewById(R.id.imz_nodata));
                     progress.setVisibility(View.GONE);
                 }
@@ -106,5 +111,29 @@ public class PreRequestActivity extends AppCompatActivity {
         TextView title= (TextView) findViewById(R.id.title);
         title.setText(getString(R.string.pre_requests));
     }
-                }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s=s.toLowerCase();
+        ArrayList<PreRequestModel> newlist=new ArrayList<>();
+        for(PreRequestModel filterlist:list)
+        {
+            String des=filterlist.getComment().toLowerCase();
+            String cust_name =filterlist.getCustomer_name().toLowerCase();
+            String address =filterlist.getAddress().toLowerCase();
+            String adv =filterlist.getAdvance().toLowerCase();
+            String date =filterlist.getDate().toLowerCase();
+            if(des.contains(s)||cust_name.contains(s)||address.contains(s)|| adv.contains(s)|| date.contains(s)) {
+                newlist.add(filterlist);
+            }
+        }
+        preRequestAdaptor.filter(newlist);
+        return true;
+    }
+}
 

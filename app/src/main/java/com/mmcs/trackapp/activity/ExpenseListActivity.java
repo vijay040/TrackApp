@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +28,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ExpenseListActivity extends AppCompatActivity {
+public class ExpenseListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
     ListView listExpenseView;
     ProgressBar progressBar;
     RelativeLayout txtAdd;
+    ArrayList<ExpenseModel> expenseModels=new ArrayList();
     Shprefrences sh;
+    ExpenseListAdaptor expenseListAdaptor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -40,9 +43,11 @@ public class ExpenseListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expense_list);
         listExpenseView=findViewById(R.id.listExpenseView);
         progressBar=findViewById(R.id.progress);
+        SearchView editTextName=(SearchView) findViewById(R.id.edt);
+        editTextName.setQueryHint(getString(R.string.search_here));
+        editTextName.setOnQueryTextListener(this);
         //getSupportActionBar().setTitle("Expenses");
         txtAdd=findViewById(R.id.txtAdd);
-
         sh=new Shprefrences(this);
         back();
         setTitle();
@@ -88,9 +93,9 @@ public class ExpenseListActivity extends AppCompatActivity {
 
                 if(response.body()==null)
                     return;
-                ArrayList<ExpenseModel> model=response.body().getResponse();
-                ExpenseListAdaptor adaptor=new ExpenseListAdaptor(ExpenseListActivity.this,model);
-                listExpenseView.setAdapter(adaptor);
+                expenseModels=response.body().getResponse();
+                expenseListAdaptor=new ExpenseListAdaptor(ExpenseListActivity.this,expenseModels);
+                listExpenseView.setAdapter(expenseListAdaptor);
                 listExpenseView.setEmptyView(findViewById(R.id.imz_nodata));
                 progressBar.setVisibility(View.GONE);
             }
@@ -106,4 +111,28 @@ public class ExpenseListActivity extends AppCompatActivity {
         title.setText(getString(R.string.expense_list));
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        s=s.toLowerCase();
+        ArrayList<ExpenseModel> newlist=new ArrayList<>();
+        for(ExpenseModel filterlist:expenseModels)
+        {
+            String des=filterlist.getDescreption().toLowerCase();
+            String cust_name =filterlist.getCustomer_name().toLowerCase();
+            String address =filterlist.getAddress().toLowerCase();
+            String created_on =filterlist.getCreated_on().toLowerCase();
+            String adv =filterlist.getAmount().toLowerCase();
+            String date =filterlist.getDate().toLowerCase();
+            if(des.contains(s)||cust_name.contains(s)||address.contains(s)|| created_on.contains(s)|| adv.contains(s)|| date.contains(s)) {
+                newlist.add(filterlist);
+            }
+        }
+        expenseListAdaptor.filter(newlist);
+        return true;
+    }
 }

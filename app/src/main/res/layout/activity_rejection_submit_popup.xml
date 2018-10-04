@@ -16,7 +16,6 @@
 
         android:textColor="@color/white_color"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/edt_message"
         android:layout_width="match_parent"

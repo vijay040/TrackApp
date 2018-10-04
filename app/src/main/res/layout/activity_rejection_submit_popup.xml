@@ -16,6 +16,21 @@
 
         android:textColor="@color/white_color"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+    <EditText
+        android:id="@+id/edt_rejection_message"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_below="@+id/edtCustomer"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/commentbck"
+        android:gravity="top"
+        android:editable="false"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="#000"
+        android:textColorHint="#000" />
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/edt_message"
         android:layout_width="match_parent"
@@ -26,6 +41,8 @@
         android:textCursorDrawable="@drawable/drable_edittext"
         app:met_baseColor="@color/text_color"
         app:met_bottomTextSize="@dimen/_1sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
         app:met_floatingLabel="highlight"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColorHint="@color/white_color"

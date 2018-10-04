@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,15 +17,18 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.ExpenseModel;
@@ -94,6 +98,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtAdvance.setText(getString(R.string.advance) + expensemodel.getAmount());
         txtExpenseType.setText(getString(R.string.expense_type) + expensemodel.getExpense_type());
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
+        image_uploaded.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseDetailActivity.this));
         if(expensemodel.getStatus().equals("REJECT"))
         {
             re_submit.setVisibility(View.VISIBLE);
@@ -105,6 +110,43 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(ExpenseDetailActivity.this, ExpenseStatusActivity.class);
                 intent.putExtra(getString(R.string.expense_model), expensemodel);
                 startActivity(intent);
+            }
+        });
+        re_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflaterAndroid = LayoutInflater.from(ExpenseDetailActivity.this);
+                View mView = layoutInflaterAndroid.inflate(R.layout.activity_rejection_submit_popup, null);
+                AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(ExpenseDetailActivity.this);
+                alertDialogBuilderUserInput.setView(mView);
+                final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.edt_message);
+                final EditText edt_rejection_message = (EditText) mView.findViewById(R.id.edt_rejection_message);
+                edt_rejection_message.setText("Due To High Cost this Expense is Rejected.please Give reasonable price ");
+                alertDialogBuilderUserInput
+                        .setCancelable(false)
+                        .setPositiveButton("Re-Submit", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                                String message=userInputDialogEditText.getText().toString();
+                                if (message.equals("")){
+                                    Toast.makeText(ExpenseDetailActivity.this,"Enter Something..", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                   Toast.makeText(ExpenseDetailActivity.this,"Successfully Sent",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogBox, int id) {
+                                        dialogBox.cancel();
+                                    }
+                                });
+                AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+                alertDialogAndroid.show();
+                Button buttonPositive = alertDialogAndroid.getButton(DialogInterface.BUTTON_POSITIVE);
+                buttonPositive.setTextColor(ContextCompat.getColor(ExpenseDetailActivity.this, R.color.them_color));
+                Button buttonNegative = alertDialogAndroid.getButton(DialogInterface.BUTTON_NEGATIVE);
+                buttonNegative.setTextColor(ContextCompat.getColor(ExpenseDetailActivity.this, R.color.them_color));
             }
         });
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());

@@ -23,6 +23,16 @@ public class ExpenseApprovalListModel implements Serializable {
 
     private String amount;
 
+    public String getExchange_rate() {
+        return exchange_rate;
+    }
+
+    public void setExchange_rate(String exchange_rate) {
+        this.exchange_rate = exchange_rate;
+    }
+
+    private String exchange_rate;
+
     private String expense_type_id;
 
     private String user_id;
@@ -31,6 +41,34 @@ public class ExpenseApprovalListModel implements Serializable {
 
     private String comment;
     private String customer_name;
+    private String description;
+    private String date;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    private String time;
 
     public String getCustomer_name() {
         return customer_name;

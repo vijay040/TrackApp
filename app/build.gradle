@@ -45,6 +45,7 @@ dependencies {
     implementation group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.0.1'
     implementation 'com.intuit.sdp:sdp-android:1.0.5'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.bogdwellers:pinchtozoom:0.1'
     compile 'com.google.code.gson:gson:2.6.1'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'

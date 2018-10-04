@@ -34,7 +34,7 @@ import retrofit2.Response;
 
 public class ExpenseAppDetailActivity extends AppCompatActivity {
     ExpenseApprovalListModel expenseApprovalListModel;
-    TextView txtdescreption,txtdate,txtadvance,txtstatus,txtaddress,txtcustomername,txt_expensetype;
+    TextView txtdescreption,txtdate,txtadvance,txtstatus,txtaddress,txtcustomername,txt_expensetype,txt_meeting_date,txt_meeting_time,txt_expense_date,txt_exchange_rate;
     ListView list_requesttype;
     Button reject,approve;
     Shprefrences sh;
@@ -52,6 +52,10 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         txtaddress=findViewById(R.id.txtaddress);
         txtcustomername=findViewById(R.id.txtcustomername);
         txt_expensetype=findViewById(R.id.txt_expensetype);
+        txt_meeting_date=findViewById(R.id.txt_meeting_date);
+        txt_meeting_time=findViewById(R.id.txt_meeting_time);
+        txt_expense_date=findViewById(R.id.txt_expense_date);
+        txt_exchange_rate=findViewById(R.id.txt_exchange_rate);
         reject=findViewById(R.id.reject);
         approve=findViewById(R.id.approve);
         setTitle();
@@ -66,6 +70,10 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         txtaddress.setText(getString(R.string.address)+expenseApprovalListModel.getAddress());
         txtcustomername.setText(getString(R.string.customer_name)+expenseApprovalListModel.getCustomer_name());
         txt_expensetype.setText(getString(R.string.expense_type)+expenseApprovalListModel.getExpense_type_id());
+        txt_meeting_date.setText(getString(R.string.meeting_date)+expenseApprovalListModel.getDate());
+        txt_meeting_time.setText(getString(R.string.meeting_time)+expenseApprovalListModel.getTime());
+        txt_expense_date.setText(getString(R.string.expense_date)+expenseApprovalListModel.getCreated_on());
+        txt_exchange_rate.setText(getString(R.string.exch_rate)+expenseApprovalListModel.getExchange_rate());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
@@ -99,6 +107,26 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_expensetype.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_meeting_date.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_meeting_date.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_meeting_time.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_meeting_time.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_expense_date.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_expense_date.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_exchange_rate.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 14, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_exchange_rate.setText(sb);
 
         approve.setOnClickListener(new View.OnClickListener() {
             @Override

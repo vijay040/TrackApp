@@ -132,6 +132,9 @@
     <string name="expensedetails">Expense Details</string>
     <string name="quotation_details">Quotation Details</string>
     <string name="meetingdate">Meeting Date</string>
+    <string name="meeting_time">Meeting Time:</string>
+    <string name="expense_date">Expense Date:</string>
+    <string name="exch_rate">Exchange Rate:</string>
     <string name="expensetype">ExpenseType</string>
     <string name="edit">Edit</string>
     <string name="to">To:</string>

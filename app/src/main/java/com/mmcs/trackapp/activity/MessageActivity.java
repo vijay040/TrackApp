@@ -75,6 +75,8 @@ public class MessageActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().getMessages(model.getId()).enqueue(new Callback<MessageResMeta>() {
             @Override
             public void onResponse(Call<MessageResMeta> call, Response<MessageResMeta> response) {
+                if(response==null)
+                    return;
                 ArrayList<MessageModel> model=response.body().getResponse();
                 MessageAdapter adaptor=new MessageAdapter(MessageActivity.this,model);
                 listMessageView.setAdapter(adaptor);

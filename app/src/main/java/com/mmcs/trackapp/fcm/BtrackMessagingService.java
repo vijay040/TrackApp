@@ -47,6 +47,7 @@ public class BtrackMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "Message getTag " + remoteMessage.getNotification().getTag());
             Log.e(TAG, "Message getBodyLocalizationArgs " + remoteMessage.getNotification().getBodyLocalizationArgs());
             Log.e(TAG, "Message getTitle " + remoteMessage.getNotification().getTitle());
+
         }
 
         for (Map.Entry<String, String> entry : remoteMessage.getData().entrySet()) {
@@ -63,9 +64,10 @@ public class BtrackMessagingService extends FirebaseMessagingService {
                 Log.d("Type", a.getString(i));
             }
         }catch (Exception e){}
-Log.e("str****************",""+str);
+        Log.e("str****************",""+str);
         intent = new Intent(this, DrawerActivity.class);
-
+        if( remoteMessage.getNotification().getTitle().contains("Messaged"))
+            intent = new Intent(this, MessageActivity.class);
         /* if (remoteMessage.getNotification().getTag().equalsIgnoreCase("meeting"))
                 intent = new Intent(this, ReminderdetailActivity.class);
             else if (params.get("type").equalsIgnoreCase("message"))

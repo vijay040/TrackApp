@@ -48,6 +48,7 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/img"
             android:text="@string/Address"
+           android:ems="18"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_9sdp" />
 
@@ -71,10 +72,10 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_toRightOf="@id/txtDescreption"
             android:gravity="right"
-            android:paddingRight="@dimen/_10sdp"
+            android:paddingRight="@dimen/_20sdp"
             android:text="@string/Amount"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/_6sdp" />
+            android:textSize="@dimen/_8sdp" />
 
         <TextView
             android:id="@+id/txtAdvanceMoney"
@@ -90,6 +91,32 @@
             android:textColor="@color/text_hint_color"
             android:textSize="@dimen/_10sdp"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/txtDescreption"
+            android:gravity="right"
+            android:layout_below="@id/txtAdvanceMoney"
+            android:paddingRight="@dimen/_20sdp"
+            android:text="@string/Status"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_8sdp" />
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtstatus"
+            android:layout_marginLeft="@dimen/_100sdp"
+            android:layout_toRightOf="@id/img"
+            android:gravity="right"
+            android:paddingRight="@dimen/_10sdp"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
+
 
         <ImageView
             android:id="@+id/imz_down"
@@ -97,6 +124,7 @@
             android:layout_height="@dimen/_50sdp"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/txtCreatedOn"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="12dp"
             android:padding="@dimen/_15sdp"
             android:src="@drawable/ic_down" />

@@ -52,7 +52,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
-    TextView check_status,txtdescreption, txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
+    TextView check_status,re_submit,txtdescreption, txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
     ImageView image_uploaded;
 
     @Override
@@ -72,6 +72,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtAdvance = findViewById(R.id.txtAdvance);
         image_uploaded = findViewById(R.id.image_uploaded);
         txtEdit = findViewById(R.id.txtEdit);
+        re_submit=findViewById(R.id.re_submit);
         btn_close = findViewById(R.id.btn_close);
         check_status=findViewById(R.id.check_status);
         txtEdit.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +94,10 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtAdvance.setText(getString(R.string.advance) + expensemodel.getAmount());
         txtExpenseType.setText(getString(R.string.expense_type) + expensemodel.getExpense_type());
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
+        if(expensemodel.getStatus().equals("REJECT"))
+        {
+            re_submit.setVisibility(View.VISIBLE);
+        }
         check_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

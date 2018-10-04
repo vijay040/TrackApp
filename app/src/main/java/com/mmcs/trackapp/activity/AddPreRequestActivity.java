@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +53,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -152,6 +155,43 @@ public class AddPreRequestActivity extends AppCompatActivity implements GoogleAp
             @Override
             public void onClick(View view) {
                 submitPost();
+            }
+        });
+        edtAdvance.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                edtAdvance.removeTextChangedListener(this);
+
+                try {
+                    String givenstring = editable.toString();
+                    Long longval;
+                    if (givenstring.contains(",")) {
+                        givenstring = givenstring.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(givenstring);
+                    DecimalFormat formatter = new DecimalFormat("#,###,###");
+                    String formattedString = formatter.format(longval);
+                    edtAdvance.setText(formattedString);
+                    edtAdvance.setSelection(edtAdvance.getText().length());
+                    // to place the cursor at the end of text
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                edtAdvance.addTextChangedListener(this);
+
             }
         });
 

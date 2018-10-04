@@ -20,6 +20,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -75,6 +77,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -163,6 +166,45 @@ public class NewExpenseActivity extends AppCompatActivity implements SearchView.
         });
         back();
         setTitle();
+        amount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                amount.removeTextChangedListener(this);
+
+                try {
+                    String givenstring = editable.toString();
+                    Long longval;
+                    if (givenstring.contains(",")) {
+                        givenstring = givenstring.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(givenstring);
+                    DecimalFormat formatter = new DecimalFormat("#,###,###");
+                    String formattedString = formatter.format(longval);
+                    amount.setText(formattedString);
+                    amount.setSelection(amount.getText().length());
+                    // to place the cursor at the end of text
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                amount.addTextChangedListener(this);
+
+            }
+
+
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

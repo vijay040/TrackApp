@@ -33,7 +33,7 @@
             android:name=".activity.CreateMeetingActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.DrawerActivity" />
-        <activity android:name=".activity.MyScheduleActivity" />
+        <activity android:name=".activity.MyScheduleActivity"  />
         <activity android:name=".activity.ExpenseActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.AddCustomerActivity" />
@@ -44,7 +44,7 @@
         <activity android:name=".activity.PreRequestActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.ApprovalActivity" />
-        <activity android:name=".activity.MeetingDetailsActivity" android:noHistory="true" />
+        <activity android:name=".activity.MeetingDetailsActivity"  />
         <activity
             android:name=".activity.AddPreRequestActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />

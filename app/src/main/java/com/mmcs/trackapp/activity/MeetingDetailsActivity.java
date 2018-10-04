@@ -249,6 +249,7 @@ public class MeetingDetailsActivity extends AppCompatActivity {
             indate = (String) data.getExtras().get("DATE");
             intime = (String) data.getExtras().get("TIME");
             update();
+            finish();
         } else
             progressbar.setVisibility(View.GONE);
     }

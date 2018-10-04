@@ -95,6 +95,13 @@ public class MyScheduleActivity extends AppCompatActivity  implements SearchView
             }
         });
     }
+
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
+        getMeetingList();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();

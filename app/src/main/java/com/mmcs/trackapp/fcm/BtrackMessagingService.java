@@ -13,7 +13,9 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.activity.DrawerActivity;
+import com.mmcs.trackapp.activity.ExpenseListActivity;
 import com.mmcs.trackapp.activity.MessageActivity;
+import com.mmcs.trackapp.activity.PreRequestActivity;
 import com.mmcs.trackapp.activity.ReminderdetailActivity;
 
 import org.json.JSONArray;
@@ -68,6 +70,10 @@ public class BtrackMessagingService extends FirebaseMessagingService {
         intent = new Intent(this, DrawerActivity.class);
         if( remoteMessage.getNotification().getTitle().contains("Messaged"))
             intent = new Intent(this, MessageActivity.class);
+       else if( remoteMessage.getNotification().getTitle().contains("Expense"))
+            intent = new Intent(this, ExpenseListActivity.class);
+        else if( remoteMessage.getNotification().getTitle().contains("Pre-Request"))
+            intent = new Intent(this, PreRequestActivity.class);
         /* if (remoteMessage.getNotification().getTag().equalsIgnoreCase("meeting"))
                 intent = new Intent(this, ReminderdetailActivity.class);
             else if (params.get("type").equalsIgnoreCase("message"))

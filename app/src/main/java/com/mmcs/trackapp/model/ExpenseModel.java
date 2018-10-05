@@ -14,8 +14,16 @@ public class ExpenseModel implements Serializable{
 
     private String expense_type;
 
-    private String Date;
+    public String getRejection_message() {
+        return rejection_message;
+    }
 
+    public void setRejection_message(String rejection_message) {
+        this.rejection_message = rejection_message;
+    }
+
+    private String rejection_message;
+    private String Date;
     private String address;
 
     private String created_on;

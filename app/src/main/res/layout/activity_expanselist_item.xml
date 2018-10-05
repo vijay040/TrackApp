@@ -100,7 +100,7 @@
             android:layout_toRightOf="@id/txtDescreption"
             android:gravity="right"
             android:layout_below="@id/txtAdvanceMoney"
-            android:paddingRight="@dimen/_20sdp"
+            android:paddingRight="@dimen/_25sdp"
             android:text="@string/Status"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_8sdp" />

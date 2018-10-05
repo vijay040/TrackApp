@@ -9,11 +9,8 @@ public class PreRequestModel implements Serializable {
     private String approve;
 
     private String reject;
-
-    private ArrayList<String> request_type;
-
-    private String address;
-
+    private String meeting_date;
+    private String exchange_rate;
     private String description;
 
     private String pending;
@@ -27,6 +24,37 @@ public class PreRequestModel implements Serializable {
     private String advance;
 
     private String status;
+
+
+    private ArrayList<String> request_type;
+
+    private String address;
+    private String meeting_time;
+
+    public String getMeeting_time() {
+        return meeting_time;
+    }
+
+    public void setMeeting_time(String meeting_time) {
+        this.meeting_time = meeting_time;
+    }
+
+    public String getMeeting_date() {
+        return meeting_date;
+    }
+
+    public void setMeeting_date(String meeting_date) {
+        this.meeting_date = meeting_date;
+    }
+
+    public String getExchange_rate() {
+        return exchange_rate;
+    }
+
+    public void setExchange_rate(String exchange_rate) {
+        this.exchange_rate = exchange_rate;
+    }
+
 
     public String getStatus() {
         return status;

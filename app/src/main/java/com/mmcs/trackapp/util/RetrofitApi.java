@@ -182,7 +182,7 @@ public interface RetrofitApi {
 
     @Multipart
     @POST("feedback_post_api.php?request=savefeedback_data")
-    Call<PreRequestResMeta> postFeedback(@Part("user_id") RequestBody user_id, @Part("customer_id") RequestBody customer_id, @Part("feedback") RequestBody feedback, @Part("posted_on") RequestBody posted_on,  @Part("image\"; filename=\"profile.jpg") RequestBody image);
+    Call<PreRequestResMeta> postFeedback(@Part("user_id") RequestBody user_id, @Part("customer_id") RequestBody customer_id, @Part("feedback") RequestBody feedback, @Part("posted_on") RequestBody posted_on,  @Part("image\"; filename=\"profile.jpg") RequestBody image, @Part("smiley_status") RequestBody smiley_status);
 
 
 
@@ -267,6 +267,11 @@ public interface RetrofitApi {
     Call<PreRequestResMeta> postAcceptRejectExpense(@Field("user_id") String user_id, @Field("id") String id, @Field("manager_status") String manager_status,@Field("rejection_message") String rejection_message
 
     );
+    @FormUrlEncoded
+    @POST("expense_resubmit_post.php?request=resumit_msg")
+    Call<PreRequestResMeta> postReSubmit(@Field("user_id") String user_id, @Field("id") String id, @Field("user_msg") String user_msg );
+
+
 
 
     @FormUrlEncoded

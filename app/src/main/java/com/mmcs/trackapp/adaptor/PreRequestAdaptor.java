@@ -2,6 +2,7 @@ package com.mmcs.trackapp.adaptor;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +69,8 @@ public class PreRequestAdaptor extends BaseAdapter {
 
         TextView txtAdvanceMoney = view.findViewById(R.id.txtAdvanceMoney);
         txtAdvanceMoney.setText(list.get(i).getAdvance());
+        TextView txt_status=view.findViewById(R.id.txt_status);
+        txt_status.setText(list.get(i).getStatus());
 
         ImageView img = view.findViewById(R.id.img);
         if(list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
@@ -91,6 +94,30 @@ public class PreRequestAdaptor extends BaseAdapter {
                 case "PROCESSED":
 //Processed
                     img.setBackground(ContextCompat.getDrawable(context, R.drawable.star));
+                    break;
+            }
+        }
+        if(list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
+
+            switch (list.get(i).getStatus()) {
+                case "PENDING":
+//Pending
+                    txt_status.setTextColor(Color.parseColor("#FDD835"));
+                    break;
+
+                case "ACCEPT":
+//Approved
+                    txt_status.setTextColor(Color.parseColor("#00C853"));
+                    break;
+
+                case "REJECT":
+//Rejected
+                    txt_status.setTextColor(Color.parseColor("#D50000"));
+                    break;
+
+                case "PROCESSED":
+//Processed
+                    txt_status.setTextColor(Color.parseColor("#FDD835"));
                     break;
             }
         }

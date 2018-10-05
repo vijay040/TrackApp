@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -56,7 +58,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeedbackActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class FeedbackActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, View.OnClickListener {
     EditText edtCustomer, comment;
     Button submit;
     Shprefrences sh;
@@ -68,6 +70,9 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
     final int MY_PERMISSIONS_REQUEST_WRITE = 103;
+    LinearLayout layout_not_satisfied, layout_satisfied, layout_awesome;
+    Button btn_not_satisfied, btn_satisfied, btn_awesome;
+    private int smilyStatus = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +92,9 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         attachement = (Button) findViewById(R.id.btAttchment);
         imageView = (ImageView) findViewById(R.id.imageView);
         image_path = findViewById(R.id.image_path);
+        layout_not_satisfied = findViewById(R.id.layout_not_satisfied);
+        layout_satisfied = findViewById(R.id.layout_satisfied);
+        layout_awesome = findViewById(R.id.layout_awesome);
         if (imgUrl != null && !imgUrl.equalsIgnoreCase(""))
             Picasso.get().load(imgUrl).into(imageView);
         //getSupportActionBar().setTitle("Feedback");
@@ -94,6 +102,16 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         getCustomerList();
         back();
         setTitle();
+        layout_not_satisfied.setOnClickListener(this);
+        btn_not_satisfied = findViewById(R.id.btn_not_satisfied);
+        btn_satisfied = findViewById(R.id.btn_satisfied);
+        btn_awesome = findViewById(R.id.btn_awesome);
+
+        btn_not_satisfied.setOnClickListener(this);
+        btn_satisfied.setOnClickListener(this);
+        btn_awesome.setOnClickListener(this);
+
+
         attachement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,10 +133,13 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
                     Toast.makeText(FeedbackActivity.this, getString(R.string.select_customer), Toast.LENGTH_SHORT).show();
                 } else if (comm.equals("")) {
                     Toast.makeText(FeedbackActivity.this, getString(R.string.enter_your_comment), Toast.LENGTH_SHORT).show();
+                } else if (smilyStatus == 0) {
+                    Toast.makeText(FeedbackActivity.this, getString(R.string.choose_reaction), Toast.LENGTH_SHORT).show();
                 } else {
                     DateFormat df = new SimpleDateFormat(getString(R.string.date_formate));
                     final String createddate = df.format(Calendar.getInstance().getTime());
-                    postFeedback(customerid, comm, createddate, imageImagePath);
+                    postFeedback(customerid, comm, createddate, imageImagePath, String.valueOf(smilyStatus));
+
                 }
             }
         });
@@ -201,20 +222,21 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         return false;
     }
 
-    public void postFeedback(String customerId, String feedback, String posted_on, String fileUrl) {
+    public void postFeedback(String customerId, String feedback, String posted_on, String fileUrl, String smiley_status) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         RequestBody imgFile = null;
         File imagPh = new File(fileUrl);
-        Log.e("***********","*************"+imagPh.getAbsolutePath());
-        if (imagPh != null && (fileUrl!=null && !fileUrl.equalsIgnoreCase("")))
+        Log.e("***********", "*************" + imagPh.getAbsolutePath());
+        if (imagPh != null && (fileUrl != null && !fileUrl.equalsIgnoreCase("")))
             imgFile = RequestBody.create(MediaType.parse("image/*"), imagPh);
         RequestBody requestId = RequestBody.create(MediaType.parse("text/plain"), model.getId());
         RequestBody requestCustomerID = RequestBody.create(MediaType.parse("text/plain"), customerId);
         RequestBody requestFeedback = RequestBody.create(MediaType.parse("text/plain"), feedback);
+        RequestBody requestSmiley = RequestBody.create(MediaType.parse("text/plain"), smiley_status);
         RequestBody requestPostedOn = RequestBody.create(MediaType.parse("text/plain"), posted_on);
 
         progressBar.setVisibility(View.VISIBLE);
-        Singleton.getInstance().getApi().postFeedback(requestId, requestCustomerID, requestFeedback, requestPostedOn, imgFile).enqueue(new Callback<PreRequestResMeta>() {
+        Singleton.getInstance().getApi().postFeedback(requestId, requestCustomerID, requestFeedback, requestPostedOn, imgFile, requestSmiley).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
                 Toast.makeText(FeedbackActivity.this, getString(R.string.successfully_posted), Toast.LENGTH_SHORT).show();
@@ -280,8 +302,8 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                File file=new File(imageImagePath);
-                resize(file,"");
+                File file = new File(imageImagePath);
+                resize(file, "");
                 image_path.setText(imageImagePath);
                 Bitmap b = decodeUri(fileUri);
                 imageView.setImageBitmap(b);
@@ -295,8 +317,8 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
                 if (selectedImage != null) {
                     imageView.setImageURI(selectedImage);
                     imageImagePath = getPath(selectedImage);
-                    File file=new File(imageImagePath);
-                    resize(file,"");
+                    File file = new File(imageImagePath);
+                    resize(file, "");
                     image_path.setText(imageImagePath);
                 }
             }
@@ -359,6 +381,7 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
 
     BitmapFactory.Options bmOptions;
     Bitmap bitmap;
+
     public void resize(File file, String benchMark) {
         try {
             bmOptions = new BitmapFactory.Options();
@@ -392,6 +415,31 @@ public class FeedbackActivity extends AppCompatActivity implements SearchView.On
                 ) {
             Log.e("Exception", "Exception in resizing image");
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        switch (id) {
+            case R.id.btn_not_satisfied:
+                Toast.makeText(FeedbackActivity.this, "Hjksgdjkdsgfkg", Toast.LENGTH_SHORT).show();
+                layout_awesome.setBackgroundColor(ContextCompat.getColor(this, R.color.white_color));
+                layout_not_satisfied.setBackgroundColor(ContextCompat.getColor(this, R.color.them_color));
+                layout_satisfied.setBackgroundColor(ContextCompat.getColor(this, R.color.white_color));
+                break;
+            case R.id.btn_satisfied:
+                layout_awesome.setBackgroundColor(ContextCompat.getColor(this, R.color.white_color));
+                layout_not_satisfied.setBackgroundColor(ContextCompat.getColor(this, R.color.white_color));
+                layout_satisfied.setBackgroundColor(ContextCompat.getColor(this, R.color.them_color));
+                break;
+            case R.id.btn_awesome:
+                layout_awesome.setBackgroundColor(ContextCompat.getColor(this, R.color.white_color));
+                layout_not_satisfied.setBackgroundColor(getResources().getColor(R.color.white_color));
+                layout_satisfied.setBackgroundColor(getResources().getColor(R.color.white_color));
+                break;
+        }
+
     }
 }
 

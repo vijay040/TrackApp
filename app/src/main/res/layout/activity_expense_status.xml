@@ -77,15 +77,15 @@
         android:textColorHint="#000" />
     <Spinner
         android:id="@+id/spnStatusType"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_130sdp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edt_your_msg"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/_10sdp"
+               android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:entries="@array/array_logintypes" />
+        android:entries="@array/array_action" />
 
 
     <Button

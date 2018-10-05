@@ -31,7 +31,8 @@
     <string name="Expenses">Expenses</string>
     <string name="Pendings">Pendings</string>
     <string name="Meetingdetails">Meeting details</string>
-    <string name="Descreption">Descreption</string>
+    <string name="meeting">Meeting:</string>
+    <string name="Descreption">Description</string>
     <string name="Purpose">Purpose</string>
     <string name="payterm">PayTerm</string>
     <string name="place">Place</string>
@@ -134,6 +135,7 @@
     <string name="meetingdate">Meeting Date</string>
     <string name="meeting_time">Meeting Time:</string>
     <string name="expense_date">Expense Date:</string>
+    <string name="pre_rest_date">Pre-Request Date:</string>
     <string name="exch_rate">Exchange Rate:</string>
     <string name="expensetype">ExpenseType</string>
     <string name="edit">Edit</string>
@@ -226,6 +228,7 @@
     <string name="select_meeting">Select Meeting</string>
     <string name="enter_amount">Enter Amount</string>
     <string name="enter_your_comment">Enter Your Comment</string>
+    <string name="choose_reaction">Choose Any Feedback Smiley</string>
     <string name="accept">ACCEPT</string>
     <string name="reject">REJECT</string>
     <string name="status">Status:</string>
@@ -304,6 +307,12 @@
         <item>User</item>
         <item>Location Manager</item>
         <item>Admin</item>
+    </string-array>
+    <string-array name="array_action">
+        <item>Action</item>
+        <item>Got It</item>
+        <item>Not Required Yet</item>
+        <item>Cancel</item>
     </string-array>
 </resources>
 

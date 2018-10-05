@@ -32,10 +32,13 @@ import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.ExpenseModel;
+import com.mmcs.trackapp.model.LoginModel;
+import com.mmcs.trackapp.model.PreRequestResMeta;
 import com.mmcs.trackapp.model.ResMetaMeeting;
 import com.mmcs.trackapp.model.UploadImageModel;
 import com.mmcs.trackapp.model.UploadImageResMeta;
 import com.mmcs.trackapp.util.CircleTransform;
+import com.mmcs.trackapp.util.Shprefrences;
 import com.mmcs.trackapp.util.Singleton;
 import com.squareup.picasso.Picasso;
 
@@ -56,18 +59,19 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
-    TextView check_status,re_submit,txtdescreption, txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
+    TextView action,re_submit,txtMeeting,txtPurpose ,txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
     ImageView image_uploaded;
-
+    Shprefrences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+        sh=new Shprefrences(this);
         setContentView(R.layout.activity_expense_detail);
         expensemodel = (ExpenseModel) getIntent().getSerializableExtra(getString(R.string.expense_model));
 
-        txtdescreption = findViewById(R.id.txtdescreption);
+        txtMeeting = findViewById(R.id.txtMeeting);
         txtCreatedOn = findViewById(R.id.txtCreatedOn);
         txtAddress = findViewById(R.id.txtAddress);
         txtCustomerName = findViewById(R.id.txtCustomerName);
@@ -75,10 +79,11 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtExpenseType = findViewById(R.id.txtExpenseType);
         txtAdvance = findViewById(R.id.txtAdvance);
         image_uploaded = findViewById(R.id.image_uploaded);
+        txtPurpose=findViewById(R.id.txtPurpose);
         txtEdit = findViewById(R.id.txtEdit);
         re_submit=findViewById(R.id.re_submit);
         btn_close = findViewById(R.id.btn_close);
-        check_status=findViewById(R.id.check_status);
+        action=findViewById(R.id.action);
         txtEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,19 +96,24 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-        txtdescreption.setText(getString(R.string.description) + expensemodel.getDescreption());
+        txtMeeting.setText(getString(R.string.meeting) + expensemodel.getDescreption());
         txtCreatedOn.setText(getString(R.string.expense_created_on) + expensemodel.getCreated_on());
         txtCustomerName.setText(getString(R.string.customer_name) + expensemodel.getCustomer_name());
         txtAddress.setText(getString(R.string.address) + expensemodel.getAddress());
         txtAdvance.setText(getString(R.string.advance) + expensemodel.getAmount());
         txtExpenseType.setText(getString(R.string.expense_type) + expensemodel.getExpense_type());
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
+        txtPurpose.setText(getString(R.string.purpose) + expensemodel.getComment());
         image_uploaded.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseDetailActivity.this));
         if(expensemodel.getStatus().equals("REJECT"))
         {
             re_submit.setVisibility(View.VISIBLE);
+            action.setVisibility(View.GONE);
         }
-        check_status.setOnClickListener(new View.OnClickListener() {
+        else if (expensemodel.getStatus().equals("PENDING")){
+            action.setVisibility(View.GONE);
+        }
+        action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -121,7 +131,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 alertDialogBuilderUserInput.setView(mView);
                 final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.edt_message);
                 final EditText edt_rejection_message = (EditText) mView.findViewById(R.id.edt_rejection_message);
-                edt_rejection_message.setText("Due To High Cost this Expense is Rejected.please Give reasonable price ");
+                edt_rejection_message.setText(expensemodel.getRejection_message());
                 alertDialogBuilderUserInput
                         .setCancelable(false)
                         .setPositiveButton("Re-Submit", new DialogInterface.OnClickListener() {
@@ -131,8 +141,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                                     Toast.makeText(ExpenseDetailActivity.this,"Enter Something..", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                   Toast.makeText(ExpenseDetailActivity.this,"Successfully Sent",Toast.LENGTH_SHORT).show();
-                                }
+                                    postReSubmitStatus(message);
+                                   Toast.makeText(ExpenseDetailActivity.this,"Successfully Re-Submitted",Toast.LENGTH_SHORT).show();
+                            }
                             }
                         })
                         .setNegativeButton("Cancel",
@@ -149,7 +160,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 buttonNegative.setTextColor(ContextCompat.getColor(ExpenseDetailActivity.this, R.color.them_color));
             }
         });
-        SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
+        SpannableStringBuilder sb = new SpannableStringBuilder(txtMeeting.getText());
         Glide.with(this).load(expensemodel.getImage()).into(image_uploaded);
 
        // Picasso.get().load(expensemodel.getImage()).placeholder(R.drawable.ic_bill).resize(100,100).into(image_uploaded);
@@ -158,8 +169,8 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         // Span to make text bold
         //    final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
         // Set the text color for first 4 characters
-        sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        txtdescreption.setText(sb);
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtMeeting.setText(sb);
 
         sb = new SpannableStringBuilder(txtCreatedOn.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
@@ -191,6 +202,11 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtMeetingDate.setText(sb);
+
+        sb = new SpannableStringBuilder( txtPurpose.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtPurpose.setText(sb);
 
         back();
         setTitle();
@@ -391,6 +407,22 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 ) {
             Log.e("Exception", "Exception in resizing image");
         }
+    }
+    private void postReSubmitStatus(String msg)
+    {
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
+        Singleton.getInstance().getApi().postReSubmit(model.getId(),expensemodel
+                .getId(),msg).enqueue(new Callback<PreRequestResMeta>() {
+            @Override
+            public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<PreRequestResMeta> call, Throwable t) {
+
+            }
+        });
     }
 
 }

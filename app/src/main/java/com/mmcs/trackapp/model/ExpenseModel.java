@@ -30,6 +30,16 @@ public class ExpenseModel implements Serializable{
 
     private String customer_name;
 
+    public String getFinal_status() {
+        return final_status;
+    }
+
+    public void setFinal_status(String final_status) {
+        this.final_status = final_status;
+    }
+
+    private String final_status;
+
     private String image;
     private String comment;
     private String update_image;

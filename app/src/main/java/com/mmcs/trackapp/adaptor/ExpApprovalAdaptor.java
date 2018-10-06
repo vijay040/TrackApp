@@ -2,6 +2,7 @@ package com.mmcs.trackapp.adaptor;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,9 @@ public class ExpApprovalAdaptor extends BaseAdapter {
         TextView txtDate = view.findViewById(R.id.txtDate);
         txtDate.setText(list.get(i).getCreated_on());
 
+        final TextView txt_status = view.findViewById(R.id.txt_status);
+        txt_status.setText(list.get(i).getStatus());
+
         TextView txtCustomer = view.findViewById(R.id.txtCustomer);
         txtCustomer.setText(list.get(i).getCustomer_name());
 
@@ -63,6 +67,20 @@ public class ExpApprovalAdaptor extends BaseAdapter {
 
         TextView txtAdvanceMoney = view.findViewById(R.id.txtAdvanceMoney);
         txtAdvanceMoney.setText(list.get(i).getAmount());
+        if(list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
+
+            switch (list.get(i).getStatus()) {
+                case "PENDING":
+//Pending
+                    txt_status.setTextColor(Color.parseColor("#FDD835"));
+                    break;
+
+                case "RESUBMIT":
+//Processed
+                    txt_status.setTextColor(Color.parseColor("#EF6C00"));
+                    break;
+            }
+        }
 
 
 

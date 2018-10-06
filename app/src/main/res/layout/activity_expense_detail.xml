@@ -58,6 +58,16 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_13sdp"
                 android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txt_manager_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/manager_approval"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_10sdp"
+                 />
 
             <TextView
                 android:id="@+id/txtPurpose"

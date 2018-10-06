@@ -32,6 +32,7 @@
     <string name="Pendings">Pendings</string>
     <string name="Meetingdetails">Meeting details</string>
     <string name="meeting">Meeting:</string>
+    <string name="manager_approval">Manager Approval:</string>
     <string name="Descreption">Description</string>
     <string name="Purpose">Purpose</string>
     <string name="payterm">PayTerm</string>
@@ -275,6 +276,7 @@
     <string name="select_logintype">Select Login Type!</string>
     <string name="master_id">Master Id:</string>
     <string name="exchange_rate">Exchange Rate:</string>
+    <string name="resubmit_msg">Re-Submit Message:</string>
     <string name="margin_currency">Margin Currency:</string>
 
     <string name="audit_mster_id">Audit Master:</string>

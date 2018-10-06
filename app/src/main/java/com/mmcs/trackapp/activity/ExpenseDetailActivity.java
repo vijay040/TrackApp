@@ -59,7 +59,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
-    TextView action,re_submit,txtMeeting,txtPurpose ,txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
+    TextView action,re_submit,txtMeeting,txtPurpose ,txt_manager_status,txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
     ImageView image_uploaded;
     Shprefrences sh;
     @Override
@@ -79,6 +79,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtExpenseType = findViewById(R.id.txtExpenseType);
         txtAdvance = findViewById(R.id.txtAdvance);
         image_uploaded = findViewById(R.id.image_uploaded);
+        txt_manager_status=findViewById(R.id.txt_manager_status);
         txtPurpose=findViewById(R.id.txtPurpose);
         txtEdit = findViewById(R.id.txtEdit);
         re_submit=findViewById(R.id.re_submit);
@@ -104,13 +105,18 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtExpenseType.setText(getString(R.string.expense_type) + expensemodel.getExpense_type());
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
         txtPurpose.setText(getString(R.string.purpose) + expensemodel.getComment());
+        txt_manager_status.setText(getString(R.string.manager_approval) + expensemodel.getStatus());
         image_uploaded.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseDetailActivity.this));
-        if(expensemodel.getStatus().equals("REJECT"))
+        if(expensemodel.getStatus().equals("REJECT")||expensemodel.getStatus().equals("RESUBMIT"))
         {
             re_submit.setVisibility(View.VISIBLE);
             action.setVisibility(View.GONE);
         }
         else if (expensemodel.getStatus().equals("PENDING")){
+            action.setVisibility(View.GONE);
+        }
+        else if (expensemodel.getFinal_status().equals("PAID")||expensemodel.getFinal_status().equals("CANCEL")){
+            re_submit.setVisibility(View.GONE);
             action.setVisibility(View.GONE);
         }
         action.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +167,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             }
         });
         SpannableStringBuilder sb = new SpannableStringBuilder(txtMeeting.getText());
-        Glide.with(this).load(expensemodel.getImage()).into(image_uploaded);
+        Glide.with(this).load(expensemodel.getImage()).placeholder(R.drawable.no_image).into(image_uploaded);
 
        // Picasso.get().load(expensemodel.getImage()).placeholder(R.drawable.ic_bill).resize(100,100).into(image_uploaded);
         // Span to set text color to some RGB value
@@ -208,9 +214,12 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtPurpose.setText(sb);
 
+        sb = new SpannableStringBuilder( txt_manager_status.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 16, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_manager_status.setText(sb);
         back();
         setTitle();
-
 
     }
 

@@ -11,6 +11,16 @@ public class ExpenseApprovalListModel implements Serializable {
 
     private String status;
 
+    public String getResubmit_msg() {
+        return resubmit_msg;
+    }
+
+    public void setResubmit_msg(String resubmit_msg) {
+        this.resubmit_msg = resubmit_msg;
+    }
+
+    private String resubmit_msg;
+
     private String created_on;
 
     private String update_comment;
@@ -38,7 +48,6 @@ public class ExpenseApprovalListModel implements Serializable {
     private String user_id;
 
     private String meeting_id;
-
     private String comment;
     private String customer_name;
     private String description;

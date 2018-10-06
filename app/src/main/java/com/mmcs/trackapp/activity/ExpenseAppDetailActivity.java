@@ -34,7 +34,7 @@ import retrofit2.Response;
 
 public class ExpenseAppDetailActivity extends AppCompatActivity {
     ExpenseApprovalListModel expenseApprovalListModel;
-    TextView txtdescreption,txtdate,txtadvance,txtstatus,txtaddress,txtcustomername,txt_expensetype,txt_meeting_date,txt_meeting_time,txt_expense_date,txt_exchange_rate;
+    TextView txtdescreption,txtdate,txt_resubmit_msg,txtadvance,title_re_submit,txtaddress,txtcustomername,txt_expensetype,txt_meeting_date,txt_meeting_time,txt_expense_date,txt_exchange_rate;
     ListView list_requesttype;
     Button reject,approve;
     Shprefrences sh;
@@ -56,6 +56,8 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         txt_meeting_time=findViewById(R.id.txt_meeting_time);
         txt_expense_date=findViewById(R.id.txt_expense_date);
         txt_exchange_rate=findViewById(R.id.txt_exchange_rate);
+        title_re_submit=findViewById(R.id.title_re_submit);
+        txt_resubmit_msg=findViewById(R.id.txt_resubmit_msg);
         reject=findViewById(R.id.reject);
         approve=findViewById(R.id.approve);
         setTitle();
@@ -75,6 +77,14 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         txt_expense_date.setText(getString(R.string.expense_date)+expenseApprovalListModel.getCreated_on());
         txt_exchange_rate.setText(getString(R.string.exch_rate)+expenseApprovalListModel.getExchange_rate());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
+        if(expenseApprovalListModel.getResubmit_msg().equals("")){
+            title_re_submit.setVisibility(View.GONE);
+            txt_resubmit_msg.setVisibility(View.GONE);
+
+        }
+        else{
+            txt_resubmit_msg.setText(expenseApprovalListModel.getResubmit_msg());
+        }
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold

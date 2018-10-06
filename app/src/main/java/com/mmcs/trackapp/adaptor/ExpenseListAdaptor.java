@@ -78,7 +78,7 @@ public class ExpenseListAdaptor extends BaseAdapter {
         txtDate.setText(context.getString(R.string.meeting_date)+list.get(i).getDate ()+", "+list.get(i).getTime ());
 
         final TextView txt_status = view.findViewById(R.id.txt_status);
-        txt_status.setText(list.get(i).getStatus());
+        txt_status.setText(list.get(i).getFinal_status());
 
         final ImageView   hide=view.findViewById(R.id.imz_down);
         RelativeLayout    relativeLayout=view.findViewById(R.id.relativelayout);
@@ -109,9 +109,9 @@ public class ExpenseListAdaptor extends BaseAdapter {
                 }
             }
         });
-        if(list.get(i).getStatus() != null && !list.get(i).getStatus().equals("")) {
+        if(list.get(i).getFinal_status() != null && !list.get(i).getFinal_status().equals("")) {
 
-            switch (list.get(i).getStatus()) {
+            switch (list.get(i).getFinal_status()) {
                 case "PENDING":
 //Pending
                     txt_status.setTextColor(Color.parseColor("#FDD835"));

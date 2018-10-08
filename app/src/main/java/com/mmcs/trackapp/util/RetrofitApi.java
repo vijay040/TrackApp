@@ -263,6 +263,13 @@ public interface RetrofitApi {
 
 
     @FormUrlEncoded
+    @POST("manager_status_getapi.php")
+    Call<LoginResMeta> getManagerStatus(@Field("user_id") String user_id
+
+    );
+
+
+    @FormUrlEncoded
     @POST("expense_appr_post_api.php?request=setExpenseApproval")
     Call<PreRequestResMeta> postAcceptRejectExpense(@Field("user_id") String user_id, @Field("id") String id, @Field("manager_status") String manager_status,@Field("rejection_message") String rejection_message
 

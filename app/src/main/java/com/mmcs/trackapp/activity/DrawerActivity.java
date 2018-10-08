@@ -38,6 +38,7 @@ import com.mmcs.trackapp.fragment.FragmentHome;
 import com.mmcs.trackapp.model.HomeItemModel;
 import com.mmcs.trackapp.model.HomeItemResMeta;
 import com.mmcs.trackapp.model.LoginModel;
+import com.mmcs.trackapp.model.LoginResMeta;
 import com.mmcs.trackapp.model.PortResMeta;
 import com.mmcs.trackapp.model.PreRequestResMeta;
 import com.mmcs.trackapp.util.AppLocationService;
@@ -73,7 +74,7 @@ public class DrawerActivity extends AppCompatActivity {
     public static int TYPE_NOT_CONNECTED = 0;
     private Snackbar snackbar;
     RelativeLayout relativeLayout;
-    private boolean internetConnected=true;
+    private boolean internetConnected = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,15 +94,16 @@ public class DrawerActivity extends AppCompatActivity {
         sh = new Shprefrences(this);
         txtName = (TextView) findViewById(R.id.txtName);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
-        relativeLayout=findViewById(R.id.relativeLayout);
+        relativeLayout = findViewById(R.id.relativeLayout);
         txtDepartment = (TextView) findViewById(R.id.txtDepartment);
         imgProfile = findViewById(R.id.imgProfile);
+        getManagerStatus();
         model = sh.getLoginModel(getString(R.string.login_model));
         if (model.getImage() != null)
             Picasso.get().load(model.getImage()).transform(new CircleTransform()).placeholder(R.drawable.ic_userlogin).resize(100, 100).into(imgProfile);
         txtName.setText(model.getDisplay_name());
         setTitle();
-       // pushFragment(new FragmentHome());
+        // pushFragment(new FragmentHome());
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
         drawerIcon = (RelativeLayout) findViewById(R.id.drawerIcon);
@@ -217,6 +219,26 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
 
+    private void getManagerStatus() {
+
+        Singleton.getInstance().getApi().getManagerStatus("").enqueue(new Callback<LoginResMeta>() {
+            @Override
+            public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
+
+                model.setExpense_request_approval(response.body().getResponse().get(0).getExpense_request_approval());
+                model.setPre_request_approval(response.body().getResponse().get(0).getPre_request_approval());
+                sh.setLoginModel(getString(R.string.login_model), model);
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginResMeta> call, Throwable t) {
+
+            }
+        });
+    }
+
+
     public void getMenu() {
         Singleton.getInstance().getApi().getMenu("").enqueue(new Callback<HomeItemResMeta>() {
             @Override
@@ -224,11 +246,11 @@ public class DrawerActivity extends AppCompatActivity {
 
                 listHomeItems = response.body().getResponse();
                 //setMenuItemIcons();
-                HomeItemModel logout=new HomeItemModel();
+                HomeItemModel logout = new HomeItemModel();
                 logout.setTitle("Logout");
                 listHomeItems.add(logout);
                 SideBarAdaptor adaptor = new SideBarAdaptor(DrawerActivity.this, listHomeItems);
-                homeAdaptor= new HomeRecyclerAdaptor(DrawerActivity.this, listHomeItems);
+                homeAdaptor = new HomeRecyclerAdaptor(DrawerActivity.this, listHomeItems);
                 list.setAdapter(adaptor);
                 pushFragment(new FragmentHome());
             }
@@ -245,8 +267,9 @@ public class DrawerActivity extends AppCompatActivity {
         super.onPause();
         unregisterReceiver(broadcastReceiver);
     }
+
     /**
-     *  Method to register runtime broadcast receiver to show snackbar alert for internet connection..
+     * Method to register runtime broadcast receiver to show snackbar alert for internet connection..
      */
     private void registerInternetCheckReceiver() {
         IntentFilter internetFilter = new IntentFilter();
@@ -254,29 +277,32 @@ public class DrawerActivity extends AppCompatActivity {
         internetFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         registerReceiver(broadcastReceiver, internetFilter);
     }
+
     /**
-     *  Runtime Broadcast receiver inner class to capture internet connectivity events
+     * Runtime Broadcast receiver inner class to capture internet connectivity events
      */
     public BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String status = getConnectivityStatusString(context);
-            setSnackbarMessage(status,false);
+            setSnackbarMessage(status, false);
         }
     };
+
     public static int getConnectivityStatus(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (null != activeNetwork) {
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
                 return TYPE_WIFI;
 
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
                 return TYPE_MOBILE;
         }
         return TYPE_NOT_CONNECTED;
     }
+
     public static String getConnectivityStatusString(Context context) {
         int conn = getConnectivityStatus(context);
         String status = null;
@@ -289,12 +315,13 @@ public class DrawerActivity extends AppCompatActivity {
         }
         return status;
     }
-    private void setSnackbarMessage(String status,boolean showBar) {
-        String internetStatus="";
-        if(status.equalsIgnoreCase("Wifi enabled")||status.equalsIgnoreCase("Mobile data enabled")){
-            internetStatus="Internet Connected";
-        }else {
-            internetStatus="Check Internet Connection";
+
+    private void setSnackbarMessage(String status, boolean showBar) {
+        String internetStatus = "";
+        if (status.equalsIgnoreCase("Wifi enabled") || status.equalsIgnoreCase("Mobile data enabled")) {
+            internetStatus = "Internet Connected";
+        } else {
+            internetStatus = "Check Internet Connection";
         }
         snackbar = Snackbar
                 .make(relativeLayout, internetStatus, Snackbar.LENGTH_LONG)
@@ -309,19 +336,18 @@ public class DrawerActivity extends AppCompatActivity {
         View sbView = snackbar.getView();
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
-        if(internetStatus.equalsIgnoreCase("Check Internet Connection")){
-            if(internetConnected){
+        if (internetStatus.equalsIgnoreCase("Check Internet Connection")) {
+            if (internetConnected) {
                 snackbar.show();
-                internetConnected=false;
+                internetConnected = false;
             }
-        }else{
-            if(!internetConnected){
-                internetConnected=true;
+        } else {
+            if (!internetConnected) {
+                internetConnected = true;
                 snackbar.show();
             }
         }
     }
-
 
 
 }

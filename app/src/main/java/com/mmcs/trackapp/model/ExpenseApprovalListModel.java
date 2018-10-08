@@ -10,6 +10,15 @@ public class ExpenseApprovalListModel implements Serializable {
     private String currency_id;
 
     private String status;
+    private String user_name;
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
 
     public String getResubmit_msg() {
         return resubmit_msg;

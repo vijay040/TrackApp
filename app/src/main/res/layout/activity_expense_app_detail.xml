@@ -55,6 +55,16 @@
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/txt_requested_by"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+
+                android:text="@string/requested_by"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/txtadvance"
@@ -63,7 +73,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
 
-                android:text="@string/Advance"
+                android:text="@string/Amount"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_12sdp" />
 

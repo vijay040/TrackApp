@@ -21,6 +21,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -62,6 +64,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     TextView action,re_submit,txtMeeting,txtPurpose ,txt_manager_status,txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
     ImageView image_uploaded;
     Shprefrences sh;
+    Animation animBlink;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -70,7 +73,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         sh=new Shprefrences(this);
         setContentView(R.layout.activity_expense_detail);
         expensemodel = (ExpenseModel) getIntent().getSerializableExtra(getString(R.string.expense_model));
-
+        animBlink = AnimationUtils.loadAnimation(this, R.anim.blink);
         txtMeeting = findViewById(R.id.txtMeeting);
         txtCreatedOn = findViewById(R.id.txtCreatedOn);
         txtAddress = findViewById(R.id.txtAddress);
@@ -218,6 +221,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 16, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_manager_status.setText(sb);
+        txt_manager_status.startAnimation(animBlink);
         back();
         setTitle();
 

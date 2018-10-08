@@ -225,6 +225,7 @@ public class DrawerActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResMeta> call, Response<LoginResMeta> response) {
 
+
                 model.setExpense_request_approval(response.body().getResponse().get(0).getExpense_request_approval());
                 model.setPre_request_approval(response.body().getResponse().get(0).getPre_request_approval());
                 sh.setLoginModel(getString(R.string.login_model), model);

@@ -73,7 +73,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
 
-                android:text="@string/Amount"
+                android:text="@string/amount"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_12sdp" />
 

@@ -69,7 +69,7 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
       // list_requesttype.setAdapter(adaptor);
         txtdescreption.setText(getString(R.string.description)+expenseApprovalListModel.getComment());
         txtdate.setText(getString(R.string.date)+expenseApprovalListModel.getCreated_on());
-        txtadvance.setText(getString(R.string.Amount)+expenseApprovalListModel.getAmount());
+        txtadvance.setText(getString(R.string.amount)+expenseApprovalListModel.getAmount());
         txtaddress.setText(getString(R.string.address)+expenseApprovalListModel.getAddress());
         txtcustomername.setText(getString(R.string.customer_name)+expenseApprovalListModel.getCustomer_name());
         txt_expensetype.setText(getString(R.string.expense_type)+expenseApprovalListModel.getExpense_type_id());
@@ -87,6 +87,8 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         else{
             txt_resubmit_msg.setText(expenseApprovalListModel.getResubmit_msg());
         }
+
+
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold

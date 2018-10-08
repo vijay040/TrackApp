@@ -63,6 +63,9 @@ public class ExpenseStatusActivity extends AppCompatActivity {
             edt_message.setVisibility(View.VISIBLE);
             edt_message.setText(expensemodel.getUpdate_comment());
         }
+        if(expensemodel.getFinal_status().equals("ACCEPT")){
+            edt_message.setVisibility(View.VISIBLE);
+        }
         Glide.with(this).load(expensemodel.getUpdate_image()).placeholder(R.drawable.no_image).into(image_uploaded);
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override

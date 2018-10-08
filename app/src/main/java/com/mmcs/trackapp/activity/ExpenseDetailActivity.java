@@ -107,7 +107,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtCreatedOn.setText(getString(R.string.expense_created_on) + expensemodel.getCreated_on());
         txtCustomerName.setText(getString(R.string.customer_name) + expensemodel.getCustomer_name());
         txtAddress.setText(getString(R.string.address) + expensemodel.getAddress());
-        txtAdvance.setText(getString(R.string.advance) + expensemodel.getAmount());
+        txtAdvance.setText(getString(R.string.amount) + expensemodel.getAmount());
         txtExpenseType.setText(getString(R.string.expense_type) + expensemodel.getExpense_type());
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
         txtPurpose.setText(getString(R.string.purpose) + expensemodel.getComment());
@@ -315,7 +315,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
         sb = new SpannableStringBuilder( txtPurpose.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
-        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtPurpose.setText(sb);
 
        /* sb = new SpannableStringBuilder( txt_manager_status.getText());

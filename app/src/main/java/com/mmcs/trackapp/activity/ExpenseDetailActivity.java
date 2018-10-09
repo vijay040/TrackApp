@@ -13,9 +13,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,6 +51,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.DecimalFormat;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -62,7 +65,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
-    TextView action,re_submit,txtMeeting,txtPurpose ,txt_status,txt_manager_status,txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
+    TextView action,re_submit,txtMeeting,txtPurpose ,txt_rejection_message,txt_rejection_title,txt_status,txt_manager_status,txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
     ImageView image_uploaded;
     Shprefrences sh;
     Animation animBlink;
@@ -79,10 +82,12 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtMeeting = findViewById(R.id.txtMeeting);
         txtCreatedOn = findViewById(R.id.txtCreatedOn);
         txtAddress = findViewById(R.id.txtAddress);
+        txt_rejection_message=findViewById(R.id.txt_rejection_message);
         txtCustomerName = findViewById(R.id.txtCustomerName);
         txtMeetingDate = findViewById(R.id.txtMeetingDate);
         txtExpenseType = findViewById(R.id.txtExpenseType);
         txtAdvance = findViewById(R.id.txtAdvance);
+        txt_rejection_title=findViewById(R.id.txt_rejection_title);
         image_uploaded = findViewById(R.id.image_uploaded);
         txt_manager_status=findViewById(R.id.txt_manager_status);
         txtPurpose=findViewById(R.id.txtPurpose);
@@ -129,6 +134,17 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         }
         if(model.getExpense_request_approval().equals("NO")||model.getPre_request_approval().equals("NO")){
             txt_manager_status.setVisibility(View.GONE);
+        }
+        if(expensemodel.getRejection_message()==null){
+            txt_rejection_title.setVisibility(View.GONE);
+            txt_rejection_message.setVisibility(View.GONE);
+
+        }
+        else if(expensemodel.getRejection_message().equals("")){
+            txt_rejection_message.setText("No Message");
+        }
+        else{
+            txt_rejection_message.setText(expensemodel.getRejection_message());
         }
 
          if(expensemodel.getStatus() != null && !expensemodel.getStatus().equals("")) {
@@ -241,17 +257,60 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 alertDialogBuilderUserInput.setView(mView);
                 final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.edt_message);
                 final EditText edt_rejection_message = (EditText) mView.findViewById(R.id.edt_rejection_message);
+                final EditText edt_amount = (EditText) mView.findViewById(R.id.edt_amount);
                 edt_rejection_message.setText(expensemodel.getRejection_message());
+                edt_amount.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        edt_amount.removeTextChangedListener(this);
+
+                        try {
+                            String givenstring = editable.toString();
+                            Long longval;
+                            if (givenstring.contains(",")) {
+                                givenstring = givenstring.replaceAll(",", "");
+                            }
+                            longval = Long.parseLong(givenstring);
+                            DecimalFormat formatter = new DecimalFormat("#,###,###");
+                            String formattedString = formatter.format(longval);
+                            edt_amount.setText(formattedString);
+                            edt_amount.setSelection(edt_amount.getText().length());
+                            // to place the cursor at the end of text
+                        } catch (NumberFormatException nfe) {
+                            nfe.printStackTrace();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        edt_amount.addTextChangedListener(this);
+
+                    }
+
+
+                });
                 alertDialogBuilderUserInput
                         .setCancelable(false)
                         .setPositiveButton("Re-Submit", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogBox, int id) {
                                 String message=userInputDialogEditText.getText().toString();
+                                String amount=expensemodel.getAmount().split(" ")[0];
                                 if (message.equals("")){
                                     Toast.makeText(ExpenseDetailActivity.this,"Enter Something..", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                    postReSubmitStatus(message);
+                                    if((edt_amount.getText()+"").length()>0)
+                                    amount=edt_amount.getText()+"";
+                                    postReSubmitStatus(message,amount);
                                    Toast.makeText(ExpenseDetailActivity.this,"Successfully Re-Submitted",Toast.LENGTH_SHORT).show();
                             }
                             }
@@ -299,7 +358,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
         sb = new SpannableStringBuilder(txtAdvance.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
-        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtAdvance.setText(sb);
 
 
@@ -522,11 +581,11 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             Log.e("Exception", "Exception in resizing image");
         }
     }
-    private void postReSubmitStatus(String msg)
+    private void postReSubmitStatus(String msg,String amount)
     {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
         Singleton.getInstance().getApi().postReSubmit(model.getId(),expensemodel
-                .getId(),msg).enqueue(new Callback<PreRequestResMeta>() {
+                .getId(),msg,amount,expensemodel.getFinal_status()).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
 

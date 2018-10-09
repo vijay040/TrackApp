@@ -67,7 +67,7 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         list_requesttype=findViewById(R.id.list_requesttype);
        //RequestTypesStrAdaptor adaptor =new RequestTypesStrAdaptor(ExpenseAppDetailActivity.this,expenseApprovalListModel.getRequest_type());
       // list_requesttype.setAdapter(adaptor);
-        txtdescreption.setText(getString(R.string.description)+expenseApprovalListModel.getComment());
+        txtdescreption.setText(getString(R.string.meeting)+expenseApprovalListModel.getDescription());
         txtdate.setText(getString(R.string.date)+expenseApprovalListModel.getCreated_on());
         txtadvance.setText(getString(R.string.amount)+expenseApprovalListModel.getAmount());
         txtaddress.setText(getString(R.string.address)+expenseApprovalListModel.getAddress());
@@ -94,7 +94,7 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         // Span to make text bold
         //    final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
         // Set the text color for first 4 characters
-        sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtdescreption.setText(sb);
 
         sb = new SpannableStringBuilder(txtadvance.getText());

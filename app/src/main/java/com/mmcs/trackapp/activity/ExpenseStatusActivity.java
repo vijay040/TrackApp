@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.model.ExpenseModel;
@@ -67,6 +68,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
             edt_message.setVisibility(View.VISIBLE);
         }
         Glide.with(this).load(expensemodel.getUpdate_image()).placeholder(R.drawable.no_image).into(image_uploaded);
+        image_uploaded.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseStatusActivity.this));
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

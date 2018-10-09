@@ -276,7 +276,7 @@ public interface RetrofitApi {
     );
     @FormUrlEncoded
     @POST("expense_resubmit_post.php?request=resumit_msg")
-    Call<PreRequestResMeta> postReSubmit(@Field("user_id") String user_id, @Field("id") String id, @Field("user_msg") String user_msg );
+    Call<PreRequestResMeta> postReSubmit(@Field("user_id") String user_id, @Field("id") String id, @Field("user_msg") String user_msg,@Field("edit_amount") String edit_amount,@Field("final_status") String final_status );
 
 
 

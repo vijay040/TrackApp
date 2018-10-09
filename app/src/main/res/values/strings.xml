@@ -136,6 +136,7 @@
     <string name="expensedetails">Expense Details</string>
     <string name="quotation_details">Quotation Details</string>
     <string name="meetingdate">Meeting Date</string>
+    <string name="rejection_msg">Rejection Message:</string>
     <string name="meeting_time">Meeting Time:</string>
     <string name="expense_date">Expense Date:</string>
     <string name="pre_rest_date">Pre-Request Date:</string>

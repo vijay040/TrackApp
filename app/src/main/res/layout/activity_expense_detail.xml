@@ -150,6 +150,24 @@
                 android:text="@string/meetingdate"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_10sdp" />
+            <TextView
+                android:id="@+id/txt_rejection_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/rejection_msg"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_10sdp" />
+            <TextView
+                android:id="@+id/txt_rejection_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="message"
+                android:textColor="@color/rejection_color"
+                android:textSize="@dimen/_10sdp" />
 
 
             <RelativeLayout

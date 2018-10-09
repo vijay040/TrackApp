@@ -131,6 +131,11 @@ public class ExpenseListAdaptor extends BaseAdapter {
 //Processed
                     txt_status.setTextColor(Color.parseColor("#FDD835"));
                     break;
+
+                case "PAID":
+//Paid
+                    txt_status.setTextColor(Color.parseColor("#0277BD"));
+                    break;
             }
         }
 

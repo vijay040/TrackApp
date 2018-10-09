@@ -152,9 +152,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             switch (expensemodel.getStatus()) {
                 case "PENDING":
 //Pending
-                    String status=  "<font color=\"#5fb0c9\"><bold>"+ getString(R.string.manager_approval) + "<font color=\"#FDD835\"><bold>"
-                            + expensemodel.getStatus()
-                            ;
+                    String status= "<font color=#5fb0c9>" +getString(R.string.manager_approval) + "</font>"+"<font color=#FDD835>" +expensemodel.getStatus() + "</font>";
                     txt_manager_status.setText( Html.fromHtml(status) );
                     txt_manager_status.startAnimation(animBlink);
                     break;
@@ -162,9 +160,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 case "ACCEPT":
 //Approved
 
-                    String status1=  "<font color=\"#5fb0c9\"><bold>"+ getString(R.string.manager_approval) + "<font color=\"#00C853\"><bold>"
-                            + expensemodel.getStatus()
-                            ;
+
+                    String status1= "<font color=#5fb0c9>" +getString(R.string.manager_approval) + "</font>"+"<font color=#00C853>" +expensemodel.getStatus() + "</font>";
+
                     txt_manager_status.setText( Html.fromHtml(status1) );
                     txt_manager_status.startAnimation(animBlink);
                     break;
@@ -173,10 +171,17 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
                 case "REJECT":
 //Rejected
-                    String status2=  "<font color=\"#5fb0c9\"><bold>"+ getString(R.string.manager_approval) + "<font color=\"#D50000\"><bold>"
-                            + expensemodel.getStatus()
-                            ;
+
+                    String status2= "<font color=#5fb0c9>" +getString(R.string.manager_approval) + "</font>"+"<font color=#D50000>" +expensemodel.getStatus() + "</font>";
                     txt_manager_status.setText( Html.fromHtml(status2) );
+                    txt_manager_status.startAnimation(animBlink);
+                    break;
+
+                case "RESUBMIT":
+//Rejected
+
+                    String status3= "<font color=#5fb0c9>" +getString(R.string.manager_approval) + "</font>"+"<font color=#EF6C00>" +expensemodel.getStatus() + "</font>";
+                    txt_manager_status.setText( Html.fromHtml(status3) );
                     txt_manager_status.startAnimation(animBlink);
                     break;
 
@@ -195,10 +200,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
                 case "ACCEPT":
 //Approved
-
-                    String status1=  "<font color=\"#5fb0c9\"><bold>"+ getString(R.string.status) + "<font color=\"#00C853\"><bold>"
-                            + expensemodel.getFinal_status()
-                            ;
+                    String status1= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#00C853>" +expensemodel.getFinal_status() + "</font>";
                     txt_status.setText( Html.fromHtml(status1) );
                     txt_status.startAnimation(animBlink);
                     break;
@@ -207,9 +209,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
                 case "REJECT":
 //Rejected
-                    String status2=  "<font color=\"#5fb0c9\"><bold>"+ getString(R.string.status) + "<font color=\"#D50000\"><bold>"
-                            + expensemodel.getFinal_status()
-                            ;
+                    String status2= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#D50000>" +expensemodel.getFinal_status() + "</font>";
                     txt_status.setText( Html.fromHtml(status2) );
                     txt_status.startAnimation(animBlink);
                     break;
@@ -217,18 +217,14 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
                 case "PROCESSED":
 //Rejected
-                    String status3=  "<font color=\"#5fb0c9\"><bold>"+ getString(R.string.status) + "<font color=\"#FDD835\"><bold>"
-                            + expensemodel.getFinal_status()
-                            ;
+                    String status3= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#FDD835>" +expensemodel.getFinal_status() + "</font>";
                     txt_status.setText( Html.fromHtml(status3) );
                     txt_status.startAnimation(animBlink);
                     break;
 
                 case "PAID":
 //Rejected
-                    String status4=  "<font color=\"#5fb0c9\"><bold>"+ getString(R.string.status) + "<font color=\"#0277BD\"><bold>"
-                            + expensemodel.getFinal_status()
-                            ;
+                    String status4= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#0277BD>" +expensemodel.getFinal_status() + "</font>";
                     txt_status.setText( Html.fromHtml(status4) );
                     txt_status.startAnimation(animBlink);
                     break;

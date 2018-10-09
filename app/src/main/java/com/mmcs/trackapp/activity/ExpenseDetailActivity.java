@@ -188,9 +188,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             switch (expensemodel.getFinal_status()) {
                 case "PENDING":
 //Pending
-                    String status=  "<font color=\"#5fb0c9\"><bold>"+ getString(R.string.status) + "<font color=\"#FDD835\"><bold>"
-                            + expensemodel.getFinal_status()
-                            ;
+                    String status= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#FDD835>" +expensemodel.getFinal_status() + "</font>";
                     txt_status.setText( Html.fromHtml(status) );
                     txt_status.startAnimation(animBlink);
                     break;

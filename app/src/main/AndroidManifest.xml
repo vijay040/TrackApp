@@ -111,7 +111,7 @@
         <activity android:name=".activity.VendorDetailsActivity" />
         <activity android:name=".activity.VQuotationDetailActivity" />
         <activity android:name=".activity.PreRequestStatusActivity" />
-        <activity android:name=".activity.ExpenseStatusActivity" />
+        <activity android:name=".activity.ExpenseStatusActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.ExpenseApprovalActivity" />
         <activity android:name=".activity.ExpenseAppDetailActivity"></activity>
     </application>

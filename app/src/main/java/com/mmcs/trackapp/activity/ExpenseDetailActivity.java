@@ -65,7 +65,8 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
-    TextView action,re_submit,txtMeeting,txtPurpose ,txt_rejection_message,txt_rejection_title,txt_status,txt_manager_status,txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit;
+    TextView action,re_submit,txtMeeting,txtPurpose ,txt_rejection_message,txt_rejection_title,txt_status,
+            txt_manager_status,txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit,txt_cancel;
     ImageView image_uploaded;
     Shprefrences sh;
     Animation animBlink;
@@ -95,6 +96,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         re_submit=findViewById(R.id.re_submit);
         txt_status=findViewById(R.id.txt_status);
         btn_close = findViewById(R.id.btn_close);
+        txt_cancel= findViewById(R.id.txt_cancel);
         action=findViewById(R.id.action);
         txtEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +110,15 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        txt_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postReSubmitStatus("Not required yet!","");
+                Toast.makeText(ExpenseDetailActivity.this,"Successfully Re-Submitted",Toast.LENGTH_SHORT).show();
+
+            }
+        });
         txtMeeting.setText(getString(R.string.meeting) + expensemodel.getDescreption());
         txtCreatedOn.setText(getString(R.string.expense_created_on) + expensemodel.getCreated_on());
         txtCustomerName.setText(getString(R.string.customer_name) + expensemodel.getCustomer_name());
@@ -117,12 +128,13 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
         txtPurpose.setText(getString(R.string.purpose) + expensemodel.getComment());
         txt_status.setText(getString(R.string.status) + expensemodel.getFinal_status());
-         model = sh.getLoginModel(getString(R.string.login_model));
+        model = sh.getLoginModel(getString(R.string.login_model));
 
         image_uploaded.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseDetailActivity.this));
         if(expensemodel.getStatus().equals("REJECT")||expensemodel.getStatus().equals("RESUBMIT"))
         {
             re_submit.setVisibility(View.VISIBLE);
+            txt_cancel.setVisibility(View.VISIBLE);
             action.setVisibility(View.GONE);
         }
         else if (expensemodel.getStatus().equals("PENDING")){
@@ -130,6 +142,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         }
         if (expensemodel.getFinal_status().equals("PAID")||expensemodel.getFinal_status().equals("CANCEL")){
             re_submit.setVisibility(View.GONE);
+            txt_cancel.setVisibility(View.GONE);
             action.setVisibility(View.GONE);
         }
         if(model.getExpense_request_approval().equals("NO")||model.getPre_request_approval().equals("NO")){
@@ -145,6 +158,16 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         }
         else{
             txt_rejection_message.setText(expensemodel.getRejection_message());
+        }
+
+        if(expensemodel.getFinal_status().equals("CANCELED"))
+        {
+            re_submit.setVisibility(View.GONE);
+            txt_cancel.setVisibility(View.GONE);
+            action.setVisibility(View.GONE);
+            String status= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#D50000>" +expensemodel.getFinal_status() + "</font>";
+            txt_status.setText( Html.fromHtml(status) );
+            txt_status.startAnimation(animBlink);
         }
 
          if(expensemodel.getStatus() != null && !expensemodel.getStatus().equals("")) {

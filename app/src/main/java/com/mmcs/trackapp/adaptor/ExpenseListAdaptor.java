@@ -127,6 +127,11 @@ public class ExpenseListAdaptor extends BaseAdapter {
                     txt_status.setTextColor(Color.parseColor("#D50000"));
                     break;
 
+                case "CANCELED":
+//Rejected
+                    txt_status.setTextColor(Color.parseColor("#D50000"));
+                    break;
+
                 case "PROCESSED":
 //Processed
                     txt_status.setTextColor(Color.parseColor("#FDD835"));

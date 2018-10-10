@@ -205,6 +205,23 @@
                     android:textColor="@color/white_color"
                     android:textStyle="bold"
                     android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txt_cancel"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_below="@id/re_submit"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn1"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/white_color"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <Button

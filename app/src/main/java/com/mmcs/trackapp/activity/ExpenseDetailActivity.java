@@ -160,7 +160,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             txt_rejection_message.setText(expensemodel.getRejection_message());
         }
 
-        if (expensemodel.getFinal_status().equals("CANCELED")) {
+        if (expensemodel.getFinal_status().equals("CANCEL")) {
             re_submit.setVisibility(View.GONE);
             txt_cancel.setVisibility(View.GONE);
             action.setVisibility(View.GONE);

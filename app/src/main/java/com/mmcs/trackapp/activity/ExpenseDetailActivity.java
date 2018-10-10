@@ -66,7 +66,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
     TextView action,re_submit,txtMeeting,txtPurpose ,txt_rejection_message,txt_rejection_title,txt_status,
-            txt_manager_status,txtCreatedOn, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit,txt_cancel;
+            txt_manager_status,txtCreatedOn, txt_meeting_des,txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit,txt_cancel;
     ImageView image_uploaded;
     Shprefrences sh;
     Animation animBlink;
@@ -88,6 +88,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtMeetingDate = findViewById(R.id.txtMeetingDate);
         txtExpenseType = findViewById(R.id.txtExpenseType);
         txtAdvance = findViewById(R.id.txtAdvance);
+        txt_meeting_des=findViewById(R.id.txt_meeting_des);
         txt_rejection_title=findViewById(R.id.txt_rejection_title);
         image_uploaded = findViewById(R.id.image_uploaded);
         txt_manager_status=findViewById(R.id.txt_manager_status);
@@ -127,8 +128,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtAdvance.setText(getString(R.string.amount) + expensemodel.getAmount());
         txtExpenseType.setText(getString(R.string.expense_type) + expensemodel.getExpense_type());
         txtMeetingDate.setText(getString(R.string.meeting_date) + expensemodel.getDate() + ", " + expensemodel.getTime());
-        txtPurpose.setText(getString(R.string.purpose) + expensemodel.getComment());
+        txtPurpose.setText(getString(R.string.expsense_des) + expensemodel.getComment());
         txt_status.setText(getString(R.string.status) + expensemodel.getFinal_status());
+        txt_meeting_des.setText(getString(R.string.meeting_purpose) + expensemodel.getPurpose());
         model = sh.getLoginModel(getString(R.string.login_model));
 
         image_uploaded.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseDetailActivity.this));
@@ -392,8 +394,13 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
         sb = new SpannableStringBuilder( txtPurpose.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
-        sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 20, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtPurpose.setText(sb);
+
+        sb = new SpannableStringBuilder( txt_meeting_des.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 16, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_meeting_des.setText(sb);
 
        /* sb = new SpannableStringBuilder( txt_manager_status.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));

@@ -52,7 +52,7 @@ public class ExpenseStatusActivity extends AppCompatActivity {
         btn_submit = findViewById(R.id.btn_submit);
         edt_your_msg=findViewById(R.id.edt_your_msg);
         progress = findViewById(R.id.progress);
-        String type[] = {"PAID","CANCEL"};
+        String type[] = {"ACCEPT","CANCEL"};
         spnStatusType.setAdapter(new ArrayAdapter(this, R.layout.spn_textview_item, R.id.spn_txt_item, type));
         expensemodel = (ExpenseModel) getIntent().getSerializableExtra(getString(R.string.expense_model));
         back();

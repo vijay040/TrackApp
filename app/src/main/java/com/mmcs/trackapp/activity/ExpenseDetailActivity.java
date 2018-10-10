@@ -98,6 +98,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         btn_close = findViewById(R.id.btn_close);
         txt_cancel= findViewById(R.id.txt_cancel);
         action=findViewById(R.id.action);
+
         txtEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

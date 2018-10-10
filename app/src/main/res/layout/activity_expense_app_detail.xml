@@ -86,6 +86,15 @@
                 android:text="@string/Address"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_12sdp" />
+            <TextView
+                android:id="@+id/txt_meeting_purpose"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/meeting_purpose"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/txtcustomername"
@@ -104,6 +113,15 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:text="@string/expensetype"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12sdp" />
+            <TextView
+                android:id="@+id/txt_expense_des"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/expsense_des"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_12sdp" />
             <TextView

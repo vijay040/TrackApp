@@ -142,6 +142,8 @@
     <string name="pre_rest_date">Pre-Request Date:</string>
     <string name="exch_rate">Exchange Rate:</string>
     <string name="expensetype">ExpenseType</string>
+    <string name="expsense_des">Expense Description:</string>
+    <string name="meeting_purpose">Meeting Purpose:</string>
     <string name="edit">Edit</string>
     <string name="to">To:</string>
     <string name="type_yourmessage_Here">Type Your Message Here</string>

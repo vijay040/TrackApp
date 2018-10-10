@@ -11,6 +11,15 @@ public class ExpenseApprovalListModel implements Serializable {
 
     private String status;
     private String user_name;
+    private String purpose;
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
 
     public String getUser_name() {
         return user_name;

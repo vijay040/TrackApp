@@ -9,6 +9,15 @@ public class ExpenseModel implements Serializable{
     private String amount;
 
     private String descreption;
+    private String purpose;
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
 
     private String Time;
 

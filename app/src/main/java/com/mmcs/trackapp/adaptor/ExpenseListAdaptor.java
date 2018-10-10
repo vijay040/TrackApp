@@ -57,7 +57,7 @@ public class ExpenseListAdaptor extends BaseAdapter {
         }
         TextView txtDescreption = view.findViewById(R.id.txtDescreption);
         ImageView imz_down=view.findViewById(R.id.imz_down);
-        txtDescreption.setText(list.get(i).getDescreption ());
+        txtDescreption.setText(list.get(i).getDescreption());
 
         TextView txtCreatedOn = view.findViewById(R.id.txtCreatedOn);
         txtCreatedOn.setText(context.getString(R.string.expense_created_on)+list.get(i).getCreated_on ());

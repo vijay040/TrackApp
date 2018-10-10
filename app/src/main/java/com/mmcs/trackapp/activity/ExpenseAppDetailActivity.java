@@ -34,7 +34,7 @@ import retrofit2.Response;
 
 public class ExpenseAppDetailActivity extends AppCompatActivity {
     ExpenseApprovalListModel expenseApprovalListModel;
-    TextView txtdescreption,txtdate,txt_resubmit_msg,txt_requested_by,txtadvance,title_re_submit,txtaddress,txtcustomername,txt_expensetype,txt_meeting_date,txt_meeting_time,txt_expense_date,txt_exchange_rate;
+    TextView txtdescreption,txtdate,txt_resubmit_msg,txt_requested_by,txt_meeting_purpose,txt_expense_des,txtadvance,title_re_submit,txtaddress,txtcustomername,txt_expensetype,txt_meeting_date,txt_meeting_time,txt_expense_date,txt_exchange_rate;
     ListView list_requesttype;
     Button reject,approve;
     Shprefrences sh;
@@ -52,11 +52,13 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         txtaddress=findViewById(R.id.txtaddress);
         txtcustomername=findViewById(R.id.txtcustomername);
         txt_expensetype=findViewById(R.id.txt_expensetype);
+        txt_expense_des=findViewById(R.id.txt_expense_des);
         txt_meeting_date=findViewById(R.id.txt_meeting_date);
         txt_meeting_time=findViewById(R.id.txt_meeting_time);
         txt_expense_date=findViewById(R.id.txt_expense_date);
         txt_exchange_rate=findViewById(R.id.txt_exchange_rate);
         txt_requested_by=findViewById(R.id.txt_requested_by);
+        txt_meeting_purpose=findViewById(R.id.txt_meeting_purpose);
         title_re_submit=findViewById(R.id.title_re_submit);
         txt_resubmit_msg=findViewById(R.id.txt_resubmit_msg);
         reject=findViewById(R.id.reject);
@@ -78,6 +80,8 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         txt_expense_date.setText(getString(R.string.expense_date)+expenseApprovalListModel.getCreated_on());
         txt_exchange_rate.setText(getString(R.string.exch_rate)+expenseApprovalListModel.getExchange_rate());
         txt_requested_by.setText(getString(R.string.requested_by)+expenseApprovalListModel.getUser_name());
+        txt_expense_des.setText(getString(R.string.expsense_des)+expenseApprovalListModel.getComment());
+        txt_meeting_purpose.setText(getString(R.string.meeting_purpose)+expenseApprovalListModel.getDescription());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         if(expenseApprovalListModel.getResubmit_msg().equals("")){
             title_re_submit.setVisibility(View.GONE);
@@ -146,6 +150,16 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_requested_by.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_expense_des.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 20, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_expense_des.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_meeting_purpose.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 16, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_meeting_purpose.setText(sb);
 
         approve.setOnClickListener(new View.OnClickListener() {
             @Override

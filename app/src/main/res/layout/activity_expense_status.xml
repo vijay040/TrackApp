@@ -82,8 +82,7 @@
         android:layout_below="@+id/edt_your_msg"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:visibility="gone"
-               android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:entries="@array/array_action" />
@@ -98,6 +97,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/btn"
         android:text="@string/Submit"
+        android:visibility="gone"
         android:layout_marginBottom="@dimen/_20sdp"
         android:textColor="@color/white_color"
         android:textSize="@dimen/_15sdp" />

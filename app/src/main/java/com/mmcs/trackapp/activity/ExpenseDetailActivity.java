@@ -65,40 +65,41 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private static final int SELECT_PHOTO = 200;
     private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
-    TextView action,re_submit,txtMeeting,txtPurpose ,txt_rejection_message,txt_rejection_title,txt_status,
-            txt_manager_status,txtCreatedOn, txt_meeting_des,txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit,txt_cancel;
+    TextView action, re_submit, txtMeeting, txtPurpose, txt_rejection_message, txt_rejection_title, txt_status,
+            txt_manager_status, txtCreatedOn, txt_meeting_des, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit, txt_cancel;
     ImageView image_uploaded;
     Shprefrences sh;
     Animation animBlink;
     LoginModel model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        sh=new Shprefrences(this);
+        sh = new Shprefrences(this);
         setContentView(R.layout.activity_expense_detail);
         expensemodel = (ExpenseModel) getIntent().getSerializableExtra(getString(R.string.expense_model));
         animBlink = AnimationUtils.loadAnimation(this, R.anim.blink);
         txtMeeting = findViewById(R.id.txtMeeting);
         txtCreatedOn = findViewById(R.id.txtCreatedOn);
         txtAddress = findViewById(R.id.txtAddress);
-        txt_rejection_message=findViewById(R.id.txt_rejection_message);
+        txt_rejection_message = findViewById(R.id.txt_rejection_message);
         txtCustomerName = findViewById(R.id.txtCustomerName);
         txtMeetingDate = findViewById(R.id.txtMeetingDate);
         txtExpenseType = findViewById(R.id.txtExpenseType);
         txtAdvance = findViewById(R.id.txtAdvance);
-        txt_meeting_des=findViewById(R.id.txt_meeting_des);
-        txt_rejection_title=findViewById(R.id.txt_rejection_title);
+        txt_meeting_des = findViewById(R.id.txt_meeting_des);
+        txt_rejection_title = findViewById(R.id.txt_rejection_title);
         image_uploaded = findViewById(R.id.image_uploaded);
-        txt_manager_status=findViewById(R.id.txt_manager_status);
-        txtPurpose=findViewById(R.id.txtPurpose);
+        txt_manager_status = findViewById(R.id.txt_manager_status);
+        txtPurpose = findViewById(R.id.txtPurpose);
         txtEdit = findViewById(R.id.txtEdit);
-        re_submit=findViewById(R.id.re_submit);
-        txt_status=findViewById(R.id.txt_status);
+        re_submit = findViewById(R.id.re_submit);
+        txt_status = findViewById(R.id.txt_status);
         btn_close = findViewById(R.id.btn_close);
-        txt_cancel= findViewById(R.id.txt_cancel);
-        action=findViewById(R.id.action);
+        txt_cancel = findViewById(R.id.txt_cancel);
+        action = findViewById(R.id.action);
 
         txtEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,8 +117,8 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txt_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postReSubmitStatus("Not required yet!","");
-                Toast.makeText(ExpenseDetailActivity.this,"Successfully Re-Submitted",Toast.LENGTH_SHORT).show();
+                postReSubmitStatus("Not required yet!", "");
+                Toast.makeText(ExpenseDetailActivity.this, "Successfully Re-Submitted", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -134,52 +135,47 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         model = sh.getLoginModel(getString(R.string.login_model));
 
         image_uploaded.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseDetailActivity.this));
-        if(expensemodel.getStatus().equals("REJECT")||expensemodel.getStatus().equals("RESUBMIT"))
-        {
+        if (expensemodel.getStatus().equals("REJECT") || expensemodel.getFinal_status().equals("REJECT")) {
             re_submit.setVisibility(View.VISIBLE);
             txt_cancel.setVisibility(View.VISIBLE);
             action.setVisibility(View.GONE);
-        }
-        else if (expensemodel.getStatus().equals("PENDING")){
+        } else if (expensemodel.getStatus().equals("PENDING")) {
             action.setVisibility(View.GONE);
         }
-        if (expensemodel.getFinal_status().equals("PAID")||expensemodel.getFinal_status().equals("CANCEL")){
+        if (expensemodel.getFinal_status().equals("PAID") || expensemodel.getFinal_status().equals("CANCEL")) {
             re_submit.setVisibility(View.GONE);
             txt_cancel.setVisibility(View.GONE);
             action.setVisibility(View.GONE);
         }
-        if(model.getExpense_request_approval().equals("NO")||model.getPre_request_approval().equals("NO")){
+        if (model.getExpense_request_approval().equals("NO") || model.getPre_request_approval().equals("NO")) {
             txt_manager_status.setVisibility(View.GONE);
         }
-        if(expensemodel.getRejection_message()==null){
+        if (expensemodel.getRejection_message() == null) {
             txt_rejection_title.setVisibility(View.GONE);
             txt_rejection_message.setVisibility(View.GONE);
 
-        }
-        else if(expensemodel.getRejection_message().equals("")){
+        } else if (expensemodel.getRejection_message().equals("")) {
             txt_rejection_message.setText("No Message");
-        }
-        else{
+        } else {
             txt_rejection_message.setText(expensemodel.getRejection_message());
         }
 
-        if(expensemodel.getFinal_status().equals("CANCEL"))
-        {
+        if (expensemodel.getFinal_status().equals("CANCEL")) {
             re_submit.setVisibility(View.GONE);
             txt_cancel.setVisibility(View.GONE);
             action.setVisibility(View.GONE);
-            String status= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#D50000>" +expensemodel.getFinal_status() + "</font>";
-            txt_status.setText( Html.fromHtml(status) );
+            String status = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#D50000>" + expensemodel.getFinal_status() + "</font>";
+            txt_status.setText(Html.fromHtml(status));
             txt_status.startAnimation(animBlink);
         }
 
-        if(expensemodel.getStatus() != null && !expensemodel.getStatus().equals("")) {
+        if (expensemodel.getStatus() != null && !expensemodel.getStatus().equals("")) {
 
             switch (expensemodel.getStatus()) {
                 case "PENDING":
 //Pending
-                    String status= "<font color=#5fb0c9>" +getString(R.string.manager_approval) + "</font>"+"<font color=#FDD835>" +expensemodel.getStatus() + "</font>";
-                    txt_manager_status.setText( Html.fromHtml(status) );
+                    String status = "<font color=#5fb0c9>" + getString(R.string.manager_approval) + "</font>" + "<font color=#FDD835>" + expensemodel.getStatus() + "</font>";
+                    txt_manager_status.setText(Html.fromHtml(status));
                     txt_manager_status.startAnimation(animBlink);
                     break;
 
@@ -187,71 +183,69 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 //Approved
 
 
-                    String status1= "<font color=#5fb0c9>" +getString(R.string.manager_approval) + "</font>"+"<font color=#00C853>" +expensemodel.getStatus() + "</font>";
+                    String status1 = "<font color=#5fb0c9>" + getString(R.string.manager_approval) + "</font>" + "<font color=#00C853>" + expensemodel.getStatus() + "</font>";
 
-                    txt_manager_status.setText( Html.fromHtml(status1) );
+                    txt_manager_status.setText(Html.fromHtml(status1));
                     txt_manager_status.startAnimation(animBlink);
                     break;
-
 
 
                 case "REJECT":
 //Rejected
 
-                    String status2= "<font color=#5fb0c9>" +getString(R.string.manager_approval) + "</font>"+"<font color=#D50000>" +expensemodel.getStatus() + "</font>";
-                    txt_manager_status.setText( Html.fromHtml(status2) );
+                    String status2 = "<font color=#5fb0c9>" + getString(R.string.manager_approval) + "</font>" + "<font color=#D50000>" + expensemodel.getStatus() + "</font>";
+                    txt_manager_status.setText(Html.fromHtml(status2));
                     txt_manager_status.startAnimation(animBlink);
                     break;
 
                 case "RESUBMIT":
 //Rejected
 
-                    String status3= "<font color=#5fb0c9>" +getString(R.string.manager_approval) + "</font>"+"<font color=#EF6C00>" +expensemodel.getStatus() + "</font>";
-                    txt_manager_status.setText( Html.fromHtml(status3) );
+                    String status3 = "<font color=#5fb0c9>" + getString(R.string.manager_approval) + "</font>" + "<font color=#EF6C00>" + expensemodel.getStatus() + "</font>";
+                    txt_manager_status.setText(Html.fromHtml(status3));
                     txt_manager_status.startAnimation(animBlink);
                     break;
 
 
             }
         }
-        if(expensemodel.getFinal_status() != null && !expensemodel.getFinal_status().equals("")) {
+        if (expensemodel.getFinal_status() != null && !expensemodel.getFinal_status().equals("")) {
 
             switch (expensemodel.getFinal_status()) {
                 case "PENDING":
 //Pending
-                    String status= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#FDD835>" +expensemodel.getFinal_status() + "</font>";
-                    txt_status.setText( Html.fromHtml(status) );
+                    String status = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#FDD835>" + expensemodel.getFinal_status() + "</font>";
+                    txt_status.setText(Html.fromHtml(status));
                     txt_status.startAnimation(animBlink);
                     break;
 
                 case "ACCEPT":
 //Approved
-                    String status1= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#00C853>" +expensemodel.getFinal_status() + "</font>";
-                    txt_status.setText( Html.fromHtml(status1) );
+                    String status1 = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#00C853>" + expensemodel.getFinal_status() + "</font>";
+                    txt_status.setText(Html.fromHtml(status1));
                     txt_status.startAnimation(animBlink);
                     break;
 
 
-
                 case "REJECT":
 //Rejected
-                    String status2= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#D50000>" +expensemodel.getFinal_status() + "</font>";
-                    txt_status.setText( Html.fromHtml(status2) );
+                    String status2 = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#D50000>" + expensemodel.getFinal_status() + "</font>";
+                    txt_status.setText(Html.fromHtml(status2));
                     txt_status.startAnimation(animBlink);
                     break;
 
 
                 case "PROCESSED":
 //Rejected
-                    String status3= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#FDD835>" +expensemodel.getFinal_status() + "</font>";
-                    txt_status.setText( Html.fromHtml(status3) );
+                    String status3 = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#FDD835>" + expensemodel.getFinal_status() + "</font>";
+                    txt_status.setText(Html.fromHtml(status3));
                     txt_status.startAnimation(animBlink);
                     break;
 
                 case "PAID":
 //Rejected
-                    String status4= "<font color=#5fb0c9>" +getString(R.string.status) + "</font>"+"<font color=#0277BD>" +expensemodel.getFinal_status() + "</font>";
-                    txt_status.setText( Html.fromHtml(status4) );
+                    String status4 = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#0277BD>" + expensemodel.getFinal_status() + "</font>";
+                    txt_status.setText(Html.fromHtml(status4));
                     txt_status.startAnimation(animBlink);
                     break;
 
@@ -262,10 +256,13 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(ExpenseDetailActivity.this, ExpenseStatusActivity.class);
-                intent.putExtra(getString(R.string.expense_model), expensemodel);
-                startActivity(intent);
+                if (expensemodel.getFinal_status().equalsIgnoreCase("ACCEPT")) {
+                    Intent intent = new Intent(ExpenseDetailActivity.this, ExpenseStatusActivity.class);
+                    intent.putExtra(getString(R.string.expense_model), expensemodel);
+                    startActivity(intent);
+                }
+                else
+                    Toast.makeText(ExpenseDetailActivity.this, "Pending from Finance yet!", Toast.LENGTH_SHORT).show();
             }
         });
         re_submit.setOnClickListener(new View.OnClickListener() {
@@ -322,16 +319,15 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                         .setCancelable(false)
                         .setPositiveButton("Re-Submit", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogBox, int id) {
-                                String message=userInputDialogEditText.getText().toString();
-                                String amount=expensemodel.getAmount().split(" ")[0];
-                                if (message.equals("")){
-                                    Toast.makeText(ExpenseDetailActivity.this,"Enter Something..", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    if((edt_amount.getText()+"").length()>0)
-                                        amount=edt_amount.getText()+"";
-                                    postReSubmitStatus(message,amount);
-                                    Toast.makeText(ExpenseDetailActivity.this,"Successfully Re-Submitted",Toast.LENGTH_SHORT).show();
+                                String message = userInputDialogEditText.getText().toString();
+                                String amount = expensemodel.getAmount().split(" ")[0];
+                                if (message.equals("")) {
+                                    Toast.makeText(ExpenseDetailActivity.this, "Enter Something..", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if ((edt_amount.getText() + "").length() > 0)
+                                        amount = edt_amount.getText() + "";
+                                    postReSubmitStatus(message, amount);
+                                    Toast.makeText(ExpenseDetailActivity.this, "Successfully Re-Submitted", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })
@@ -392,12 +388,12 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtMeetingDate.setText(sb);
 
-        sb = new SpannableStringBuilder( txtPurpose.getText());
+        sb = new SpannableStringBuilder(txtPurpose.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 20, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtPurpose.setText(sb);
 
-        sb = new SpannableStringBuilder( txt_meeting_des.getText());
+        sb = new SpannableStringBuilder(txt_meeting_des.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 16, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_meeting_des.setText(sb);
@@ -464,9 +460,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             try {
                 imageImagePath = getPath(fileUri);
-                File file=new File(imageImagePath);
-                resize(file,"");
-                Picasso.get().load(file).placeholder(R.drawable.ic_userlogin).resize(100,100).into(image_uploaded);
+                File file = new File(imageImagePath);
+                resize(file, "");
+                Picasso.get().load(file).placeholder(R.drawable.ic_userlogin).resize(100, 100).into(image_uploaded);
                 updateExpenseReceipt(imageImagePath);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -477,9 +473,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                 Uri selectedImage = data.getData();
                 if (selectedImage != null) {
                     imageImagePath = getPath(selectedImage);
-                    File file=new File(imageImagePath);
-                    resize(file,"");
-                    Picasso.get().load(file).placeholder(R.drawable.ic_userlogin).resize(100,100).into(image_uploaded);
+                    File file = new File(imageImagePath);
+                    resize(file, "");
+                    Picasso.get().load(file).placeholder(R.drawable.ic_userlogin).resize(100, 100).into(image_uploaded);
                     updateExpenseReceipt(imageImagePath);
                 }
             }
@@ -555,9 +551,9 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UploadImageResMeta> call, Response<UploadImageResMeta> response) {
 
-                UploadImageModel model= response.body().getData();
-                if(model!=null && model.getImage()!=null)
-                    Picasso.get().load(model.getImage()).placeholder(R.drawable.ic_bill).resize(100,100).into(image_uploaded);
+                UploadImageModel model = response.body().getData();
+                if (model != null && model.getImage() != null)
+                    Picasso.get().load(model.getImage()).placeholder(R.drawable.ic_bill).resize(100, 100).into(image_uploaded);
                 else
                     Toast.makeText(ExpenseDetailActivity.this, "Please Try Again!", Toast.LENGTH_SHORT).show();
             }
@@ -572,6 +568,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
     BitmapFactory.Options bmOptions;
     Bitmap bitmap;
+
     public void resize(File file, String benchMark) {
         try {
             bmOptions = new BitmapFactory.Options();
@@ -606,11 +603,11 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             Log.e("Exception", "Exception in resizing image");
         }
     }
-    private void postReSubmitStatus(String msg,String amount)
-    {
+
+    private void postReSubmitStatus(String msg, String amount) {
         LoginModel model = sh.getLoginModel(getString(R.string.login_model));
-        Singleton.getInstance().getApi().postReSubmit(model.getId(),expensemodel
-                .getId(),msg,amount,expensemodel.getFinal_status()).enqueue(new Callback<PreRequestResMeta>() {
+        Singleton.getInstance().getApi().postReSubmit(model.getId(), expensemodel
+                .getId(), msg, amount, expensemodel.getFinal_status()).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
 

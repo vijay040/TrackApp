@@ -132,6 +132,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtPurpose.setText(getString(R.string.expsense_des) + expensemodel.getComment());
         txt_status.setText(getString(R.string.status) + expensemodel.getFinal_status());
         txt_meeting_des.setText(getString(R.string.meeting_purpose) + expensemodel.getPurpose());
+        txt_manager_status.setText(getString(R.string.manager_approval) + expensemodel.getStatus());
         model = sh.getLoginModel(getString(R.string.login_model));
 
         image_uploaded.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseDetailActivity.this));
@@ -142,7 +143,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         } else if (expensemodel.getStatus().equals("PENDING")) {
             action.setVisibility(View.GONE);
         }
-        if (expensemodel.getFinal_status().equals("PAID") || expensemodel.getFinal_status().equals("CANCEL")) {
+        if (expensemodel.getFinal_status().equals("RECEIVED") || expensemodel.getFinal_status().equals("WITHDRAW")) {
             re_submit.setVisibility(View.GONE);
             txt_cancel.setVisibility(View.GONE);
             action.setVisibility(View.GONE);
@@ -160,13 +161,17 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             txt_rejection_message.setText(expensemodel.getRejection_message());
         }
 
-        if (expensemodel.getFinal_status().equals("CANCEL")) {
+        if (expensemodel.getFinal_status().equals("WITHDRAW")) {
             re_submit.setVisibility(View.GONE);
             txt_cancel.setVisibility(View.GONE);
             action.setVisibility(View.GONE);
             String status = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#D50000>" + expensemodel.getFinal_status() + "</font>";
             txt_status.setText(Html.fromHtml(status));
             txt_status.startAnimation(animBlink);
+        }
+
+        if(!expensemodel.getFinal_status().equalsIgnoreCase("PAID")){
+            action.setVisibility(View.GONE);
         }
 
         if (expensemodel.getStatus() != null && !expensemodel.getStatus().equals("")) {
@@ -219,7 +224,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                     txt_status.startAnimation(animBlink);
                     break;
 
-                case "ACCEPT":
+                case "WITHDRAW":
 //Approved
                     String status1 = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#00C853>" + expensemodel.getFinal_status() + "</font>";
                     txt_status.setText(Html.fromHtml(status1));
@@ -249,6 +254,13 @@ public class ExpenseDetailActivity extends AppCompatActivity {
                     txt_status.startAnimation(animBlink);
                     break;
 
+                case "RECEIVED":
+//Rejected
+                    String status5 = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#00C853>" + expensemodel.getFinal_status() + "</font>";
+                    txt_status.setText(Html.fromHtml(status5));
+                    txt_status.startAnimation(animBlink);
+                    break;
+
 
             }
         }
@@ -256,7 +268,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (expensemodel.getFinal_status().equalsIgnoreCase("ACCEPT")) {
+                if (expensemodel.getFinal_status().equalsIgnoreCase("PAID")) {
                     Intent intent = new Intent(ExpenseDetailActivity.this, ExpenseStatusActivity.class);
                     intent.putExtra(getString(R.string.expense_model), expensemodel);
                     startActivity(intent);
@@ -398,10 +410,10 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         sb.setSpan(fcs, 0, 16, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_meeting_des.setText(sb);
 
-       /* sb = new SpannableStringBuilder( txt_manager_status.getText());
+        sb = new SpannableStringBuilder( txt_manager_status.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 16, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        txt_manager_status.setText(sb);*/
+        txt_manager_status.setText(sb);
 
         back();
         setTitle();

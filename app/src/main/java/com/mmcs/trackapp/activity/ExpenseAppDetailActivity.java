@@ -81,7 +81,7 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         txt_exchange_rate.setText(getString(R.string.exch_rate)+expenseApprovalListModel.getExchange_rate());
         txt_requested_by.setText(getString(R.string.requested_by)+expenseApprovalListModel.getUser_name());
         txt_expense_des.setText(getString(R.string.expsense_des)+expenseApprovalListModel.getComment());
-        txt_meeting_purpose.setText(getString(R.string.meeting_purpose)+expenseApprovalListModel.getDescription());
+        txt_meeting_purpose.setText(getString(R.string.meeting_purpose)+expenseApprovalListModel.getPurpose());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         if(expenseApprovalListModel.getResubmit_msg().equals("")){
             title_re_submit.setVisibility(View.GONE);

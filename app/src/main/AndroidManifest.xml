@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -26,7 +25,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -102,8 +101,7 @@
           Set color used with incoming notification messages. This is used when no color is set for the incoming
           notification message. See README(https://goo.gl/6BKBk7) for more.
         -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/them_color" />
 
         <activity android:name=".activity.ReminderdetailActivity" />

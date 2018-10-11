@@ -196,7 +196,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:text="@string/view_attachment"
                 android:textColor="@color/white_color"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_10sdp"
                 android:padding="@dimen/_5sdp"
                 android:background="@drawable/btn"
                 android:textStyle="bold"

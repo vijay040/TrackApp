@@ -66,7 +66,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
     Button btn_close;
     TextView action, re_submit, txtMeeting, txtPurpose, txt_rejection_message, txt_rejection_title, txt_status,
-            txt_manager_status, txtCreatedOn, txt_meeting_des, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit, txt_cancel;
+            txt_manager_status, txtCreatedOn, txt_view_attachment,txt_meeting_des, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance, txtEdit, txt_cancel;
     ImageView image_uploaded;
     Shprefrences sh;
     Animation animBlink;
@@ -88,6 +88,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         txtCustomerName = findViewById(R.id.txtCustomerName);
         txtMeetingDate = findViewById(R.id.txtMeetingDate);
         txtExpenseType = findViewById(R.id.txtExpenseType);
+        txt_view_attachment=findViewById(R.id.txt_view_attachment);
         txtAdvance = findViewById(R.id.txtAdvance);
         txt_meeting_des = findViewById(R.id.txt_meeting_des);
         txt_rejection_title = findViewById(R.id.txt_rejection_title);
@@ -136,6 +137,36 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         model = sh.getLoginModel(getString(R.string.login_model));
 
         image_uploaded.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseDetailActivity.this));
+        txt_view_attachment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LayoutInflater layoutInflaterAndroid = LayoutInflater.from(ExpenseDetailActivity.this);
+                View mView = layoutInflaterAndroid.inflate(R.layout.activity_view_attachment, null);
+                android.app.AlertDialog.Builder alertDialogBuilderUserInput = new android.app.AlertDialog.Builder(ExpenseDetailActivity.this);
+                alertDialogBuilderUserInput.setView(mView);
+                final  ImageView imz_view_attacment=(ImageView) mView.findViewById(R.id.imz_view_attacment);
+                Glide.with(ExpenseDetailActivity.this).load(expensemodel.getUpdate_image()).placeholder(R.drawable.no_image).into(imz_view_attacment);
+                imz_view_attacment.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseDetailActivity.this));
+                alertDialogBuilderUserInput
+                        .setCancelable(false)
+                        .setPositiveButton("X", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                                dialogBox.dismiss();
+
+                            }
+                        });
+
+
+                android.app.AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+                alertDialogAndroid.show();
+                Button buttonPositive = alertDialogAndroid.getButton(DialogInterface.BUTTON_POSITIVE);
+                buttonPositive.setTextColor(ContextCompat.getColor(ExpenseDetailActivity.this, R.color.rejection_color));
+
+            }
+
+
+        });
         if (expensemodel.getStatus().equals("REJECT") || expensemodel.getFinal_status().equals("REJECT")) {
             re_submit.setVisibility(View.VISIBLE);
             txt_cancel.setVisibility(View.VISIBLE);
@@ -151,6 +182,10 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         if (model.getExpense_request_approval().equals("NO") || model.getPre_request_approval().equals("NO")) {
             txt_manager_status.setVisibility(View.GONE);
         }
+
+        if(expensemodel.getFinal_status().equalsIgnoreCase("REJECT"))
+            expensemodel.setRejection_message(expensemodel.getUpdate_comment());
+
         if (expensemodel.getRejection_message() == null) {
             txt_rejection_title.setVisibility(View.GONE);
             txt_rejection_message.setVisibility(View.GONE);
@@ -172,6 +207,10 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
         if(!expensemodel.getFinal_status().equalsIgnoreCase("PAID")){
             action.setVisibility(View.GONE);
+        }
+
+        if(expensemodel.getFinal_status().equalsIgnoreCase("REJECT")){
+            txt_view_attachment.setVisibility(View.VISIBLE);
         }
 
         if (expensemodel.getStatus() != null && !expensemodel.getStatus().equals("")) {
@@ -258,6 +297,13 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 //Rejected
                     String status5 = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#00C853>" + expensemodel.getFinal_status() + "</font>";
                     txt_status.setText(Html.fromHtml(status5));
+                    txt_status.startAnimation(animBlink);
+                    break;
+
+                case "RESUBMIT":
+//Rejected
+                    String status6 = "<font color=#5fb0c9>" + getString(R.string.status) + "</font>" + "<font color=#800000>" + expensemodel.getFinal_status() + "</font>";
+                    txt_status.setText(Html.fromHtml(status6));
                     txt_status.startAnimation(animBlink);
                     break;
 

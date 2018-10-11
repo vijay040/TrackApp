@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -140,6 +141,11 @@ public class ExpenseListAdaptor extends BaseAdapter {
                 case "PAID":
 //Paid
                     txt_status.setTextColor(Color.parseColor("#0277BD"));
+                    break;
+
+                case "RESUBMIT":
+//Rejected
+                    txt_status.setTextColor(Color.parseColor("#800000"));
                     break;
             }
         }

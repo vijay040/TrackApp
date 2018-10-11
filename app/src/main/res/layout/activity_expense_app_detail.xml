@@ -186,6 +186,22 @@
                 android:text="message"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/txt_view_attachment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/view_attachment"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/_12sdp"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/btn"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

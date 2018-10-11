@@ -87,6 +87,7 @@
     <string name="PreRequestdetail">Pre-Request detail</string>
     <string name="RequestTypes">RequestType</string>
     <string name="Attachment">Attachment</string>
+    <string name="view_attachment">View Attachment</string>
     <string name="Create">Create</string>
     <string name="name">Name</string>
     <string name="Email">Email</string>
@@ -296,6 +297,7 @@
     <string name="next">NEXT</string>
     <string name="your_message">Your Message...</string>
     <string name="cancel">Cancel</string>
+    <string name="withdraw">WITHDRAW</string>
 
     <string-array name="language_list">
         <item>English</item>

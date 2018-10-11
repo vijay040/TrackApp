@@ -14,11 +14,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
+import com.bumptech.glide.Glide;
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.RequestTypesStrAdaptor;
 import com.mmcs.trackapp.model.ExpenseApprovalListModel;
@@ -34,7 +37,7 @@ import retrofit2.Response;
 
 public class ExpenseAppDetailActivity extends AppCompatActivity {
     ExpenseApprovalListModel expenseApprovalListModel;
-    TextView txtdescreption,txtdate,txt_resubmit_msg,txt_requested_by,txt_meeting_purpose,txt_expense_des,txtadvance,title_re_submit,txtaddress,txtcustomername,txt_expensetype,txt_meeting_date,txt_meeting_time,txt_expense_date,txt_exchange_rate;
+    TextView txtdescreption,txtdate,txt_resubmit_msg,txt_requested_by,txt_view_attachment,txt_meeting_purpose,txt_expense_des,txtadvance,title_re_submit,txtaddress,txtcustomername,txt_expensetype,txt_meeting_date,txt_meeting_time,txt_expense_date,txt_exchange_rate;
     ListView list_requesttype;
     Button reject,approve;
     Shprefrences sh;
@@ -54,6 +57,7 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         txt_expensetype=findViewById(R.id.txt_expensetype);
         txt_expense_des=findViewById(R.id.txt_expense_des);
         txt_meeting_date=findViewById(R.id.txt_meeting_date);
+        txt_view_attachment=findViewById(R.id.txt_view_attachment);
         txt_meeting_time=findViewById(R.id.txt_meeting_time);
         txt_expense_date=findViewById(R.id.txt_expense_date);
         txt_exchange_rate=findViewById(R.id.txt_exchange_rate);
@@ -83,6 +87,37 @@ public class ExpenseAppDetailActivity extends AppCompatActivity {
         txt_expense_des.setText(getString(R.string.expsense_des)+expenseApprovalListModel.getComment());
         txt_meeting_purpose.setText(getString(R.string.meeting_purpose)+expenseApprovalListModel.getPurpose());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
+        txt_view_attachment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LayoutInflater layoutInflaterAndroid = LayoutInflater.from(ExpenseAppDetailActivity.this);
+                View mView = layoutInflaterAndroid.inflate(R.layout.activity_view_attachment, null);
+                AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(ExpenseAppDetailActivity.this);
+                alertDialogBuilderUserInput.setView(mView);
+            final  ImageView imz_view_attacment=(ImageView) mView.findViewById(R.id.imz_view_attacment);
+                Glide.with(ExpenseAppDetailActivity.this).load(expenseApprovalListModel.getImage()).placeholder(R.drawable.no_image).into(imz_view_attacment);
+                imz_view_attacment.setOnTouchListener(new ImageMatrixTouchHandler(ExpenseAppDetailActivity.this));
+                alertDialogBuilderUserInput
+                        .setCancelable(false)
+                        .setPositiveButton("X", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                            dialogBox.dismiss();
+
+                            }
+                        });
+
+
+                AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+                alertDialogAndroid.show();
+                Button buttonPositive = alertDialogAndroid.getButton(DialogInterface.BUTTON_POSITIVE);
+                buttonPositive.setTextColor(ContextCompat.getColor(ExpenseAppDetailActivity.this, R.color.rejection_color));
+
+            }
+
+
+        });
+
         if(expenseApprovalListModel.getResubmit_msg().equals("")){
             title_re_submit.setVisibility(View.GONE);
             txt_resubmit_msg.setVisibility(View.GONE);

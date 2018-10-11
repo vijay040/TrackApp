@@ -209,8 +209,15 @@ public class ExpenseDetailActivity extends AppCompatActivity {
             action.setVisibility(View.GONE);
         }
 
-        if(expensemodel.getFinal_status().equalsIgnoreCase("REJECT")){
+
+        if(expensemodel.getFinal_status().equalsIgnoreCase("REJECT")||expensemodel.getFinal_status().equalsIgnoreCase("PAID")){
             txt_view_attachment.setVisibility(View.VISIBLE);
+            expensemodel.setRejection_message(expensemodel.getUpdate_comment());
+            txt_rejection_message.setVisibility(View.VISIBLE);
+            txt_rejection_title.setVisibility(View.VISIBLE);
+            txt_rejection_message.setText(expensemodel.getRejection_message());
+            if(expensemodel.getFinal_status().equalsIgnoreCase("PAID"))
+            txt_rejection_message.setTextColor(Color.parseColor("#00C853"));
         }
 
         if (expensemodel.getStatus() != null && !expensemodel.getStatus().equals("")) {

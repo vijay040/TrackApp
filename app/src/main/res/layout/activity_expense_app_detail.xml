@@ -104,6 +104,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:text="@string/CustomerName"
                 android:textColor="@color/text_color"
+
                 android:textSize="@dimen/_12sdp" />
 
             <TextView

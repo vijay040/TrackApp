@@ -35,7 +35,7 @@ import retrofit2.Response;
 
 public class PendingDetailActivity extends AppCompatActivity {
 PreRequestModel prerequestmodel;
-TextView txtdescreption,txtdate,txtadvance,txtstatus,txtaddress,txtcustomername,txt_expensetype,txt_meeting_date,txt_meeting_time,txt_pre_request_date,txt_exchange_rate;
+TextView txtdescreption,txtdate,txtadvance,txt_prerequest_des,txt_requested_by,txt_meeting_purpose,txtaddress,txtcustomername,txt_expensetype,txt_meeting_date,txt_meeting_time,txt_pre_request_date,txt_exchange_rate;
 ListView list_requesttype;
 Button reject,approve;
 Shprefrences sh;
@@ -52,13 +52,14 @@ Shprefrences sh;
         txt_meeting_time=findViewById(R.id.txt_meeting_time);
         txt_pre_request_date=findViewById(R.id.txt_pre_request_date);
         txt_exchange_rate=findViewById(R.id.txt_exchange_rate);
-
+        txt_prerequest_des=findViewById(R.id.txt_prerequest_des);
         txtdescreption=findViewById(R.id.txtdescreption);
+        txt_requested_by=findViewById(R.id.txt_requested_by);
         txtdate=findViewById(R.id.txtdate);
         txtadvance=findViewById(R.id.txtadvance);
         txtaddress=findViewById(R.id.txtaddress);
         txtcustomername=findViewById(R.id.txtcustomername);
-
+        txt_meeting_purpose=findViewById(R.id.txt_meeting_purpose);
 
         reject=findViewById(R.id.reject);
         approve=findViewById(R.id.approve);
@@ -68,23 +69,25 @@ Shprefrences sh;
         list_requesttype=findViewById(R.id.list_requesttype);
         RequestTypesStrAdaptor adaptor =new RequestTypesStrAdaptor(PendingDetailActivity.this,prerequestmodel.getRequest_type());
         list_requesttype.setAdapter(adaptor);
-        txtdescreption.setText(getString(R.string.description)+prerequestmodel.getComment());
-        txtdate.setText(getString(R.string.date)+prerequestmodel.getDate());
+        txtdescreption.setText(getString(R.string.meeting)+prerequestmodel.getComment());
+        txtdate.setText(getString(R.string.date)+prerequestmodel.getMeeting_date());
         txtadvance.setText(getString(R.string.advance)+prerequestmodel.getAdvance());
         txtaddress.setText(getString(R.string.address)+prerequestmodel.getAddress());
         txtcustomername.setText(getString(R.string.customer_name)+prerequestmodel.getCustomer_name());
         txt_meeting_date.setText(getString(R.string.meeting_date)+prerequestmodel.getMeeting_date());
-        txt_meeting_time.setText(getString(R.string.meeting_time)+prerequestmodel.getMeeting_date());
+        txt_meeting_time.setText(getString(R.string.meeting_time)+prerequestmodel.getMeeting_time());
         txt_pre_request_date.setText(getString(R.string.pre_rest_date)+prerequestmodel.getDate());
         txt_exchange_rate.setText(getString(R.string.exch_rate)+prerequestmodel.getExchange_rate());
-
+        txt_prerequest_des.setText(getString(R.string.pre_des)+prerequestmodel.getDescription());
+        txt_requested_by.setText(getString(R.string.requested_by)+prerequestmodel.getUser_name());
+        txt_meeting_purpose.setText(getString(R.string.meeting_purpose)+prerequestmodel.getPurpose());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold
         //    final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
         // Set the text color for first 4 characters
-        sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtdescreption.setText(sb);
 
         sb = new SpannableStringBuilder(txtadvance.getText());
@@ -122,10 +125,25 @@ Shprefrences sh;
         sb.setSpan(fcs, 0, 17, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_pre_request_date.setText(sb);
 
+        sb = new SpannableStringBuilder(txt_requested_by.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_requested_by.setText(sb);
+
         sb = new SpannableStringBuilder(txt_exchange_rate.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 14, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txt_exchange_rate.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_prerequest_des.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 24, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_prerequest_des.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_meeting_purpose.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 16, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_meeting_purpose.setText(sb);
 
         approve.setOnClickListener(new View.OnClickListener() {
             @Override

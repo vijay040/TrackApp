@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/ic_bill" />
+
+        <TextView
+            android:id="@+id/txtDescreption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:ems="12"
+            android:text="@string/Descreption"
+            android:textColor="@color/them_color"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtCreatedOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDescreption"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:singleLine="true"
+            android:text="@string/CreatedOn"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_8sdp" />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCreatedOn"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:text="@string/Address"
+           android:ems="15"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtCustomerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtAddress"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/img"
+            android:singleLine="true"
+            android:text="@string/CustomerName"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:id="@+id/txtAdvance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/txtDescreption"
+            android:gravity="right"
+            android:paddingRight="@dimen/_20sdp"
+            android:text="@string/Amount"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_8sdp" />
+
+        <TextView
+            android:id="@+id/txtAdvanceMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtAdvance"
+            android:layout_marginLeft="@dimen/_100sdp"
+            android:layout_toRightOf="@id/img"
+            android:gravity="right"
+            android:paddingRight="@dimen/_10sdp"
+            android:text="@string/IDR2000"
+            android:textColor="@color/text_hint_color"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/txtDescreption"
+            android:gravity="right"
+            android:layout_below="@id/txtAdvanceMoney"
+            android:paddingRight="@dimen/_25sdp"
+            android:text="@string/Status"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_8sdp" />
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtstatus"
+            android:layout_marginLeft="@dimen/_100sdp"
+            android:layout_toRightOf="@id/img"
+            android:gravity="right"
+            android:paddingRight="@dimen/_10sdp"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/imz_down"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/txtCreatedOn"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="12dp"
+            android:padding="@dimen/_15sdp"
+            android:src="@drawable/ic_down" />
+
+        <RelativeLayout
+            android:id="@+id/lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCustomerName"
+            android:layout_toRightOf="@+id/img">
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:singleLine="true"
+                android:text="@string/Date"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_9sdp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/txtRequestType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDate"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/RequestType"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_9sdp" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

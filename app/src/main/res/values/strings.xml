@@ -135,6 +135,7 @@
     <string name="balancetorct">Balance To Rct:</string>
     <string name="close">close</string>
     <string name="expensedetails">Expense Details</string>
+    <string name="appro_details">Approval Details</string>
     <string name="quotation_details">Quotation Details</string>
     <string name="meetingdate">Meeting Date</string>
     <string name="rejection_msg">Comment:</string>
@@ -144,6 +145,7 @@
     <string name="exch_rate">Exchange Rate:</string>
     <string name="expensetype">ExpenseType</string>
     <string name="expsense_des">Expense Description:</string>
+    <string name="pre_des">Pre-Request Description:</string>
     <string name="meeting_purpose">Meeting Purpose:</string>
     <string name="edit">Edit</string>
     <string name="to">To:</string>
@@ -154,6 +156,7 @@
     <string name="add_prerequest">Add Pre-Request</string>
     <string name="bTrack">BTrack</string>
     <string name="expense_list">Expense List</string>
+    <string name="approval_list">Approved By Manager</string>
     <string name="expense_status">Expense Status</string>
     <string name="expense_report">Expense Report</string>
     <string name="report_details">Report Details</string>
@@ -262,6 +265,7 @@
     <string name="report_model">REPORTMODEL</string>
     <string name="meeting_model">MEETINGMODEL</string>
     <string name="expense_model">EXPENSEMODEL</string>
+    <string name="appro_model">APPROVALMODEL</string>
     <string name="message_model">MESSAGEMODEL</string>
     <string name="you_have_logged_out_successfully">You have logged out successfully!</string>
     <string name="date_pattern">yyyyMMdd-HHmmss</string>

@@ -50,7 +50,7 @@ public class PendingAdaptor extends BaseAdapter {
             }
 
         TextView txtTitle = view.findViewById(R.id.txtTitle);
-        txtTitle.setText(list.get(i).getComment());
+        txtTitle.setText(context.getString(R.string.meeting)+list.get(i).getComment());
 
         TextView txtDate = view.findViewById(R.id.txtDate);
         txtDate.setText(list.get(i).getDate());

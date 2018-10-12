@@ -26,7 +26,7 @@ import com.mmcs.trackapp.model.PreRequestModel;
 
 public class PreRequestDetailActivity extends AppCompatActivity {
 PreRequestModel prerequestmodel;
-    TextView txtdescreption,txtdate,txtadvance,txtstatus,txtaddress,txtcustomer;
+    TextView txtdescreption,txtdate,txtadvance,txtstatus,txt_pre_request_date,txtaddress,txtcustomer,txt_meeting_des,txtpre_reqst_des,txtMeetingDate;
 ListView listTypes;
 Button ok;
     @Override
@@ -42,6 +42,10 @@ Button ok;
         txtstatus=findViewById(R.id.txtstatus);
         txtaddress=findViewById(R.id.txtaddress);
         txtcustomer=findViewById(R.id.txtcustomer);
+        txt_meeting_des=findViewById(R.id.txt_meeting_des);
+        txtpre_reqst_des=findViewById(R.id.txtpre_reqst_des);
+        txtMeetingDate=findViewById(R.id.txtMeetingDate);
+        txt_pre_request_date=findViewById(R.id.txt_pre_request_date);
         listTypes=findViewById(R.id.listTypes);
         ok=findViewById(R.id.btn_ok);
         ok.setOnClickListener(new View.OnClickListener() {
@@ -65,12 +69,17 @@ Button ok;
             }
         });
         txtdescreption.setText(getString(R.string.description)+prerequestmodel.getComment());
-        txtdate.setText(getString(R.string.date)+prerequestmodel.getDate());
+        txtdate.setText(getString(R.string.date)+prerequestmodel.getMeeting_date());
         txtadvance.setText(getString(R.string.advance)+prerequestmodel.getAdvance());
         txtaddress.setText(getString(R.string.address)+prerequestmodel.getAddress());
         txtcustomer.setText(getString(R.string.customer_name)+prerequestmodel.getCustomer_name());
         txtstatus.setText(getString(R.string.status)+prerequestmodel.getStatus());
+        txt_meeting_des.setText(getString(R.string.meeting_purpose) +prerequestmodel.getPurpose());
+        txtMeetingDate.setText(getString(R.string.meeting_date) + prerequestmodel.getMeeting_date() + ", " +  prerequestmodel.getMeeting_time());
+        txtpre_reqst_des.setText(getString(R.string.pre_des) +prerequestmodel.getDescription());
+        txt_pre_request_date.setText(getString(R.string.pre_rest_date)+prerequestmodel.getDate());
         SpannableStringBuilder sb = new SpannableStringBuilder(txtdescreption.getText());
+
         // Span to set text color to some RGB value
         ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         // Span to make text bold
@@ -78,6 +87,12 @@ Button ok;
         // Set the text color for first 4 characters
         sb.setSpan(fcs, 0, 12, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtdescreption.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_pre_request_date.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 17, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_pre_request_date.setText(sb);
+
 
         sb = new SpannableStringBuilder(txtadvance.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
@@ -94,6 +109,21 @@ Button ok;
         sb.setSpan(fcs, 0, 7, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtstatus.setText(sb);
 
+
+        sb = new SpannableStringBuilder(txtpre_reqst_des.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 24, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtpre_reqst_des.setText(sb);
+
+
+        sb = new SpannableStringBuilder(txtMeetingDate.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txtMeetingDate.setText(sb);
+
+
+
+
         sb = new SpannableStringBuilder(txtaddress.getText());
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
@@ -103,6 +133,11 @@ Button ok;
         fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
         sb.setSpan(fcs, 0, 13, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         txtcustomer.setText(sb);
+
+        sb = new SpannableStringBuilder(txt_meeting_des.getText());
+        fcs = new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary));
+        sb.setSpan(fcs, 0, 16, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        txt_meeting_des.setText(sb);
         back();
         setTitle();
     }

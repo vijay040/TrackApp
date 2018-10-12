@@ -128,7 +128,8 @@ public class ExpenseListActivity extends AppCompatActivity implements SearchView
             String created_on =filterlist.getCreated_on().toLowerCase();
             String adv =filterlist.getAmount().toLowerCase();
             String date =filterlist.getDate().toLowerCase();
-            if(des.contains(s)||cust_name.contains(s)||address.contains(s)|| created_on.contains(s)|| adv.contains(s)|| date.contains(s)) {
+            String final_status =filterlist.getFinal_status().toLowerCase();
+            if(des.contains(s)||cust_name.contains(s)||final_status.contains(s)||address.contains(s)|| created_on.contains(s)|| adv.contains(s)|| date.contains(s)) {
                 newlist.add(filterlist);
             }
         }

@@ -14,6 +14,25 @@ public class PreRequestModel implements Serializable {
     private String description;
 
     private String pending;
+    private String user_name;
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    private String purpose;
 
     private String customer_name;
 

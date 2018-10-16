@@ -35,12 +35,14 @@ import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.adaptor.HomeRecyclerAdaptor;
 import com.mmcs.trackapp.adaptor.SideBarAdaptor;
 import com.mmcs.trackapp.fragment.FragmentHome;
+import com.mmcs.trackapp.model.AttandenceModel;
 import com.mmcs.trackapp.model.HomeItemModel;
 import com.mmcs.trackapp.model.HomeItemResMeta;
 import com.mmcs.trackapp.model.LoginModel;
 import com.mmcs.trackapp.model.LoginResMeta;
 import com.mmcs.trackapp.model.PortResMeta;
 import com.mmcs.trackapp.model.PreRequestResMeta;
+import com.mmcs.trackapp.model.ResAttandance;
 import com.mmcs.trackapp.util.AppLocationService;
 import com.mmcs.trackapp.util.CircleTransform;
 import com.mmcs.trackapp.util.MyLocation;
@@ -75,10 +77,12 @@ public class DrawerActivity extends AppCompatActivity {
     private Snackbar snackbar;
     RelativeLayout relativeLayout;
     private boolean internetConnected = true;
+    public static String signinStatus = "signout";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getLocation();
         listHomeItems = new ArrayList<>();
         fragmentManager = getSupportFragmentManager();
         getMenu();
@@ -120,7 +124,7 @@ public class DrawerActivity extends AppCompatActivity {
             }
         });
 
-        getLocation();
+
 
     }
 
@@ -179,7 +183,7 @@ public class DrawerActivity extends AppCompatActivity {
         Singleton.getInstance().getApi().postDeviceLocation(model.getId(), lat, lng).enqueue(new Callback<PreRequestResMeta>() {
             @Override
             public void onResponse(Call<PreRequestResMeta> call, Response<PreRequestResMeta> response) {
-
+                getAttandanceStatus();
             }
 
             @Override
@@ -348,6 +352,34 @@ public class DrawerActivity extends AppCompatActivity {
                 snackbar.show();
             }
         }
+    }
+
+    String status;
+
+    private void getAttandanceStatus() {
+        LoginModel model = sh.getLoginModel(getString(R.string.login_model));
+        Singleton.getInstance().getApi().getAttandanceStatus(model.getId()).enqueue(new Callback<ResAttandance>() {
+            @Override
+            public void onResponse(Call<ResAttandance> call, Response<ResAttandance> response) {
+
+                ArrayList<AttandenceModel> model = response.body().getResponse();
+
+                status = model.get(0).getStatus();
+                // sh.setString(getString(R.string.signin_status),status);
+                signinStatus = status;
+                if (status.equalsIgnoreCase("signout")) {
+                    Intent i = new Intent(DrawerActivity.this, AttandanceActivity.class);
+                    startActivity(i);
+                }
+                // progress.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<ResAttandance> call, Throwable t) {
+                // progress.setVisibility(View.GONE);
+            }
+        });
+
     }
 
 

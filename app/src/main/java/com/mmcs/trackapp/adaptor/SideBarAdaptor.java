@@ -75,61 +75,160 @@ Shprefrences sh;
         //icon.setBackground(ctx.getResources().getDrawable(list.get(i).getImage()));
         setIcons(list.get(i).getTitle(),icon);
         RelativeLayout relativeLayout = view.findViewById(R.id.relativeLayout);
+
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (list.get(i).getTitle()) {
                     case "Create Meeting":
-                        Intent intent = new Intent(ctx, CreateMeetingActivity.class);
-                        ctx.startActivity(intent);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent = new Intent(ctx, CreateMeetingActivity.class);
+                            ctx.startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Messages":
-                        Intent intent1 = new Intent(ctx, MessageActivity.class);
-                        ctx.startActivity(intent1);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent =  new Intent(ctx, MessageActivity.class);
+                            ctx.startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "My Schedule":
-                        Intent intent2 = new Intent(ctx, MyScheduleActivity.class);
-                        ctx.startActivity(intent2);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent2 = new Intent(ctx, MyScheduleActivity.class);
+                            ctx.startActivity(intent2);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
+
                         break;
 
                     case "Feedback":
-                        Intent intent3 = new Intent(ctx, FeedbackListActivity.class);
-                        ctx.startActivity(intent3);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent3 = new Intent(ctx, FeedbackListActivity.class);
+                            ctx.startActivity(intent3);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Attendance":
-                        Intent intent4 = new Intent(ctx, AttandanceActivity.class);
-                        ctx.startActivity(intent4);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent4 = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent4);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Clients":
-                        Intent intent5 = new Intent(ctx, AddCustomerActivity.class);
-                        ctx.startActivity(intent5);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent5 = new Intent(ctx, AddCustomerActivity.class);
+                            ctx.startActivity(intent5);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Settings":
-                        Intent intent6 = new Intent(ctx, SettingActivity.class);
-                        ctx.startActivity(intent6);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent6 = new Intent(ctx, SettingActivity.class);
+                            ctx.startActivity(intent6);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
                     case "Expense":
-                        Intent intent7 = new Intent(ctx, ExpenseActivity.class);
-                        ctx.startActivity(intent7);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent7 = new Intent(ctx, ExpenseActivity.class);
+                            ctx.startActivity(intent7);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
                     case "Pre-Req Approval":
 
-                        Intent intent8 = new Intent(ctx, PendingActivity.class);
-                        ctx.startActivity(intent8);
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent8 = new Intent(ctx, PendingActivity.class);
+                            ctx.startActivity(intent8);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Sales Checking":
-                        Intent intent9 = new Intent(ctx, SalesCheckingActivity.class);
-                        ctx.startActivity(intent9);
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent9 = new Intent(ctx, SalesCheckingActivity.class);
+                            ctx.startActivity(intent9);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
                     case "Exp Approval":
-                        Intent intent10 = new Intent(ctx, ExpenseApprovalActivity.class);
-                        ctx.startActivity(intent10);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent10 = new Intent(ctx, ExpenseApprovalActivity.class);
+                            ctx.startActivity(intent10);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
                     case "Logout":
                         sh.clearData();

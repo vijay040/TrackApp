@@ -23,6 +23,8 @@ public class ExpenseModel implements Serializable{
 
     private String expense_type;
 
+    private String manager;
+
     public String getRejection_message() {
         return rejection_message;
     }
@@ -194,6 +196,14 @@ public class ExpenseModel implements Serializable{
     public void setImage (String image)
     {
         this.image = image;
+    }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 
     @Override

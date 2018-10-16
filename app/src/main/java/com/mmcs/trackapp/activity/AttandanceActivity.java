@@ -187,8 +187,12 @@ public class AttandanceActivity extends AppCompatActivity {
             textViewsignin.setText(getString(R.string.SIGNOUT));
         }
         Singleton.getInstance().getApi().postAttendance(model.getId(), currentLocation, createddate, status,date).enqueue(new Callback<ResMetaMeeting>() {
+
             @Override
             public void onResponse(Call<ResMetaMeeting> call, Response<ResMetaMeeting> response) {
+                DrawerActivity.signinStatus=status;
+
+                Log.e("inside","*******inside******"+sh.getString(getString(R.string.signin_status),""));
             }
 
             @Override
@@ -214,6 +218,7 @@ public class AttandanceActivity extends AppCompatActivity {
                     signin.setBackground(ContextCompat.getDrawable(AttandanceActivity.this, R.drawable.ic_signin));
                     textViewsignin.setText(getString(R.string.SIGNIN));
                 }
+
                 progress.setVisibility(View.GONE);
             }
 

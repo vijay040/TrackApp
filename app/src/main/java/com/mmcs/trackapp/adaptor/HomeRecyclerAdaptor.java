@@ -10,14 +10,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mmcs.trackapp.R;
 import com.mmcs.trackapp.activity.AddCustomerActivity;
 import com.mmcs.trackapp.activity.AttandanceActivity;
 import com.mmcs.trackapp.activity.CreateMeetingActivity;
+import com.mmcs.trackapp.activity.DrawerActivity;
 import com.mmcs.trackapp.activity.ExpenseActivity;
 import com.mmcs.trackapp.activity.ExpenseApprovalActivity;
 import com.mmcs.trackapp.activity.FeedbackListActivity;
+import com.mmcs.trackapp.activity.LoginActivity;
 import com.mmcs.trackapp.activity.MessageActivity;
 import com.mmcs.trackapp.activity.MyScheduleActivity;
 import com.mmcs.trackapp.activity.NewCustomerActivity;
@@ -25,6 +28,7 @@ import com.mmcs.trackapp.activity.PendingActivity;
 import com.mmcs.trackapp.activity.SalesCheckingActivity;
 import com.mmcs.trackapp.activity.SettingActivity;
 import com.mmcs.trackapp.model.HomeItemModel;
+import com.mmcs.trackapp.util.Shprefrences;
 
 import java.util.ArrayList;
 
@@ -32,16 +36,18 @@ import java.util.ArrayList;
 public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdaptor.ViewHolder> {
 
     ArrayList<HomeItemModel> list;
-    Context context;
+    Context ctx;
     private LayoutInflater mInflater;
     ImageView ic;
     TextView txtTitle;
     RelativeLayout layUser;
+    Shprefrences sh;
     public HomeRecyclerAdaptor(Context context, ArrayList<HomeItemModel> list)
     {
         this.list=list;
-        this.context=context;
+        this.ctx=context;
         this.mInflater = LayoutInflater.from(context);
+        sh=new Shprefrences(context);
     }
 
     @Override
@@ -58,6 +64,7 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
         txtTitle.setText(list.get(position).getTitle()+"");
         Log.e("list.get(i).getTitle()", "*****************" + list.get(position).getTitle());
         setIcons(list.get(position).getTitle(),ic);
+        final String status=sh.getString(ctx.getString(R.string.signin_status),"");
         //imgUserProfile.setBackground(context.getResources().getDrawable(list.get(position).getImage()));
         layUser.setOnClickListener(new View.OnClickListener() {
 
@@ -65,59 +72,159 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
             public void onClick(View view) {
                 switch (list.get(position).getTitle()) {
                     case "Create Meeting":
-                        Intent intent = new Intent(context, CreateMeetingActivity.class);
-                        context.startActivity(intent);
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent = new Intent(ctx, CreateMeetingActivity.class);
+                            ctx.startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Messages":
-                        Intent intent1 = new Intent(context, MessageActivity.class);
-                        context.startActivity(intent1);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent =  new Intent(ctx, MessageActivity.class);
+                            ctx.startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "My Schedule":
-                        Intent intent2 = new Intent(context, MyScheduleActivity.class);
-                        context.startActivity(intent2);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent2 = new Intent(ctx, MyScheduleActivity.class);
+                            ctx.startActivity(intent2);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
+
                         break;
 
                     case "Feedback":
-                        Intent intent3 = new Intent(context, FeedbackListActivity.class);
-                        context.startActivity(intent3);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent3 = new Intent(ctx, FeedbackListActivity.class);
+                            ctx.startActivity(intent3);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Attendance":
-                        Intent intent4 = new Intent(context, AttandanceActivity.class);
-                        context.startActivity(intent4);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent4 = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent4);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Clients":
-                        Intent intent5 = new Intent(context, AddCustomerActivity.class);
-                        context.startActivity(intent5);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent5 = new Intent(ctx, AddCustomerActivity.class);
+                            ctx.startActivity(intent5);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Settings":
-                        Intent intent6 = new Intent(context, SettingActivity.class);
-                        context.startActivity(intent6);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent6 = new Intent(ctx, SettingActivity.class);
+                            ctx.startActivity(intent6);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
                     case "Expense":
-                        Intent intent7 = new Intent(context, ExpenseActivity.class);
-                        context.startActivity(intent7);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent7 = new Intent(ctx, ExpenseActivity.class);
+                            ctx.startActivity(intent7);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
                     case "Pre-Req Approval":
 
-                        Intent intent8 = new Intent(context, PendingActivity.class);
-                        context.startActivity(intent8);
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent8 = new Intent(ctx, PendingActivity.class);
+                            ctx.startActivity(intent8);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
 
                     case "Sales Checking":
-                        Intent intent9 = new Intent(context, SalesCheckingActivity.class);
-                        context.startActivity(intent9);
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent9 = new Intent(ctx, SalesCheckingActivity.class);
+                            ctx.startActivity(intent9);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
                     case "Exp Approval":
-                        Intent intent10 = new Intent(context, ExpenseApprovalActivity.class);
-                        context.startActivity(intent10);
+
+                        if(DrawerActivity.signinStatus.equalsIgnoreCase("signin")) {
+                            Intent intent10 = new Intent(ctx, ExpenseApprovalActivity.class);
+                            ctx.startActivity(intent10);
+                        }
+                        else
+                        {
+                            Toast.makeText(ctx, "Attendance Pending!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ctx, AttandanceActivity.class);
+                            ctx.startActivity(intent);
+                        }
                         break;
                     case "Logout":
-
+                        sh.clearData();
+                        Toast.makeText(ctx, ctx.getString(R.string.you_have_logged_out_successfully), Toast.LENGTH_SHORT).show();
+                        Intent in = new Intent(ctx, LoginActivity.class);
+                        ctx.startActivity(in);
                         break;
 
                 }
@@ -143,49 +250,49 @@ public class HomeRecyclerAdaptor  extends RecyclerView.Adapter<HomeRecyclerAdapt
     public void setIcons(String page, ImageView img) {
         switch (page) {
             case "Create Meeting":
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_meeting));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_meeting));
                 break;
 
             case "Messages":
-                img.setBackground(context.getResources().getDrawable(R.drawable.msgicon));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.msgicon));
                 break;
 
             case "My Schedule":
-                img.setBackground(context.getResources().getDrawable(R.drawable.schedule));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.schedule));
                 break;
 
             case "Feedback":
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_feedback));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_feedback));
                 break;
 
             case "Attendance":
-                img.setBackground(context.getResources().getDrawable(R.drawable.attaindance));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.attaindance));
                 break;
 
             case "Clients":
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_customer));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_customer));
                 break;
 
             case "Settings":
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_settings));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_settings));
                 break;
             case "Expense":
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_expense));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_expense));
                 break;
             case "Pre-Req Approval":
 
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_pre_appr));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_pre_appr));
                 break;
 
             case "Sales Checking":
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_sale));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_sale));
                 break;
             case "Exp Approval":
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_expense_app));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_expense_app));
                 break;
             case "Logout":
                 layUser.setVisibility(View.GONE);
-                img.setBackground(context.getResources().getDrawable(R.drawable.ic_logout));
+                img.setBackground(ctx.getResources().getDrawable(R.drawable.ic_logout));
                 break;
 
         }

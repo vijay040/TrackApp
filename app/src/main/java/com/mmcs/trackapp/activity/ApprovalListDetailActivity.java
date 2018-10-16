@@ -61,7 +61,7 @@ import retrofit2.Response;
 public class ApprovalListDetailActivity extends AppCompatActivity {
     ExpenseModel expensemodel;
     Button btn_close;
-    TextView  txtMeeting, txtPurpose, txt_manager_status, txtCreatedOn,txt_meeting_des, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance;
+    TextView  txtMeeting,txtApprovedBy, txtPurpose, txt_manager_status, txtCreatedOn,txt_meeting_des, txtAddress, txtCustomerName, txtMeetingDate, txtExpenseType, txtAdvance;
     ImageView image_uploaded;
     Shprefrences sh;
     Animation animBlink;
@@ -88,7 +88,8 @@ public class ApprovalListDetailActivity extends AppCompatActivity {
         image_uploaded = findViewById(R.id.image_uploaded);
         txt_manager_status = findViewById(R.id.txt_manager_status);
         txtPurpose = findViewById(R.id.txtPurpose);
-
+        txtApprovedBy= findViewById(R.id.txtApprovedBy);
+        txtApprovedBy.setText("Approved By:"+expensemodel.getManager());
         btn_close = findViewById(R.id.btn_close);
 
         btn_close.setOnClickListener(new View.OnClickListener() {

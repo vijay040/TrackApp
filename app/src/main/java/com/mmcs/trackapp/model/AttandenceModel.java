@@ -2,11 +2,25 @@ package com.mmcs.trackapp.model;
 
 public class AttandenceModel {
 
+    private String login_date_time;
+
     private String status;
 
-    private String location;
+    private String logout_location;
 
-    private String date_time;
+    private String login_location;
+
+    private String logout_date_time;
+
+    public String getLogin_date_time ()
+    {
+        return login_date_time;
+    }
+
+    public void setLogin_date_time (String login_date_time)
+    {
+        this.login_date_time = login_date_time;
+    }
 
     public String getStatus ()
     {
@@ -18,30 +32,36 @@ public class AttandenceModel {
         this.status = status;
     }
 
-    public String getLocation ()
+    public String getLogout_location ()
     {
-        return location;
+        return logout_location;
     }
 
-    public void setLocation (String location)
+    public void setLogout_location (String logout_location)
     {
-        this.location = location;
+        this.logout_location = logout_location;
     }
 
-    public String getDate_time ()
+    public String getLogin_location ()
     {
-        return date_time;
+        return login_location;
     }
 
-    public void setDate_time (String date_time)
+    public void setLogin_location (String login_location)
     {
-        this.date_time = date_time;
+        this.login_location = login_location;
     }
 
-    @Override
-    public String toString()
+    public String getLogout_date_time ()
     {
-        return "ClassPojo [status = "+status+", location = "+location+", date_time = "+date_time+"]";
+        return logout_date_time;
     }
+
+    public void setLogout_date_time (String logout_date_time)
+    {
+        this.logout_date_time = logout_date_time;
+    }
+
+
 }
 

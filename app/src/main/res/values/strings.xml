@@ -302,6 +302,8 @@
     <string name="your_message">Your Message...</string>
     <string name="cancel">Cancel</string>
     <string name="withdraw">WITHDRAW</string>
+    <string name="approved_by">Approved By</string>
+    <string name="signin_status">SIGNIN_STATUS</string>
 
     <string-array name="language_list">
         <item>English</item>

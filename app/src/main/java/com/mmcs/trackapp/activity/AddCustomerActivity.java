@@ -43,6 +43,7 @@ public class AddCustomerActivity extends AppCompatActivity  implements SearchVie
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         editTextName.setQueryHint(getString(R.string.search_by_customer_name));
         editTextName.setOnQueryTextListener(this);
+
         back();
         setTitle();
        // getSupportActionBar().setTitle("Customer Details");
